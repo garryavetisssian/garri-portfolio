@@ -1,0 +1,451 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────
+   BRUTALIST EDITORIAL-TECH SYSTEM
+   Garri Avetisyan — Product Designer / 2026
+   Display: Unbounded · Body: Manrope · Labels: JetBrains Mono
+───────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Surface */
+  --ink: #F2F0EA;
+  --ink-mute: #9A968C;
+  --ink-faint: #5A574F;
+  --paper: #0B0B0A;
+  --paper-soft: #131311;
+  --paper-elev: #1A1A17;
+
+  /* Hairlines */
+  --line: rgba(242, 240, 234, 0.10);
+  --line-strong: rgba(242, 240, 234, 0.22);
+  --line-faint: rgba(242, 240, 234, 0.05);
+
+  /* Acid accent */
+  --acid: #D8FF36;
+  --acid-soft: #D8FF36AA;
+  --acid-faint: rgba(216, 255, 54, 0.16);
+
+  /* Functional */
+  --warn: #FF5C2A;
+
+  /* Type rhythm */
+  --display-tight: 0.86;
+  --display-track: -0.04em;
+  --mono-track: 0.12em;
+
+  /* Layout */
+  --gutter: clamp(1rem, 2.5vw, 2.5rem);
+  --rule-h: 1px;
+  --nav-h: 64px;
+  --max: 1480px;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-mute: var(--ink-mute);
+  --color-ink-faint: var(--ink-faint);
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-paper-elev: var(--paper-elev);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-acid: var(--acid);
+  --color-warn: var(--warn);
+
+  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ─── Reset / base ──────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  overflow-x: clip;
+  width: 100%;
+  font-feature-settings: "ss01", "ss02", "cv11";
+  font-variant-ligatures: contextual;
+}
+
+::selection { background: var(--acid); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; border-radius: 2px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); }
+::-webkit-scrollbar-thumb:hover { background: var(--acid); }
+
+/* ─── Typography utilities ──────────────────────────────────────── */
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mono-sm {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: var(--display-tight);
+  letter-spacing: var(--display-track);
+}
+
+.display-tight {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.serif-num {
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* ─── Brutalist primitives ──────────────────────────────────────── */
+
+.rule {
+  height: var(--rule-h);
+  background: var(--line-strong);
+}
+
+.rule-faint { background: var(--line); }
+
+.hairline-t { border-top: 1px solid var(--line-strong); }
+.hairline-b { border-bottom: 1px solid var(--line-strong); }
+.hairline-l { border-left: 1px solid var(--line-strong); }
+.hairline-r { border-right: 1px solid var(--line-strong); }
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+/* Grain overlay — subtle film texture */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Vertical column guides (decorative, brutalist editorial feel) */
+.col-guides {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: none;
+}
+@media (min-width: 768px) {
+  .col-guides {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    padding: 0 var(--gutter);
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .col-guides > span {
+    border-right: 1px solid var(--line-faint);
+  }
+  .col-guides > span:last-child { border-right: none; }
+}
+
+/* ─── Animations ────────────────────────────────────────────────── */
+
+@keyframes mask-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes mask-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%, 90%, 100% { opacity: 1; }
+  92% { opacity: 0.4; }
+  94% { opacity: 1; }
+  96% { opacity: 0.2; }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.85); }
+}
+
+@keyframes blink-caret {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -6px, 0); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* Reveal classes — used with CSS-only entrance */
+.reveal-up {
+  display: inline-block;
+  overflow: hidden;
+}
+.reveal-up > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: mask-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-mask {
+  animation: mask-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.flicker { animation: flicker 4s infinite; }
+.pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+.drift { animation: drift 6s ease-in-out infinite; }
+.spin-slow { animation: spin-slow 22s linear infinite; }
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 38s linear infinite;
+}
+
+/* Link underline that scribbles in on hover */
+.link-uline {
+  position: relative;
+  display: inline-block;
+}
+.link-uline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.link-uline:hover::after {
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+
+/* Acid hover swap */
+.hover-acid {
+  transition: color 0.25s ease, background 0.25s ease;
+}
+.hover-acid:hover {
+  color: var(--acid);
+}
+
+/* Work-row hover — letter-slide effect on arrow */
+.row-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: baseline;
+  gap: var(--gutter);
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line-strong);
+  transition: padding 0.45s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.row-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--acid);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.row-link:hover::before { transform: scaleY(1); }
+.row-link:hover { color: var(--paper); padding-left: 1rem; }
+.row-link > * { position: relative; z-index: 1; }
+
+.row-arrow {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-link:hover .row-arrow {
+  transform: translateX(8px) translateY(-8px);
+}
+
+/* Tag chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-mute);
+}
+
+.chip-acid {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  padding: 14px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--acid);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Headline letter wrap helper */
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  font-size: clamp(3rem, 11vw, 12rem);
+}
+
+.headline-md {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+}
+
+.headline-sm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+}
+
+/* Body prose */
+.prose-brut {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.prose-brut p { margin-bottom: 1.25em; }
+.prose-brut p:last-child { margin-bottom: 0; }
+.prose-brut strong { color: var(--acid); font-weight: 600; }
+.prose-brut a { color: var(--acid); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Cursor blink */
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 0.92em;
+  background: var(--acid);
+  vertical-align: -0.15em;
+  margin-left: 0.18em;
+  animation: blink-caret 1.05s steps(1) infinite;
+}
+
+/* Number badge */
+.num-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  min-width: 3ch;
+}
+
+/* Frame box (used around imagery & quote callouts) */
+.frame {
+  border: 1px solid var(--line-strong);
+  background: var(--paper-soft);
+}
+
+.frame-acid {
+  border: 1px solid var(--acid);
+  background: var(--paper-soft);
+}
+
+/* Image placeholder pattern */
+.img-stub {
+  background:
+    linear-gradient(135deg, transparent 49.5%, var(--line-strong) 49.5%, var(--line-strong) 50.5%, transparent 50.5%),
+    var(--paper-soft);
+  border: 1px solid var(--line-strong);
+}
+
+/* Print: keep CV readable */
+@media print {
+  body { background: white; color: black; }
+  .grain, .col-guides { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .row-link:hover { padding-left: 0; }
+}

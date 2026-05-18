@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "mcp__claude_ai_Vercel__deploy_to_vercel",
+      "Bash(vercel deploy *)",
+      "Bash(npx vercel *)",
+      "Bash(curl -s -I https://garri-portfolio.vercel.app/cv/hy)",
+      "Bash(curl -s https://garri-portfolio.vercel.app/cv/hy)",
+      "Bash(curl -s https://garri-portfolio.vercel.app/_next/static/chunks/0.~_ve7mkobh-.css)",
+      "Bash(curl -s https://garri-portfolio.vercel.app/_next/static/chunks/0y7yewbnd_jp4.css)",
+      "Bash(grep -oE 'class=\"[^\"]{0,50}\"')",
+      "Bash(curl -s \"https://garri-portfolio.vercel.app/_next/static/chunks/0yu9.zem6e.-l.css\")",
+      "Bash(curl -s \"https://garri-portfolio.vercel.app/_next/static/chunks/0.~_ve7mkobh-.css\")",
+      "Bash(grep -oE 'body[^,}{]*\\\\{[^}]*\\\\}')",
+      "Bash(curl -s \"https://garri-portfolio.vercel.app/work/nexwave\")",
+      "Skill(frontend-design:frontend-design)",
+      "Bash(cp /Users/garryavetissian/Desktop/Claude/garri-portfolio/src/app/cv/\\\\[locale\\\\]/cv.css /Users/garryavetissian/Desktop/Claude/garri-portfolio/src/app/\\\\[locale\\\\]/cv/cv.css)",
+      "Bash(cp /Users/garryavetissian/Desktop/Claude/garri-portfolio/src/app/cv/\\\\[locale\\\\]/CvPageMode.tsx /Users/garryavetissian/Desktop/Claude/garri-portfolio/src/app/\\\\[locale\\\\]/cv/CvPageMode.tsx)",
+      "Bash(npx next *)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code} %{redirect_url} %{url_effective}\\\\n\" -L http://localhost:3000/)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code} %{url_effective}\\\\n\" http://localhost:3000/en)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code} %{url_effective}\\\\n\" http://localhost:3000/en/work/balvoi)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code} %{url_effective}\\\\n\" http://localhost:3000/ru/about)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code} %{url_effective}\\\\n\" http://localhost:3000/hy/cv)",
+      "Bash(vercel --version)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm i *)",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "mcp__claude_ai_Vercel__get_project",
+      "mcp__claude_ai_Vercel__list_teams",
+      "mcp__claude_ai_Vercel__list_projects",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
