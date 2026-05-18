@@ -48,7 +48,7 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
 
   return (
     <footer className="relative border-t border-line-strong bg-paper-soft mt-32">
-      {/* Brand mark */}
+      {/* Brand mark — translated first-name across locales */}
       <div className="overflow-hidden border-b border-line-strong">
         <div
           className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 select-none"
@@ -63,7 +63,8 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
           }}
           aria-hidden
         >
-          GARRI<span style={{ color: "var(--acid)", WebkitTextStroke: "0" }}>.</span>
+          {t.hero.name.split(" ")[0].toUpperCase()}
+          <span style={{ color: "var(--acid)", WebkitTextStroke: "0" }}>.</span>
         </div>
       </div>
 

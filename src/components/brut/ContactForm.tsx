@@ -20,6 +20,7 @@ export default function ContactForm() {
   const [data, setData] = useState<FormData>(initial);
   const [status, setStatus] = useState<Status>("idle");
   const [errorKey, setErrorKey] = useState<ContactResult["errorKey"]>();
+  const [errorDetail, setErrorDetail] = useState<string | undefined>();
   const [copied, setCopied] = useState(false);
   const [pending, startTransition] = useTransition();
 
@@ -30,6 +31,7 @@ export default function ContactForm() {
       if (status === "error") {
         setStatus("idle");
         setErrorKey(undefined);
+        setErrorDetail(undefined);
       }
     };
 
@@ -41,8 +43,10 @@ export default function ContactForm() {
       if (result.ok) {
         setStatus("sent");
         setData(initial);
+        setErrorDetail(undefined);
       } else {
         setErrorKey(result.errorKey);
+        setErrorDetail(result.detail);
         setStatus("error");
       }
     });
@@ -129,7 +133,7 @@ export default function ContactForm() {
       </Field>
 
       <div className="bg-paper p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-        <div className="mono text-[11px] max-w-[44ch] leading-[1.5] min-h-[1.5em]">
+        <div className="mono text-[11px] max-w-[52ch] leading-[1.5] min-h-[1.5em] flex flex-col gap-1">
           {statusLine ? (
             <span
               className={
@@ -145,6 +149,11 @@ export default function ContactForm() {
             </span>
           ) : (
             <span className="text-ink-mute opacity-0">·</span>
+          )}
+          {errorDetail && status === "error" && (
+            <span className="text-ink-faint text-[10px] truncate">
+              ↳ {errorDetail}
+            </span>
           )}
         </div>
 

@@ -54,7 +54,16 @@ export default function Header({ locale }: HeaderProps) {
           <Link href={`/${locale}`} className="group flex items-center gap-2.5">
             <span className="block h-2.5 w-2.5 bg-acid group-hover:rotate-45 transition-transform duration-500" aria-hidden />
             <span className="mono text-ink">
-              GARRI <span className="text-ink-faint">/</span> AVETISYAN
+              {(() => {
+                const parts = t.hero.name.toUpperCase().split(" ");
+                const first = parts[0];
+                const last = parts.slice(1).join(" ");
+                return (
+                  <>
+                    {first} <span className="text-ink-faint">/</span> {last}
+                  </>
+                );
+              })()}
             </span>
           </Link>
 

@@ -320,7 +320,7 @@ export default function CaseStudyView({
             <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-6 items-center">
               <span className="md:col-span-2 mono">— {t.caseStudy.nextProject}</span>
               <span
-                className="md:col-span-8"
+                className="next-title md:col-span-8"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 800,

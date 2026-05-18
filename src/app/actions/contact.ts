@@ -10,6 +10,8 @@ interface ContactPayload {
 export interface ContactResult {
   ok: boolean;
   errorKey?: "formError" | "formErrorSend" | "formNotConfigured";
+  /** Raw upstream detail — surfaced to UI for easier debugging. */
+  detail?: string;
 }
 
 function isValidEmail(s: string): boolean {
@@ -23,10 +25,11 @@ function isValidEmail(s: string): boolean {
  *   1. Visit https://web3forms.com
  *   2. Enter `garryavetissian@gmail.com`, get an access key emailed to you
  *   3. Add `WEB3FORMS_ACCESS_KEY` to Vercel → Settings → Environment Variables
- *   4. Redeploy. Submissions land in your inbox.
+ *      (Production + Preview + Development scopes)
+ *   4. **Trigger a redeploy** (the env var is read at build time on Vercel)
  *
- * Without the env var, the action returns `formNotConfigured` so the UI
- * can prompt the visitor to email directly.
+ * Returns `detail` with the actual upstream error so the form UI can show
+ * "Web3Forms: Invalid Access Key" or similar without you digging into logs.
  */
 export async function sendContact(payload: ContactPayload): Promise<ContactResult> {
   const name = payload.name?.trim() ?? "";
@@ -38,7 +41,7 @@ export async function sendContact(payload: ContactPayload): Promise<ContactResul
     return { ok: false, errorKey: "formError" };
   }
 
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim();
   if (!accessKey) {
     return { ok: false, errorKey: "formNotConfigured" };
   }
@@ -59,19 +62,24 @@ export async function sendContact(payload: ContactPayload): Promise<ContactResul
         subject: composedSubject,
         message,
         from_name: "garri.design contact form",
-        botcheck: "", // honeypot
       }),
     });
 
-    if (!res.ok) {
-      return { ok: false, errorKey: "formErrorSend" };
-    }
-    const data = await res.json();
-    if (data && data.success === true) {
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data?.success === true) {
       return { ok: true };
     }
-    return { ok: false, errorKey: "formErrorSend" };
-  } catch {
-    return { ok: false, errorKey: "formErrorSend" };
+
+    const detail =
+      typeof data?.message === "string"
+        ? data.message
+        : `HTTP ${res.status}`;
+    console.error("[contact] Web3Forms failure:", detail, data);
+    return { ok: false, errorKey: "formErrorSend", detail };
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : "network error";
+    console.error("[contact] fetch threw:", detail);
+    return { ok: false, errorKey: "formErrorSend", detail };
   }
 }

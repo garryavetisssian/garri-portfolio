@@ -55,7 +55,7 @@ export default function WorkList({
               <Link href={`/${locale}/work/${p.slug}`} className="row-link">
                 <span className="num-badge">{String(i + 1).padStart(2, "0")} —</span>
                 <span
-                  className="text-ink"
+                  className="row-title text-ink"
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 700,
