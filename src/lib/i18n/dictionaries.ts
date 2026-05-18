@@ -468,7 +468,7 @@ const ru: Dictionary = {
     languages: "Языки",
     languageLevels: { native: "Родной", fluent: "Свободно", professional: "Профессиональный" },
     headlineLine1: "ДИЗАЙН",
-    headlineLine2: "— ЭТО БИЗНЕС-",
+    headlineLine2: "— БИЗНЕС-",
     headlineLine3: "ФУНКЦИЯ",
   },
   projects: {

@@ -1,9 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { SITE } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import type { Locale } from "@/lib/i18n/types";
+import { LOCALES, type Locale } from "@/lib/i18n/types";
+
+const localeCodes = LOCALES.map((l) => l.code);
+
+function swapLocale(pathname: string, next: Locale) {
+  const parts = pathname.split("/");
+  if (parts[1] && localeCodes.includes(parts[1] as Locale)) {
+    parts[1] = next;
+    return parts.join("/") || `/${next}`;
+  }
+  return `/${next}${pathname === "/" ? "" : pathname}`;
+}
 
 interface FooterProps {
   locale: Locale;
@@ -16,7 +28,15 @@ function catLabel(c: string | string[]): string {
 
 export default function Footer({ locale, projects = [] }: FooterProps) {
   const { t } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  const switchLocale = (next: Locale) => {
+    if (next === locale) return;
+    document.cookie = `locale=${next}; path=/; max-age=31536000; samesite=lax`;
+    router.push(swapLocale(pathname, next));
+  };
 
   const projectLinks = projects.slice(0, 4).map((p) => ({
     label: `${p.title} · ${catLabel(p.category)}`,
@@ -146,19 +166,26 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
 
         <div className="md:col-span-2">
           <p className="mono text-ink-mute mb-4">— {t.footer.localeCol}</p>
-          <div className="flex gap-1.5 mono">
-            {(["en", "ru", "hy"] as const).map((l) => (
-              <span
-                key={l}
-                className={
-                  l === locale
-                    ? "px-2 py-1 border border-acid text-acid"
-                    : "px-2 py-1 border border-line-strong text-ink-mute"
-                }
-              >
-                {l.toUpperCase()}
-              </span>
-            ))}
+          <div className="flex flex-wrap gap-1.5 mono">
+            {LOCALES.map((l) => {
+              const isActive = l.code === locale;
+              return (
+                <button
+                  key={l.code}
+                  type="button"
+                  onClick={() => switchLocale(l.code)}
+                  aria-current={isActive ? "true" : undefined}
+                  aria-label={`Switch to ${l.label}`}
+                  className={
+                    isActive
+                      ? "px-2 py-1 border border-acid text-acid cursor-default"
+                      : "px-2 py-1 border border-line-strong text-ink-mute hover:border-acid hover:text-acid transition-colors cursor-pointer"
+                  }
+                >
+                  {l.code.toUpperCase()}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
