@@ -327,6 +327,78 @@ body {
   color: var(--acid);
 }
 
+/* Ghost row — used as the 5th teaser in WorkList on the homepage.
+   Reads as the list literally fading off into the archive, but the
+   row itself is the clickable "View All" CTA. */
+.row-ghost {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: baseline;
+  gap: var(--gutter);
+  padding: 1.6rem 0 1.6rem 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  transition: padding-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  color: var(--ink-mute);
+  overflow: hidden;
+}
+.row-ghost::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--acid);
+  box-shadow: 0 0 16px var(--acid-faint);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-ghost::after {
+  /* Left-to-right opacity trail — list "fades off into the archive" */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 12%,
+    rgba(11, 11, 10, 0.05) 40%,
+    rgba(11, 11, 10, 0.35) 75%,
+    rgba(11, 11, 10, 0.7) 100%
+  );
+  transition: opacity 0.5s ease;
+}
+.row-ghost:hover::before { transform: scaleY(1); }
+.row-ghost:hover::after { opacity: 0; }
+.row-ghost:hover { padding-left: 1.5rem; color: var(--ink); }
+.row-ghost .ghost-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink-faint);
+  transition: color 0.3s ease, letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-ghost:hover .ghost-title {
+  color: var(--acid);
+  letter-spacing: -0.02em;
+}
+.row-ghost .ghost-cta {
+  border: 1px solid var(--ink-faint);
+  padding: 6px 12px;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.row-ghost:hover .ghost-cta {
+  border-color: var(--acid);
+  background: var(--acid);
+  color: var(--paper);
+}
+
 /* Next-project link — same restrained pattern */
 .next-project {
   position: relative;

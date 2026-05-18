@@ -148,6 +148,13 @@ export interface Dictionary {
     elsewhereCol: string;
     localeCol: string;
     madeWith: string;
+    builtLabel: string;
+    setInLabel: string;
+    figuresLabel: string;
+    figureLocales: string;
+    figureCases: string;
+    figureTrackers: string;
+    figureVersion: string;
   };
   method: {
     eyebrow: string;
@@ -179,6 +186,8 @@ export interface Dictionary {
     filesSuffix: string;
     selectedWork: string;
     viewAllCases: string;
+    viewAllShort: string;
+    moreInArchive: string;
     caseArchiveBlurb: string;
     visualsLabel: string;
     aboutEyebrow: string;
@@ -341,6 +350,13 @@ const en: Dictionary = {
     elsewhereCol: "Elsewhere",
     localeCol: "Locale",
     madeWith: "Made with care · No tracking",
+    builtLabel: "Built with",
+    setInLabel: "Set in",
+    figuresLabel: "Figures",
+    figureLocales: "Locales",
+    figureCases: "Case studies",
+    figureTrackers: "Trackers",
+    figureVersion: "Version",
   },
   method: {
     eyebrow: "Method / 4-step",
@@ -378,6 +394,8 @@ const en: Dictionary = {
     filesSuffix: "files",
     selectedWork: "Selected Work",
     viewAllCases: "— View all {count} case studies ↗",
+    viewAllShort: "View all",
+    moreInArchive: "more in the archive",
     caseArchiveBlurb:
       "Every case is a full story — problem, research, decisions, what worked, and what I'd redo. No mood-board screenshots, no shipped-feature drive-bys. Pick a file and read the receipts.",
     visualsLabel: "Visuals",
@@ -561,6 +579,13 @@ const ru: Dictionary = {
     elsewhereCol: "Где ещё",
     localeCol: "Язык",
     madeWith: "Сделано с заботой · Без трекеров",
+    builtLabel: "Построено на",
+    setInLabel: "Шрифты",
+    figuresLabel: "Цифры",
+    figureLocales: "Языков",
+    figureCases: "Кейсов",
+    figureTrackers: "Трекеров",
+    figureVersion: "Версия",
   },
   method: {
     eyebrow: "Метод / 4 шага",
@@ -598,6 +623,8 @@ const ru: Dictionary = {
     filesSuffix: "файлов",
     selectedWork: "Избранные работы",
     viewAllCases: "— Все {count} кейсов ↗",
+    viewAllShort: "Все",
+    moreInArchive: "ещё в архиве",
     caseArchiveBlurb:
       "Каждый кейс — это полная история: задача, ресерч, решения, что сработало и что я бы переделал. Без скриншотов из мудборда и понтов о фичах. Откройте и читайте по существу.",
     visualsLabel: "Визуал",
@@ -783,6 +810,13 @@ const hy: Dictionary = {
     elsewhereCol: "Այլուր",
     localeCol: "Լեզու",
     madeWith: "Ստեղծված խնամքով · Առանց հետևման",
+    builtLabel: "Կառուցված է",
+    setInLabel: "Տառատեսակ",
+    figuresLabel: "Թվեր",
+    figureLocales: "Լեզու",
+    figureCases: "Գործ",
+    figureTrackers: "Թրեքեր",
+    figureVersion: "Տարբերակ",
   },
   method: {
     eyebrow: "Մեթոդ / 4 քայլ",
@@ -820,6 +854,8 @@ const hy: Dictionary = {
     filesSuffix: "ֆայլ",
     selectedWork: "Ընտրված աշխատանքներ",
     viewAllCases: "— Տեսնել բոլոր {count} գործերը ↗",
+    viewAllShort: "Բոլորը",
+    moreInArchive: "ևս արխիվում",
     caseArchiveBlurb:
       "Ամեն գործ՝ ամբողջական պատմություն է. խնդիր, ուսումնասիրություն, որոշումներ, ինչն աշխատեց ու ինչը կփոխեի։ Առանց մուդբորդից սքրինների ու ֆիչաների ցուցադրման։ Բացեք և կարդացեք ըստ էության։",
     visualsLabel: "Վիզուալ",

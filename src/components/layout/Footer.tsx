@@ -70,13 +70,48 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
 
       {/* Columns */}
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 grid gap-10 md:grid-cols-12">
-        <div className="md:col-span-4">
-          <p className="mono text-ink-mute mb-4">— {t.footer.aboutSiteLabel}</p>
-          <p className="prose-brut text-[15px] max-w-sm">
-            {t.footer.aboutSiteBlurb} {t.hero.locationCity}.
-          </p>
-          <p className="mono text-ink-mute mt-4">
-            ⚆ {t.hero.available}
+        {/* Brutalist colophon — replaces generic "about this site" blurb */}
+        <div className="md:col-span-4 space-y-6">
+          {/* Built with */}
+          <div>
+            <p className="mono text-ink-mute mb-2">— {t.footer.builtLabel}</p>
+            <p className="text-[14px] text-ink leading-[1.55]">
+              Next.js 16 · Tailwind 4 · Vercel
+            </p>
+          </div>
+
+          {/* Set in */}
+          <div>
+            <p className="mono text-ink-mute mb-2">— {t.footer.setInLabel}</p>
+            <p className="text-[14px] text-ink leading-[1.55]">
+              Unbounded · Manrope · JetBrains Mono
+            </p>
+          </div>
+
+          {/* Figures — tight stats grid */}
+          <div>
+            <p className="mono text-ink-mute mb-3">— {t.footer.figuresLabel}</p>
+            <dl className="grid grid-cols-2 gap-y-1 gap-x-4 text-[13px]">
+              <dt className="mono text-ink-mute">{t.footer.figureLocales}</dt>
+              <dd className="text-ink tabular-nums">
+                <span className="text-acid">03</span>
+              </dd>
+              <dt className="mono text-ink-mute">{t.footer.figureCases}</dt>
+              <dd className="text-ink tabular-nums">
+                <span className="text-acid">{String(projects.length).padStart(2, "0")}</span>
+              </dd>
+              <dt className="mono text-ink-mute">{t.footer.figureTrackers}</dt>
+              <dd className="text-ink tabular-nums">
+                <span className="text-acid">00</span>
+              </dd>
+              <dt className="mono text-ink-mute">{t.footer.figureVersion}</dt>
+              <dd className="text-ink tabular-nums mono">v2026.07</dd>
+            </dl>
+          </div>
+
+          <p className="mono text-acid pt-2 flex items-center gap-2">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-acid pulse-dot" />
+            {t.hero.available}
           </p>
         </div>
 

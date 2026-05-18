@@ -76,20 +76,33 @@ export default function WorkList({
               </Link>
             </li>
           ))}
+
+          {/* Ghost teaser row — embedded "View All" CTA */}
+          {showViewAll && totalCount && totalCount > items.length && (
+            <li key="ghost">
+              <Link href={`/${locale}/work`} className="row-ghost">
+                <span className="num-badge">
+                  {String(items.length + 1).padStart(2, "0")} —
+                </span>
+                <span className="ghost-title">
+                  +{String(totalCount - items.length).padStart(2, "0")}
+                  <span className="hidden md:inline text-ink-faint">
+                    {" "}{t.ui.moreInArchive}
+                  </span>
+                </span>
+                <span className="hidden md:inline mono text-ink-faint">
+                  [{t.ui.archiveLabel.toUpperCase()}]
+                </span>
+                <span className="hidden md:inline mono text-ink-faint">
+                  / {String(totalCount).padStart(2, "0")}
+                </span>
+                <span className="mono ghost-cta">
+                  {t.ui.viewAllShort.toUpperCase()} ↗
+                </span>
+              </Link>
+            </li>
+          )}
         </ul>
-
-        <div className="hairline-b" />
-
-        {showViewAll && totalCount && totalCount > items.length && (
-          <div className="mt-10 flex justify-end">
-            <Link
-              href={`/${locale}/work`}
-              className="mono text-ink hover:text-acid link-uline transition-colors"
-            >
-              {t.ui.viewAllCases.replace("{count}", String(totalCount))}
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );
