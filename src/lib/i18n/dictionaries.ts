@@ -39,6 +39,9 @@ export interface Dictionary {
     tools: string;
     languages: string;
     languageLevels: { native: string; fluent: string; professional: string };
+    headlineLine1: string;
+    headlineLine2: string;
+    headlineLine3: string;
   };
   projects: {
     eyebrow: string;
@@ -66,6 +69,8 @@ export interface Dictionary {
     linkedinLabel: string;
     locationFooter: string;
     // Contact form
+    formHeading: string;
+    formIntro: string;
     formName: string;
     formNamePlaceholder: string;
     formEmail: string;
@@ -75,13 +80,16 @@ export interface Dictionary {
     formMessage: string;
     formMessagePlaceholder: string;
     formSubmit: string;
-    formSubmitOpening: string;
+    formSubmitSending: string;
     formSubmitDone: string;
     formCopy: string;
     formCopied: string;
-    formIntro: string;
-    formNote: string;
     formError: string;
+    formErrorSend: string;
+    formNotConfigured: string;
+    directHeading: string;
+    directLabel: string;
+    rightsReserved: string;
   };
   caseStudy: {
     backToWork: string;
@@ -102,8 +110,8 @@ export interface Dictionary {
     shortVersion: string;
     receipts: string;
     visuals: string;
-    versionsAssets: string;   // "{count} versions · {total} assets"
-    assetsCount: string;       // "{count} assets"
+    versionsAssets: string;
+    assetsCount: string;
   };
   modal: { close: string; comingSoon: string };
   caseTabs: { firstVersion: string; releaseVersion: string };
@@ -128,7 +136,6 @@ export interface Dictionary {
     generatedOn: string;
   };
   languagePicker: { title: string; subtitle: string };
-  // Footer
   footer: {
     aboutSiteLabel: string;
     aboutSiteBlurb: string;
@@ -138,7 +145,6 @@ export interface Dictionary {
     localeCol: string;
     madeWith: string;
   };
-  // Method / process section
   method: {
     eyebrow: string;
     headingLine1: string;
@@ -147,7 +153,6 @@ export interface Dictionary {
     stepLabel: string;
     steps: [ProcessStep, ProcessStep, ProcessStep, ProcessStep];
   };
-  // About page section labels
   about: {
     heroLine1: string;
     heroLine2: string;
@@ -157,14 +162,12 @@ export interface Dictionary {
     experienceLabel: string;
     freelanceLabel: string;
   };
-  // 404 page
   notFound: {
     eyebrow: string;
     title: string;
     blurb: string;
     cta: string;
   };
-  // Miscellaneous UI strings
   ui: {
     portfolioStrip: string;
     caseStudiesStrip: string;
@@ -177,7 +180,6 @@ export interface Dictionary {
     aboutEyebrow: string;
     contactEyebrow: string;
   };
-  // Marquee ticker items per page
   marquees: {
     home: string[];
     work: string[];
@@ -220,6 +222,9 @@ const en: Dictionary = {
     tools: "Tools",
     languages: "Languages",
     languageLevels: { native: "Native", fluent: "Fluent", professional: "Professional" },
+    headlineLine1: "DESIGN",
+    headlineLine2: "IS A BUSINESS",
+    headlineLine3: "FUNCTION",
   },
   projects: {
     eyebrow: "Selected Work",
@@ -247,6 +252,9 @@ const en: Dictionary = {
     emailLabel: "Email",
     linkedinLabel: "LinkedIn",
     locationFooter: "Yerevan, Armenia · Remote worldwide",
+    formHeading: "Drop a line",
+    formIntro:
+      "Send a message and I'll reply within a day. Prefer email or LinkedIn? Both work — scroll down.",
     formName: "Name",
     formNamePlaceholder: "Your name",
     formEmail: "Email",
@@ -256,15 +264,17 @@ const en: Dictionary = {
     formMessage: "Message",
     formMessagePlaceholder: "Tell me about the project, role, or just say hi.",
     formSubmit: "Send message",
-    formSubmitOpening: "Opening your mail app…",
-    formSubmitDone: "Sent — your message is in your draft folder.",
-    formCopy: "Copy to clipboard",
+    formSubmitSending: "Sending…",
+    formSubmitDone: "Sent — thanks, I'll get back to you within a day.",
+    formCopy: "Copy",
     formCopied: "Copied",
-    formIntro:
-      "Fill the form and I'll get the message in my inbox. Prefer something else? Email or LinkedIn work too.",
-    formNote:
-      "Submitting opens your email client with everything prefilled. The message is also copied to your clipboard as a backup.",
     formError: "Please fill in name, email, and a message.",
+    formErrorSend: "Couldn't send. Please email me directly or try again.",
+    formNotConfigured:
+      "Form delivery isn't configured yet. Please email me directly while it's being set up.",
+    directHeading: "Or reach me directly",
+    directLabel: "Direct",
+    rightsReserved: "All rights reserved",
   },
   caseStudy: {
     backToWork: "Back to work",
@@ -317,7 +327,7 @@ const en: Dictionary = {
   footer: {
     aboutSiteLabel: "About this site",
     aboutSiteBlurb:
-      "Brutalist editorial-tech portfolio. Three locales, full case studies, zero tracking.",
+      "A brutalist editorial-tech portfolio. Three locales, full case studies, zero tracking.",
     navigateCol: "Navigate",
     workCol: "Work",
     elsewhereCol: "Elsewhere",
@@ -431,6 +441,9 @@ const ru: Dictionary = {
     tools: "Инструменты",
     languages: "Языки",
     languageLevels: { native: "Родной", fluent: "Свободно", professional: "Профессиональный" },
+    headlineLine1: "ДИЗАЙН",
+    headlineLine2: "— ЭТО БИЗНЕС-",
+    headlineLine3: "ФУНКЦИЯ",
   },
   projects: {
     eyebrow: "Избранные работы",
@@ -458,6 +471,9 @@ const ru: Dictionary = {
     emailLabel: "Email",
     linkedinLabel: "LinkedIn",
     locationFooter: "Ереван, Армения · Удалённо по всему миру",
+    formHeading: "Напишите",
+    formIntro:
+      "Заполните форму — я отвечу в течение дня. Удобнее через email или LinkedIn? Ниже есть прямые контакты.",
     formName: "Имя",
     formNamePlaceholder: "Ваше имя",
     formEmail: "Email",
@@ -467,15 +483,17 @@ const ru: Dictionary = {
     formMessage: "Сообщение",
     formMessagePlaceholder: "Расскажите о проекте, роли или просто поздоровайтесь.",
     formSubmit: "Отправить",
-    formSubmitOpening: "Открываю почтовый клиент…",
-    formSubmitDone: "Готово — сообщение в черновиках.",
-    formCopy: "Скопировать",
+    formSubmitSending: "Отправка…",
+    formSubmitDone: "Отправлено — спасибо, отвечу в течение дня.",
+    formCopy: "Копировать",
     formCopied: "Скопировано",
-    formIntro:
-      "Заполните форму — и сообщение придёт ко мне на почту. Удобнее иначе? Email или LinkedIn тоже работают.",
-    formNote:
-      "При отправке откроется ваш почтовый клиент с заполненным письмом. На всякий случай оно копируется в буфер обмена.",
     formError: "Пожалуйста, заполните имя, email и сообщение.",
+    formErrorSend: "Не удалось отправить. Напишите мне напрямую или попробуйте ещё раз.",
+    formNotConfigured:
+      "Отправка формы пока не настроена. Напишите мне напрямую, пока я её настраиваю.",
+    directHeading: "Или напрямую",
+    directLabel: "Прямой",
+    rightsReserved: "Все права защищены",
   },
   caseStudy: {
     backToWork: "К работам",
@@ -605,53 +623,55 @@ const ru: Dictionary = {
   },
 };
 
-// Armenian — rewritten in a warmer, more conversational tone.
-// Avoids overly formal academic phrasing; reads like a friend
-// talking about their work rather than a textbook.
+// Armenian — restored to the original polished, professional tone.
+// New keys added with the same register (warm but not casual).
 const hy: Dictionary = {
   nav: {
     about: "Իմ մասին",
-    projects: "Աշխատանքներ",
+    projects: "Նախագծեր",
     experience: "Փորձ",
     contact: "Կապ",
-    work: "Աշխատանքներ",
+    work: "Նախագծեր",
     cv: "CV",
     downloadCv: "Ներբեռնել CV-ն",
-    menu: "Մենյու",
+    menu: "Ընտրացանկ",
     close: "Փակել",
     language: "Լեզու",
     chooseLanguage: "Ընտրել լեզուն",
   },
   hero: {
-    available: "Բաց եմ նոր նախագծերի համար",
+    available: "Բաց եմ աշխատանքի համար",
     name: "Գարրի Ավետիսյան",
     role: "Պրոդուկտի դիզայներ",
     summary:
-      "Պրոդուկտի դիզայներ եմ՝ ավելի քան 5 տարվա փորձով։ Աշխատում եմ բարդ թվային պրոդուկտների վրա՝ AI, Web3, SaaS ու մարքեթփլեյս ոլորտներում։ Գործս է՝ ճիշտ խնդիրները լուծել, տեղեկատվությունը հստակ դասավորել ու բարդը պարզ դարձնել։",
-    viewProjects: "Տեսնել աշխատանքները",
-    getInTouch: "Գրել",
-    location: "Որտեղ եմ",
+      "Պրոդուկտի դիզայներ՝ 5+ տարվա փորձով։ Ստեղծում եմ բարդ թվային արտադրանքներ AI, Web3, SaaS և շուկայահրապարակի ոլորտներում։ Կենտրոնանում եմ ճիշտ խնդիրներ լուծելու, տեղեկատվությունը պարզ կառուցելու և բարդ համակարգերը պարզ զգալի դարձնելու վրա։",
+    viewProjects: "Տեսնել նախագծերը",
+    getInTouch: "Կապվել",
+    location: "Գտնվելու վայր",
     locationCity: "Երևան, Հայաստան",
-    locationSub: "Բաց եմ ռեմոութի՝ ամբողջ աշխարհով",
-    focus: "Հիմնական ուղղություններ",
-    focusAreas: ["AI", "Web3", "SaaS", "Մարքեթփլեյս", "Մոբայլ"],
+    locationSub: "Բաց եմ հեռահար աշխատանքի՝ ամբողջ աշխարհում",
+    focus: "Հիմնական ոլորտներ",
+    focusAreas: ["AI", "Web3", "SaaS", "Շուկայահրապարակ", "Մոբայլ"],
     years: "Տարի",
-    projects: "Պրոյեկտ",
+    projects: "Նախագիծ",
     industries: "Ոլորտ",
     skills: "Հմտություններ",
     tools: "Գործիքներ",
     languages: "Լեզուներ",
     languageLevels: { native: "Մայրենի", fluent: "Ազատ", professional: "Մասնագիտական" },
+    headlineLine1: "ԴԻԶԱՅՆԸ",
+    headlineLine2: "ԲԻԶՆԵՍ",
+    headlineLine3: "ԳՈՐԾԱՌՈՒՅԹ Է",
   },
   projects: {
-    eyebrow: "Ընտրած աշխատանքներ",
-    heading: "Կեյսեր",
-    inProgress: "Ընթացքում է",
+    eyebrow: "Ընտրված աշխատանքներ",
+    heading: "Գործեր",
+    inProgress: "Ընթացքում",
     comingSoon: "Շուտով",
   },
   experience: {
     eyebrow: "Փորձ",
-    heading: "Աշխատանքային ճանապարհ",
+    heading: "Աշխատանքի պատմություն",
     fullTime: "Լրիվ դրույք",
     freelance: "Ֆրիլանս",
     freelancePeriod: "Մայիս 2025 – Դեկ 2025",
@@ -659,37 +679,42 @@ const hy: Dictionary = {
   },
   contact: {
     eyebrow: "Կապ",
-    headingPart1: "Արի",
+    headingPart1: "Եկեք ստեղծենք ինչ-որ բան",
     headingAccent: "միասին",
-    headingPart3: " սարքենք",
+    headingPart3: "։",
     description:
-      "Բաց եմ պրոդուկտի դիզայների դիրքերի ու ֆրիլանս համագործակցության համար։ Եթե կա լուծելու արժանի մի խնդիր՝ ուրախ կլինեմ լսել։",
-    sendEmail: "Գրել նամակ",
-    connect: "Կապ հաստատել",
+      "Բաց եմ պրոդուկտի դիզայների դիրքերի և ֆրիլանս համագործակցության համար։ Եթե ունեք լուծելու արժանի խնդիր՝ ուրախ կլինեմ լսել։",
+    sendEmail: "Ուղարկել նամակ",
+    connect: "Կապ",
     emailLabel: "Email",
     linkedinLabel: "LinkedIn",
-    locationFooter: "Երևան, Հայաստան · Ռեմոութ՝ ամբողջ աշխարհով",
+    locationFooter: "Երևան, Հայաստան · Հեռահար՝ ամբողջ աշխարհում",
+    formHeading: "Գրեք ինձ",
+    formIntro:
+      "Լրացրեք ձևը՝ կպատասխանեմ մեկ օրվա ընթացքում։ Կարող եք նաև գրել email-ով կամ LinkedIn-ով՝ ստորև։",
     formName: "Անուն",
-    formNamePlaceholder: "Քո անունը",
+    formNamePlaceholder: "Ձեր անունը",
     formEmail: "Email",
     formEmailPlaceholder: "you@company.com",
     formSubject: "Թեմա",
     formSubjectPlaceholder: "Ինչի՞ մասին է",
-    formMessage: "Նամակ",
-    formMessagePlaceholder: "Պատմիր նախագծի, դիրքի մասին կամ պարզապես բարևիր։",
+    formMessage: "Հաղորդագրություն",
+    formMessagePlaceholder: "Պատմեք նախագծի, դիրքի մասին կամ պարզապես բարևեք։",
     formSubmit: "Ուղարկել",
-    formSubmitOpening: "Բացում եմ մեյլդ…",
-    formSubmitDone: "Պատրաստ է — նամակը քո դրաֆտներում է։",
-    formCopy: "Կրկնօրինակել",
-    formCopied: "Պատճենված է",
-    formIntro:
-      "Լրացրու ֆորման՝ ու հաղորդագրությունն ինձ կհասնի։ Եթե այլ կերպ ես ուզում՝ email-ն ու LinkedIn-ն էլ են աշխատում։",
-    formNote:
-      "Ուղարկելիս կբացվի քո mail-ը՝ արդեն լրացված տեքստով։ Ապահով լինելու համար տեքստը նաև պատճենվում է clipboard-ում։",
-    formError: "Խնդրում եմ լրացրու անունը, email-ն ու հաղորդագրությունը։",
+    formSubmitSending: "Ուղարկվում է…",
+    formSubmitDone: "Ուղարկված է — շնորհակալություն, կպատասխանեմ մեկ օրվա ընթացքում։",
+    formCopy: "Պատճենել",
+    formCopied: "Պատճենվեց",
+    formError: "Խնդրում եմ լրացնել անունը, email-ն ու հաղորդագրությունը։",
+    formErrorSend: "Չհաջողվեց ուղարկել։ Գրեք ինձ ուղիղ email-ով կամ փորձեք կրկին։",
+    formNotConfigured:
+      "Ձևի առաքումը դեռ կարգավորված չէ։ Գրեք ինձ ուղիղ email-ով, մինչ կարգավորում եմ։",
+    directHeading: "Կամ ուղիղ կապ",
+    directLabel: "Ուղիղ",
+    rightsReserved: "Բոլոր իրավունքները պաշտպանված են",
   },
   caseStudy: {
-    backToWork: "Հետ՝ աշխատանքներին",
+    backToWork: "Վերադառնալ աշխատանքներին",
     overview: "Ընդհանուր",
     role: "Դեր",
     duration: "Տևողություն",
@@ -698,7 +723,7 @@ const hy: Dictionary = {
     problem: "Խնդիր",
     solution: "Լուծում",
     outcome: "Արդյունք",
-    reflection: "Մտքեր հետադարձ նայելով",
+    reflection: "Եզրակացություններ",
     impact: "Արդյունքներ",
     nextProject: "Հաջորդ նախագիծ",
     readingProgress: "Ընթերցման ընթացք",
@@ -710,19 +735,19 @@ const hy: Dictionary = {
     versionsAssets: "{count} տարբերակ · {total} ֆայլ",
     assetsCount: "{count} ֆայլ",
   },
-  modal: { close: "Փակել", comingSoon: "Կեյսի նյութերը շուտով կհայտնվեն" },
+  modal: { close: "Փակել", comingSoon: "Գործի նյութերը շուտով կհայտնվեն" },
   caseTabs: { firstVersion: "Առաջին տարբերակ", releaseVersion: "Թողարկման տարբերակ" },
   cv: {
     downloadTitle: "Ներբեռնել CV-ն",
-    downloadIntro: "Ընտրիր լեզուն, որով ուզում ես CV-ն։",
-    chooseLang: "Ընտրիր լեզու",
+    downloadIntro: "Ընտրեք CV-ի լեզուն։",
+    chooseLang: "Ընտրեք լեզու",
     downloadPdf: "Ներբեռնել PDF",
     print: "Տպել",
     contact: "Կապ",
-    location: "Որտեղ եմ",
+    location: "Գտնվելու վայր",
     email: "Email",
     linkedin: "LinkedIn",
-    summaryTitle: "Կարճ իմ մասին",
+    summaryTitle: "Համառոտ",
     skillsTitle: "Հմտություններ",
     skillsWhatIDo: "Ինչ եմ անում",
     skillsWhatIUse: "Ինչով եմ աշխատում",
@@ -730,38 +755,38 @@ const hy: Dictionary = {
     workExperienceTitle: "Աշխատանքային փորձ",
     freelanceTitle: "Ֆրիլանս նախագծեր",
     freelancePeriod: "Մայիս 2025 – Դեկ 2025",
-    generatedOn: "Կազմված է",
+    generatedOn: "Ստեղծված է",
   },
-  languagePicker: { title: "CV-ի լեզու", subtitle: "Ընտրիր ներբեռնման լեզուն։" },
+  languagePicker: { title: "CV-ի լեզու", subtitle: "Ընտրեք ներբեռնման համար լեզուն։" },
   footer: {
     aboutSiteLabel: "Այս կայքի մասին",
     aboutSiteBlurb:
-      "Բրուտալիստ editorial-tech պորտֆոլիո։ Երեք լեզու, ամբողջական կեյսեր, զրո թրեքերներ։",
+      "Բրուտալիստ editorial-tech պորտֆոլիո։ Երեք լեզու, ամբողջական գործեր, առանց հետևման։",
     navigateCol: "Նավիգացիա",
-    workCol: "Աշխատանքներ",
+    workCol: "Նախագծեր",
     elsewhereCol: "Այլուր",
     localeCol: "Լեզու",
-    madeWith: "Սարքած խնամքով · Առանց թրեքերների",
+    madeWith: "Ստեղծված խնամքով · Առանց հետևման",
   },
   method: {
     eyebrow: "Մեթոդ / 4 քայլ",
-    headingLine1: "ՈՒ ՍԱ",
-    headingLine2: "ԵՆՔ ՍԱՐՔՈՒՄ",
+    headingLine1: "ԻՆՉՊԵՍ Է",
+    headingLine2: "ՍՏԵՂԾՎՈՒՄ",
     blurb:
-      "Տվյալները՝ նկարից առաջ։ Ստրատեգիան՝ էկրաններից առաջ։ Միևնույն ցիկլը՝ ամեն նախագծում՝ ուսումնասիրել, շրջանակել, դիզայնել, ստուգել։",
+      "Տվյալները՝ պիքսելներից առաջ։ Ստրատեգիան՝ էկրաններից առաջ։ Միևնույն ցիկլը՝ ամեն նախագծում՝ ուսումնասիրել, շրջանակել, դիզայնել, ստուգել։",
     stepLabel: "Քայլ",
     steps: [
-      { step: "01", title: "Հասկանալ", description: "Ուսումնասիրել խնդիրը, խոսել օգտատերերի հետ, վերլուծել տվյալներն ու բիզնեսի համատեքստը։ Առանց ենթադրությունների՝ միայն փաստեր։" },
-      { step: "02", title: "Շրջանակել", description: "Գտնել իսկական խնդիրը (ոչ թե առաջին պատահածը), սահմանել սահմանափակումները, հաջողության մետրիկները ու ուղղությունը համաձայնեցնել թիմի հետ։" },
-      { step: "03", title: "Դիզայնել", description: "Սկզբում շատ տարբերակներ՝ հետո սահող ֆոկուս։ Վայրֆրեյմեր, պրոտոտիպեր, վիզուալ — ամեն ինչ կապված ստրատեգիայի հետ։ Թույլ գաղափարները շուտ գցել։" },
-      { step: "04", title: "Ստուգել", description: "Թեստել իրական մարդկանց հետ, համեմատել նպատակների հետ, փոխել տվյալների հիման վրա։ Դիզայնը handoff-ով չի ավարտվում։" },
+      { step: "01", title: "Հասկանալ", description: "Ուսումնասիրել խնդիրը, զրուցել օգտատերերի հետ, վերլուծել տվյալներն ու բիզնեսի համատեքստը։ Առանց ենթադրությունների՝ միայն փաստեր։" },
+      { step: "02", title: "Շրջանակել", description: "Սահմանել իրական խնդիրը (ոչ թե առաջին պատահածը), սահմանել սահմանափակումները, հաջողության մետրիկաները և համաձայնեցնել ուղղությունը շահագրգիռների հետ։" },
+      { step: "03", title: "Դիզայնել", description: "Բացել տարբերակների լայն դաշտ, ապա սահող ֆոկուս։ Վայրֆրեյմեր, նախատիպեր, վիզուալ դիզայն՝ միշտ կապված ստրատեգիայի հետ։ Թույլ գաղափարները շուտ թողնել։" },
+      { step: "04", title: "Ստուգել", description: "Թեստել իրական օգտատերերի հետ, համեմատել նպատակների հետ, փոփոխել՝ տվյալների հիման վրա։ Դիզայնը handoff-ով չի ավարտվում։" },
     ],
   },
   about: {
     heroLine1: "ԴԻԶԱՅՆԸ",
     heroLine2: "ԲԻԶՆԵՍ Է",
     bioLabel: "Իմ մասին",
-    capabilitiesLabel: "Ինչ կարող եմ",
+    capabilitiesLabel: "Կարողություններ",
     methodLabel: "Մեթոդ",
     experienceLabel: "Փորձ",
     freelanceLabel: "Ֆրիլանս",
@@ -770,17 +795,17 @@ const hy: Dictionary = {
     eyebrow: "Սխալ / 404",
     title: "ՉԻ ԳՏՆՎԵԼ",
     blurb: "Այս էջը գոյություն չունի կամ տեղափոխվել է։",
-    cta: "Վերադառնալ սկիզբ",
+    cta: "Վերադառնալ գլխավոր",
   },
   ui: {
     portfolioStrip: "Պորտֆոլիո / 2020—2026",
-    caseStudiesStrip: "Կեյսեր / 2020—2026",
+    caseStudiesStrip: "Գործեր / 2020—2026",
     archiveLabel: "Արխիվ",
     filesSuffix: "ֆայլ",
-    selectedWork: "Ընտրած աշխատանքներ",
-    viewAllCases: "— Տեսնել բոլոր {count} կեյսերը ↗",
+    selectedWork: "Ընտրված աշխատանքներ",
+    viewAllCases: "— Տեսնել բոլոր {count} գործերը ↗",
     caseArchiveBlurb:
-      "Ամեն կեյս ամբողջ պատմություն է՝ խնդիր, ուսումնասիրություն, որոշումներ, ինչն աշխատեց ու ինչը կփոխեի։ Առանց մուդբորդից սքրիններ ու բարձրաձայն ֆիչաների։ Բացիր ու կարդա ըստ էության։",
+      "Ամեն գործ՝ ամբողջական պատմություն է. խնդիր, ուսումնասիրություն, որոշումներ, ինչն աշխատեց ու ինչը կփոխեի։ Առանց մուդբորդից սքրինների ու ֆիչաների ցուցադրման։ Բացեք և կարդացեք ըստ էության։",
     visualsLabel: "Վիզուալ",
     aboutEyebrow: "Իմ մասին",
     contactEyebrow: "Կապ / միշտ բաց",
@@ -789,28 +814,28 @@ const hy: Dictionary = {
     home: [
       "ՊՐՈԴՈՒԿՏԻ ԴԻԶԱՅՆԵՐ",
       "2020-ից · ԵՐԵՎԱՆ",
-      "AI · WEB3 · SAAS · ՄԱՐՔԵԹՓԼԵՅՍ",
+      "AI · WEB3 · SAAS · ՇՈՒԿԱՅԱՀՐԱՊԱՐԱԿ",
       "ԲԱՑ ԵՄ ԱՇԽԱՏԱՆՔԻ ՀԱՄԱՐ",
       "ՍՏՐԱՏԵԳԻԱ → ՈՒՍՈՒՄՆԱՍԻՐՈՒԹՅՈՒՆ → ԴԻԶԱՅՆ → ՇԻՓ",
-      "5+ ՏԱՐԻ · ԿԵՅՍԵՐ 3 ԼԵԶՎՈՎ",
+      "5+ ՏԱՐԻ · ԳՈՐԾԵՐ 3 ԼԵԶՎՈՎ",
     ],
     work: [
-      "ԲՈԼՈՐ ԿԵՅՍԵՐԸ",
+      "ԲՈԼՈՐ ԳՈՐԾԵՐԸ",
       "ՊՐՈԴՈՒԿՏԻ ԴԻԶԱՅՆ · UX ՍՏՐԱՏԵԳԻԱ · ԴԻԶԱՅՆ ՀԱՄԱԿԱՐԳԵՐ",
-      "ԿԱՐԴԱ — ՄԻ ԲԱՎԱՐԱՐՎԻՐ ՍՔՐՈԼՈՎ",
-      "ՓԱՍՏԵՐԸ՝ ԴԵԿՈՐԱՑԻԱՅԻ ԴԵՄ",
+      "ԿԱՐԴԱՑԵՔ — ՈՉ ՊԱՐԶԱՊԵՍ ՍՔՐՈԼԵՔ",
+      "ԱՊԱՑՈՒՅՑՆԵՐ՝ ԴԵԿՈՐԱՑԻԱՅԻ ԴԵՄ",
     ],
     contact: [
       "ԲԱՑ ԵՄ ԱՇԽԱՏԱՆՔԻ",
       "ՖՈՒԼԹԱՅՄ · ԿՈՆՏՐԱԿՏ · FRACTIONAL",
       "EN · RU · HY",
-      "ՌԵՄՈՈՒԹ ԱՄԲՈՂՋ ԱՇԽԱՐՀՈՎ",
+      "ՀԵՌԱՀԱՐ՝ ԱՄԲՈՂՋ ԱՇԽԱՐՀՈՒՄ",
       "ՊԱՏԱՍԽԱՆ 24 ԺԱՄՈՒՄ",
     ],
     about: [
-      "ՖՈԿՈՒՍ · AI · WEB3 · SAAS · ՄԱՐՔԵԹՓԼԵՅՍ",
-      "5+ ՏԱՐԻ · 6 ԿԵՅՍ",
-      "ԵՐԵՎԱՆ · ԲԱՑ ԵՄ ՌԵՄՈՈՒԹԻ",
+      "ՖՈԿՈՒՍ · AI · WEB3 · SAAS · ՇՈՒԿԱՅԱՀՐԱՊԱՐԱԿ",
+      "5+ ՏԱՐԻ · 6 ԳՈՐԾ",
+      "ԵՐԵՎԱՆ · ԲԱՑ ԵՄ ՀԵՌԱՀԱՐ ԱՇԽԱՏԱՆՔԻ",
       "ԴԻԶԱՅՆԸ ԲԻԶՆԵՍ ԳՈՐԾԱՌՈՒՅԹ Է",
     ],
   },

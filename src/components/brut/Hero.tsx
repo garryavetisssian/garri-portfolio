@@ -42,14 +42,14 @@ export default function Hero({ locale }: HeroProps) {
         {/* Type-tower headline */}
         <h1 className="headline text-ink select-none">
           <span className="block reveal-up" style={{ animationDelay: "0.0s" }}>
-            <span style={{ animationDelay: "0.0s" }}>DESIGN</span>
+            <span style={{ animationDelay: "0.0s" }}>{t.hero.headlineLine1}</span>
             <span className="text-acid ml-2" aria-hidden>↗</span>
           </span>
           <span className="block reveal-up" style={{ animationDelay: "0.12s" }}>
-            <span style={{ animationDelay: "0.12s" }}>IS&nbsp;A&nbsp;BUSINESS</span>
+            <span style={{ animationDelay: "0.12s" }}>{t.hero.headlineLine2.replace(/ /g, " ")}</span>
           </span>
           <span className="block reveal-up" style={{ animationDelay: "0.22s" }}>
-            <span style={{ animationDelay: "0.22s" }}>FUNCTION<span className="text-acid">.</span></span>
+            <span style={{ animationDelay: "0.22s" }}>{t.hero.headlineLine3}<span className="text-acid">.</span></span>
           </span>
         </h1>
 

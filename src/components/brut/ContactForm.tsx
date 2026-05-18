@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { SITE } from "@/lib/constants";
+import { sendContact, type ContactResult } from "@/app/actions/contact";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -15,80 +15,72 @@ interface FormData {
 
 const initial: FormData = { name: "", email: "", subject: "", message: "" };
 
-function isValidEmail(s: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-}
-
-function buildMailto(d: FormData) {
-  const subject = d.subject.trim() || `Portfolio inquiry from ${d.name}`;
-  const lines = [
-    `Hi Garri,`,
-    ``,
-    d.message.trim(),
-    ``,
-    `— ${d.name.trim()}`,
-    d.email.trim(),
-  ];
-  const body = lines.join("\n");
-  const params = new URLSearchParams({ subject, body });
-  return { href: `mailto:${SITE.email}?${params}`, body, subject };
-}
-
 export default function ContactForm() {
   const { t } = useLanguage();
   const [data, setData] = useState<FormData>(initial);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorKey, setErrorKey] = useState<ContactResult["errorKey"]>();
   const [copied, setCopied] = useState(false);
+  const [pending, startTransition] = useTransition();
 
-  const update = (k: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setData((d) => ({ ...d, [k]: e.target.value }));
-    if (status === "error") setStatus("idle");
-  };
+  const update =
+    (k: keyof FormData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setData((d) => ({ ...d, [k]: e.target.value }));
+      if (status === "error") {
+        setStatus("idle");
+        setErrorKey(undefined);
+      }
+    };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!data.name.trim() || !data.message.trim() || !isValidEmail(data.email)) {
-      setStatus("error");
-      return;
-    }
-
     setStatus("sending");
-    const { href, body, subject } = buildMailto(data);
-
-    // Copy formatted message to clipboard as a backup
-    try {
-      const fullText = `To: ${SITE.email}\nFrom: ${data.name} <${data.email}>\nSubject: ${subject}\n\n${body}`;
-      await navigator.clipboard.writeText(fullText);
-    } catch {
-      // clipboard may be blocked; not fatal
-    }
-
-    // Open mail client
-    window.location.href = href;
-
-    // Show success state briefly
-    setTimeout(() => setStatus("sent"), 400);
+    startTransition(async () => {
+      const result = await sendContact(data);
+      if (result.ok) {
+        setStatus("sent");
+        setData(initial);
+      } else {
+        setErrorKey(result.errorKey);
+        setStatus("error");
+      }
+    });
   };
 
   const handleCopy = async () => {
-    if (!data.name.trim() || !data.message.trim() || !isValidEmail(data.email)) {
-      setStatus("error");
-      return;
-    }
-    const { body, subject } = buildMailto(data);
-    const fullText = `To: ${SITE.email}\nFrom: ${data.name} <${data.email}>\nSubject: ${subject}\n\n${body}`;
+    const fullText = `From: ${data.name} <${data.email}>\nSubject: ${data.subject || `Portfolio inquiry from ${data.name}`}\n\n${data.message}`;
     try {
       await navigator.clipboard.writeText(fullText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
-      // ignore
+      /* clipboard blocked — silent */
     }
   };
 
+  const statusLine = (() => {
+    if (status === "sent") return { tone: "ok" as const, text: t.contact.formSubmitDone };
+    if (status === "sending" || pending)
+      return { tone: "info" as const, text: t.contact.formSubmitSending };
+    if (status === "error") {
+      const message =
+        errorKey === "formError"
+          ? t.contact.formError
+          : errorKey === "formNotConfigured"
+          ? t.contact.formNotConfigured
+          : t.contact.formErrorSend;
+      return { tone: "warn" as const, text: message };
+    }
+    return null;
+  })();
+
   return (
-    <form onSubmit={handleSubmit} className="grid gap-px bg-line-strong hairline-t hairline-b" noValidate>
-      {/* Row 1: Name + Email */}
+    <form
+      onSubmit={handleSubmit}
+      className="grid gap-px bg-line-strong hairline-t hairline-b"
+      noValidate
+    >
       <div className="grid sm:grid-cols-2 gap-px bg-line-strong">
         <Field label={t.contact.formName} required>
           <input
@@ -98,6 +90,7 @@ export default function ContactForm() {
             placeholder={t.contact.formNamePlaceholder}
             className="form-input"
             autoComplete="name"
+            disabled={pending}
           />
         </Field>
         <Field label={t.contact.formEmail} required>
@@ -108,11 +101,11 @@ export default function ContactForm() {
             placeholder={t.contact.formEmailPlaceholder}
             className="form-input"
             autoComplete="email"
+            disabled={pending}
           />
         </Field>
       </div>
 
-      {/* Row 2: Subject */}
       <Field label={t.contact.formSubject}>
         <input
           type="text"
@@ -120,10 +113,10 @@ export default function ContactForm() {
           onChange={update("subject")}
           placeholder={t.contact.formSubjectPlaceholder}
           className="form-input"
+          disabled={pending}
         />
       </Field>
 
-      {/* Row 3: Message */}
       <Field label={t.contact.formMessage} required>
         <textarea
           value={data.message}
@@ -131,36 +124,46 @@ export default function ContactForm() {
           placeholder={t.contact.formMessagePlaceholder}
           rows={7}
           className="form-input resize-y min-h-[150px]"
+          disabled={pending}
         />
       </Field>
 
-      {/* Status row + actions */}
       <div className="bg-paper p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-        <div className="mono text-ink-mute text-[11px] max-w-[44ch] leading-[1.5]">
-          {status === "sent"
-            ? <span className="text-acid">✓ {t.contact.formSubmitDone}</span>
-            : status === "error"
-            ? <span className="text-warn">⚠ {t.contact.formError}</span>
-            : status === "sending"
-            ? <span>… {t.contact.formSubmitOpening}</span>
-            : t.contact.formNote}
+        <div className="mono text-[11px] max-w-[44ch] leading-[1.5] min-h-[1.5em]">
+          {statusLine ? (
+            <span
+              className={
+                statusLine.tone === "ok"
+                  ? "text-acid"
+                  : statusLine.tone === "warn"
+                  ? "text-warn"
+                  : "text-ink-mute"
+              }
+            >
+              {statusLine.tone === "ok" ? "✓ " : statusLine.tone === "warn" ? "⚠ " : "… "}
+              {statusLine.text}
+            </span>
+          ) : (
+            <span className="text-ink-mute opacity-0">·</span>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={handleCopy}
-            className="mono px-4 py-3 border border-line-strong text-ink hover:border-acid hover:text-acid transition-colors"
+            disabled={pending}
+            className="mono px-4 py-3 border border-line-strong text-ink hover:border-acid hover:text-acid transition-colors disabled:opacity-60"
           >
             {copied ? `✓ ${t.contact.formCopied}` : `${t.contact.formCopy} ⎘`}
           </button>
           <button
             type="submit"
-            disabled={status === "sending"}
+            disabled={pending}
             className="mono inline-flex items-center gap-3 px-5 py-3 border border-acid text-acid hover:bg-acid hover:text-paper transition-colors disabled:opacity-60"
           >
-            <span>{t.contact.formSubmit}</span>
-            <span className="transition-transform duration-300 group-hover:translate-x-1">↗</span>
+            <span>{pending ? t.contact.formSubmitSending : t.contact.formSubmit}</span>
+            <span>↗</span>
           </button>
         </div>
       </div>

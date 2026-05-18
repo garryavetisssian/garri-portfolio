@@ -130,7 +130,7 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
       {/* Bottom rule */}
       <div className="border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] flex flex-col md:flex-row items-center justify-between gap-2 py-4 mono text-ink-mute">
-          <span>© {year} {SITE.name}. All rights reserved.</span>
+          <span>© {year} {SITE.name}. {t.contact.rightsReserved}.</span>
           <span>{t.footer.madeWith}</span>
         </div>
       </div>

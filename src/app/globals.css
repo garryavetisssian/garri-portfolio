@@ -20,10 +20,15 @@
   --line-strong: rgba(242, 240, 234, 0.22);
   --line-faint: rgba(242, 240, 234, 0.05);
 
-  /* Acid accent */
-  --acid: #D8FF36;
-  --acid-soft: #D8FF36AA;
-  --acid-faint: rgba(216, 255, 54, 0.16);
+  /* Primary accent — electric violet, Web3 vibe.
+     Variable is still named --acid to keep all downstream styles working;
+     the colour is just a different "acid". */
+  --acid: #9B6BFF;
+  --acid-soft: #B594FFCC;
+  --acid-faint: rgba(155, 107, 255, 0.16);
+  --acid-glow: 0 0 32px rgba(155, 107, 255, 0.45);
+  /* Optional iridescent gradient for hero / CTA flourishes */
+  --acid-gradient: linear-gradient(135deg, #9B6BFF 0%, #F472B6 55%, #06B6D4 100%);
 
   /* Functional */
   --warn: #FF5C2A;
