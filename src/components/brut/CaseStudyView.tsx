@@ -243,13 +243,13 @@ export default function CaseStudyView({
                 <span className="chip">{project.year}</span>
               </div>
               <h1
-                className="text-ink"
+                className="text-ink h-break"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 800,
-                  fontSize: "clamp(3.5rem, 11vw, 11rem)",
+                  fontSize: "clamp(2.25rem, 9vw, 8.5rem)",
                   letterSpacing: "-0.045em",
-                  lineHeight: 0.88,
+                  lineHeight: 0.92,
                 }}
               >
                 {project.title.toUpperCase()}
@@ -422,13 +422,13 @@ export default function CaseStudyView({
             <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-6 items-center">
               <span className="md:col-span-2 mono">— {t.caseStudy.nextProject}</span>
               <span
-                className="next-title md:col-span-8"
+                className="next-title md:col-span-8 h-break"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 800,
-                  fontSize: "clamp(2.5rem, 7vw, 6rem)",
+                  fontSize: "clamp(1.75rem, 6vw, 5rem)",
                   letterSpacing: "-0.04em",
-                  lineHeight: 0.9,
+                  lineHeight: 0.95,
                 }}
               >
                 {nextProject.title.toUpperCase()}

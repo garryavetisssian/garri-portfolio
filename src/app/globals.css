@@ -488,26 +488,45 @@ body {
 .headline {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 0.86;
+  line-height: 0.9;
   letter-spacing: -0.04em;
-  font-size: clamp(2.75rem, 9.5vw, 10rem);
+  font-size: clamp(2rem, 8.5vw, 9rem);
   overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .headline-md {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.035em;
-  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-size: clamp(1.75rem, 6vw, 5rem);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .headline-sm {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 1;
   letter-spacing: -0.025em;
-  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Utility for inline display-font elements that aren't using a class */
+.h-break {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 /* Body prose */

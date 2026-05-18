@@ -71,12 +71,12 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
       {/* Brand mark — translated first-name across locales */}
       <div className="overflow-hidden border-b border-line-strong">
         <div
-          className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 select-none"
+          className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 select-none h-break"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 900,
-            fontSize: "clamp(4rem, 18vw, 22rem)",
-            lineHeight: 0.85,
+            fontSize: "clamp(3rem, 15vw, 16rem)",
+            lineHeight: 0.9,
             letterSpacing: "-0.05em",
             color: "transparent",
             WebkitTextStroke: "1px var(--line-strong)",
