@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/brut/CaseStudyView";
 import { getProject, getProjectSlugs } from "@/data/projects";
+import { getCaseAssets } from "@/lib/case-assets";
 import { LOCALES, type Locale } from "@/lib/i18n/types";
 
 const localeCodes = LOCALES.map((l) => l.code) as Locale[];
@@ -48,5 +49,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (!localeCodes.includes(locale as Locale)) notFound();
   const project = getProject(slug);
   if (!project) notFound();
-  return <CaseStudyView project={project} />;
+
+  // Server-side scan of public/cases/[slug]/ — baked into the static HTML.
+  const caseAssets = getCaseAssets(slug);
+
+  return <CaseStudyView project={project} caseAssets={caseAssets} />;
 }

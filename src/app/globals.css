@@ -9,8 +9,8 @@
 :root {
   /* Surface */
   --ink: #F2F0EA;
-  --ink-mute: #9A968C;
-  --ink-faint: #5A574F;
+  --ink-mute: #A5A199;
+  --ink-faint: #76736B;
   --paper: #0B0B0A;
   --paper-soft: #131311;
   --paper-elev: #1A1A17;
@@ -300,8 +300,39 @@ body {
   z-index: 0;
 }
 .row-link:hover::before { transform: scaleY(1); }
-.row-link:hover { color: var(--paper); padding-left: 1rem; }
+.row-link:hover { padding-left: 1rem; }
 .row-link > * { position: relative; z-index: 1; }
+
+/* All child text inside a hovered row collapses to paper, so dim
+   mono labels stay readable against the acid sweep. */
+.row-link:hover,
+.row-link:hover * {
+  color: var(--paper) !important;
+}
+
+/* Next-project link — same acid-sweep + paper-text pattern. */
+.next-project {
+  position: relative;
+  overflow: hidden;
+  transition: padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--ink);
+}
+.next-project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--acid);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.next-project:hover::before { transform: scaleY(1); }
+.next-project > * { position: relative; z-index: 1; }
+.next-project:hover,
+.next-project:hover * {
+  color: var(--paper) !important;
+}
 
 .row-arrow {
   display: inline-block;
