@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Marquee from "@/components/brut/Marquee";
-import AboutBackground from "@/components/brut/AboutBackground";
 import Reveal from "@/components/brut/Reveal";
 import { LOCALES, type Locale } from "@/lib/i18n/types";
 import { DICTIONARIES } from "@/lib/i18n/dictionaries";
@@ -46,8 +45,6 @@ export default async function AboutPage({ params }: PageProps) {
 
   return (
     <>
-      <AboutBackground />
-
       <section className="relative pt-[calc(var(--nav-h)+5rem)] pb-16">
         <span className="section-marker" style={{ top: "20%", right: "-2vw" }} aria-hidden>
           01
@@ -158,7 +155,7 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="relative py-20 border-t border-line-strong bg-paper-soft/60 backdrop-blur-[2px]">
+      <section className="relative py-20 border-t border-line-strong bg-paper-soft">
         <span className="section-marker" style={{ top: "10%", left: "-2vw" }} aria-hidden>
           04
         </span>
@@ -221,7 +218,7 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="relative py-20 border-t border-line-strong bg-paper-soft/60 backdrop-blur-[2px]">
+      <section className="relative py-20 border-t border-line-strong bg-paper-soft">
         <span className="section-marker" style={{ top: "10%", left: "-2vw" }} aria-hidden>
           06
         </span>

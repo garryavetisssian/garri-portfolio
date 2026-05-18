@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SITE } from "@/lib/constants";
 import { getAvailableProjects } from "@/lib/case-assets";
+import GeometricField from "@/components/brut/GeometricField";
 
 const localeCodes = LOCALES.map((l) => l.code) as Locale[];
 
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   return (
     <LanguageProvider locale={locale as Locale}>
       <div className="relative min-h-screen bg-paper text-ink">
+        <GeometricField />
         <div className="grain" aria-hidden />
         <Header locale={locale as Locale} />
         <main id="content" className="relative z-10">

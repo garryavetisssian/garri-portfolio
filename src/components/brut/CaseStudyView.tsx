@@ -178,13 +178,13 @@ export default function CaseStudyView({
         </div>
       </section>
 
-      {/* TLDR block */}
-      <section className="py-20 border-t border-line-strong">
+      {/* TLDR block — no generic heading, content carries the section */}
+      <section className="py-16 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-          <p className="mono text-ink-mute mb-3">— TL;DR</p>
-          <h2 className="headline-md text-ink mb-12">
-            {t.caseStudy.shortVersion}<span className="text-acid">.</span>
-          </h2>
+          <div className="flex items-baseline justify-between mb-8 mono">
+            <span className="text-ink-mute">— TL;DR</span>
+            <span className="text-ink-mute">{project.slug.toUpperCase()} / 00</span>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-px bg-line-strong hairline-t hairline-b">
             {[
@@ -254,14 +254,16 @@ export default function CaseStudyView({
         </section>
       )}
 
-      {/* Metrics */}
+      {/* Metrics — no generic heading, numbers speak */}
       {project.metrics && project.metrics.length > 0 && (
-        <section className="py-20 border-t border-line-strong bg-paper-soft">
+        <section className="py-16 border-t border-line-strong bg-paper-soft">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-            <p className="mono text-ink-mute mb-3">— {t.caseStudy.impact}</p>
-            <h3 className="headline-md text-ink mb-12">
-              {t.caseStudy.receipts}<span className="text-acid">.</span>
-            </h3>
+            <div className="flex items-baseline justify-between mb-8 mono">
+              <span className="text-ink-mute">— {t.caseStudy.impact}</span>
+              <span className="text-ink-mute">
+                {project.slug.toUpperCase()} / {String(project.metrics.length).padStart(2, "0")} {t.ui.filesSuffix}
+              </span>
+            </div>
             <div
               className="grid gap-px bg-line-strong hairline-t hairline-b"
               style={{

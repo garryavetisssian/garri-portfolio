@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { sendContact, type ContactResult } from "@/app/actions/contact";
 
 type Status = "idle" | "sending" | "sent" | "error";
+type ErrorKey = "formError" | "formErrorSend" | "formNotConfigured";
 
 interface FormData {
   name: string;
@@ -15,14 +15,21 @@ interface FormData {
 
 const initial: FormData = { name: "", email: "", subject: "", message: "" };
 
+function isValidEmail(s: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+}
+
 export default function ContactForm() {
   const { t } = useLanguage();
   const [data, setData] = useState<FormData>(initial);
   const [status, setStatus] = useState<Status>("idle");
-  const [errorKey, setErrorKey] = useState<ContactResult["errorKey"]>();
+  const [errorKey, setErrorKey] = useState<ErrorKey | undefined>();
   const [errorDetail, setErrorDetail] = useState<string | undefined>();
   const [copied, setCopied] = useState(false);
-  const [pending, startTransition] = useTransition();
+
+  // Public-safe key — Web3Forms keys only forward to the email address
+  // they're bound to, so exposing them client-side is by design.
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
   const update =
     (k: keyof FormData) =>
@@ -35,24 +42,68 @@ export default function ContactForm() {
       }
     };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (!data.name.trim() || !data.message.trim() || !isValidEmail(data.email)) {
+      setStatus("error");
+      setErrorKey("formError");
+      setErrorDetail(undefined);
+      return;
+    }
+    if (!accessKey) {
+      setStatus("error");
+      setErrorKey("formNotConfigured");
+      setErrorDetail("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY missing");
+      return;
+    }
+
     setStatus("sending");
-    startTransition(async () => {
-      const result = await sendContact(data);
-      if (result.ok) {
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: data.name.trim(),
+          email: data.email.trim(),
+          subject:
+            data.subject.trim() || `Portfolio inquiry from ${data.name.trim()}`,
+          message: data.message.trim(),
+          from_name: "garri.design contact form",
+        }),
+      });
+
+      const body = await res.json().catch(() => ({}));
+
+      if (res.ok && body?.success === true) {
         setStatus("sent");
         setData(initial);
         setErrorDetail(undefined);
-      } else {
-        setErrorKey(result.errorKey);
-        setErrorDetail(result.detail);
-        setStatus("error");
+        return;
       }
-    });
-  };
 
-  const handleCopy = async () => {
+      const detail =
+        typeof body?.message === "string"
+          ? body.message
+          : `HTTP ${res.status}`;
+      console.error("[contact] Web3Forms returned:", detail, body);
+      setStatus("error");
+      setErrorKey("formErrorSend");
+      setErrorDetail(detail);
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : "network error";
+      console.error("[contact] fetch threw:", detail);
+      setStatus("error");
+      setErrorKey("formErrorSend");
+      setErrorDetail(detail);
+    }
+  }
+
+  async function handleCopy() {
     const fullText = `From: ${data.name} <${data.email}>\nSubject: ${data.subject || `Portfolio inquiry from ${data.name}`}\n\n${data.message}`;
     try {
       await navigator.clipboard.writeText(fullText);
@@ -61,11 +112,11 @@ export default function ContactForm() {
     } catch {
       /* clipboard blocked — silent */
     }
-  };
+  }
 
   const statusLine = (() => {
     if (status === "sent") return { tone: "ok" as const, text: t.contact.formSubmitDone };
-    if (status === "sending" || pending)
+    if (status === "sending")
       return { tone: "info" as const, text: t.contact.formSubmitSending };
     if (status === "error") {
       const message =
@@ -79,9 +130,11 @@ export default function ContactForm() {
     return null;
   })();
 
+  const isPending = status === "sending";
+
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={submit}
       className="grid gap-px bg-line-strong hairline-t hairline-b"
       noValidate
     >
@@ -94,7 +147,7 @@ export default function ContactForm() {
             placeholder={t.contact.formNamePlaceholder}
             className="form-input"
             autoComplete="name"
-            disabled={pending}
+            disabled={isPending}
           />
         </Field>
         <Field label={t.contact.formEmail} required>
@@ -105,7 +158,7 @@ export default function ContactForm() {
             placeholder={t.contact.formEmailPlaceholder}
             className="form-input"
             autoComplete="email"
-            disabled={pending}
+            disabled={isPending}
           />
         </Field>
       </div>
@@ -117,7 +170,7 @@ export default function ContactForm() {
           onChange={update("subject")}
           placeholder={t.contact.formSubjectPlaceholder}
           className="form-input"
-          disabled={pending}
+          disabled={isPending}
         />
       </Field>
 
@@ -128,7 +181,7 @@ export default function ContactForm() {
           placeholder={t.contact.formMessagePlaceholder}
           rows={7}
           className="form-input resize-y min-h-[150px]"
-          disabled={pending}
+          disabled={isPending}
         />
       </Field>
 
@@ -151,9 +204,7 @@ export default function ContactForm() {
             <span className="text-ink-mute opacity-0">·</span>
           )}
           {errorDetail && status === "error" && (
-            <span className="text-ink-faint text-[10px] truncate">
-              ↳ {errorDetail}
-            </span>
+            <span className="text-ink-faint text-[10px] truncate">↳ {errorDetail}</span>
           )}
         </div>
 
@@ -161,17 +212,17 @@ export default function ContactForm() {
           <button
             type="button"
             onClick={handleCopy}
-            disabled={pending}
+            disabled={isPending}
             className="mono px-4 py-3 border border-line-strong text-ink hover:border-acid hover:text-acid transition-colors disabled:opacity-60"
           >
             {copied ? `✓ ${t.contact.formCopied}` : `${t.contact.formCopy} ⎘`}
           </button>
           <button
             type="submit"
-            disabled={pending}
+            disabled={isPending}
             className="mono inline-flex items-center gap-3 px-5 py-3 border border-acid text-acid hover:bg-acid hover:text-paper transition-colors disabled:opacity-60"
           >
-            <span>{pending ? t.contact.formSubmitSending : t.contact.formSubmit}</span>
+            <span>{isPending ? t.contact.formSubmitSending : t.contact.formSubmit}</span>
             <span>↗</span>
           </button>
         </div>
