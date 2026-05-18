@@ -112,6 +112,10 @@ export interface Dictionary {
     visuals: string;
     versionsAssets: string;
     assetsCount: string;
+    soundOn: string;
+    soundOff: string;
+    soundOnAria: string;
+    soundOffAria: string;
   };
   modal: { close: string; comingSoon: string };
   caseTabs: { firstVersion: string; releaseVersion: string };
@@ -297,6 +301,10 @@ const en: Dictionary = {
     visuals: "Visuals",
     versionsAssets: "{count} versions · {total} assets",
     assetsCount: "{count} assets",
+    soundOn: "Sound on",
+    soundOff: "Sound off",
+    soundOnAria: "Mute video",
+    soundOffAria: "Unmute video",
   },
   modal: { close: "Close", comingSoon: "Case study assets coming soon" },
   caseTabs: { firstVersion: "First Version", releaseVersion: "Release Version" },
@@ -516,6 +524,10 @@ const ru: Dictionary = {
     visuals: "Визуал",
     versionsAssets: "{count} версии · {total} файлов",
     assetsCount: "{count} файлов",
+    soundOn: "Звук вкл.",
+    soundOff: "Без звука",
+    soundOnAria: "Выключить звук",
+    soundOffAria: "Включить звук",
   },
   modal: { close: "Закрыть", comingSoon: "Материалы кейса скоро появятся" },
   caseTabs: { firstVersion: "Первая версия", releaseVersion: "Релизная версия" },
@@ -734,6 +746,10 @@ const hy: Dictionary = {
     visuals: "Վիզուալ",
     versionsAssets: "{count} տարբերակ · {total} ֆայլ",
     assetsCount: "{count} ֆայլ",
+    soundOn: "Ձայնը միացված",
+    soundOff: "Անձայն",
+    soundOnAria: "Անջատել ձայնը",
+    soundOffAria: "Միացնել ձայնը",
   },
   modal: { close: "Փակել", comingSoon: "Գործի նյութերը շուտով կհայտնվեն" },
   caseTabs: { firstVersion: "Առաջին տարբերակ", releaseVersion: "Թողարկման տարբերակ" },

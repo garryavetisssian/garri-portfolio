@@ -1,28 +1,128 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 
-function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean }) {
-  if (asset.type === "video") {
-    return (
+function VideoBlock({ src }: { src: string }) {
+  const { t } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+  const [inView, setInView] = useState(false);
+
+  // Play / pause as the video enters / leaves the viewport
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting && entry.intersectionRatio >= 0.4;
+        setInView(visible);
+        if (visible) {
+          // play() can reject with NotAllowedError if browser blocks it
+          el.play().catch(() => {
+            /* swallow; user can interact to retry */
+          });
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: [0, 0.4, 0.8] }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Push the muted state to the element imperatively so toggling
+  // doesn't restart playback
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.muted = muted;
+  }, [muted]);
+
+  return (
+    <div className="relative group">
       <video
-        src={asset.src}
-        autoPlay
+        ref={videoRef}
+        src={src}
         loop
         muted
         playsInline
         preload="metadata"
         className="block w-full h-auto"
       />
-    );
+
+      {/* Mute / unmute toggle */}
+      <button
+        type="button"
+        onClick={() => setMuted((m) => !m)}
+        aria-label={muted ? t.caseStudy.soundOffAria : t.caseStudy.soundOnAria}
+        className="absolute bottom-4 right-4 mono flex items-center gap-2 px-3 py-2 bg-paper/85 backdrop-blur-sm text-ink border border-line-strong hover:border-acid hover:text-acid transition-colors"
+      >
+        {muted ? (
+          <SpeakerOffIcon />
+        ) : (
+          <SpeakerOnIcon />
+        )}
+        <span>{muted ? t.caseStudy.soundOff : t.caseStudy.soundOn}</span>
+      </button>
+
+      {/* Subtle playing indicator (only when paused outside viewport) */}
+      {!inView && (
+        <span className="absolute top-4 left-4 mono text-ink-mute bg-paper/70 backdrop-blur-sm px-2 py-1">
+          ▍▍ PAUSED
+        </span>
+      )}
+    </div>
+  );
+}
+
+function SpeakerOnIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path
+        d="M3.5 5 H5 L8 2.5 V11.5 L5 9 H3.5 V5z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 4.5 Q11.5 7 10 9.5 M11.5 3 Q13.5 7 11.5 11"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        fill="none"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function SpeakerOffIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path
+        d="M3.5 5 H5 L8 2.5 V11.5 L5 9 H3.5 V5z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10.5 4.5 L13 11.5 M13 4.5 L10.5 11.5"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean }) {
+  if (asset.type === "video") {
+    return <VideoBlock src={asset.src} />;
   }
-  // Use <img> over next/image for stacked gallery — gives us natural-height
-  // full-bleed without forcing an aspect ratio. Next/image is great for hero
-  // shots but fights us when stacking dozens of different sizes seamlessly.
   /* eslint-disable-next-line @next/next/no-img-element */
   return (
     <img
