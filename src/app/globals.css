@@ -458,6 +458,34 @@ body {
   background: var(--paper-soft);
 }
 
+/* Form inputs — brutalist, hairline border, acid focus */
+.form-input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  letter-spacing: -0.005em;
+  outline: none;
+}
+.form-input::placeholder {
+  color: var(--ink-faint);
+}
+.form-input:focus {
+  outline: none;
+}
+label:has(.form-input:focus) {
+  background: var(--paper-elev);
+  box-shadow: inset 2px 0 0 var(--acid);
+}
+textarea.form-input {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
 /* Image placeholder pattern */
 .img-stub {
   background:

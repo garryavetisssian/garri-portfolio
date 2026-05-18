@@ -9,7 +9,7 @@ export default function ContactStrip() {
   return (
     <section id="contact" className="relative py-24 border-t border-line-strong">
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-        <p className="mono text-ink-faint mb-6">— Contact / always open</p>
+        <p className="mono text-ink-mute mb-6">— {t.ui.contactEyebrow}</p>
 
         <h2 className="headline text-ink select-none">
           <span className="block">
@@ -29,16 +29,16 @@ export default function ContactStrip() {
           <div className="md:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-px bg-line-strong hairline-t hairline-b">
             <a
               href={`mailto:${SITE.email}`}
-              className="group bg-paper p-6 hover:bg-acid hover:text-paper transition-colors block"
+              className="group bg-paper p-6 hover:bg-acid transition-colors block min-w-0"
             >
-              <p className="mono text-ink-faint group-hover:text-paper mb-3">— {t.contact.emailLabel}</p>
+              <p className="mono text-ink-mute group-hover:text-paper mb-3">— {t.contact.emailLabel}</p>
               <p
-                className="text-ink group-hover:text-paper"
+                className="text-ink group-hover:text-paper break-all leading-[1.15]"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 600,
-                  fontSize: "1.25rem",
-                  letterSpacing: "-0.015em",
+                  fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 {SITE.email}
@@ -51,16 +51,16 @@ export default function ContactStrip() {
               href={SITE.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="group bg-paper p-6 hover:bg-acid hover:text-paper transition-colors block"
+              className="group bg-paper p-6 hover:bg-acid transition-colors block min-w-0"
             >
-              <p className="mono text-ink-faint group-hover:text-paper mb-3">— {t.contact.linkedinLabel}</p>
+              <p className="mono text-ink-mute group-hover:text-paper mb-3">— {t.contact.linkedinLabel}</p>
               <p
-                className="text-ink group-hover:text-paper"
+                className="text-ink group-hover:text-paper break-all leading-[1.15]"
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 600,
-                  fontSize: "1.25rem",
-                  letterSpacing: "-0.015em",
+                  fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 /in/garri-avetisyan

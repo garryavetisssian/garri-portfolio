@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <main className="min-h-screen bg-paper text-ink flex items-center">
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] w-full">
-        <p className="mono text-ink-faint mb-6">— Error / 404</p>
+        <p className="mono text-ink-mute mb-6">— Error / 404</p>
         <h1
           className="text-ink mb-6"
           style={{
@@ -20,7 +20,6 @@ export default function NotFound() {
         </h1>
         <p className="prose-brut text-ink-mute max-w-[42ch] mb-10">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
-          Probably one of the freelance projects that shipped years ago.
         </p>
         <Link
           href="/en"

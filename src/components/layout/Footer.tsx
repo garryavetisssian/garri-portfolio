@@ -7,33 +7,38 @@ import type { Locale } from "@/lib/i18n/types";
 
 interface FooterProps {
   locale: Locale;
+  projects?: { slug: string; title: string; category: string | string[] }[];
 }
 
-export default function Footer({ locale }: FooterProps) {
+function catLabel(c: string | string[]): string {
+  return Array.isArray(c) ? c[0] : c;
+}
+
+export default function Footer({ locale, projects = [] }: FooterProps) {
   const { t } = useLanguage();
   const year = new Date().getFullYear();
 
-  const cols = [
+  const projectLinks = projects.slice(0, 4).map((p) => ({
+    label: `${p.title} · ${catLabel(p.category)}`,
+    href: `/${locale}/work/${p.slug}`,
+  }));
+
+  const cols: { label: string; links: { label: string; href: string; external?: boolean }[] }[] = [
     {
-      label: "Navigate",
+      label: t.footer.navigateCol,
       links: [
         { label: t.nav.about, href: `/${locale}/about` },
-        { label: t.nav.projects, href: `/${locale}/work` },
-        { label: "CV", href: `/${locale}/cv` },
+        { label: t.nav.work, href: `/${locale}/work` },
+        { label: t.nav.cv, href: `/${locale}/cv` },
         { label: t.nav.contact, href: `/${locale}/contact` },
       ],
     },
     {
-      label: "Work",
-      links: [
-        { label: "BalVoi · AI", href: `/${locale}/work/balvoi` },
-        { label: "XYGO · Web3", href: `/${locale}/work/xygo` },
-        { label: "Duck Master · Mobile", href: `/${locale}/work/duck-master` },
-        { label: "Ineed · Marketplace", href: `/${locale}/work/ineed` },
-      ],
+      label: t.footer.workCol,
+      links: projectLinks,
     },
     {
-      label: "Elsewhere",
+      label: t.footer.elsewhereCol,
       links: [
         { label: "Email", href: `mailto:${SITE.email}`, external: true },
         { label: "LinkedIn", href: SITE.linkedin, external: true },
@@ -43,7 +48,7 @@ export default function Footer({ locale }: FooterProps) {
 
   return (
     <footer className="relative border-t border-line-strong bg-paper-soft mt-32">
-      {/* Massive brand mark */}
+      {/* Brand mark */}
       <div className="overflow-hidden border-b border-line-strong">
         <div
           className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 select-none"
@@ -65,30 +70,29 @@ export default function Footer({ locale }: FooterProps) {
       {/* Columns */}
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 grid gap-10 md:grid-cols-12">
         <div className="md:col-span-4">
-          <p className="mono text-ink-faint mb-4">— About this site</p>
+          <p className="mono text-ink-mute mb-4">— {t.footer.aboutSiteLabel}</p>
           <p className="prose-brut text-[15px] max-w-sm">
-            Built as a brutalist editorial-tech portfolio. Three locales, full
-            case studies, zero analytics. {t.hero.locationCity}.
+            {t.footer.aboutSiteBlurb} {t.hero.locationCity}.
           </p>
-          <p className="mono text-ink-faint mt-4">
+          <p className="mono text-ink-mute mt-4">
             ⚆ {t.hero.available}
           </p>
         </div>
 
         {cols.map((col) => (
           <div key={col.label} className="md:col-span-2">
-            <p className="mono text-ink-faint mb-4">— {col.label}</p>
+            <p className="mono text-ink-mute mb-4">— {col.label}</p>
             <ul className="space-y-2.5">
               {col.links.map((link) => (
                 <li key={link.label}>
-                  {"external" in link && link.external ? (
+                  {link.external ? (
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noreferrer"
                       className="text-[14px] text-ink hover:text-acid link-uline transition-colors"
                     >
-                      {link.label} <span className="text-ink-faint">↗</span>
+                      {link.label} <span className="text-ink-mute">↗</span>
                     </a>
                   ) : (
                     <Link
@@ -105,7 +109,7 @@ export default function Footer({ locale }: FooterProps) {
         ))}
 
         <div className="md:col-span-2">
-          <p className="mono text-ink-faint mb-4">— Locale</p>
+          <p className="mono text-ink-mute mb-4">— {t.footer.localeCol}</p>
           <div className="flex gap-1.5 mono">
             {(["en", "ru", "hy"] as const).map((l) => (
               <span
@@ -125,13 +129,9 @@ export default function Footer({ locale }: FooterProps) {
 
       {/* Bottom rule */}
       <div className="border-t border-line-strong">
-        <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] flex flex-col md:flex-row items-center justify-between gap-2 py-4 mono text-ink-faint">
+        <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] flex flex-col md:flex-row items-center justify-between gap-2 py-4 mono text-ink-mute">
           <span>© {year} {SITE.name}. All rights reserved.</span>
-          <span className="flex items-center gap-3">
-            <span>v2026.01</span>
-            <span aria-hidden>·</span>
-            <span>Made with care · No tracking</span>
-          </span>
+          <span>{t.footer.madeWith}</span>
         </div>
       </div>
     </footer>

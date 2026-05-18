@@ -1,5 +1,7 @@
 import fs from "fs";
 import path from "path";
+import { projects } from "@/data/projects";
+import type { CaseStudy } from "@/lib/types";
 
 const ALLOWED_EXT = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm"];
 
@@ -115,3 +117,37 @@ export function getCaseAssets(slug: string): CaseAssets {
   const assets = scanDir(dir, `/cases/${slug}`);
   return { cover, assets, tabs: [], defaultTab: 0, isEmpty: assets.length === 0 };
 }
+
+/**
+ * Whether a case has a public/cases/[slug]/ folder on disk.
+ * Used to filter out cases whose visual assets have been deleted.
+ */
+export function hasCaseFolder(slug: string): boolean {
+  return fs.existsSync(path.join(process.cwd(), "public", "cases", slug));
+}
+
+/**
+ * Projects array filtered to only those with a case folder on disk,
+ * preserving the original order in projects.ts.
+ */
+export function getAvailableProjects(): CaseStudy[] {
+  return projects.filter((p) => hasCaseFolder(p.slug));
+}
+
+export function getAvailableProjectSlugs(): string[] {
+  return getAvailableProjects().map((p) => p.slug);
+}
+
+/**
+ * Compute the "next project" slug as the project immediately after the
+ * current one in the available list (cycles back to the first). Replaces
+ * the hardcoded `nextProject` field which breaks when cases are deleted.
+ */
+export function getNextProjectSlug(currentSlug: string): string | undefined {
+  const all = getAvailableProjects();
+  if (all.length === 0) return undefined;
+  const idx = all.findIndex((p) => p.slug === currentSlug);
+  if (idx === -1) return undefined;
+  return all[(idx + 1) % all.length].slug;
+}
+

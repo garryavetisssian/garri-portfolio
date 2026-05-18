@@ -32,7 +32,7 @@ export default function Hero({ locale }: HeroProps) {
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
         {/* Top mono row */}
         <div className="flex flex-wrap items-baseline justify-between gap-3 mb-8 mono">
-          <span className="text-ink-faint">— Portfolio / 2020—2026</span>
+          <span className="text-ink-mute">— {t.ui.portfolioStrip}</span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 bg-acid pulse-dot rounded-full" />
             <span className="text-ink-mute">{t.hero.available.toUpperCase()}</span>

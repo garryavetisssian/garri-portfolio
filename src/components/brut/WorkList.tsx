@@ -1,17 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { projects } from "@/data/projects";
-import type { Locale } from "@/lib/i18n/types";
 import type { CaseStudy } from "@/lib/types";
+import type { Locale } from "@/lib/i18n/types";
+import { DICTIONARIES } from "@/lib/i18n/dictionaries";
 
 interface WorkListProps {
   locale: Locale;
-  limit?: number;
+  items: CaseStudy[];
   showHeading?: boolean;
   heading?: string;
   eyebrow?: string;
+  showViewAll?: boolean;
+  totalCount?: number;
 }
 
 function categoryString(cat: CaseStudy["category"]): string {
@@ -20,13 +19,17 @@ function categoryString(cat: CaseStudy["category"]): string {
 
 export default function WorkList({
   locale,
-  limit,
+  items,
   showHeading = true,
-  heading = "SELECTED WORK",
-  eyebrow = "— Case studies / 2020—2026",
+  heading,
+  eyebrow,
+  showViewAll = false,
+  totalCount,
 }: WorkListProps) {
-  const items = limit ? projects.slice(0, limit) : projects;
-  const [hovered, setHovered] = useState<string | null>(null);
+  const t = DICTIONARIES[locale];
+  const headingText = heading ?? t.projects.heading.toUpperCase();
+  const eyebrowText = eyebrow ?? `— ${t.ui.caseStudiesStrip}`;
+  const filesLabel = t.ui.filesSuffix;
 
   return (
     <section id="work" className="relative py-24">
@@ -34,25 +37,21 @@ export default function WorkList({
         {showHeading && (
           <div className="mb-12 flex items-end justify-between gap-4">
             <div>
-              <p className="mono text-ink-faint mb-3">{eyebrow}</p>
+              <p className="mono text-ink-mute mb-3">{eyebrowText}</p>
               <h2 className="headline-md text-ink">
-                {heading}<span className="text-acid">.</span>
+                {headingText}<span className="text-acid">.</span>
               </h2>
             </div>
-            <div className="hidden md:flex items-center gap-2 mono text-ink-faint">
+            <div className="hidden md:flex items-center gap-2 mono text-ink-mute">
               <span>{String(items.length).padStart(2, "0")}</span>
-              <span>files</span>
+              <span>{filesLabel}</span>
             </div>
           </div>
         )}
 
         <ul role="list">
           {items.map((p, i) => (
-            <li
-              key={p.slug}
-              onMouseEnter={() => setHovered(p.slug)}
-              onMouseLeave={() => setHovered(null)}
-            >
+            <li key={p.slug}>
               <Link href={`/${locale}/work/${p.slug}`} className="row-link">
                 <span className="num-badge">{String(i + 1).padStart(2, "0")} —</span>
                 <span
@@ -70,7 +69,7 @@ export default function WorkList({
                 <span className="hidden md:inline mono text-ink-mute">
                   [{categoryString(p.category)}]
                 </span>
-                <span className="hidden md:inline mono text-ink-faint">
+                <span className="hidden md:inline mono text-ink-mute">
                   {p.year}
                 </span>
                 <span className="mono text-ink row-arrow">↗</span>
@@ -79,28 +78,18 @@ export default function WorkList({
           ))}
         </ul>
 
-        {/* Bottom rule */}
-        <div className="hairline-b mt-0" />
+        <div className="hairline-b" />
 
-        {limit && limit < projects.length && (
+        {showViewAll && totalCount && totalCount > items.length && (
           <div className="mt-10 flex justify-end">
             <Link
               href={`/${locale}/work`}
-              className="mono text-ink-mute hover:text-acid link-uline transition-colors"
+              className="mono text-ink hover:text-acid link-uline transition-colors"
             >
-              — View all {projects.length} case studies ↗
+              {t.ui.viewAllCases.replace("{count}", String(totalCount))}
             </Link>
           </div>
         )}
-
-        {/* Decorative hovered slug echo (faint) */}
-        <span
-          aria-hidden
-          className="hidden lg:block pointer-events-none fixed bottom-6 right-6 mono text-acid opacity-40 select-none"
-          style={{ transition: "opacity 0.3s" }}
-        >
-          {hovered ? `→ /${locale}/work/${hovered}` : ""}
-        </span>
       </div>
     </section>
   );

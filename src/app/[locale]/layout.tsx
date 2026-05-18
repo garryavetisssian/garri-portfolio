@@ -6,6 +6,7 @@ import { DICTIONARIES } from "@/lib/i18n/dictionaries";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SITE } from "@/lib/constants";
+import { getAvailableProjects } from "@/lib/case-assets";
 
 const localeCodes = LOCALES.map((l) => l.code) as Locale[];
 
@@ -40,6 +41,11 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
 export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
   if (!localeCodes.includes(locale as Locale)) notFound();
+  const projects = getAvailableProjects().map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    category: p.category,
+  }));
 
   return (
     <LanguageProvider locale={locale as Locale}>
@@ -49,7 +55,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <main id="content" className="relative z-10">
           {children}
         </main>
-        <Footer locale={locale as Locale} />
+        <Footer locale={locale as Locale} projects={projects} />
       </div>
     </LanguageProvider>
   );

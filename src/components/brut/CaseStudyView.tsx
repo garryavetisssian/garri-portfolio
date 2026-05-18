@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
-import { projects } from "@/data/projects";
 
 function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean }) {
   if (asset.type === "video") {
@@ -90,9 +89,11 @@ function TabbedGallery({
 export default function CaseStudyView({
   project,
   caseAssets,
+  nextProject,
 }: {
   project: CaseStudy;
   caseAssets: CaseAssets;
+  nextProject: CaseStudy | null;
 }) {
   const { locale, t } = useLanguage();
   const [progress, setProgress] = useState(0);
@@ -106,14 +107,6 @@ export default function CaseStudyView({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const nextProject = useMemo(
-    () =>
-      project.nextProject
-        ? projects.find((p) => p.slug === project.nextProject)
-        : undefined,
-    [project.nextProject]
-  );
 
   const hasGallery = !caseAssets.isEmpty;
   const hasTabs = caseAssets.tabs.length > 0;
@@ -190,7 +183,7 @@ export default function CaseStudyView({
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
           <p className="mono text-ink-mute mb-3">— TL;DR</p>
           <h2 className="headline-md text-ink mb-12">
-            THE SHORT VERSION<span className="text-acid">.</span>
+            {t.caseStudy.shortVersion}<span className="text-acid">.</span>
           </h2>
 
           <div className="grid md:grid-cols-3 gap-px bg-line-strong hairline-t hairline-b">
@@ -237,14 +230,19 @@ export default function CaseStudyView({
         <section className="border-t border-line-strong bg-paper">
           {/* Strip label above the stack */}
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-6 flex items-center justify-between mono">
-            <span className="text-ink-mute">— Visuals</span>
+            <span className="text-ink-mute">— {t.caseStudy.visuals}</span>
             <span className="text-ink-mute">
               {hasTabs
-                ? `${caseAssets.tabs.length} versions · ${caseAssets.tabs.reduce(
-                    (s, tab) => s + tab.assets.length,
-                    0
-                  )} assets`
-                : `${caseAssets.assets.length} assets`}
+                ? t.caseStudy.versionsAssets
+                    .replace("{count}", String(caseAssets.tabs.length))
+                    .replace(
+                      "{total}",
+                      String(caseAssets.tabs.reduce((s, tab) => s + tab.assets.length, 0))
+                    )
+                : t.caseStudy.assetsCount.replace(
+                    "{count}",
+                    String(caseAssets.assets.length)
+                  )}
             </span>
           </div>
 
@@ -262,7 +260,7 @@ export default function CaseStudyView({
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
             <p className="mono text-ink-mute mb-3">— {t.caseStudy.impact}</p>
             <h3 className="headline-md text-ink mb-12">
-              THE RECEIPTS<span className="text-acid">.</span>
+              {t.caseStudy.receipts}<span className="text-acid">.</span>
             </h3>
             <div
               className="grid gap-px bg-line-strong hairline-t hairline-b"

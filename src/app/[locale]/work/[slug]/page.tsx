@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/brut/CaseStudyView";
-import { getProject, getProjectSlugs } from "@/data/projects";
-import { getCaseAssets } from "@/lib/case-assets";
+import { getProject } from "@/data/projects";
+import {
+  getCaseAssets,
+  hasCaseFolder,
+  getAvailableProjectSlugs,
+  getNextProjectSlug,
+} from "@/lib/case-assets";
 import { LOCALES, type Locale } from "@/lib/i18n/types";
 
 const localeCodes = LOCALES.map((l) => l.code) as Locale[];
@@ -12,7 +17,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getProjectSlugs();
+  const slugs = getAvailableProjectSlugs();
   return localeCodes.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
@@ -47,11 +52,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CaseStudyPage({ params }: PageProps) {
   const { locale, slug } = await params;
   if (!localeCodes.includes(locale as Locale)) notFound();
+  if (!hasCaseFolder(slug)) notFound();
   const project = getProject(slug);
   if (!project) notFound();
 
-  // Server-side scan of public/cases/[slug]/ — baked into the static HTML.
   const caseAssets = getCaseAssets(slug);
+  const nextSlug = getNextProjectSlug(slug);
+  const nextProject = nextSlug ? getProject(nextSlug) : undefined;
 
-  return <CaseStudyView project={project} caseAssets={caseAssets} />;
+  return (
+    <CaseStudyView
+      project={project}
+      caseAssets={caseAssets}
+      nextProject={nextProject ?? null}
+    />
+  );
 }

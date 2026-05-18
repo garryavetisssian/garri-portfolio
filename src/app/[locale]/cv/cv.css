@@ -9,6 +9,20 @@ body.cv-mode {
   color-scheme: light;
 }
 
+/* When CV page is mounted, force the brutalist header into its solid
+   dark state so the light-coloured brand mark and nav stay readable
+   against the light CV background. */
+body.cv-mode header[class*="fixed"] {
+  background: rgba(11, 11, 10, 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(242, 240, 234, 0.15);
+}
+/* Hide the film-grain overlay over the CV — it muddies the print look. */
+body.cv-mode .grain {
+  display: none !important;
+}
+
 .cv-root {
   --cv-ink: #0a0c12;
   --cv-muted: #5a5d6b;

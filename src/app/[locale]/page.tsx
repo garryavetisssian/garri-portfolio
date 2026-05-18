@@ -7,6 +7,7 @@ import ExperienceStrip from "@/components/brut/ExperienceStrip";
 import ContactStrip from "@/components/brut/ContactStrip";
 import { LOCALES, type Locale } from "@/lib/i18n/types";
 import { DICTIONARIES } from "@/lib/i18n/dictionaries";
+import { getAvailableProjects } from "@/lib/case-assets";
 
 const localeCodes = LOCALES.map((l) => l.code) as Locale[];
 
@@ -18,26 +19,19 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   if (!localeCodes.includes(locale as Locale)) notFound();
   const t = DICTIONARIES[locale as Locale];
-
-  const tickerItems = [
-    "PRODUCT DESIGNER",
-    `EST. 2020 · YEREVAN`,
-    "AI · WEB3 · SAAS · MARKETPLACE",
-    t.hero.available.toUpperCase(),
-    "STRATEGY → RESEARCH → DESIGN → SHIP",
-    "5+ YRS · 7 CASE STUDIES",
-    "3 LANGUAGES · EN · RU · HY",
-  ];
+  const available = getAvailableProjects();
 
   return (
     <>
       <Hero locale={locale as Locale} />
-      <Marquee items={tickerItems} />
+      <Marquee items={t.marquees.home} />
       <WorkList
         locale={locale as Locale}
-        limit={4}
+        items={available.slice(0, 4)}
+        totalCount={available.length}
         heading={t.projects.heading.toUpperCase()}
         eyebrow={`— ${t.projects.eyebrow}`}
+        showViewAll
       />
       <ProcessGrid />
       <ExperienceStrip />

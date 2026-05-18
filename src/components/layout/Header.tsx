@@ -17,7 +17,6 @@ export default function Header({ locale }: HeaderProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [time, setTime] = useState<string>("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -27,35 +26,16 @@ export default function Header({ locale }: HeaderProps) {
   }, []);
 
   useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      const opts: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Yerevan",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      };
-      setTime(new Intl.DateTimeFormat("en-GB", opts).format(d));
-    };
-    tick();
-    const id = setInterval(tick, 30_000);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const nav = [
-    { href: `/${locale}`, label: t.nav.about === "About" ? "Index" : t.nav.about },
-    { href: `/${locale}/work`, label: t.nav.projects },
+  const navItems = [
+    { href: `/${locale}/work`, label: t.nav.work },
     { href: `/${locale}/about`, label: t.nav.about },
-    { href: `/${locale}/cv`, label: "CV" },
+    { href: `/${locale}/cv`, label: t.nav.cv },
     { href: `/${locale}/contact`, label: t.nav.contact },
   ];
-  // First "Index" entry is redundant with logo; trim it out for clean nav
-  const navItems = nav.slice(1);
 
   const isActive = (href: string) => {
     if (href === `/${locale}`) return pathname === `/${locale}`;
@@ -71,7 +51,6 @@ export default function Header({ locale }: HeaderProps) {
         )}
       >
         <div className="mx-auto flex h-[var(--nav-h)] max-w-[var(--max)] items-center justify-between px-[var(--gutter)]">
-          {/* Brand mark */}
           <Link href={`/${locale}`} className="group flex items-center gap-2.5">
             <span className="block h-2.5 w-2.5 bg-acid group-hover:rotate-45 transition-transform duration-500" aria-hidden />
             <span className="mono text-ink">
@@ -79,7 +58,6 @@ export default function Header({ locale }: HeaderProps) {
             </span>
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-7">
             {navItems.map((item, i) => (
               <Link
@@ -98,32 +76,13 @@ export default function Header({ locale }: HeaderProps) {
             <LanguageSwitcher />
           </nav>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
             className="md:hidden mono text-ink"
-            aria-label="Menu"
+            aria-label={t.nav.menu}
           >
-            {open ? "CLOSE" : "MENU"}
+            {open ? t.nav.close.toUpperCase() : t.nav.menu.toUpperCase()}
           </button>
-        </div>
-
-        {/* Sub-bar — live status */}
-        <div className={cn(
-          "mx-auto max-w-[var(--max)] px-[var(--gutter)] hidden lg:flex items-center justify-between py-1.5 mono text-ink-faint border-t",
-          scrolled ? "border-line" : "border-transparent"
-        )}>
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-acid pulse-dot" />
-              {t.hero.available}
-            </span>
-            <span>{t.hero.locationCity}</span>
-          </div>
-          <div className="flex items-center gap-5">
-            <span>{time && `${time} YVN`}</span>
-            <span>v2026.01 / brutalist edition</span>
-          </div>
         </div>
       </header>
 
@@ -135,7 +94,7 @@ export default function Header({ locale }: HeaderProps) {
         )}
       >
         <div className="flex h-full flex-col px-[var(--gutter)] pt-[calc(var(--nav-h)+2rem)]">
-          <p className="mono text-ink-faint mb-6">— Navigate</p>
+          <p className="mono text-ink-mute mb-6">— {t.footer.navigateCol}</p>
           <ul className="space-y-1">
             {navItems.map((item, i) => (
               <li key={item.href} className="hairline-t">
@@ -148,7 +107,7 @@ export default function Header({ locale }: HeaderProps) {
                   )}
                 >
                   <span>{item.label}</span>
-                  <span className="mono text-ink-faint">
+                  <span className="mono text-ink-mute">
                     {String(i + 1).padStart(2, "0")} ↗
                   </span>
                 </Link>

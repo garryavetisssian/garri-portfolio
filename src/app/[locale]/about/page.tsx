@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!localeCodes.includes(locale as Locale)) return {};
   return {
     title: "About — Garri Avetisyan",
-    description: "Product Designer with 5+ years building complex digital products. Learn about my approach, process, and experience.",
+    description:
+      "Product Designer with 5+ years building complex digital products. Learn about my approach, process, and experience.",
     alternates: {
       canonical: `/${locale}/about`,
       languages: { en: "/en/about", ru: "/ru/about", hy: "/hy/about" },
@@ -43,24 +44,22 @@ export default async function AboutPage({ params }: PageProps) {
 
   return (
     <>
-      {/* Page header */}
       <section className="pt-[calc(var(--nav-h)+5rem)] pb-16">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-          <p className="mono text-ink-faint mb-6">— {t.nav.about}</p>
+          <p className="mono text-ink-mute mb-6">— {t.ui.aboutEyebrow}</p>
           <h1 className="headline text-ink">
-            <span className="block">DESIGN IS</span>
+            <span className="block">{t.about.heroLine1}</span>
             <span className="block">
-              A BUSINESS<span className="text-acid">.</span>
+              {t.about.heroLine2}<span className="text-acid">.</span>
             </span>
           </h1>
         </div>
       </section>
 
-      {/* Bio */}
       <section className="py-16 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <div className="md:col-span-3">
-            <p className="mono text-ink-faint">— Bio / 01</p>
+            <p className="mono text-ink-mute">— {t.about.bioLabel} / 01</p>
           </div>
           <div className="md:col-span-9 prose-brut text-ink text-[19px] leading-[1.6] max-w-[62ch] space-y-6">
             {bio.bio.map((p, i) => (
@@ -70,18 +69,12 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      <Marquee items={[
-        "FOCUS · AI · WEB3 · SAAS · MARKETPLACE",
-        "5+ YEARS / 7 CASE STUDIES",
-        "BASED IN YEREVAN · OPEN TO REMOTE",
-        "DESIGN IS A BUSINESS FUNCTION",
-      ]} />
+      <Marquee items={t.marquees.about} />
 
-      {/* Skills + tools */}
       <section className="py-20 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <div className="md:col-span-3">
-            <p className="mono text-ink-faint">— Capabilities / 02</p>
+            <p className="mono text-ink-mute">— {t.about.capabilitiesLabel} / 02</p>
           </div>
           <div className="md:col-span-9 space-y-12">
             {skills.map((group, gi) => (
@@ -98,7 +91,7 @@ export default async function AboutPage({ params }: PageProps) {
                   >
                     {group.category}
                   </h2>
-                  <span className="mono text-ink-faint">
+                  <span className="mono text-ink-mute">
                     {String(gi + 1).padStart(2, "0")} / {String(group.items.length).padStart(2, "0")}
                   </span>
                 </div>
@@ -112,7 +105,6 @@ export default async function AboutPage({ params }: PageProps) {
               </div>
             ))}
 
-            {/* Languages */}
             <div className="hairline-t pt-6">
               <h2
                 className="text-ink mb-6"
@@ -147,11 +139,10 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Collaboration */}
       <section className="py-20 border-t border-line-strong bg-paper-soft">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <div className="md:col-span-3">
-            <p className="mono text-ink-faint">— Method / 03</p>
+            <p className="mono text-ink-mute">— {t.about.methodLabel} / 03</p>
           </div>
           <p className="md:col-span-9 prose-brut text-ink text-[18px] leading-[1.65] max-w-[62ch] border-l border-acid pl-6">
             {bio.collaboration}
@@ -159,11 +150,10 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Work experience */}
       <section className="py-20 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <div className="md:col-span-3">
-            <p className="mono text-ink-faint">— {t.cv.workExperienceTitle} / 04</p>
+            <p className="mono text-ink-mute">— {t.about.experienceLabel} / 04</p>
           </div>
           <div className="md:col-span-9 space-y-12">
             {work.map((w, i) => (
@@ -178,12 +168,12 @@ export default async function AboutPage({ params }: PageProps) {
                       letterSpacing: "-0.02em",
                     }}
                   >
-                    <span className="text-ink-faint mr-3 mono text-[14px]">
+                    <span className="text-ink-mute mr-3 mono text-[14px]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {w.company}
                   </span>
-                  <span className="mono text-ink-faint whitespace-nowrap">{w.period}</span>
+                  <span className="mono text-ink-mute whitespace-nowrap">{w.period}</span>
                 </div>
                 <p className="mono text-acid mb-4">
                   {w.role} · {w.location}
@@ -202,11 +192,10 @@ export default async function AboutPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Freelance */}
       <section className="py-20 border-t border-line-strong bg-paper-soft">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <div className="md:col-span-3">
-            <p className="mono text-ink-faint">— {t.cv.freelanceTitle} / 05</p>
+            <p className="mono text-ink-mute">— {t.about.freelanceLabel} / 05</p>
           </div>
           <div className="md:col-span-9 grid gap-px bg-line-strong hairline-t hairline-b">
             {freelance.map((f) => (
@@ -227,7 +216,7 @@ export default async function AboutPage({ params }: PageProps) {
                     [{f.tag}]
                   </span>
                 </div>
-                <p className="mono text-ink-faint mb-4">{f.period}</p>
+                <p className="mono text-ink-mute mb-4">{f.period}</p>
                 <p className="prose-brut text-ink mb-4">{f.description}</p>
                 <ul className="space-y-1.5 prose-brut text-ink-mute text-[14px]">
                   {f.details.map((d, i) => (

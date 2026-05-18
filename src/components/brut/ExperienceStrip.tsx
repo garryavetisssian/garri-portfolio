@@ -18,7 +18,7 @@ export default function ExperienceStrip() {
             </h2>
           </div>
           <p className="md:col-span-5 mono text-ink-mute">
-            {work.length} positions · {t.experience.fullTime}
+            {work.length} {t.experience.positions} · {t.experience.fullTime}
           </p>
         </div>
 
