@@ -46,9 +46,6 @@ export default async function AboutPage({ params }: PageProps) {
   return (
     <>
       <section className="relative pt-[calc(var(--nav-h)+5rem)] pb-16">
-        <span className="section-marker" style={{ top: "20%", right: "-2vw" }} aria-hidden>
-          01
-        </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10">
           <Reveal from="up">
             <p className="mono text-ink-mute mb-6">— {t.ui.aboutEyebrow}</p>
@@ -64,7 +61,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       <section className="relative py-16 border-t border-line-strong">
         <span className="section-marker" style={{ top: "10%", left: "-2vw" }} aria-hidden>
-          02
+          01
         </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10 grid md:grid-cols-12 gap-8">
           <Reveal from="left" className="md:col-span-3">
@@ -82,7 +79,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       <section className="relative py-20 border-t border-line-strong">
         <span className="section-marker" style={{ top: "5%", right: "-4vw" }} aria-hidden>
-          03
+          02
         </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10 grid md:grid-cols-12 gap-8">
           <Reveal from="left" className="md:col-span-3">
@@ -157,7 +154,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       <section className="relative py-20 border-t border-line-strong bg-paper-soft">
         <span className="section-marker" style={{ top: "10%", left: "-2vw" }} aria-hidden>
-          04
+          03
         </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10 grid md:grid-cols-12 gap-8">
           <Reveal from="left" className="md:col-span-3">
@@ -173,7 +170,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       <section className="relative py-20 border-t border-line-strong">
         <span className="section-marker" style={{ top: "5%", right: "-4vw" }} aria-hidden>
-          05
+          04
         </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10 grid md:grid-cols-12 gap-8">
           <Reveal from="left" className="md:col-span-3">
@@ -220,7 +217,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       <section className="relative py-20 border-t border-line-strong bg-paper-soft">
         <span className="section-marker" style={{ top: "10%", left: "-2vw" }} aria-hidden>
-          06
+          05
         </span>
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] relative z-10 grid md:grid-cols-12 gap-8">
           <Reveal from="left" className="md:col-span-3">
