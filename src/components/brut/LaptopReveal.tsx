@@ -1,30 +1,27 @@
 "use client";
 
 /**
- * LaptopReveal — scroll-driven 3D laptop with mouse-reactive atmosphere.
+ * LaptopReveal — scroll-driven 3D laptop with mouse-reactive line atmosphere.
  *
- * Each case feeds its own accent color (sampled from the cover image) into
- * the section via a CSS variable. The color tints:
- *   • A large blurred gradient blob that follows the cursor (spring-damped)
- *   • A secondary blob that drifts on its own ambient loop
- *   • The ambient glow under the laptop
- *   • A "power-on" light wash that sweeps the screen as the lid opens
- *   • The faint logo dot on the laptop's shell
+ * Background:
+ *   A small set of long bezier curves tinted in the case's accent color. Each
+ *   curve drifts at its own parallax depth as the cursor moves, so the field
+ *   subtly reshapes itself under the pointer (cheap and CSS-composited — pure
+ *   transform on five SVG <g>s).
  *
  * Scroll choreography (scrollYProgress 0 → 1 across the section):
- *   0.00 → 0.08  laptop fades + lifts into place
- *   0.08 → 0.46  lid hinges open, with a tiny overshoot at the end for snap
- *   0.18 → 0.42  power-on light wash sweeps across the lid
+ *   0.00 → 0.08  laptop fades + lifts in
+ *   0.08 → 0.46  lid hinges open with a small overshoot at 0.42 for snap
+ *   0.18 → 0.42  power-on light wash sweeps across the lid (case color)
  *   0.30 → 0.50  cover image fades in on the screen
- *   0.35 → 0.55  glossy reflection sweep across the screen
- *   0.30 → 0.50  ambient glow under the laptop blooms up
+ *   0.35 → 0.55  glossy reflection sweep
+ *   0.30 → 0.50  ambient glow under the laptop blooms (case color)
  *
- * Mouse interaction (independent of scroll):
- *   • cursor position drives the main background blob via spring
- *   • cursor position adds a subtle parallax tilt (≤5°) to the whole laptop
- *   • cursor leaves → both decay back to neutral
+ * Mouse:
+ *   • Each background curve translates with its own depth/speed
+ *   • Whole laptop tilts up to ±5°/±3° toward the cursor
  *
- * Reduced-motion: static fully-open laptop, no scroll or mouse animation.
+ * Reduced-motion: static fully-open laptop with cover, no animations.
  */
 
 import {
@@ -43,10 +40,24 @@ function useLidTransform(rotateX: MotionValue<number>) {
   return useTransform(rotateX, (r) => `rotateX(${r}deg)`);
 }
 
+/** Spring-damped 2D drift for a background curve. */
+function useDrift(
+  mx: MotionValue<number>,
+  my: MotionValue<number>,
+  sx: number,
+  sy: number,
+) {
+  const xRaw = useTransform(mx, [-1, 1], [-sx, sx]);
+  const yRaw = useTransform(my, [-1, 1], [-sy, sy]);
+  const x = useSpring(xRaw, { stiffness: 55, damping: 19, mass: 0.5 });
+  const y = useSpring(yRaw, { stiffness: 55, damping: 19, mass: 0.5 });
+  return { x, y };
+}
+
 interface LaptopRevealProps {
   src: string;
-  /** Hex / CSS color of the case's accent — used to tint the atmosphere
-   *  and the laptop's ambient glow. Falls back to the global acid. */
+  /** Hex / CSS color of the case's accent — tints the curves, the laptop's
+   *  ambient glow, and the empty bars inside the screen. */
   color?: string;
 }
 
@@ -55,24 +66,24 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
   const stickyRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
-  /* ── Mouse position, normalized −1 .. 1 around sticky center ───── */
+  // Mouse position, normalized −1..1 within the sticky bounds.
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  // Spring-damped translation of the cursor-following blob
-  const blobXRaw = useTransform(mx, [-1, 1], [-300, 300]);
-  const blobYRaw = useTransform(my, [-1, 1], [-200, 200]);
-  const blobX = useSpring(blobXRaw, { stiffness: 55, damping: 18, mass: 0.5 });
-  const blobY = useSpring(blobYRaw, { stiffness: 55, damping: 18, mass: 0.5 });
+  // Five curves at different parallax depths. The bolder ones (higher sx/sy)
+  // sit "closer" to the viewer in the depth illusion.
+  const c1 = useDrift(mx, my, 36, 14);
+  const c2 = useDrift(mx, my, 20, 18);
+  const c3 = useDrift(mx, my, 44, 10);
+  const c4 = useDrift(mx, my, 16, 20);
+  const c5 = useDrift(mx, my, 28, 22);
 
-  // Parallax tilt of the whole laptop (clamped small — depth without nausea)
-  const tiltYRaw = useTransform(mx, [-1, 1], [-5, 5]);   // rotateY (left↔right)
-  const tiltXRaw = useTransform(my, [-1, 1], [3, -3]);   // rotateX (up↔down)
+  // Laptop parallax tilt.
+  const tiltYRaw = useTransform(mx, [-1, 1], [-5, 5]);
+  const tiltXRaw = useTransform(my, [-1, 1], [3, -3]);
   const tiltY = useSpring(tiltYRaw, { stiffness: 110, damping: 22 });
   const tiltX = useSpring(tiltXRaw, { stiffness: 110, damping: 22 });
 
-  // Mouse tracking — scoped to the sticky element so the (−1..1) range maps
-  // cleanly to what the user actually sees while the section is pinned.
   useEffect(() => {
     if (reduce) return;
     const el = stickyRef.current;
@@ -99,7 +110,6 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     };
   }, [mx, my, reduce]);
 
-  /* ── Scroll progress ────────────────────────────────────────────── */
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -111,7 +121,7 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
   const enterScale = useTransform(scrollYProgress, [0.0, 0.08], [0.92, 1]);
 
   // Lid hinge — multi-point curve gives ease-out with a small overshoot
-  // around 0.42 ("snap") before settling at -2°.
+  // at 0.42 before settling at -2°.
   const lidRotate = useTransform(
     scrollYProgress,
     [0.08, 0.22, 0.36, 0.42, 0.46],
@@ -139,14 +149,16 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     [0, 0.55, 0.55, 0],
   );
 
-  // Ambient glow under the laptop, in the case color
+  // Ambient glow under the laptop
   const glowOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
 
-  // Background blob pulses larger at the climax of the open animation
-  const bgPulse = useTransform(scrollYProgress, [0.3, 0.42, 0.6], [0.85, 1.3, 1]);
-  const bgOpacity = useTransform(scrollYProgress, [0.0, 0.2, 0.7, 1.0], [0.0, 1.0, 1.0, 0.4]);
+  // Atmosphere fade in / out across the section
+  const bgOpacity = useTransform(
+    scrollYProgress,
+    [0.0, 0.18, 0.7, 1.0],
+    [0.0, 1.0, 1.0, 0.4],
+  );
 
-  /* ── Reduced-motion fallback ────────────────────────────────────── */
   if (reduce) {
     return (
       <section
@@ -171,22 +183,69 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
       aria-hidden
     >
       <div ref={stickyRef} className="laptop-reveal-sticky">
-        {/* Mouse-reactive atmosphere — lives inside the sticky so it stays
-            pinned along with the laptop. */}
+        {/* ── Mouse-reactive curve atmosphere ──────────────────────── */}
         <motion.div
           className="laptop-reveal-atmosphere"
           style={{ opacity: bgOpacity }}
           aria-hidden
         >
-          <motion.div
-            className="atm-blob-main"
-            style={{ x: blobX, y: blobY, scale: bgPulse }}
-          />
-          <div className="atm-blob-drift" />
-          <div className="atm-grid" />
+          <svg
+            className="atm-curves"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <motion.path
+              d="M-180,140 C200,40 500,210 800,80 C1000,20 1180,130 1380,80"
+              stroke="var(--case-color)"
+              strokeWidth="1.4"
+              fill="none"
+              opacity="0.26"
+              vectorEffect="non-scaling-stroke"
+              style={{ x: c1.x, y: c1.y }}
+            />
+            <motion.path
+              d="M-180,260 C150,180 470,350 780,220 C980,160 1180,290 1380,230"
+              stroke="var(--case-color)"
+              strokeWidth="1.1"
+              fill="none"
+              opacity="0.20"
+              vectorEffect="non-scaling-stroke"
+              style={{ x: c2.x, y: c2.y }}
+            />
+            <motion.path
+              d="M-180,410 C220,330 510,470 810,360 C1020,290 1190,440 1380,380"
+              stroke="var(--case-color)"
+              strokeWidth="1.6"
+              fill="none"
+              opacity="0.30"
+              vectorEffect="non-scaling-stroke"
+              style={{ x: c3.x, y: c3.y }}
+            />
+            <motion.path
+              d="M-180,570 C260,490 520,640 820,520 C1020,460 1180,600 1380,540"
+              stroke="var(--case-color)"
+              strokeWidth="1.0"
+              fill="none"
+              opacity="0.18"
+              vectorEffect="non-scaling-stroke"
+              style={{ x: c4.x, y: c4.y }}
+            />
+            <motion.path
+              d="M-180,700 C200,630 510,770 810,640 C1010,580 1180,720 1380,660"
+              stroke="var(--case-color)"
+              strokeWidth="1.3"
+              fill="none"
+              opacity="0.22"
+              vectorEffect="non-scaling-stroke"
+              style={{ x: c5.x, y: c5.y }}
+            />
+          </svg>
+          {/* Vignette to focus the laptop */}
           <div className="atm-vignette" />
         </motion.div>
 
+        {/* ── Laptop stage ────────────────────────────────────────── */}
         <motion.div
           className="laptop-stage"
           style={{
@@ -195,7 +254,6 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
             y: enterY,
           }}
         >
-          {/* Parallax tilt wrap — the whole laptop reacts to cursor */}
           <motion.div
             className="laptop-tilt-wrap"
             style={{ rotateY: tiltY, rotateX: tiltX }}
@@ -222,7 +280,6 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
                           scale: screenScale,
                         }}
                       >
-                        {/* Crossfade when cover changes (e.g., tab swap) */}
                         <AnimatePresence initial={false}>
                           <motion.img
                             key={src}
@@ -238,15 +295,11 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
                         </AnimatePresence>
                       </motion.div>
 
-                      {/* Power-on light wash — sweeps across the screen as
-                          the lid opens, tinted with the case color */}
                       <motion.div
                         className="laptop-screen-poweron"
                         style={{ x: powerOnX, opacity: powerOnOpacity }}
                         aria-hidden
                       />
-
-                      {/* Glossy reflection sweep */}
                       <motion.div
                         className="laptop-screen-sweep"
                         style={{ x: sweepX, opacity: sweepOpacity }}
@@ -260,7 +313,9 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
 
               <div className="laptop-base" aria-hidden>
                 <div className="laptop-base-top">
+                  <div className="laptop-base-speaker laptop-base-speaker-l" />
                   <div className="laptop-base-keyboard" />
+                  <div className="laptop-base-speaker laptop-base-speaker-r" />
                   <div className="laptop-base-trackpad" />
                 </div>
                 <div className="laptop-base-front" />
