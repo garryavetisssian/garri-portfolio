@@ -652,23 +652,19 @@ textarea.form-input {
   .row-link:hover { padding-left: 0; }
 }
 
-/* ─── LaptopReveal — Apple-style scroll-driven 3D laptop ─────────── */
+/* ─── LaptopReveal — scroll-driven 3D laptop ─────────────────────── */
 
-/* Sizing tokens — keep the laptop comfortable across viewports */
+/* Tokens — sized so the whole laptop always fits within ~72vh of the viewport.
+   The width is capped by either viewport width OR the lid height the viewport
+   can accommodate (whichever is smaller), preserving 16:10 aspect. */
 .laptop-reveal {
-  /* Tall track so we have room for sticky scroll-through animation */
-  min-height: 220vh;
+  min-height: 130vh;          /* short track — no large empty tail */
   overflow: hidden;
   isolation: isolate;
-  --laptop-w: clamp(420px, 76vw, 1040px);
-  --laptop-h: calc(var(--laptop-w) * 0.625); /* 16:10 lid */
-  --laptop-base-h: clamp(18px, 2.4vw, 32px);
-  --laptop-bezel: clamp(8px, 1vw, 16px);
-}
-
-.laptop-reveal-track {
-  position: relative;
-  height: 100%;
+  --laptop-w: min(78vw, calc((72vh - 32px) * 1.6));
+  --laptop-h: calc(var(--laptop-w) / 1.6);
+  --laptop-base-h: clamp(18px, 2vw, 28px);
+  --laptop-bezel: clamp(8px, 1vw, 14px);
 }
 
 .laptop-reveal-sticky {
@@ -676,57 +672,27 @@ textarea.form-input {
   top: 0;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.5rem, 3vw, 3rem);
   padding: 0 var(--gutter);
-}
-
-.laptop-reveal-label,
-.laptop-reveal-caption {
-  white-space: nowrap;
-  letter-spacing: var(--mono-track);
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.laptop-reveal-label::before,
-.laptop-reveal-caption::after {
-  content: "";
-  display: inline-block;
-  width: 24px;
-  height: 1px;
-  background: var(--line-strong);
-  vertical-align: middle;
-  margin: 0 0.6em;
-}
-
-.laptop-reveal-caption::before {
-  content: "";
-  display: inline-block;
-  width: 24px;
-  height: 1px;
-  background: var(--line-strong);
-  vertical-align: middle;
-  margin: 0 0.6em;
 }
 
 /* 3D stage — perspective lives here so all children share the same camera */
 .laptop-stage {
   position: relative;
   width: var(--laptop-w);
-  height: calc(var(--laptop-h) + var(--laptop-base-h) + 80px);
+  height: calc(var(--laptop-h) + var(--laptop-base-h) + 24px);
   perspective: 1900px;
-  perspective-origin: 50% 38%;
+  perspective-origin: 50% 42%;
   transform-style: preserve-3d;
   will-change: transform, opacity;
 }
 
-/* Laptop wrap — sits centered, base at bottom, lid hinges from top of base */
+/* Laptop wrap — base anchored near the bottom of the stage so the lid has
+   room to swing up without being clipped by the viewport. */
 .laptop {
   position: absolute;
-  bottom: 60px;
+  bottom: 0;
   left: 0;
   width: 100%;
   transform-style: preserve-3d;
@@ -972,11 +938,10 @@ textarea.form-input {
   .laptop-reveal { display: none !important; }
 }
 
-/* Smaller screens: shorten the scroll track and reduce travel; effect still
-   reads at smaller sizes without locking the page too long */
+/* Smaller screens — drop the keyboard detail; track stays compact */
 @media (max-width: 640px) {
   .laptop-reveal {
-    min-height: 170vh;
+    min-height: 115vh;
     --laptop-base-h: 16px;
     --laptop-bezel: 8px;
   }
