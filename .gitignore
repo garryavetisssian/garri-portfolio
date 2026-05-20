@@ -50,3 +50,6 @@ next-env.d.ts
 .idea/
 .vscode/
 Thumbs.db
+
+# slide-deck raw exports (re-fetched from Figma on demand; not shipped)
+scripts/slides/*/_assets/
