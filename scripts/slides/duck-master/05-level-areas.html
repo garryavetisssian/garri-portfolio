@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  /* 20 area scenes laid out 5×4. Areas are landscapes so each cell is a
+     thin wide tile that crops to the central composition. */
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    height: 700px;
+  }
+
+  .acard {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 209, 43, 0.16);
+    box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+  }
+  .acard img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .acard-num {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 3px 7px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .acard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4));
+    pointer-events: none;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 06 / Level Areas</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 06 / 15</span>
+  </div>
+
+  <div class="top">
+    <div>
+      <span class="eyebrow">— The worlds</span>
+      <h1 class="headline">Twenty worlds,<br/>one <em>universe</em>.</h1>
+    </div>
+    <p class="caption" style="margin-top: 0;">
+      Each district the duck unlocks has its own cinematic backdrop —
+      neon Tokyo, taxi-yellow Manhattan, rooftop trading floors, jungle
+      hideouts. Generated and curated to share one rendering style so the
+      world stays coherent even as the player travels through it.
+    </p>
+  </div>
+
+  <div class="area-grid">
+    <div class="acard"><span class="acard-num">A 01</span><img src="_assets/level-area-01.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 02</span><img src="_assets/level-area-02.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 03</span><img src="_assets/level-area-03.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 04</span><img src="_assets/level-area-04.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 05</span><img src="_assets/level-area-05.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 06</span><img src="_assets/level-area-06.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 07</span><img src="_assets/level-area-07.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 08</span><img src="_assets/level-area-08.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 09</span><img src="_assets/level-area-09.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 10</span><img src="_assets/level-area-10.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 11</span><img src="_assets/level-area-11.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 12</span><img src="_assets/level-area-12.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 13</span><img src="_assets/level-area-13.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 14</span><img src="_assets/level-area-14.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 15</span><img src="_assets/level-area-15.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 16</span><img src="_assets/level-area-16.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 17</span><img src="_assets/level-area-17.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 18</span><img src="_assets/level-area-18.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 19</span><img src="_assets/level-area-19.png" alt=""></div>
+    <div class="acard"><span class="acard-num">A 20</span><img src="_assets/level-area-20.png" alt=""></div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Level areas</span>
+    <span>— 20 districts · same rendering style · same world</span>
+  </div>
+</div></body></html>
