@@ -114,6 +114,7 @@ export interface Dictionary {
     soundOff: string;
     soundOnAria: string;
     soundOffAria: string;
+    clickToPlayWithSound: string;
   };
   modal: { close: string; comingSoon: string };
   caseTabs: { firstVersion: string; releaseVersion: string };
@@ -310,6 +311,7 @@ const en: Dictionary = {
     soundOff: "Sound off",
     soundOnAria: "Mute video",
     soundOffAria: "Unmute video",
+    clickToPlayWithSound: "Click to play with sound",
   },
   modal: { close: "Close", comingSoon: "Case study assets coming soon" },
   caseTabs: { firstVersion: "First Version", releaseVersion: "Release Version" },
@@ -540,6 +542,7 @@ const ru: Dictionary = {
     soundOff: "Без звука",
     soundOnAria: "Выключить звук",
     soundOffAria: "Включить звук",
+    clickToPlayWithSound: "Нажмите, чтобы воспроизвести со звуком",
   },
   modal: { close: "Закрыть", comingSoon: "Материалы кейса скоро появятся" },
   caseTabs: { firstVersion: "Первая версия", releaseVersion: "Релизная версия" },
@@ -769,6 +772,7 @@ const hy: Dictionary = {
     soundOff: "Անձայն",
     soundOnAria: "Անջատել ձայնը",
     soundOffAria: "Միացնել ձայնը",
+    clickToPlayWithSound: "Սեղմեք՝ ձայնով նվագարկելու համար",
   },
   modal: { close: "Փակել", comingSoon: "Գործի նյութերը շուտով կհայտնվեն" },
   caseTabs: { firstVersion: "Առաջին տարբերակ", releaseVersion: "Թողարկման տարբերակ" },

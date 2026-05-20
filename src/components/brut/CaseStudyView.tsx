@@ -1,47 +1,63 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import Brief from "./Brief";
 import LaptopReveal from "./LaptopReveal";
 
-// Module-level flag: true once the user has interacted with the page
-// (pointerdown / keydown). Browsers require a real user gesture before they
-// allow programmatic unmuting; before that, an attempt would pause the video.
-// Shared across every VideoBlock so unmuting one video "unlocks" the rest.
-let pageHasUserGesture = false;
-const gestureSubscribers = new Set<() => void>();
-
-if (typeof window !== "undefined") {
-  const onGesture = () => {
-    if (pageHasUserGesture) return;
-    pageHasUserGesture = true;
-    gestureSubscribers.forEach((cb) => cb());
-    gestureSubscribers.clear();
-    window.removeEventListener("pointerdown", onGesture);
-    window.removeEventListener("keydown", onGesture);
-    window.removeEventListener("touchstart", onGesture);
-  };
-  window.addEventListener("pointerdown", onGesture, { passive: true });
-  window.addEventListener("keydown", onGesture, { passive: true });
-  window.addEventListener("touchstart", onGesture, { passive: true });
-}
-
+/**
+ * VideoBlock — case-study video that:
+ *   • Stays paused until ≥85% of the element is visible in the viewport
+ *   • Plays with sound the moment it becomes fully visible (video + audio
+ *     start together — no muted preview phase)
+ *   • Pauses entirely (not just mutes) once the visible ratio drops below 50%
+ *
+ * Browser caveat — handled gracefully:
+ *   Modern browsers (Safari, Chrome, Firefox) refuse to play a video with
+ *   sound on a page that hasn't seen a real user gesture (mouse-wheel scroll
+ *   doesn't count). When that happens for the FIRST video on a fresh load,
+ *   the play() promise rejects and we surface a small "Click to play with
+ *   sound" overlay. One click anywhere on it unblocks the rest of the page,
+ *   so subsequent videos auto-play with sound without prompts.
+ */
 function VideoBlock({ src }: { src: string }) {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
-  const [inView, setInView] = useState(false);
-  // Tracks whether the video is *currently* focal (≥60% visible). When the
-  // user gesture unlock arrives later, we use this to unmute videos that are
-  // already in view.
-  const focalRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [needsClickToPlay, setNeedsClickToPlay] = useState(false);
+  // Tracks the latest viewport intent so observer fires don't double-trigger
+  // play() while it's already running.
+  const wantsPlayRef = useRef(false);
 
-  // Play / pause + auto mute / unmute as the video enters / leaves the
-  // viewport.
+  const playWithSound = useCallback(async () => {
+    const el = videoRef.current;
+    if (!el) return;
+    try {
+      el.muted = false;
+      // play() returns a promise that rejects with NotAllowedError when the
+      // browser blocks autoplay-with-sound (most common on Safari without
+      // a prior user gesture, or Chrome with low Media Engagement Index).
+      await el.play();
+      setIsPlaying(true);
+      setNeedsClickToPlay(false);
+    } catch {
+      setIsPlaying(false);
+      setNeedsClickToPlay(true);
+    }
+  }, []);
+
+  const pauseVideo = useCallback(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.pause();
+    setIsPlaying(false);
+    setNeedsClickToPlay(false);
+  }, []);
+
+  // Viewport-driven play/pause. Hysteresis: play at ≥0.85, pause at <0.5.
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
@@ -49,85 +65,58 @@ function VideoBlock({ src }: { src: string }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         const ratio = entry.intersectionRatio;
-        const focal = entry.isIntersecting && ratio >= 0.6;
-        focalRef.current = focal;
-        setInView(focal);
+        const fullyVisible = entry.isIntersecting && ratio >= 0.85;
+        const mostlyHidden = ratio < 0.5;
 
-        if (focal) {
-          // play() can reject with NotAllowedError if browser blocks it
-          el.play().catch(() => {
-            /* swallow; user can interact to retry */
-          });
-          // Auto-unmute only after a real user gesture exists for the page.
-          if (pageHasUserGesture) setMuted(false);
-        } else {
-          el.pause();
-          // Always mute when leaving the focal area so audio doesn't bleed
-          // into adjacent sections / videos.
-          setMuted(true);
+        if (fullyVisible) {
+          if (!wantsPlayRef.current) {
+            wantsPlayRef.current = true;
+            playWithSound();
+          }
+        } else if (mostlyHidden) {
+          if (wantsPlayRef.current) {
+            wantsPlayRef.current = false;
+            pauseVideo();
+          }
         }
+        // Between 0.5 and 0.85 is the hysteresis band — no state change.
       },
-      { threshold: [0, 0.3, 0.6, 0.9] }
+      { threshold: [0, 0.5, 0.85, 0.95] },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  // If the user hasn't gestured yet when this video first becomes focal, the
-  // muted state stays true. Subscribe so we can unmute the moment the gesture
-  // arrives if we're still the focal video.
-  useEffect(() => {
-    if (pageHasUserGesture) return;
-    const cb = () => {
-      if (focalRef.current) setMuted(false);
-    };
-    gestureSubscribers.add(cb);
-    return () => {
-      gestureSubscribers.delete(cb);
-    };
-  }, []);
-
-  // Push the muted state to the element imperatively so toggling
-  // doesn't restart playback
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.muted = muted;
-  }, [muted]);
+  }, [playWithSound, pauseVideo]);
 
   return (
-    <div className="relative group">
+    <div className="relative">
       <video
         ref={videoRef}
         src={src}
         loop
-        muted
         playsInline
         preload="metadata"
         className="block w-full h-auto"
       />
 
-      {/* Mute / unmute toggle — also acts as the first user gesture if the
-          user hasn't interacted with the page yet, letting auto-unmute work
-          for subsequent videos. */}
-      <button
-        type="button"
-        onClick={() => {
-          pageHasUserGesture = true;
-          setMuted((m) => !m);
-        }}
-        aria-label={muted ? t.caseStudy.soundOffAria : t.caseStudy.soundOnAria}
-        className="absolute bottom-4 right-4 mono flex items-center gap-2 px-3 py-2 bg-paper/85 backdrop-blur-sm text-ink border border-line-strong hover:border-acid hover:text-acid transition-colors"
-      >
-        {muted ? (
-          <SpeakerOffIcon />
-        ) : (
-          <SpeakerOnIcon />
-        )}
-        <span>{muted ? t.caseStudy.soundOff : t.caseStudy.soundOn}</span>
-      </button>
+      {/* Fallback overlay — only shows when the browser blocked autoplay-
+          with-sound for the very first play. One click unlocks the page. */}
+      {needsClickToPlay && (
+        <button
+          type="button"
+          onClick={playWithSound}
+          aria-label={t.caseStudy.clickToPlayWithSound}
+          className="absolute inset-0 z-10 flex items-center justify-center bg-paper/55 backdrop-blur-[1px] hover:bg-paper/45 transition-colors"
+        >
+          <span className="mono inline-flex items-center gap-3 px-5 py-3 bg-paper/90 text-acid border border-acid">
+            <PlayIcon />
+            <span>{t.caseStudy.clickToPlayWithSound}</span>
+          </span>
+        </button>
+      )}
 
-      {/* Subtle playing indicator (only when paused outside viewport) */}
-      {!inView && (
+      {/* Subtle PAUSED marker when video isn't playing (but no overlay). */}
+      {!isPlaying && !needsClickToPlay && (
         <span className="absolute top-4 left-4 mono text-ink-mute bg-paper/70 backdrop-blur-sm px-2 py-1">
           ▍▍ PAUSED
         </span>
@@ -136,41 +125,10 @@ function VideoBlock({ src }: { src: string }) {
   );
 }
 
-function SpeakerOnIcon() {
+function PlayIcon() {
   return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M3.5 5 H5 L8 2.5 V11.5 L5 9 H3.5 V5z"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10 4.5 Q11.5 7 10 9.5 M11.5 3 Q13.5 7 11.5 11"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function SpeakerOffIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M3.5 5 H5 L8 2.5 V11.5 L5 9 H3.5 V5z"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10.5 4.5 L13 11.5 M13 4.5 L10.5 11.5"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
+      <path d="M3.5 2 L11 7 L3.5 12 Z" fill="currentColor" />
     </svg>
   );
 }
