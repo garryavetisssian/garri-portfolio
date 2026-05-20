@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .layout .mockup { height: 740px; }
+  .layout .mockup-viewport { height: 690px; }
+  /* This frame is tall — show the bias-chart + sentence-highlights area
+     (offset down past the page header). */
+  .layout .mockup-viewport img {
+    position: relative;
+    top: -180px;
+  }
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .legend-item { display: inline-flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 05 / Sentence-level transparency</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 05 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <span class="eyebrow">— Visualisation</span>
+      <h1 class="headline">Every<br/>sentence,<br/><em>weighed</em>.</h1>
+      <p class="caption">
+        Each sentence in the article gets its own bar and color stripe —
+        from green for neutral framing to red for the most loaded phrasing.
+        The chart makes the texture of a story visible at a glance.
+      </p>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#22C55E"></span>Neutral</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#EAB308"></span>Mild lean</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#F97316"></span>Strong lean</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#EF4444"></span>Loaded</span>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-chrome">
+        <span class="mockup-dot r"></span>
+        <span class="mockup-dot y"></span>
+        <span class="mockup-dot g"></span>
+        <div class="mockup-url"><span class="mockup-url-bar">balvoi.com/debiasit/analysis/9b3a</span></div>
+      </div>
+      <div class="mockup-viewport">
+        <img src="_assets/2975-34031.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Sentence-level analysis</span>
+    <span>— Surface 03 of 04</span>
+  </div>
+</div></body></html>

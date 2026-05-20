@@ -1,0 +1,268 @@
+/* Shared styles for the BalVoi case study slide deck.
+   Each slide is a self-contained HTML file rendered at 1600×1000 by Puppeteer.
+   This file is loaded via <link rel="stylesheet"> from each slide. */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@600;700;800&display=swap');
+
+:root {
+  --bv-blue:        #0081DD;   /* primary brand blue (palette 600) */
+  --bv-blue-deep:   #005693;
+  --bv-blue-dark:   #01497C;
+  --bv-blue-ink:    #012C50;
+  --bv-orange:      #E94A20;   /* the BalVoi wordmark orange */
+  --bv-orange-soft: #FF6B3D;
+
+  --slide-bg-1:     #050E1C;
+  --slide-bg-2:     #0A1A33;
+
+  --text:           #F2F4F8;
+  --text-muted:     rgba(242, 244, 248, 0.68);
+  --text-faint:     rgba(242, 244, 248, 0.38);
+  --rule:           rgba(242, 244, 248, 0.14);
+  --rule-strong:    rgba(242, 244, 248, 0.24);
+
+  --display:        'Unbounded', 'Inter', system-ui, sans-serif;
+  --body:           'Manrope', system-ui, sans-serif;
+  --mono:           'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1600px;
+  height: 1000px;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0, 129, 221, 0.22), transparent 70%),
+    linear-gradient(180deg, var(--slide-bg-1) 0%, var(--slide-bg-2) 60%, var(--slide-bg-1) 100%);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Subtle grain across every slide */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* The page frame each slide builds inside */
+.slide {
+  width: 1600px;
+  height: 1000px;
+  padding: 64px 80px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/* Top hairline + mono labels */
+.slide-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+
+.slide-top .mark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-transform: none;
+}
+
+.slide-top .mark .tm {
+  font-family: var(--body);
+  font-size: 9px;
+  vertical-align: super;
+  color: var(--bv-orange);
+  margin-left: 1px;
+}
+
+.slide-top .right .accent { color: var(--bv-orange); }
+
+/* Section eyebrow above headlines */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bv-orange);
+  margin-bottom: 18px;
+}
+
+.headline {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  max-width: 22ch;
+}
+.headline-lg { font-size: 96px; }
+.headline-sm { font-size: 42px; }
+.headline em {
+  font-style: normal;
+  color: var(--bv-orange);
+}
+
+.caption {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 58ch;
+  margin-top: 22px;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 14px;
+}
+
+/* Footer strip on every slide */
+.slide-bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Mockup window ──────────────────────────────────────────────── */
+/* Reusable browser-chrome frame for embedding Figma screen exports. */
+
+.mockup {
+  background: #14141B;
+  border-radius: 14px;
+  border: 1px solid var(--rule-strong);
+  overflow: hidden;
+  box-shadow:
+    0 40px 100px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.mockup-chrome {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #0F0F15;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 8px;
+}
+
+.mockup-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.mockup-dot.r { background: #FF5F56; }
+.mockup-dot.y { background: #FFBD2E; }
+.mockup-dot.g { background: #27C93F; }
+
+.mockup-url {
+  margin-left: 18px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.mockup-url-bar {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 5px 18px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: var(--mono);
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mockup-url-bar::before {
+  content: "🔒";
+  font-size: 9px;
+  opacity: 0.5;
+}
+
+/* The actual viewport — img inside, overflow hidden, height varies per slide */
+.mockup-viewport {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mockup-viewport img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Small mockup variant for triptychs / responsive grids */
+.mockup-sm .mockup-chrome { padding: 8px 10px; gap: 5px; }
+.mockup-sm .mockup-dot { width: 8px; height: 8px; }
+.mockup-sm .mockup-url-bar { font-size: 9px; padding: 3px 10px; }
+
+/* The BalVoi mark — recreated in CSS so we don't depend on a logo PNG */
+.bv-mark {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.bv-mark .bv-badge {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  color: #fff;
+  background: var(--bv-blue-deep);
+  padding: 10px 18px 10px 18px;
+  line-height: 1;
+}
+
+.bv-mark .bv-word {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: var(--bv-orange);
+  padding: 6px 14px;
+  line-height: 1;
+}
+
+.bv-mark-lg .bv-badge { font-size: 80px; padding: 22px 40px; }
+.bv-mark-lg .bv-word { font-size: 50px; padding: 14px 28px; }

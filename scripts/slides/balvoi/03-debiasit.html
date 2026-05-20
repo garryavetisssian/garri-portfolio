@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.4fr 0.85fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .layout .mockup { height: 720px; }
+  .layout .mockup-viewport { height: 670px; }
+  .annotation {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bv-orange);
+    padding: 6px 10px;
+    background: rgba(5, 14, 28, 0.85);
+    border: 1px solid var(--bv-orange);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .ann-1 { top: 20%; right: -16px; }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 04 / DeBiasIt™</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 04 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div class="mockup" style="position: relative;">
+      <div class="mockup-chrome">
+        <span class="mockup-dot r"></span>
+        <span class="mockup-dot y"></span>
+        <span class="mockup-dot g"></span>
+        <div class="mockup-url"><span class="mockup-url-bar">balvoi.com/debiasit</span></div>
+      </div>
+      <div class="mockup-viewport">
+        <img src="_assets/2079-27801.png" alt="">
+      </div>
+      <span class="annotation ann-1">Bias density · sentence-by-sentence</span>
+    </div>
+
+    <div>
+      <span class="eyebrow">— The core feature</span>
+      <h1 class="headline">Bias,<br/><em>measured</em>.</h1>
+      <p class="caption">
+        DeBiasIt™ analyzes a news article and returns a complete bias
+        breakdown — every sentence colored by its lean, every paragraph
+        scored, and a trust number you can interrogate.
+      </p>
+      <p class="kicker">Paste → analyze → understand · &lt;3 sec</p>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>DeBiasIt™</span>
+    <span>— Surface 02 of 04</span>
+  </div>
+</div></body></html>
