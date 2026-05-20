@@ -314,8 +314,9 @@ export default function CaseStudyView({
       {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
       <Brief brief={project.brief} slug={project.slug} />
 
-      {/* Laptop reveal — scroll-driven cover image moment. */}
-      {coverSrc && <LaptopReveal src={coverSrc} />}
+      {/* Laptop reveal — scroll-driven cover image moment, tinted with the
+          case's accent color. */}
+      {coverSrc && <LaptopReveal src={coverSrc} color={project.color} />}
 
       {/* Overview */}
       <section className="py-16 border-t border-line-strong">

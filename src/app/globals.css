@@ -675,6 +675,100 @@ textarea.form-input {
   align-items: center;
   justify-content: center;
   padding: 0 var(--gutter);
+  isolation: isolate;
+}
+
+/* ── Mouse-reactive atmosphere ───────────────────────────────────── */
+/* Behind the laptop. Pointer events pass through to the section for the
+   mouse tracker. The whole sub-tree is tinted with var(--case-color). */
+.laptop-reveal-atmosphere {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity;
+}
+
+/* Main cursor-tracking blob — large, soft, low opacity. The framer
+   transform sets x/y on top of these centered defaults. */
+.atm-blob-main {
+  position: absolute;
+  width: clamp(420px, 56vw, 1100px);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 50%;
+  margin-left: clamp(-550px, -28vw, -210px);
+  margin-top: clamp(-550px, -28vw, -210px);
+  background: radial-gradient(
+    circle,
+    var(--case-color, var(--acid)) 0%,
+    transparent 65%
+  );
+  opacity: 0.28;
+  filter: blur(54px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Secondary blob — ambient drift, independent of cursor */
+.atm-blob-drift {
+  position: absolute;
+  width: clamp(280px, 36vw, 680px);
+  aspect-ratio: 1;
+  left: 78%;
+  top: 28%;
+  background: radial-gradient(
+    circle,
+    var(--case-color, var(--acid)) 0%,
+    transparent 60%
+  );
+  opacity: 0.14;
+  filter: blur(70px);
+  transform: translate(-50%, -50%);
+  animation: atm-drift 22s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes atm-drift {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-25%, -75%) scale(1.25); }
+}
+
+/* Dot grid — only visible in the middle region */
+.atm-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+  opacity: 0.6;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    ellipse 55% 45% at center,
+    black 0%,
+    transparent 85%
+  );
+  mask-image: radial-gradient(
+    ellipse 55% 45% at center,
+    black 0%,
+    transparent 85%
+  );
+}
+
+/* Vignette to focus the laptop */
+.atm-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(11, 11, 10, 0.65) 100%
+  );
+  pointer-events: none;
 }
 
 /* 3D stage — perspective lives here so all children share the same camera */
@@ -686,6 +780,16 @@ textarea.form-input {
   perspective-origin: 50% 42%;
   transform-style: preserve-3d;
   will-change: transform, opacity;
+  z-index: 1;
+}
+
+/* Mouse-parallax wrap — the whole laptop tilts subtly toward the cursor */
+.laptop-tilt-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 /* Laptop wrap — base anchored near the bottom of the stage so the lid has
@@ -794,7 +898,7 @@ textarea.form-input {
     inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* Tiny logo glyph in the middle of the shell */
+/* Tiny logo glyph on the back of the shell — tinted with case color */
 .laptop-lid-logo {
   position: absolute;
   top: 50%;
@@ -802,10 +906,10 @@ textarea.form-input {
   width: 14%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  background: var(--acid);
-  opacity: 0.08;
+  background: var(--case-color, var(--acid));
+  opacity: 0.14;
   border-radius: 50%;
-  filter: blur(4px);
+  filter: blur(5px);
 }
 
 /* Lid front face — screen + bezel — visible when open */
@@ -889,6 +993,24 @@ textarea.form-input {
   will-change: transform, opacity;
 }
 
+/* Power-on wash — a soft case-color streak that crosses the screen as the
+   lid hinges open. Reads like the display lighting up before the image
+   finishes settling in. */
+.laptop-screen-poweron {
+  position: absolute;
+  inset: -15% -50%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    var(--case-color, var(--acid)) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(14px);
+  will-change: transform, opacity;
+}
+
 /* Static screen gloss — subtle top-down vignette */
 .laptop-screen-gloss {
   position: absolute;
@@ -899,19 +1021,24 @@ textarea.form-input {
   pointer-events: none;
 }
 
-/* Bloom under the laptop — soft acid glow */
+/* Bloom under the laptop — soft case-color glow that intensifies as the
+   lid finishes opening (opacity is animated by framer). */
 .laptop-glow {
   position: absolute;
   left: 50%;
-  bottom: -40px;
+  bottom: -50px;
   transform: translateX(-50%);
-  width: 85%;
-  height: 80px;
-  background:
-    radial-gradient(50% 100% at 50% 50%, var(--acid-faint), transparent 70%);
-  filter: blur(18px);
+  width: 92%;
+  height: 110px;
+  background: radial-gradient(
+    55% 100% at 50% 50%,
+    var(--case-color, var(--acid)),
+    transparent 72%
+  );
+  filter: blur(26px);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.6;          /* CSS fallback; framer animates this live */
 }
 
 /* ── Reduced-motion fallback (static, fully open) ────────────────── */

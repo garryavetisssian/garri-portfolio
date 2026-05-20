@@ -143,7 +143,7 @@ export const projects: CaseStudy[] = [
     duration: "8 months",
     team: "PM, 4 Engineers, Blockchain Dev",
     thumbnail: "/work/xygo/hero.jpg",
-    color: "#8B5CF6",
+    color: "#F5A524",
     brief: {
       narrative:
         "A Web3 lottery and NFT marketplace designed for two very different audiences: crypto-native users, and people who just want to buy a ticket without learning crypto first.",
@@ -368,7 +368,7 @@ export const projects: CaseStudy[] = [
     duration: "2 years",
     team: "PM, 3 Engineers, 1 Designer",
     thumbnail: "/cases/ineed/Cover.png",
-    color: "#38BDF8",
+    color: "#C44545",
     brief: {
       narrative:
         "A two-sided service marketplace with separate mobile apps for clients and professionals. I designed it end-to-end through two full iterations — the initial concept, then the polished release.",
@@ -423,7 +423,7 @@ export const projects: CaseStudy[] = [
     duration: "4 months",
     team: "PM, 2 Engineers",
     thumbnail: "",
-    color: "#F59E0B",
+    color: "#22C9A0",
     brief: {
       narrative:
         "An AI productivity platform that helps teams automate routine work — while keeping people in charge of every decision the AI suggests.",
@@ -467,7 +467,7 @@ export const projects: CaseStudy[] = [
     duration: "3 months",
     team: "PM, 4 Engineers",
     thumbnail: "",
-    color: "#EF4444",
+    color: "#3D6FA8",
     brief: {
       narrative:
         "A real-time logistics dashboard for fleet operators. Live vehicle tracking, automated routing, and driver chat — all in one screen, organized around what the dispatcher needs to act on right now.",
@@ -511,7 +511,7 @@ export const projects: CaseStudy[] = [
     duration: "3 months",
     team: "PM, 3 Engineers",
     thumbnail: "",
-    color: "#8B5CF6",
+    color: "#5BB5C9",
     brief: {
       narrative:
         "A single smart home app that replaces the half-dozen device-specific apps people usually juggle — organized around how users actually think: by rooms and routines, not brands or protocols.",
@@ -555,7 +555,7 @@ export const projects: CaseStudy[] = [
     duration: "2 weeks",
     team: "Solo",
     thumbnail: "",
-    color: "#00FF7F",
+    color: "#44D62C",
     brief: {
       narrative:
         "A two-week solo design exploration asking a simple question: can a gaming brand's UI feel unmistakably gaming and still be clean, fast, and easy to read?",
