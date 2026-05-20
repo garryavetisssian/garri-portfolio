@@ -1060,24 +1060,58 @@ textarea.form-input {
   pointer-events: none;
 }
 
-/* Bloom under the laptop — soft case-color glow that intensifies as the
-   lid finishes opening (opacity is animated by framer). */
+/* Bloom under the laptop — two-layer soft halo that bathes the floor.
+   The wrapper handles framer-driven opacity (ramps in with the lid open).
+   Inside, two pseudo-children render a wide soft halo + a tighter hot core. */
 .laptop-glow {
   position: absolute;
   left: 50%;
-  bottom: -50px;
+  bottom: -180px;
   transform: translateX(-50%);
-  width: 92%;
-  height: 110px;
-  background: radial-gradient(
-    55% 100% at 50% 50%,
-    var(--case-color, var(--acid)),
-    transparent 72%
-  );
-  filter: blur(26px);
+  width: 180%;
+  height: 360px;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;          /* CSS fallback; framer animates this live */
+  z-index: -1;        /* sits behind the laptop body */
+  opacity: 0.6;       /* CSS fallback; framer drives the live opacity */
+}
+
+/* Outer halo — very wide, very soft, low opacity. Sells the "ambient light
+   bouncing off a surface" feel. */
+.laptop-glow-halo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    50% 65% at 50% 38%,
+    var(--case-color, var(--acid)) 0%,
+    transparent 70%
+  );
+  filter: blur(72px);
+  opacity: 0.55;
+  will-change: transform, opacity;
+}
+
+/* Inner hot core — tighter, brighter, gently breathes. */
+.laptop-glow-core {
+  position: absolute;
+  inset: 18% 28%;
+  background: radial-gradient(
+    50% 80% at 50% 30%,
+    var(--case-color, var(--acid)) 0%,
+    transparent 65%
+  );
+  filter: blur(30px);
+  opacity: 0.9;
+  animation: glow-breathe 5.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.08); opacity: 1;    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laptop-glow-core { animation: none; }
 }
 
 /* ── Reduced-motion fallback (static, fully open) ────────────────── */

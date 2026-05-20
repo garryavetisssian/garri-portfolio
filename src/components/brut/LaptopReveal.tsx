@@ -1,13 +1,16 @@
 "use client";
 
 /**
- * LaptopReveal — scroll-driven 3D laptop with mouse-reactive line atmosphere.
+ * LaptopReveal — scroll-driven 3D laptop with cursor-deforming curves.
  *
- * Background:
- *   A small set of long bezier curves tinted in the case's accent color. Each
- *   curve drifts at its own parallax depth as the cursor moves, so the field
- *   subtly reshapes itself under the pointer (cheap and CSS-composited — pure
- *   transform on five SVG <g>s).
+ * Background pattern:
+ *   Five thin SVG curves tinted in the case accent color. Each curve is
+ *   rebuilt every frame from a chain of 11 anchor points. The cursor exerts
+ *   a repulsive force on each anchor: anchors close to the cursor get pushed
+ *   away with a smoothstep falloff. The curve visibly bends around the
+ *   pointer — like a magnetic field disturbance — and returns to rest when
+ *   the cursor leaves. Spring-damping on the cursor coordinates keeps the
+ *   deformation smooth.
  *
  * Scroll choreography (scrollYProgress 0 → 1 across the section):
  *   0.00 → 0.08  laptop fades + lifts in
@@ -18,7 +21,7 @@
  *   0.30 → 0.50  ambient glow under the laptop blooms (case color)
  *
  * Mouse:
- *   • Each background curve translates with its own depth/speed
+ *   • Cursor position drives the curve deformation (above)
  *   • Whole laptop tilts up to ±5°/±3° toward the cursor
  *
  * Reduced-motion: static fully-open laptop with cover, no animations.
@@ -40,24 +43,81 @@ function useLidTransform(rotateX: MotionValue<number>) {
   return useTransform(rotateX, (r) => `rotateX(${r}deg)`);
 }
 
-/** Spring-damped 2D drift for a background curve. */
-function useDrift(
-  mx: MotionValue<number>,
-  my: MotionValue<number>,
-  sx: number,
-  sy: number,
-) {
-  const xRaw = useTransform(mx, [-1, 1], [-sx, sx]);
-  const yRaw = useTransform(my, [-1, 1], [-sy, sy]);
-  const x = useSpring(xRaw, { stiffness: 55, damping: 19, mass: 0.5 });
-  const y = useSpring(yRaw, { stiffness: 55, damping: 19, mass: 0.5 });
-  return { x, y };
+interface CurveConfig {
+  /** Resting y position in viewBox units (0–800). */
+  y: number;
+  /** Sinusoidal wave amplitude added to each anchor for natural variation. */
+  amp: number;
+  /** Phase offset for the rest-wave so curves don't all wiggle in sync. */
+  phase: number;
+  /** Stroke width (in viewBox units; non-scaling-stroke keeps it constant). */
+  sw: number;
+  opacity: number;
+  /** Maximum distance an anchor is pushed when the cursor sits on top of it. */
+  strength: number;
+  /** Radius of cursor influence — beyond this, the anchor doesn't move. */
+  falloff: number;
+}
+
+const CURVES: CurveConfig[] = [
+  { y: 140, amp: 22, phase: 0.0, sw: 1.4, opacity: 0.26, strength: 95, falloff: 270 },
+  { y: 270, amp: 18, phase: 1.2, sw: 1.0, opacity: 0.18, strength: 70, falloff: 240 },
+  { y: 410, amp: 32, phase: 2.4, sw: 1.6, opacity: 0.30, strength: 115, falloff: 300 },
+  { y: 560, amp: 20, phase: 3.6, sw: 1.0, opacity: 0.18, strength: 80, falloff: 260 },
+  { y: 690, amp: 26, phase: 4.8, sw: 1.3, opacity: 0.22, strength: 95, falloff: 280 },
+];
+
+const ANCHORS = 11;
+const X_START = -180;
+const X_END = 1380;
+
+/**
+ * Build the SVG `d` attribute for one curve, given the cursor's viewBox
+ * coordinates. Each of the 11 anchor points sits at its resting position
+ * plus a small natural wave; if the cursor is within the curve's falloff
+ * radius, the anchor is shoved away from it with a smoothstep ease.
+ *
+ * The resulting points are stitched together with cubic-bezier segments
+ * whose control points sit midway in x — this produces smooth, flowing
+ * curves without sharp corners between anchors.
+ */
+function buildCurvePath(cfg: CurveConfig, cx: number, cy: number): string {
+  const { y, amp, phase, strength, falloff } = cfg;
+  const pts: Array<[number, number]> = [];
+
+  for (let i = 0; i < ANCHORS; i++) {
+    const baseX = X_START + (i / (ANCHORS - 1)) * (X_END - X_START);
+    const baseY = y + Math.sin(i * 0.95 + phase) * amp;
+
+    const dx = baseX - cx;
+    const dy = baseY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    let nx = baseX;
+    let ny = baseY;
+    if (dist < falloff && dist > 0.001) {
+      const t = 1 - dist / falloff;
+      const ease = t * t * (3 - 2 * t); // smoothstep
+      nx = baseX + (dx / dist) * ease * strength;
+      ny = baseY + (dy / dist) * ease * strength;
+    }
+    pts.push([nx, ny]);
+  }
+
+  let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1];
+    const [x1, y1] = pts[i];
+    const midX = (x0 + x1) / 2;
+    d += ` C${midX.toFixed(1)},${y0.toFixed(1)} ${midX.toFixed(1)},${y1.toFixed(1)} ${x1.toFixed(1)},${y1.toFixed(1)}`;
+  }
+  return d;
 }
 
 interface LaptopRevealProps {
   src: string;
-  /** Hex / CSS color of the case's accent — tints the curves, the laptop's
-   *  ambient glow, and the empty bars inside the screen. */
+  /** Hex / CSS color of the case's accent — tints the curves, the screen
+   *  letterbox, and the laptop's ambient glow. */
   color?: string;
 }
 
@@ -66,24 +126,33 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
   const stickyRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
-  // Mouse position, normalized −1..1 within the sticky bounds.
+  /* ── Cursor position normalized to −1..1 inside the sticky bounds ── */
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  // Five curves at different parallax depths. The bolder ones (higher sx/sy)
-  // sit "closer" to the viewer in the depth illusion.
-  const c1 = useDrift(mx, my, 36, 14);
-  const c2 = useDrift(mx, my, 20, 18);
-  const c3 = useDrift(mx, my, 44, 10);
-  const c4 = useDrift(mx, my, 16, 20);
-  const c5 = useDrift(mx, my, 28, 22);
+  /* Cursor expressed in SVG viewBox space, spring-smoothed. At rest (mouse
+     leaves), it animates back toward the section center. */
+  const cxRaw = useTransform(mx, [-1, 1], [0, 1200]);
+  const cyRaw = useTransform(my, [-1, 1], [0, 800]);
+  const cx = useSpring(cxRaw, { stiffness: 65, damping: 16, mass: 0.45 });
+  const cy = useSpring(cyRaw, { stiffness: 65, damping: 16, mass: 0.45 });
 
-  // Laptop parallax tilt.
+  /* Reactive `d` strings — one per curve, recomputed every frame from the
+     springed cursor. (useTransform's array form re-runs whenever any input
+     motion value changes.) */
+  const d1 = useTransform([cx, cy], ([x, y]) => buildCurvePath(CURVES[0], x as number, y as number));
+  const d2 = useTransform([cx, cy], ([x, y]) => buildCurvePath(CURVES[1], x as number, y as number));
+  const d3 = useTransform([cx, cy], ([x, y]) => buildCurvePath(CURVES[2], x as number, y as number));
+  const d4 = useTransform([cx, cy], ([x, y]) => buildCurvePath(CURVES[3], x as number, y as number));
+  const d5 = useTransform([cx, cy], ([x, y]) => buildCurvePath(CURVES[4], x as number, y as number));
+
+  /* Laptop tilt — independent springs, gentler clamp than the curves. */
   const tiltYRaw = useTransform(mx, [-1, 1], [-5, 5]);
   const tiltXRaw = useTransform(my, [-1, 1], [3, -3]);
   const tiltY = useSpring(tiltYRaw, { stiffness: 110, damping: 22 });
   const tiltX = useSpring(tiltXRaw, { stiffness: 110, damping: 22 });
 
+  /* Mouse tracking on the sticky bounds. */
   useEffect(() => {
     if (reduce) return;
     const el = stickyRef.current;
@@ -110,18 +179,16 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     };
   }, [mx, my, reduce]);
 
+  /* ── Scroll progress ────────────────────────────────────────────── */
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Entry
   const enterOpacity = useTransform(scrollYProgress, [0.0, 0.08], [0, 1]);
   const enterY = useTransform(scrollYProgress, [0.0, 0.08], [40, 0]);
   const enterScale = useTransform(scrollYProgress, [0.0, 0.08], [0.92, 1]);
 
-  // Lid hinge — multi-point curve gives ease-out with a small overshoot
-  // at 0.42 before settling at -2°.
   const lidRotate = useTransform(
     scrollYProgress,
     [0.08, 0.22, 0.36, 0.42, 0.46],
@@ -129,11 +196,9 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
   );
   const lidTransform = useLidTransform(lidRotate);
 
-  // Screen content fade
   const screenOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
   const screenScale = useTransform(scrollYProgress, [0.3, 0.5], [1.06, 1]);
 
-  // Power-on light wash across the lid as it opens
   const powerOnX = useTransform(scrollYProgress, [0.18, 0.42], ["-100%", "120%"]);
   const powerOnOpacity = useTransform(
     scrollYProgress,
@@ -141,7 +206,6 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     [0, 0.7, 0.6, 0],
   );
 
-  // Reflection sweep on screen
   const sweepX = useTransform(scrollYProgress, [0.35, 0.55], ["-110%", "110%"]);
   const sweepOpacity = useTransform(
     scrollYProgress,
@@ -149,10 +213,8 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     [0, 0.55, 0.55, 0],
   );
 
-  // Ambient glow under the laptop
   const glowOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
 
-  // Atmosphere fade in / out across the section
   const bgOpacity = useTransform(
     scrollYProgress,
     [0.0, 0.18, 0.7, 1.0],
@@ -183,7 +245,7 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
       aria-hidden
     >
       <div ref={stickyRef} className="laptop-reveal-sticky">
-        {/* ── Mouse-reactive curve atmosphere ──────────────────────── */}
+        {/* ── Cursor-deforming curve atmosphere ─────────────────────── */}
         <motion.div
           className="laptop-reveal-atmosphere"
           style={{ opacity: bgOpacity }}
@@ -195,64 +257,26 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <motion.path
-              d="M-180,140 C200,40 500,210 800,80 C1000,20 1180,130 1380,80"
-              stroke="var(--case-color)"
-              strokeWidth="1.4"
-              fill="none"
-              opacity="0.26"
-              vectorEffect="non-scaling-stroke"
-              style={{ x: c1.x, y: c1.y }}
-            />
-            <motion.path
-              d="M-180,260 C150,180 470,350 780,220 C980,160 1180,290 1380,230"
-              stroke="var(--case-color)"
-              strokeWidth="1.1"
-              fill="none"
-              opacity="0.20"
-              vectorEffect="non-scaling-stroke"
-              style={{ x: c2.x, y: c2.y }}
-            />
-            <motion.path
-              d="M-180,410 C220,330 510,470 810,360 C1020,290 1190,440 1380,380"
-              stroke="var(--case-color)"
-              strokeWidth="1.6"
-              fill="none"
-              opacity="0.30"
-              vectorEffect="non-scaling-stroke"
-              style={{ x: c3.x, y: c3.y }}
-            />
-            <motion.path
-              d="M-180,570 C260,490 520,640 820,520 C1020,460 1180,600 1380,540"
-              stroke="var(--case-color)"
-              strokeWidth="1.0"
-              fill="none"
-              opacity="0.18"
-              vectorEffect="non-scaling-stroke"
-              style={{ x: c4.x, y: c4.y }}
-            />
-            <motion.path
-              d="M-180,700 C200,630 510,770 810,640 C1010,580 1180,720 1380,660"
-              stroke="var(--case-color)"
-              strokeWidth="1.3"
-              fill="none"
-              opacity="0.22"
-              vectorEffect="non-scaling-stroke"
-              style={{ x: c5.x, y: c5.y }}
-            />
+            {[d1, d2, d3, d4, d5].map((d, i) => (
+              <motion.path
+                key={i}
+                d={d}
+                stroke="var(--case-color)"
+                strokeWidth={CURVES[i].sw}
+                opacity={CURVES[i].opacity}
+                fill="none"
+                strokeLinecap="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            ))}
           </svg>
-          {/* Vignette to focus the laptop */}
           <div className="atm-vignette" />
         </motion.div>
 
         {/* ── Laptop stage ────────────────────────────────────────── */}
         <motion.div
           className="laptop-stage"
-          style={{
-            opacity: enterOpacity,
-            scale: enterScale,
-            y: enterY,
-          }}
+          style={{ opacity: enterOpacity, scale: enterScale, y: enterY }}
         >
           <motion.div
             className="laptop-tilt-wrap"
@@ -263,22 +287,17 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
                 className="laptop-lid"
                 style={{ transform: lidTransform }}
               >
-                {/* Shell back — visible while closed */}
                 <div className="laptop-lid-shell" aria-hidden>
                   <span className="laptop-lid-logo" />
                 </div>
 
-                {/* Screen face — visible while open */}
                 <div className="laptop-lid-face">
                   <div className="laptop-bezel">
                     <span className="laptop-camera" aria-hidden />
                     <div className="laptop-screen">
                       <motion.div
                         className="laptop-screen-inner"
-                        style={{
-                          opacity: screenOpacity,
-                          scale: screenScale,
-                        }}
+                        style={{ opacity: screenOpacity, scale: screenScale }}
                       >
                         <AnimatePresence initial={false}>
                           <motion.img
@@ -325,7 +344,10 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
                 className="laptop-glow"
                 style={{ opacity: glowOpacity }}
                 aria-hidden
-              />
+              >
+                <span className="laptop-glow-halo" aria-hidden />
+                <span className="laptop-glow-core" aria-hidden />
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>
