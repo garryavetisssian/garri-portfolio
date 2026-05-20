@@ -98,9 +98,7 @@ export interface Dictionary {
     duration: string;
     team: string;
     year: string;
-    problem: string;
-    solution: string;
-    outcome: string;
+    brief: string;
     reflection: string;
     impact: string;
     nextProject: string;
@@ -296,9 +294,7 @@ const en: Dictionary = {
     duration: "Duration",
     team: "Team",
     year: "Year",
-    problem: "Problem",
-    solution: "Solution",
-    outcome: "Outcome",
+    brief: "Brief",
     reflection: "Reflection",
     impact: "Impact",
     nextProject: "Next project",
@@ -528,9 +524,7 @@ const ru: Dictionary = {
     duration: "Срок",
     team: "Команда",
     year: "Год",
-    problem: "Задача",
-    solution: "Решение",
-    outcome: "Результат",
+    brief: "Бриф",
     reflection: "Выводы",
     impact: "Результаты",
     nextProject: "Следующий проект",
@@ -759,9 +753,7 @@ const hy: Dictionary = {
     duration: "Տևողություն",
     team: "Թիմ",
     year: "Տարի",
-    problem: "Խնդիր",
-    solution: "Լուծում",
-    outcome: "Արդյունք",
+    brief: "Բրիֆ",
     reflection: "Եզրակացություններ",
     impact: "Արդյունքներ",
     nextProject: "Հաջորդ նախագիծ",

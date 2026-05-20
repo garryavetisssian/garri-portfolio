@@ -17,13 +17,37 @@ export const projects: CaseStudy[] = [
     team: "PM, 3 Engineers, Data Scientist",
     thumbnail: "/work/balvoi/hero.jpg",
     color: "#2563EB",
-    tldr: {
-      problem:
-        "Journalists spent 60% of their time on repetitive formatting and distribution tasks instead of reporting.",
-      solution:
-        "An AI-assisted editorial platform that automates content structuring, SEO optimization, and multi-channel publishing.",
-      outcome:
-        "Reduced content production time by 45% and increased article reach by 3x across distribution channels.",
+    brief: {
+      narrative:
+        "Twelve journalists, fourteen manual publishing steps, one editorial AI that learned to stop at every red light.",
+      tiles: [
+        { kind: "stat", value: "12", label: "User interviews", span: 3 },
+        { kind: "stat", value: "14", suffix: "→2", label: "Steps to publish", span: 3 },
+        {
+          kind: "quote",
+          text: "AI as copilot, not autopilot.",
+          cite: "Design principle 01",
+          span: 6,
+        },
+        {
+          kind: "label",
+          key: "Stack",
+          value: "Figma · GPT-4 · Dev Mode",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Methods",
+          items: [
+            "Contextual inquiry",
+            "Journey maps",
+            "Competitive audit",
+            "A/B testing",
+            "Trust calibration",
+          ],
+          span: 8,
+        },
+      ],
     },
     overview:
       "BalVoi is an AI journalism platform designed to augment — not replace — editorial workflows. The platform helps newsrooms produce higher-quality content faster by automating the mechanical parts of publishing while keeping editorial judgment in human hands.",
@@ -120,13 +144,31 @@ export const projects: CaseStudy[] = [
     team: "PM, 4 Engineers, Blockchain Dev",
     thumbnail: "/work/xygo/hero.jpg",
     color: "#8B5CF6",
-    tldr: {
-      problem:
-        "Web3 lottery platforms had poor UX, confusing wallet interactions, and zero trust signals for non-crypto-native users.",
-      solution:
-        "A lottery + NFT marketplace with progressive Web3 onboarding that hid blockchain complexity behind familiar e-commerce patterns.",
-      outcome:
-        "Achieved 12,000 registered users in first 3 months with a 68% non-crypto-native user ratio.",
+    brief: {
+      narrative:
+        "Two audiences. One product. The word “wallet” was the most expensive thing we removed.",
+      tiles: [
+        { kind: "stat", value: "2", label: "Audiences served", span: 3 },
+        { kind: "stat", value: "23", suffix: "%", label: "Lift from re-labelling CTA", span: 3 },
+        {
+          kind: "quote",
+          text: "Language design IS UX design.",
+          cite: "Lesson from launch",
+          span: 6,
+        },
+        {
+          kind: "label",
+          key: "Scale",
+          value: "Dual-track onboarding · custodial + on-chain",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "Surfaces",
+          items: ["Lottery", "Marketplace", "Wallet", "Live draw", "Tickets", "Profile"],
+          span: 6,
+        },
+      ],
     },
     overview:
       "XYGO is a Web3 lottery platform combined with an NFT marketplace. The core challenge was designing for two radically different audiences: crypto-native users who expect decentralization and transparency, and mainstream users who just want to buy a lottery ticket without understanding blockchain.",
@@ -221,13 +263,33 @@ export const projects: CaseStudy[] = [
     team: "PM, 2 Engineers",
     thumbnail: "/work/duck-master/hero.jpg",
     color: "#F59E0B",
-    tldr: {
-      problem:
-        "Telegram mini-games had high install rates but abysmal Day 7 retention due to shallow gameplay and no social hooks.",
-      solution:
-        "A casual game with progression mechanics, social leaderboards, and shareable moments designed into every session.",
-      outcome:
-        "Achieved 35% Day 7 retention vs. 12% category average, with 40% of new users coming from organic shares.",
+    brief: {
+      narrative:
+        "A casual game built around three nested engagement loops — seconds, minutes, days.",
+      tiles: [
+        { kind: "stat", value: "3", label: "Engagement loops", span: 3 },
+        { kind: "stat", value: "22", suffix: "%", label: "Share rate per session", span: 3 },
+        { kind: "stat", value: "35", suffix: "%", label: "Day 7 retention", span: 3 },
+        { kind: "stat", value: "4:12", label: "Avg session length", span: 3 },
+        {
+          kind: "quote",
+          text: "The share moment must be designed, not bolted on.",
+          cite: "Research finding",
+          span: 8,
+        },
+        {
+          kind: "label",
+          key: "Constraint",
+          value: "Telegram viewport · no push · in-chat attention",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Systems",
+          items: ["Streaks", "Leaderboards", "Cosmetics", "Haptics", "Share cards"],
+          span: 12,
+        },
+      ],
     },
     overview:
       "Duck Master is a casual game built as a Telegram Mini App. The design challenge was unique: create a game that's simple enough to play in a chat conversation, compelling enough to drive daily return, and social enough to spread organically through Telegram's network effects.",
@@ -307,13 +369,39 @@ export const projects: CaseStudy[] = [
     team: "PM, 3 Engineers, 1 Designer",
     thumbnail: "/cases/ineed/Cover.png",
     color: "#38BDF8",
-    tldr: {
-      problem:
-        "Users struggled to find reliable local service providers, and the existing solutions lacked trust signals and intuitive booking flows.",
-      solution:
-        "A two-sided mobile marketplace with separate apps for clients and professionals — verified profiles, streamlined booking, and seamless communication.",
-      outcome:
-        "Shaped the complete user experience across both client and professional apps, from initial concept through two major design iterations.",
+    brief: {
+      narrative:
+        "Two apps, one trust loop. Two design phases — first the concept, then everything refined.",
+      tiles: [
+        { kind: "stat", value: "2", label: "Native apps shipped", span: 3 },
+        { kind: "stat", value: "2", label: "Design iterations", span: 3 },
+        {
+          kind: "quote",
+          text: "Trust has to build on both sides simultaneously.",
+          cite: "Reflection from release",
+          span: 6,
+        },
+        {
+          kind: "label",
+          key: "Scope",
+          value: "Discovery · Booking · Profiles · Comms",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Surfaces",
+          items: [
+            "Onboarding",
+            "Search",
+            "Booking",
+            "Chat",
+            "Payment",
+            "Reviews",
+            "Pro dashboard",
+          ],
+          span: 8,
+        },
+      ],
     },
     overview:
       "Ineed is a two-sided service marketplace with dedicated mobile apps for clients and professionals. I shaped the user experience and interface design for both sides, taking the product through two distinct design phases — an initial concept and a polished release version.",
@@ -336,10 +424,30 @@ export const projects: CaseStudy[] = [
     team: "PM, 2 Engineers",
     thumbnail: "",
     color: "#F59E0B",
-    tldr: {
-      problem: "Teams wasted hours on repetitive tasks that could be automated with AI but lacked accessible tools.",
-      solution: "An AI productivity hub with automated workflows, smart suggestions, and team collaboration features.",
-      outcome: "Designed the full product experience from concept to high-fidelity UI with interactive prototypes.",
+    brief: {
+      narrative:
+        "A productivity hub where automation feels helpful — never autonomous.",
+      tiles: [
+        { kind: "stat", value: "4", suffix: "mo", label: "Concept → hi-fi", span: 3 },
+        {
+          kind: "label",
+          key: "Stage",
+          value: "Concept · Prototype",
+          span: 3,
+        },
+        {
+          kind: "quote",
+          text: "Helpful, not autonomous.",
+          cite: "Core design principle",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "Surfaces",
+          items: ["Workflows", "Suggestions", "Dashboard", "Collab", "Settings"],
+          span: 12,
+        },
+      ],
     },
     overview: "AI Hive is an AI-powered productivity platform designed to help teams automate repetitive workflows and focus on high-value work.",
     sections: [],
@@ -360,10 +468,30 @@ export const projects: CaseStudy[] = [
     team: "PM, 4 Engineers",
     thumbnail: "",
     color: "#EF4444",
-    tldr: {
-      problem: "Dispatchers relied on fragmented tools and manual coordination to manage fleet operations in real time.",
-      solution: "A unified dispatch dashboard with live map tracking, automated route optimization, and driver communication.",
-      outcome: "Designed an end-to-end logistics management interface handling real-time data at scale.",
+    brief: {
+      narrative:
+        "Real-time data without the firehose — information hierarchy as a UX problem.",
+      tiles: [
+        { kind: "stat", value: "1", label: "Unified ops surface", span: 3 },
+        {
+          kind: "label",
+          key: "Domain",
+          value: "Fleet · Dispatch · Live tracking",
+          span: 5,
+        },
+        {
+          kind: "quote",
+          text: "Operators need what matters now, not everything at once.",
+          cite: "Design principle",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Components",
+          items: ["Live map", "Route optimization", "Driver chat", "Alerts", "Cohort view"],
+          span: 12,
+        },
+      ],
     },
     overview: "Dispatch Center is a SaaS logistics platform that gives fleet managers a real-time view of their entire operation — vehicles, drivers, routes, and deliveries — in a single dashboard.",
     sections: [],
@@ -384,10 +512,30 @@ export const projects: CaseStudy[] = [
     team: "PM, 3 Engineers",
     thumbnail: "",
     color: "#8B5CF6",
-    tldr: {
-      problem: "Smart home apps were fragmented — users needed multiple apps to control different devices with no unified experience.",
-      solution: "A unified smart home management app with device control, automation rules, and real-time monitoring in one interface.",
-      outcome: "Designed the complete product UI with intuitive device management, room-based organization, and automation workflows.",
+    brief: {
+      narrative:
+        "Users think in rooms and routines. Devices and protocols come last.",
+      tiles: [
+        { kind: "stat", value: "1", label: "App replacing 5+", span: 3 },
+        {
+          kind: "label",
+          key: "Mental model",
+          value: "Rooms · Devices · Automations",
+          span: 5,
+        },
+        {
+          kind: "quote",
+          text: "The mental model isn’t devices — it’s rooms and routines.",
+          cite: "IA insight",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Screens",
+          items: ["Home", "Room", "Device", "Automation", "Energy", "Scenes"],
+          span: 12,
+        },
+      ],
     },
     overview: "NexWave is a smart home management app that gives users full control over their IoT devices, automation scenarios, and home monitoring from a single, intuitive interface.",
     sections: [],
@@ -408,10 +556,32 @@ export const projects: CaseStudy[] = [
     team: "Solo",
     thumbnail: "",
     color: "#00FF7F",
-    tldr: {
-      problem: "Gaming brand interfaces often sacrifice usability for aesthetics, creating flashy but frustrating experiences.",
-      solution: "A UI concept that balances gaming aesthetics with product design principles — bold but usable.",
-      outcome: "Created a design exploration showcasing how gaming brands can have both visual impact and functional clarity.",
+    brief: {
+      narrative:
+        "Two weeks. Solo. One question: can gaming look gaming without sacrificing readability?",
+      tiles: [
+        { kind: "stat", value: "2", suffix: "wk", label: "Sprint length", span: 3 },
+        { kind: "stat", value: "1", label: "Designer · solo", span: 3 },
+        {
+          kind: "quote",
+          text: "Gaming aesthetic ≠ unusable interface.",
+          cite: "Thesis",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "Exploration",
+          items: [
+            "Typography",
+            "Iconography",
+            "Density",
+            "Motion",
+            "Color systems",
+            "Hierarchy",
+          ],
+          span: 12,
+        },
+      ],
     },
     overview: "Razer UI is a personal design exploration — a concept project reimagining how a gaming hardware brand's digital experience could look if product design principles were applied to gaming aesthetics.",
     sections: [],

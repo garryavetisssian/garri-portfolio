@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
+import Brief from "./Brief";
 
 function VideoBlock({ src }: { src: string }) {
   const { t } = useLanguage();
@@ -278,42 +279,8 @@ export default function CaseStudyView({
         </div>
       </section>
 
-      {/* TLDR block — no generic heading, content carries the section */}
-      <section className="py-16 border-t border-line-strong">
-        <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-          <div className="flex items-baseline justify-between mb-8 mono">
-            <span className="text-ink-mute">— TL;DR</span>
-            <span className="text-ink-mute">{project.slug.toUpperCase()} / 00</span>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-px bg-line-strong hairline-t hairline-b">
-            {[
-              { label: t.caseStudy.problem, content: project.tldr.problem },
-              { label: t.caseStudy.solution, content: project.tldr.solution },
-              { label: t.caseStudy.outcome, content: project.tldr.outcome },
-            ].map((b, i) => (
-              <div key={b.label} className="bg-paper p-7">
-                <div className="flex items-center gap-2 mb-4">
-                  <span
-                    className="text-acid"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontWeight: 700,
-                      fontSize: "1.75rem",
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="mono text-ink-mute">/ {b.label}</span>
-                </div>
-                <p className="prose-brut text-ink text-[16px] leading-[1.5]">{b.content}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
+      <Brief brief={project.brief} slug={project.slug} />
 
       {/* Overview */}
       <section className="py-16 border-t border-line-strong">

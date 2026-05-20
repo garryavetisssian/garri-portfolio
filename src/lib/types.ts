@@ -22,10 +22,39 @@ export interface ProjectMeta {
   color: string; // accent color for this project
 }
 
-export interface CaseStudyTLDR {
-  problem: string;
-  solution: string;
-  outcome: string;
+/* Per-case "Brief" — replaces the generic TL;DR strip.
+   Bespoke content per case: short narrative line + a mixed grid of tiles. */
+export type BriefTile =
+  | {
+      kind: "stat";
+      value: string;
+      label: string;
+      prefix?: string;
+      suffix?: string;
+      span?: number;
+    }
+  | {
+      kind: "label";
+      key: string;
+      value: string;
+      span?: number;
+    }
+  | {
+      kind: "quote";
+      text: string;
+      cite?: string;
+      span?: number;
+    }
+  | {
+      kind: "tags";
+      label: string;
+      items: string[];
+      span?: number;
+    };
+
+export interface CaseBrief {
+  narrative: string; // one-or-two-sentence story-in-a-breath
+  tiles: BriefTile[]; // 3-6 tiles, authored per case
 }
 
 export interface CaseStudySection {
@@ -37,7 +66,7 @@ export interface CaseStudySection {
 }
 
 export interface CaseStudy extends ProjectMeta {
-  tldr: CaseStudyTLDR;
+  brief: CaseBrief;
   overview: string;
   sections: CaseStudySection[];
   metrics?: { label: string; value: string; prefix?: string; suffix?: string }[];
