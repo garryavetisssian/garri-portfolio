@@ -8,35 +8,84 @@ import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import Brief from "./Brief";
 import LaptopReveal from "./LaptopReveal";
 
+// Module-level flag: true once the user has interacted with the page
+// (pointerdown / keydown). Browsers require a real user gesture before they
+// allow programmatic unmuting; before that, an attempt would pause the video.
+// Shared across every VideoBlock so unmuting one video "unlocks" the rest.
+let pageHasUserGesture = false;
+const gestureSubscribers = new Set<() => void>();
+
+if (typeof window !== "undefined") {
+  const onGesture = () => {
+    if (pageHasUserGesture) return;
+    pageHasUserGesture = true;
+    gestureSubscribers.forEach((cb) => cb());
+    gestureSubscribers.clear();
+    window.removeEventListener("pointerdown", onGesture);
+    window.removeEventListener("keydown", onGesture);
+    window.removeEventListener("touchstart", onGesture);
+  };
+  window.addEventListener("pointerdown", onGesture, { passive: true });
+  window.addEventListener("keydown", onGesture, { passive: true });
+  window.addEventListener("touchstart", onGesture, { passive: true });
+}
+
 function VideoBlock({ src }: { src: string }) {
   const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const [inView, setInView] = useState(false);
+  // Tracks whether the video is *currently* focal (≥60% visible). When the
+  // user gesture unlock arrives later, we use this to unmute videos that are
+  // already in view.
+  const focalRef = useRef(false);
 
-  // Play / pause as the video enters / leaves the viewport
+  // Play / pause + auto mute / unmute as the video enters / leaves the
+  // viewport.
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const visible = entry.isIntersecting && entry.intersectionRatio >= 0.4;
-        setInView(visible);
-        if (visible) {
+        const ratio = entry.intersectionRatio;
+        const focal = entry.isIntersecting && ratio >= 0.6;
+        focalRef.current = focal;
+        setInView(focal);
+
+        if (focal) {
           // play() can reject with NotAllowedError if browser blocks it
           el.play().catch(() => {
             /* swallow; user can interact to retry */
           });
+          // Auto-unmute only after a real user gesture exists for the page.
+          if (pageHasUserGesture) setMuted(false);
         } else {
           el.pause();
+          // Always mute when leaving the focal area so audio doesn't bleed
+          // into adjacent sections / videos.
+          setMuted(true);
         }
       },
-      { threshold: [0, 0.4, 0.8] }
+      { threshold: [0, 0.3, 0.6, 0.9] }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  // If the user hasn't gestured yet when this video first becomes focal, the
+  // muted state stays true. Subscribe so we can unmute the moment the gesture
+  // arrives if we're still the focal video.
+  useEffect(() => {
+    if (pageHasUserGesture) return;
+    const cb = () => {
+      if (focalRef.current) setMuted(false);
+    };
+    gestureSubscribers.add(cb);
+    return () => {
+      gestureSubscribers.delete(cb);
+    };
   }, []);
 
   // Push the muted state to the element imperatively so toggling
@@ -57,10 +106,15 @@ function VideoBlock({ src }: { src: string }) {
         className="block w-full h-auto"
       />
 
-      {/* Mute / unmute toggle */}
+      {/* Mute / unmute toggle — also acts as the first user gesture if the
+          user hasn't interacted with the page yet, letting auto-unmute work
+          for subsequent videos. */}
       <button
         type="button"
-        onClick={() => setMuted((m) => !m)}
+        onClick={() => {
+          pageHasUserGesture = true;
+          setMuted((m) => !m);
+        }}
         aria-label={muted ? t.caseStudy.soundOffAria : t.caseStudy.soundOnAria}
         className="absolute bottom-4 right-4 mono flex items-center gap-2 px-3 py-2 bg-paper/85 backdrop-blur-sm text-ink border border-line-strong hover:border-acid hover:text-acid transition-colors"
       >
