@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 60px; align-items: center; }
+  .three-up {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .three-up .phone { width: 100%; }
+  .step-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bv-blue);
+    margin-bottom: 10px;
+  }
+  .progress-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 24px;
+  }
+  .progress-cell {
+    width: 24px;
+    height: 6px;
+    border-radius: 2px;
+    background: rgba(255, 209, 43, 0.12);
+  }
+  .progress-cell.on { background: var(--bv-blue); }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 12 / Onboarding</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 12 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div>
+      <span class="eyebrow">— 25 steps</span>
+      <h1 class="headline">A guided<br/><em>25-step</em><br/>tour.</h1>
+      <p class="caption">
+        Duck Master is dense. The onboarding teaches every system one beat
+        at a time — career → cards → market → safes → raids → friends —
+        before the player ever sees the full UI uncluttered.
+      </p>
+      <p class="kicker" style="margin-top: 14px;">— 25 steps · 8 guide slides · 4 contextual modals</p>
+      <div class="progress-row">
+        <span class="progress-cell on"></span><span class="progress-cell on"></span><span class="progress-cell on"></span>
+        <span class="progress-cell on"></span><span class="progress-cell on"></span><span class="progress-cell on"></span>
+        <span class="progress-cell on"></span><span class="progress-cell on"></span><span class="progress-cell on"></span>
+        <span class="progress-cell on"></span><span class="progress-cell on"></span><span class="progress-cell on"></span>
+        <span class="progress-cell"></span><span class="progress-cell"></span><span class="progress-cell"></span>
+        <span class="progress-cell"></span><span class="progress-cell"></span><span class="progress-cell"></span>
+        <span class="progress-cell"></span><span class="progress-cell"></span><span class="progress-cell"></span>
+        <span class="progress-cell"></span><span class="progress-cell"></span><span class="progress-cell"></span>
+        <span class="progress-cell"></span>
+      </div>
+    </div>
+
+    <div class="three-up">
+      <div>
+        <div class="step-label">— Slide 1</div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="_assets/11001-25494.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="step-label">— Slide 2</div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="_assets/11001-25559.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="step-label">— Step 5</div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="_assets/13164-76759.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Onboarding</span>
+    <span>— 25 steps to mastery</span>
+  </div>
+</div></body></html>

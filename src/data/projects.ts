@@ -5,6 +5,351 @@ import type { CaseStudy } from "@/lib/types";
 // Replace placeholder content with real project details.
 
 export const projects: CaseStudy[] = [
+  // ── Razer UI ────────────────────────────────────────────────────
+  {
+    slug: "razer-ui",
+    title: "Razer UI",
+    subtitle: "UI concept and design exploration for a gaming hardware brand's digital product experience",
+    category: "Experimental",
+    year: "2022",
+    role: "UI Designer",
+    duration: "2 weeks",
+    team: "Solo",
+    thumbnail: "",
+    color: "#44D62C",
+    brief: {
+      narrative:
+        "A two-week solo design exploration asking a simple question: can a gaming brand's UI feel unmistakably gaming and still be clean, fast, and easy to read?",
+      tiles: [
+        { kind: "stat", value: "2", suffix: " weeks", label: "Project length", span: 3 },
+        { kind: "stat", value: "1", label: "Designer (solo project)", span: 3 },
+        {
+          kind: "quote",
+          text: "Gaming aesthetics shouldn't get in the way of using the product.",
+          cite: "Project thesis",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "What I explored",
+          items: [
+            "Typography",
+            "Custom iconography",
+            "Information density",
+            "Motion design",
+            "Color systems",
+            "Visual hierarchy",
+          ],
+          span: 12,
+        },
+      ],
+    },
+    overview: "Razer UI is a personal design exploration — a concept project reimagining how a gaming hardware brand's digital experience could look if product design principles were applied to gaming aesthetics.",
+    sections: [],
+    metrics: [],
+    reflection: "Side projects like this let me push visual boundaries I can't always explore in client work. The constraint was to make it look 'gaming' without sacrificing readability.",
+    nextProject: "balvoi",
+  },
+
+  // ── Ineed ───────────────────────────────────────────────────────
+  {
+    slug: "ineed",
+    title: "Ineed",
+    subtitle: "Two-sided mobile platform connecting clients with local professionals — separate apps for each side",
+    category: ["Marketplace", "Mobile", "SaaS"],
+    year: "2022 - 2024",
+    role: "Product Designer",
+    duration: "2 years",
+    team: "PM, 3 Engineers, 1 Designer",
+    thumbnail: "/cases/ineed/Cover.png",
+    color: "#C44545",
+    brief: {
+      narrative:
+        "A two-sided service marketplace with separate mobile apps for clients and professionals. I designed it end-to-end through two full iterations — the initial concept, then the polished release.",
+      tiles: [
+        { kind: "stat", value: "2", label: "Native apps (client + pro)", span: 3 },
+        { kind: "stat", value: "2", label: "Full design iterations", span: 3 },
+        {
+          kind: "quote",
+          text: "A marketplace works only when both sides trust it equally.",
+          cite: "Reflection after release",
+          span: 6,
+        },
+        {
+          kind: "label",
+          key: "Product scope",
+          value: "Search · Booking · Profiles · Messaging · Payments",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Main flows designed",
+          items: [
+            "Onboarding",
+            "Search & filters",
+            "Booking",
+            "Chat",
+            "Payment",
+            "Reviews",
+            "Pro dashboard",
+          ],
+          span: 8,
+        },
+      ],
+    },
+    overview:
+      "Ineed is a two-sided service marketplace with dedicated mobile apps for clients and professionals. I shaped the user experience and interface design for both sides, taking the product through two distinct design phases — an initial concept and a polished release version.",
+    sections: [],
+    metrics: [],
+    reflection:
+      "This project taught me the value of iteration at scale. The first version established the core flows, but the release version refined every interaction based on real user feedback. The biggest lesson was that a marketplace needs to build trust on both sides simultaneously — users need to trust providers, and providers need to trust the platform.",
+    nextProject: "aihive",
+  },
+
+  // ── AI Hive ─────────────────────────────────────────────────────
+  {
+    slug: "aihive",
+    title: "AI Hive",
+    subtitle: "AI-powered productivity platform that streamlines team workflows with intelligent automation",
+    category: ["AI", "SaaS"],
+    year: "2023",
+    role: "Product Designer",
+    duration: "4 months",
+    team: "PM, 2 Engineers",
+    thumbnail: "",
+    color: "#22C9A0",
+    brief: {
+      narrative:
+        "An AI productivity platform that helps teams automate routine work — while keeping people in charge of every decision the AI suggests.",
+      tiles: [
+        { kind: "stat", value: "4", suffix: " months", label: "From concept to hi-fi UI", span: 3 },
+        {
+          kind: "label",
+          key: "Project stage",
+          value: "Concept · Interactive prototype",
+          span: 3,
+        },
+        {
+          kind: "quote",
+          text: "AI should be helpful, never autonomous.",
+          cite: "Core design principle",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "What I designed",
+          items: ["Automated workflows", "Smart suggestions", "Team dashboard", "Collaboration", "Settings"],
+          span: 12,
+        },
+      ],
+    },
+    overview: "AI Hive is an AI-powered productivity platform designed to help teams automate repetitive workflows and focus on high-value work.",
+    sections: [],
+    metrics: [],
+    reflection: "Designing for AI-augmented workflows requires balancing automation with user control — the product needs to feel helpful, not autonomous.",
+    nextProject: "dispatch-center",
+  },
+
+  // ── Dispatch Center ─────────────────────────────────────────────
+  {
+    slug: "dispatch-center",
+    title: "Dispatch Center",
+    subtitle: "Real-time logistics dashboard for managing fleet operations, dispatching, and delivery tracking",
+    category: ["SaaS", "Mobile", "Logistics"],
+    year: "2023 - 2024",
+    role: "Product Designer",
+    duration: "3 months",
+    team: "PM, 4 Engineers",
+    thumbnail: "",
+    color: "#3D6FA8",
+    brief: {
+      narrative:
+        "A real-time logistics dashboard for fleet operators. Live vehicle tracking, automated routing, and driver chat — all in one screen, organized around what the dispatcher needs to act on right now.",
+      tiles: [
+        { kind: "stat", value: "1", label: "Dashboard replacing 4+ tools", span: 3 },
+        {
+          kind: "label",
+          key: "Domain",
+          value: "Fleet management · Dispatching · Live tracking",
+          span: 5,
+        },
+        {
+          kind: "quote",
+          text: "Show what needs action now — not everything that could ever matter.",
+          cite: "Design principle",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Key components designed",
+          items: ["Live map", "Route optimization", "Driver chat", "Real-time alerts", "Trip history"],
+          span: 12,
+        },
+      ],
+    },
+    overview: "Dispatch Center is a SaaS logistics platform that gives fleet managers a real-time view of their entire operation — vehicles, drivers, routes, and deliveries — in a single dashboard.",
+    sections: [],
+    metrics: [],
+    reflection: "Designing for real-time data taught me that information hierarchy is everything — operators need to see what matters now, not everything at once.",
+    nextProject: "nexwave",
+  },
+
+  // ── NexWave ─────────────────────────────────────────────────────
+  {
+    slug: "nexwave",
+    title: "NexWave",
+    subtitle: "Smart home management app for controlling IoT devices, automation, and monitoring",
+    category: ["SaaS", "Mobile"],
+    year: "2024",
+    role: "Product Designer",
+    duration: "3 months",
+    team: "PM, 3 Engineers",
+    thumbnail: "",
+    color: "#5BB5C9",
+    brief: {
+      narrative:
+        "A single smart home app that replaces the half-dozen device-specific apps people usually juggle — organized around how users actually think: by rooms and routines, not brands or protocols.",
+      tiles: [
+        { kind: "stat", value: "1", label: "App replacing 5+ device apps", span: 3 },
+        {
+          kind: "label",
+          key: "How the app is organized",
+          value: "Rooms · Devices · Automations",
+          span: 5,
+        },
+        {
+          kind: "quote",
+          text: "People don't think in devices — they think in rooms and daily routines.",
+          cite: "Research insight",
+          span: 4,
+        },
+        {
+          kind: "tags",
+          label: "Main screens",
+          items: ["Home overview", "Room view", "Device control", "Automations", "Energy use", "Scenes"],
+          span: 12,
+        },
+      ],
+    },
+    overview: "NexWave is a smart home management app that gives users full control over their IoT devices, automation scenarios, and home monitoring from a single, intuitive interface.",
+    sections: [],
+    metrics: [],
+    reflection: "Designing for IoT taught me that the challenge isn't the interface — it's the mental model. Users think in rooms and routines, not devices and protocols. The design had to bridge that gap.",
+    nextProject: "razer-ui",
+  },
+
+  // ── Duck Master ──────────────────────────────────────────────────
+  {
+    slug: "duck-master",
+    title: "Duck Master",
+    subtitle: "Viral Telegram mini-game designed for engagement loops and social sharing",
+    category: ["Mobile", "Experimental"],
+    year: "2024 - 2025",
+    role: "Product Designer",
+    duration: "3 months",
+    team: "PM, 2 Engineers",
+    thumbnail: "/cases/duck-master/Cover.png",
+    color: "#FFD12B",
+    brief: {
+      narrative:
+        "A Telegram trading-game hybrid built around one duck mascot. I led the product design AND ran the AI pipeline that generated 300+ on-model character cards, scene art, and game assets across 347 screens.",
+      tiles: [
+        { kind: "stat", value: "347", label: "Frames across the design system", span: 3 },
+        { kind: "stat", value: "300", suffix: "+", label: "AI-generated game assets", span: 3 },
+        { kind: "stat", value: "25", label: "Onboarding steps", span: 3 },
+        {
+          kind: "quote",
+          text: "One duck, one universe — every variant had to read as the same character.",
+          cite: "Brand brief",
+          span: 6,
+        },
+        {
+          kind: "label",
+          key: "Product surfaces",
+          value: "Career · Cards · Stock Market · Mini-games · Shop · Social",
+          span: 6,
+        },
+        {
+          kind: "tags",
+          label: "What I owned",
+          items: [
+            "AI asset generation",
+            "Character & card art",
+            "Game UI design",
+            "Onboarding system",
+            "Economy design",
+            "Mobile component library",
+          ],
+          span: 6,
+        },
+      ],
+    },
+    overview:
+      "Duck Master is a Telegram mini-app that fuses a stock-market trading loop, card collection, PvP attacks, mini-games, and weekly leaderboards — all anchored to a single anthropomorphic duck mascot. Beyond leading product design across 347 frames and a 25-step onboarding, my main contribution was building the AI asset pipeline: prompt libraries, base-image conditioning, hand-curated seeds, and production polish that turned every new game system into shippable character art in days, not months. The same duck appears in 300+ contexts — sailor, taxi driver, trader, dealer, raid target — and the silhouette, eye, beak, and proportions read as one character every single time.",
+    sections: [
+      {
+        id: "problem",
+        title: "The Problem",
+        content:
+          "Telegram Mini Apps were booming as a distribution platform, but retention was terrible. Most mini-games were simple tap-to-earn mechanics with no depth. Users played once, got bored, and never returned.\n\nThe business model depended on daily active users (for in-app ads and premium items), so retention was the core design challenge — not acquisition.",
+      },
+      {
+        id: "goals",
+        title: "Business Goals",
+        content:
+          "**Primary goals:**\n- Achieve 25%+ Day 7 retention (vs. 12% category average)\n- Drive 30%+ organic acquisition through social sharing\n- Average session length of 3+ minutes\n- Build sustainable monetization through cosmetics and power-ups (no pay-to-win)",
+      },
+      {
+        id: "research",
+        title: "Research & Discovery",
+        content:
+          "**Competitive teardown:** Analyzed 15 Telegram mini-games, mapping their retention mechanics, monetization, and social features. Found that games with leaderboards had 2x better retention than those without.\n\n**Player psychology research:** Studied Bartle's player types and Nir Eyal's Hook Model to design engagement loops. Identified that Telegram's user base skews toward Socializers and Achievers.\n\n**Platform constraints:** Telegram Mini Apps have significant technical constraints — limited viewport, no push notifications (only in-chat messages), and shared attention with the chat interface.",
+        images: ["/work/duck-master/research-competitive.jpg"],
+      },
+      {
+        id: "insights",
+        title: "Key Insights",
+        content:
+          "**Insight 1:** The share moment must be designed, not bolted on. Games that prompt \"Share your score\" after losing get ignored. Games that create naturally shareable moments (achievements, rare drops, funny outcomes) get shared organically.\n\n**Insight 2:** Session length in Telegram is constrained by context — users are mid-conversation. Design for 2–5 minute sessions with clear stopping points and reasons to return.\n\n**Insight 3:** Progression visibility is everything. Users need to see exactly what they'll unlock next. A visible progress bar to the next reward increases session time by 40% (based on A/B test data from similar games).",
+      },
+      {
+        id: "strategy",
+        title: "UX Strategy",
+        content:
+          "I designed the game around a triple-loop engagement model:\n\n**Core loop (seconds):** Tap → Score → Feedback. Instantly satisfying.\n\n**Session loop (minutes):** Play round → Earn coins → Unlock cosmetic → Play again with new look. 3–5 minute sessions.\n\n**Social loop (days):** Compete on weekly leaderboard → Share achievement → Friend joins → Both get bonus. Drives return and acquisition.\n\nEvery design decision was evaluated against: does this serve one of the three loops?",
+        images: ["/work/duck-master/strategy-loops.jpg"],
+      },
+      {
+        id: "ui-design",
+        title: "UI Design & Visual System",
+        content:
+          "The visual design balanced playfulness with clarity:\n\n- **Bold, saturated colors** — Stand out in the Telegram chat environment (which is relatively muted).\n- **Oversized touch targets** — Minimum 48px, with most interactive elements at 56px+. Designed for one-thumb play.\n- **Character system** — 20+ duck variants as collectible cosmetics. Each with distinct personality to encourage collection.\n- **Minimal UI during gameplay** — Only score and combo counter visible. Everything else slides away to maximize play area.",
+        images: ["/work/duck-master/ui-game.jpg", "/work/duck-master/ui-shop.jpg", "/work/duck-master/ui-leaderboard.jpg"],
+      },
+      {
+        id: "interactions",
+        title: "Interaction Design",
+        content:
+          "**Haptic feedback:** Every successful action triggers a subtle vibration pattern. Combos escalate the haptic intensity.\n\n**Score celebration:** High scores trigger a full-screen particle effect with a auto-generated share card showing the score, duck character, and leaderboard position.\n\n**Streak system:** Daily login streaks with visible rewards. Missing a day doesn't reset the streak — it pauses it. This reduces punishment anxiety while maintaining the return incentive.",
+      },
+      {
+        id: "testing",
+        title: "Testing & Iteration",
+        content:
+          "**Soft launch (500 users):** Tracked session length, D1/D3/D7 retention, and share rates. Initial D7 was 18% — already above average but below target.\n\n**Key iteration:** Added the weekly leaderboard reset. Before: top players dominated permanently, new players felt they couldn't compete. After: weekly resets gave everyone a fresh start. D7 retention jumped to 28%.\n\n**Second iteration:** Made share cards visual (duck character + score + rank) instead of text-only. Share rate increased from 8% to 22% of sessions.",
+      },
+    ],
+    metrics: [
+      { label: "Frames designed", value: "347" },
+      { label: "AI-generated assets", value: "300", suffix: "+" },
+      { label: "Onboarding steps", value: "25" },
+      { label: "Product surfaces", value: "6" },
+    ],
+    reflection:
+      "Duck Master was where I learned that designing for AI-asset-heavy products is a different discipline. The hard part isn't generating images — it's generating the SAME character across hundreds of contexts when the model wants to drift on every prompt. I built a workflow around a locked anatomy brief, a prompt-template library, base-image conditioning, and a brutal curation pass. Every shipped card was one of 8–16 candidates.\n\nWhat I'd change next time: invest in the curation tooling itself. By the end I was scoring candidates in spreadsheets, which is fine for a dozen cards and unbearable for hundreds. A lightweight web tool with side-by-side comparisons and silhouette overlays would have saved weeks.",
+    nextProject: "ineed",
+  },
+
   // ── BalVoi ────────────────────────────────────────────────────────
   {
     slug: "balvoi",
@@ -252,344 +597,6 @@ export const projects: CaseStudy[] = [
     nextProject: "duck-master",
   },
 
-  // ── Duck Master ──────────────────────────────────────────────────
-  {
-    slug: "duck-master",
-    title: "Duck Master",
-    subtitle: "Viral Telegram mini-game designed for engagement loops and social sharing",
-    category: ["Mobile", "Experimental"],
-    year: "2024 - 2025",
-    role: "Product Designer",
-    duration: "3 months",
-    team: "PM, 2 Engineers",
-    thumbnail: "/work/duck-master/hero.jpg",
-    color: "#F59E0B",
-    brief: {
-      narrative:
-        "A casual Telegram mini-game designed to bring people back daily and pull their friends in — through quick play, weekly leaderboards, and share-worthy moments.",
-      tiles: [
-        { kind: "stat", value: "35", suffix: "%", label: "Day 7 retention (3x category avg)", span: 3 },
-        { kind: "stat", value: "22", suffix: "%", label: "Sessions that end in a share", span: 3 },
-        { kind: "stat", value: "40", suffix: "%", label: "New players from organic shares", span: 3 },
-        { kind: "stat", value: "4:12", label: "Average session length", span: 3 },
-        {
-          kind: "quote",
-          text: "Share moments should feel natural — not like the game asking you for a favor.",
-          cite: "Research insight",
-          span: 8,
-        },
-        {
-          kind: "label",
-          key: "Platform limits",
-          value: "Telegram chat viewport · no push notifications",
-          span: 4,
-        },
-        {
-          kind: "tags",
-          label: "What I designed",
-          items: ["Daily streaks", "Leaderboards", "Collectible skins", "Haptic feedback", "Share cards"],
-          span: 12,
-        },
-      ],
-    },
-    overview:
-      "Duck Master is a casual game built as a Telegram Mini App. The design challenge was unique: create a game that's simple enough to play in a chat conversation, compelling enough to drive daily return, and social enough to spread organically through Telegram's network effects.",
-    sections: [
-      {
-        id: "problem",
-        title: "The Problem",
-        content:
-          "Telegram Mini Apps were booming as a distribution platform, but retention was terrible. Most mini-games were simple tap-to-earn mechanics with no depth. Users played once, got bored, and never returned.\n\nThe business model depended on daily active users (for in-app ads and premium items), so retention was the core design challenge — not acquisition.",
-      },
-      {
-        id: "goals",
-        title: "Business Goals",
-        content:
-          "**Primary goals:**\n- Achieve 25%+ Day 7 retention (vs. 12% category average)\n- Drive 30%+ organic acquisition through social sharing\n- Average session length of 3+ minutes\n- Build sustainable monetization through cosmetics and power-ups (no pay-to-win)",
-      },
-      {
-        id: "research",
-        title: "Research & Discovery",
-        content:
-          "**Competitive teardown:** Analyzed 15 Telegram mini-games, mapping their retention mechanics, monetization, and social features. Found that games with leaderboards had 2x better retention than those without.\n\n**Player psychology research:** Studied Bartle's player types and Nir Eyal's Hook Model to design engagement loops. Identified that Telegram's user base skews toward Socializers and Achievers.\n\n**Platform constraints:** Telegram Mini Apps have significant technical constraints — limited viewport, no push notifications (only in-chat messages), and shared attention with the chat interface.",
-        images: ["/work/duck-master/research-competitive.jpg"],
-      },
-      {
-        id: "insights",
-        title: "Key Insights",
-        content:
-          "**Insight 1:** The share moment must be designed, not bolted on. Games that prompt \"Share your score\" after losing get ignored. Games that create naturally shareable moments (achievements, rare drops, funny outcomes) get shared organically.\n\n**Insight 2:** Session length in Telegram is constrained by context — users are mid-conversation. Design for 2–5 minute sessions with clear stopping points and reasons to return.\n\n**Insight 3:** Progression visibility is everything. Users need to see exactly what they'll unlock next. A visible progress bar to the next reward increases session time by 40% (based on A/B test data from similar games).",
-      },
-      {
-        id: "strategy",
-        title: "UX Strategy",
-        content:
-          "I designed the game around a triple-loop engagement model:\n\n**Core loop (seconds):** Tap → Score → Feedback. Instantly satisfying.\n\n**Session loop (minutes):** Play round → Earn coins → Unlock cosmetic → Play again with new look. 3–5 minute sessions.\n\n**Social loop (days):** Compete on weekly leaderboard → Share achievement → Friend joins → Both get bonus. Drives return and acquisition.\n\nEvery design decision was evaluated against: does this serve one of the three loops?",
-        images: ["/work/duck-master/strategy-loops.jpg"],
-      },
-      {
-        id: "ui-design",
-        title: "UI Design & Visual System",
-        content:
-          "The visual design balanced playfulness with clarity:\n\n- **Bold, saturated colors** — Stand out in the Telegram chat environment (which is relatively muted).\n- **Oversized touch targets** — Minimum 48px, with most interactive elements at 56px+. Designed for one-thumb play.\n- **Character system** — 20+ duck variants as collectible cosmetics. Each with distinct personality to encourage collection.\n- **Minimal UI during gameplay** — Only score and combo counter visible. Everything else slides away to maximize play area.",
-        images: ["/work/duck-master/ui-game.jpg", "/work/duck-master/ui-shop.jpg", "/work/duck-master/ui-leaderboard.jpg"],
-      },
-      {
-        id: "interactions",
-        title: "Interaction Design",
-        content:
-          "**Haptic feedback:** Every successful action triggers a subtle vibration pattern. Combos escalate the haptic intensity.\n\n**Score celebration:** High scores trigger a full-screen particle effect with a auto-generated share card showing the score, duck character, and leaderboard position.\n\n**Streak system:** Daily login streaks with visible rewards. Missing a day doesn't reset the streak — it pauses it. This reduces punishment anxiety while maintaining the return incentive.",
-      },
-      {
-        id: "testing",
-        title: "Testing & Iteration",
-        content:
-          "**Soft launch (500 users):** Tracked session length, D1/D3/D7 retention, and share rates. Initial D7 was 18% — already above average but below target.\n\n**Key iteration:** Added the weekly leaderboard reset. Before: top players dominated permanently, new players felt they couldn't compete. After: weekly resets gave everyone a fresh start. D7 retention jumped to 28%.\n\n**Second iteration:** Made share cards visual (duck character + score + rank) instead of text-only. Share rate increased from 8% to 22% of sessions.",
-      },
-    ],
-    metrics: [
-      { label: "Day 7 retention", value: "35", suffix: "%" },
-      { label: "Organic acquisition", value: "40", suffix: "%" },
-      { label: "Average session length", value: "4:12" },
-      { label: "Share rate per session", value: "22", suffix: "%" },
-    ],
-    reflection:
-      "Duck Master taught me that product design and game design share more DNA than either discipline usually admits. The engagement loops, feedback systems, and progression mechanics I designed here are directly applicable to SaaS onboarding, marketplace activation, and any product that needs to build habits.\n\nWhat I'd change: I'd build an analytics dashboard for myself earlier. For the first month, I was making decisions based on aggregate metrics when I needed cohort analysis. Understanding how different player segments (casual vs. competitive) behaved differently would have let me personalize the experience sooner.",
-    nextProject: "ineed",
-  },
-
-  // ── Ineed ───────────────────────────────────────────────────────
-  {
-    slug: "ineed",
-    title: "Ineed",
-    subtitle: "Two-sided mobile platform connecting clients with local professionals — separate apps for each side",
-    category: ["Marketplace", "Mobile", "SaaS"],
-    year: "2022 - 2024",
-    role: "Product Designer",
-    duration: "2 years",
-    team: "PM, 3 Engineers, 1 Designer",
-    thumbnail: "/cases/ineed/Cover.png",
-    color: "#C44545",
-    brief: {
-      narrative:
-        "A two-sided service marketplace with separate mobile apps for clients and professionals. I designed it end-to-end through two full iterations — the initial concept, then the polished release.",
-      tiles: [
-        { kind: "stat", value: "2", label: "Native apps (client + pro)", span: 3 },
-        { kind: "stat", value: "2", label: "Full design iterations", span: 3 },
-        {
-          kind: "quote",
-          text: "A marketplace works only when both sides trust it equally.",
-          cite: "Reflection after release",
-          span: 6,
-        },
-        {
-          kind: "label",
-          key: "Product scope",
-          value: "Search · Booking · Profiles · Messaging · Payments",
-          span: 4,
-        },
-        {
-          kind: "tags",
-          label: "Main flows designed",
-          items: [
-            "Onboarding",
-            "Search & filters",
-            "Booking",
-            "Chat",
-            "Payment",
-            "Reviews",
-            "Pro dashboard",
-          ],
-          span: 8,
-        },
-      ],
-    },
-    overview:
-      "Ineed is a two-sided service marketplace with dedicated mobile apps for clients and professionals. I shaped the user experience and interface design for both sides, taking the product through two distinct design phases — an initial concept and a polished release version.",
-    sections: [],
-    metrics: [],
-    reflection:
-      "This project taught me the value of iteration at scale. The first version established the core flows, but the release version refined every interaction based on real user feedback. The biggest lesson was that a marketplace needs to build trust on both sides simultaneously — users need to trust providers, and providers need to trust the platform.",
-    nextProject: "aihive",
-  },
-
-  // ── AI Hive ─────────────────────────────────────────────────────
-  {
-    slug: "aihive",
-    title: "AI Hive",
-    subtitle: "AI-powered productivity platform that streamlines team workflows with intelligent automation",
-    category: ["AI", "SaaS"],
-    year: "2023",
-    role: "Product Designer",
-    duration: "4 months",
-    team: "PM, 2 Engineers",
-    thumbnail: "",
-    color: "#22C9A0",
-    brief: {
-      narrative:
-        "An AI productivity platform that helps teams automate routine work — while keeping people in charge of every decision the AI suggests.",
-      tiles: [
-        { kind: "stat", value: "4", suffix: " months", label: "From concept to hi-fi UI", span: 3 },
-        {
-          kind: "label",
-          key: "Project stage",
-          value: "Concept · Interactive prototype",
-          span: 3,
-        },
-        {
-          kind: "quote",
-          text: "AI should be helpful, never autonomous.",
-          cite: "Core design principle",
-          span: 6,
-        },
-        {
-          kind: "tags",
-          label: "What I designed",
-          items: ["Automated workflows", "Smart suggestions", "Team dashboard", "Collaboration", "Settings"],
-          span: 12,
-        },
-      ],
-    },
-    overview: "AI Hive is an AI-powered productivity platform designed to help teams automate repetitive workflows and focus on high-value work.",
-    sections: [],
-    metrics: [],
-    reflection: "Designing for AI-augmented workflows requires balancing automation with user control — the product needs to feel helpful, not autonomous.",
-    nextProject: "dispatch-center",
-  },
-
-  // ── Dispatch Center ─────────────────────────────────────────────
-  {
-    slug: "dispatch-center",
-    title: "Dispatch Center",
-    subtitle: "Real-time logistics dashboard for managing fleet operations, dispatching, and delivery tracking",
-    category: ["SaaS", "Mobile", "Logistics"],
-    year: "2023 - 2024",
-    role: "Product Designer",
-    duration: "3 months",
-    team: "PM, 4 Engineers",
-    thumbnail: "",
-    color: "#3D6FA8",
-    brief: {
-      narrative:
-        "A real-time logistics dashboard for fleet operators. Live vehicle tracking, automated routing, and driver chat — all in one screen, organized around what the dispatcher needs to act on right now.",
-      tiles: [
-        { kind: "stat", value: "1", label: "Dashboard replacing 4+ tools", span: 3 },
-        {
-          kind: "label",
-          key: "Domain",
-          value: "Fleet management · Dispatching · Live tracking",
-          span: 5,
-        },
-        {
-          kind: "quote",
-          text: "Show what needs action now — not everything that could ever matter.",
-          cite: "Design principle",
-          span: 4,
-        },
-        {
-          kind: "tags",
-          label: "Key components designed",
-          items: ["Live map", "Route optimization", "Driver chat", "Real-time alerts", "Trip history"],
-          span: 12,
-        },
-      ],
-    },
-    overview: "Dispatch Center is a SaaS logistics platform that gives fleet managers a real-time view of their entire operation — vehicles, drivers, routes, and deliveries — in a single dashboard.",
-    sections: [],
-    metrics: [],
-    reflection: "Designing for real-time data taught me that information hierarchy is everything — operators need to see what matters now, not everything at once.",
-    nextProject: "nexwave",
-  },
-
-  // ── NexWave ─────────────────────────────────────────────────────
-  {
-    slug: "nexwave",
-    title: "NexWave",
-    subtitle: "Smart home management app for controlling IoT devices, automation, and monitoring",
-    category: ["SaaS", "Mobile"],
-    year: "2024",
-    role: "Product Designer",
-    duration: "3 months",
-    team: "PM, 3 Engineers",
-    thumbnail: "",
-    color: "#5BB5C9",
-    brief: {
-      narrative:
-        "A single smart home app that replaces the half-dozen device-specific apps people usually juggle — organized around how users actually think: by rooms and routines, not brands or protocols.",
-      tiles: [
-        { kind: "stat", value: "1", label: "App replacing 5+ device apps", span: 3 },
-        {
-          kind: "label",
-          key: "How the app is organized",
-          value: "Rooms · Devices · Automations",
-          span: 5,
-        },
-        {
-          kind: "quote",
-          text: "People don't think in devices — they think in rooms and daily routines.",
-          cite: "Research insight",
-          span: 4,
-        },
-        {
-          kind: "tags",
-          label: "Main screens",
-          items: ["Home overview", "Room view", "Device control", "Automations", "Energy use", "Scenes"],
-          span: 12,
-        },
-      ],
-    },
-    overview: "NexWave is a smart home management app that gives users full control over their IoT devices, automation scenarios, and home monitoring from a single, intuitive interface.",
-    sections: [],
-    metrics: [],
-    reflection: "Designing for IoT taught me that the challenge isn't the interface — it's the mental model. Users think in rooms and routines, not devices and protocols. The design had to bridge that gap.",
-    nextProject: "razer-ui",
-  },
-
-  // ── Razer UI ────────────────────────────────────────────────────
-  {
-    slug: "razer-ui",
-    title: "Razer UI",
-    subtitle: "UI concept and design exploration for a gaming hardware brand's digital product experience",
-    category: "Experimental",
-    year: "2022",
-    role: "UI Designer",
-    duration: "2 weeks",
-    team: "Solo",
-    thumbnail: "",
-    color: "#44D62C",
-    brief: {
-      narrative:
-        "A two-week solo design exploration asking a simple question: can a gaming brand's UI feel unmistakably gaming and still be clean, fast, and easy to read?",
-      tiles: [
-        { kind: "stat", value: "2", suffix: " weeks", label: "Project length", span: 3 },
-        { kind: "stat", value: "1", label: "Designer (solo project)", span: 3 },
-        {
-          kind: "quote",
-          text: "Gaming aesthetics shouldn't get in the way of using the product.",
-          cite: "Project thesis",
-          span: 6,
-        },
-        {
-          kind: "tags",
-          label: "What I explored",
-          items: [
-            "Typography",
-            "Custom iconography",
-            "Information density",
-            "Motion design",
-            "Color systems",
-            "Visual hierarchy",
-          ],
-          span: 12,
-        },
-      ],
-    },
-    overview: "Razer UI is a personal design exploration — a concept project reimagining how a gaming hardware brand's digital experience could look if product design principles were applied to gaming aesthetics.",
-    sections: [],
-    metrics: [],
-    reflection: "Side projects like this let me push visual boundaries I can't always explore in client work. The constraint was to make it look 'gaming' without sacrificing readability.",
-    nextProject: "balvoi",
-  },
 ];
 
 // Helper to get a project by slug

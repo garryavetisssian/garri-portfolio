@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 0.7fr 1.8fr; gap: 60px; align-items: center; }
+
+  /* Roster bento — mix of full character art and stat-cards, all isolated
+     duck assets sourced from individual Figma nodes rather than frame crops. */
+  .roster {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+    height: 720px;
+  }
+
+  .cell {
+    position: relative;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 209, 43, 0.18);
+    background: linear-gradient(180deg, #1B1810 0%, #0E0C08 100%);
+    overflow: hidden;
+    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cell img {
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    z-index: 2;
+  }
+
+  /* Hero cell spans 2x2 */
+  .cell.hero {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    background:
+      radial-gradient(ellipse at center, rgba(255, 209, 43, 0.22), transparent 70%),
+      linear-gradient(180deg, #1B1810 0%, #0E0C08 100%);
+  }
+  .cell.hero img { max-width: 75%; max-height: 85%; }
+
+  /* Stat-card variants — already framed in Figma export, fill more of cell */
+  .cell.card-art img { max-width: 75%; max-height: 95%; }
+
+  /* Arena / scene — fill completely */
+  .cell.scene { padding: 0; }
+  .cell.scene img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cell-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bv-blue);
+    z-index: 3;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+  .cell.scene .cell-tag {
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
+    padding: 12px 14px 10px;
+    margin: 0;
+    bottom: 0; left: 0; right: 0;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 05 / AI roster</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 05 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div>
+      <span class="eyebrow">— Roster</span>
+      <h1 class="headline">A consistent<br/>duck, every <em>time</em>.</h1>
+      <p class="caption">
+        Sample of card art and character variants generated, curated and
+        shipped across game systems. Each piece changes wardrobe, props,
+        and setting — but the mascot's silhouette, eye, beak and
+        proportions read as one character every time.
+      </p>
+      <p class="kicker">— Sampled from Career · Cards · Districts</p>
+    </div>
+
+    <div class="roster">
+      <!-- Hero: 2×2 — the standing business duck -->
+      <div class="cell hero">
+        <img src="_assets/card_12429-15800.png" alt="">
+        <div class="cell-tag">— Hero · base mascot</div>
+      </div>
+
+      <!-- Top row right -->
+      <div class="cell card-art">
+        <img src="_assets/card_12429-15735.png" alt="">
+        <div class="cell-tag">— Card · Job · Taxi</div>
+      </div>
+      <div class="cell card-art">
+        <img src="_assets/card_12429-15736.png" alt="">
+        <div class="cell-tag">— Card · Trading</div>
+      </div>
+
+      <!-- Bottom row right -->
+      <div class="cell">
+        <img src="_assets/card_12429-15765.png" alt="">
+        <div class="cell-tag">— Duck · with money</div>
+      </div>
+      <div class="cell scene">
+        <img src="_assets/card_12429-15762.png" alt="">
+        <div class="cell-tag">— Scene · taxi district</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Roster</span>
+    <span>— Isolated assets · all AI-generated · all curated</span>
+  </div>
+</div></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 0.85fr 1.2fr; gap: 60px; align-items: center; }
+  .phone-shell {
+    height: 740px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-shell .phone { width: 360px; }
+  .rarity-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .rarity {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(255, 209, 43, 0.06);
+    border: 1px solid;
+  }
+  .r-c { color: #B8AEA0; border-color: rgba(184, 174, 160, 0.4); }
+  .r-r { color: #6FB7FF; border-color: rgba(111, 183, 255, 0.4); }
+  .r-e { color: #C56FFF; border-color: rgba(197, 111, 255, 0.4); }
+  .r-l { color: var(--bv-blue); border-color: var(--bv-blue); background: rgba(255, 209, 43, 0.12); }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 07 / Cards &amp; decks</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 07 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div>
+      <span class="eyebrow">— Cards</span>
+      <h1 class="headline">Cards make<br/>the <em>duck</em>.</h1>
+      <p class="caption">
+        Players collect job cards (Taxi, Trading, Chill, Special, etc.) and
+        slot them into a four-card deck. Each card boosts a different
+        metric, and the deck-replacement flow is the loop that pulls
+        players back into the meta-game between districts.
+      </p>
+
+      <div class="rarity-row">
+        <span class="rarity r-c">Common</span>
+        <span class="rarity r-r">Rare</span>
+        <span class="rarity r-e">Epic</span>
+        <span class="rarity r-l">Legendary</span>
+      </div>
+      <p class="kicker" style="margin-top: 20px;">— 4-slot deck · 4 rarities · unique buffs per slot</p>
+    </div>
+
+    <div class="phone-shell">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="_assets/12429-15701.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Cards</span>
+    <span>— Surface 02 of 06</span>
+  </div>
+</div></body></html>

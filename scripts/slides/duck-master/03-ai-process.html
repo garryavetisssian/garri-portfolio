@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 12px;
+  }
+  .step {
+    background: linear-gradient(180deg, rgba(255, 209, 43, 0.06), rgba(255, 209, 43, 0.01));
+    border: 1px solid rgba(255, 209, 43, 0.18);
+    padding: 22px 18px;
+    border-radius: 10px;
+    position: relative;
+    min-height: 220px;
+  }
+  .step .n {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bv-blue);
+    margin-bottom: 14px;
+  }
+  .step .t {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .step .d {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+  .step::after {
+    content: "→";
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--display);
+    color: var(--bv-blue);
+    font-size: 22px;
+    z-index: 2;
+  }
+  .step:last-child::after { content: none; }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .stat {
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 16px;
+  }
+  .stat .num {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--bv-blue);
+  }
+  .stat .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: 10px;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 04 / AI asset generation · process</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 04 / 13</span>
+  </div>
+
+  <div class="top">
+    <div>
+      <span class="eyebrow">— My main contribution</span>
+      <h1 class="headline">Hundreds of duck<br/>cards from <em>one brief</em>.</h1>
+    </div>
+    <p class="caption" style="margin-top:0;">
+      The product team locked the mascot's anatomy and personality in a
+      tight brand brief. Then I built a generation pipeline — prompt
+      libraries, base-image conditioning, hand-picked seeds, and
+      production polish — that turned every new game system into card art
+      in days, not months.
+    </p>
+  </div>
+
+  <div class="pipeline">
+    <div class="step">
+      <div class="n">01 / Brief</div>
+      <div class="t">Anatomy lock</div>
+      <div class="d">Silhouette, eye, beak, sailor outfit. The fixed parts of the duck identity.</div>
+    </div>
+    <div class="step">
+      <div class="n">02 / Prompts</div>
+      <div class="t">Variant library</div>
+      <div class="d">A prompt template per job + district, with character traits as parameters.</div>
+    </div>
+    <div class="step">
+      <div class="n">03 / Generate</div>
+      <div class="t">Batches of seeds</div>
+      <div class="d">8–16 candidates per card slot, conditioned on the mascot reference image.</div>
+    </div>
+    <div class="step">
+      <div class="n">04 / Curate</div>
+      <div class="t">Pick the keepers</div>
+      <div class="d">Throw out the off-model outputs; rate the rest on silhouette &amp; vibe.</div>
+    </div>
+    <div class="step">
+      <div class="n">05 / Polish</div>
+      <div class="t">Production art</div>
+      <div class="d">Background separation, frame, rarity stripe, copy. Then into Figma.</div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">300+</div>
+      <div class="label">— Duck assets shipped</div>
+    </div>
+    <div class="stat">
+      <div class="num">8–16</div>
+      <div class="label">— Candidates per card slot</div>
+    </div>
+    <div class="stat">
+      <div class="num">~3d</div>
+      <div class="label">— Brief → shippable card</div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>AI process</span>
+    <span>— Brief · Prompt · Generate · Curate · Polish</span>
+  </div>
+</div></body></html>

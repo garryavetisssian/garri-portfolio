@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 0.85fr 1.2fr; gap: 80px; align-items: center; }
+  .hero-stage {
+    position: relative;
+    height: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .duck-frame {
+    position: absolute;
+    width: 92%;
+    height: 72%;
+    background:
+      radial-gradient(circle at center, rgba(255, 209, 43, 0.22), transparent 65%);
+    filter: blur(50px);
+    z-index: 0;
+  }
+  .duck-phone {
+    position: relative;
+    z-index: 2;
+    width: 340px;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+  }
+  /* Reveal the duck in the lower portion of the career frame */
+  .duck-phone .phone-screen img {
+    position: relative;
+    top: -180px;
+  }
+  .principles {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .principle {
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .principle:last-child { border-bottom: 1px solid var(--rule); padding-bottom: 14px; }
+  .principle .n {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--bv-blue);
+  }
+  .principle .t {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .principle .t b { color: var(--text); font-weight: 600; }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 03 / The character</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 03 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div>
+      <span class="eyebrow">— The duck</span>
+      <h1 class="headline">One duck,<br/>one <em>universe</em>.</h1>
+      <p class="caption">
+        Every progression card, ad placement, and reward animation in Duck Master
+        starts from the same 3D mascot — sailor outfit, navy collar, red bowtie,
+        anthropomorphic but unmistakably duck. The brief locked the character;
+        the work was extending it consistently into hundreds of contexts.
+      </p>
+
+      <div class="principles">
+        <div class="principle"><span class="n">01</span><span class="t"><b>Stay recognisable.</b> Same silhouette, same eye, same beak across every variant.</span></div>
+        <div class="principle"><span class="n">02</span><span class="t"><b>Stay playful.</b> Telegram users scroll fast — every variant has to read on a 64-px thumbnail.</span></div>
+        <div class="principle"><span class="n">03</span><span class="t"><b>Stay extensible.</b> Each variant is a starting point for a whole job, district, or campaign.</span></div>
+      </div>
+    </div>
+
+    <div class="hero-stage">
+      <div class="duck-frame"></div>
+      <div class="duck-phone">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="_assets/13816-139404.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Character</span>
+    <span>— Foundation for every visual</span>
+  </div>
+</div></body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 0.9fr 1.3fr; gap: 60px; align-items: center; }
+  .phone-shell {
+    height: 740px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-shell .phone { width: 360px; }
+  /* Long shop frame — show the top portion where the BOOST + Cards Safe items are */
+  .phone-shell .phone-screen { height: 700px; }
+  .phone-shell .phone-screen img { position: relative; top: 0; }
+  .offers {
+    margin-top: 24px;
+    display: grid;
+    gap: 12px;
+  }
+  .offer {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    align-items: center;
+  }
+  .offer:last-child { border-bottom: 1px solid var(--rule); }
+  .offer .icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--bv-blue) 0%, var(--bv-blue-deep) 100%);
+  }
+  .offer .name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .offer .price {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--bv-blue);
+    letter-spacing: 0.04em;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 10 / Shop &amp; economy</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 10 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div>
+      <span class="eyebrow">— Monetisation</span>
+      <h1 class="headline">A store<br/>that <em>respects</em><br/>the player.</h1>
+      <p class="caption">
+        The shop sells time saves, not power. Boosts speed up the loop;
+        safes drop card variants you'd unlock anyway through play. Every
+        item is priced in both soft currency (Bucks) and premium (Futures),
+        so the wallet is always optional.
+      </p>
+
+      <div class="offers">
+        <div class="offer"><span class="icon"></span><span class="name">Boost ×2 · 10 min</span><span class="price">249 ◆</span></div>
+        <div class="offer"><span class="icon"></span><span class="name">Energy pack · 30</span><span class="price">170 ◆</span></div>
+        <div class="offer"><span class="icon"></span><span class="name">Cards Safe · Gold</span><span class="price">540 ◆</span></div>
+        <div class="offer"><span class="icon"></span><span class="name">Special Offer · Daily</span><span class="price">132 ◆</span></div>
+      </div>
+    </div>
+
+    <div class="phone-shell">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="_assets/11663-72409.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Shop</span>
+    <span>— Surface 05 of 06</span>
+  </div>
+</div></body></html>

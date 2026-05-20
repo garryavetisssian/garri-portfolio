@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .grid { flex: 1; display: grid; grid-template-columns: 1.2fr 0.85fr; gap: 60px; align-items: center; }
+  .phone-shell {
+    height: 740px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-shell .phone { width: 360px; }
+  .mech-list { margin-top: 22px; display: grid; gap: 12px; }
+  .mech {
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 14px;
+  }
+  .mech:last-child { border-bottom: 1px solid var(--rule); padding-bottom: 12px; }
+  .mech-key {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bv-blue);
+    padding-top: 3px;
+  }
+  .mech-val {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .mech-val b { color: var(--text); font-weight: 600; }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 08 / Stock Market</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 08 / 13</span>
+  </div>
+
+  <div class="grid">
+    <div class="phone-shell">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="_assets/13021-119331.png" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="eyebrow">— The trading core</span>
+      <h1 class="headline">A casino<br/>that <em>looks</em><br/>like Bloomberg.</h1>
+      <p class="caption">
+        The Markets surface borrows the language of real finance — tickers,
+        margin calls, futures — and wraps it in a fast, candy-coloured
+        gamble that resolves in seconds. The trick was making "trade"
+        feel like a power, not a chore.
+      </p>
+
+      <div class="mech-list">
+        <div class="mech"><span class="mech-key">— Tickers</span><span class="mech-val"><b>Live charts</b> for every job district.</span></div>
+        <div class="mech"><span class="mech-key">— Margin</span><span class="mech-val"><b>Margin calls</b> create urgency and re-engagement.</span></div>
+        <div class="mech"><span class="mech-key">— Futures</span><span class="mech-val"><b>Futures contracts</b> as a premium loop.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Stock Market</span>
+    <span>— Surface 03 of 06</span>
+  </div>
+</div></body></html>

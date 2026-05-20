@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 60% 70% at 30% 60%, rgba(255, 209, 43, 0.22), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 80% 30%, rgba(255, 77, 94, 0.10), transparent 65%),
+      linear-gradient(180deg, #0B0A08 0%, #14110A 60%, #050403 100%);
+  }
+  .cover {
+    width: 100%;
+    height: 100%;
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+  .cover-left {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .cover-title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 168px;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .cover-title .duck { color: var(--bv-blue); }
+  .cover-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: rgba(255,255,255,0.7);
+  }
+  .cover-tag .sep { color: var(--bv-blue); margin: 0 12px; }
+
+  .cover-right {
+    position: relative;
+    height: 720px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover-phone {
+    width: 320px;
+    transform: rotate(6deg);
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+  }
+  .cover-phone .phone {
+    padding: 10px;
+    border-radius: 32px;
+  }
+  .cover-phone .phone-screen {
+    border-radius: 22px;
+  }
+  .cover-glow {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(255, 209, 43, 0.30), transparent 60%);
+    filter: blur(60px);
+    z-index: 0;
+  }
+
+  .cover-top {
+    position: absolute;
+    top: 48px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .cover-top .right { color: var(--bv-blue); }
+  .cover-bottom {
+    position: absolute;
+    bottom: 48px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .cover-bottom .right .accent { color: var(--bv-blue); }
+</style></head>
+<body>
+  <div class="cover-top">
+    <span>Duck Master · Case Study</span>
+    <span class="right">Garri Avetisyan · 2024 — 2025</span>
+  </div>
+
+  <div class="cover">
+    <div class="cover-left">
+      <h1 class="cover-title">DUCK<br/><span class="duck">MASTER</span></h1>
+      <p class="cover-tag">A Telegram trading-game<span class="sep">·</span>built around one duck</p>
+    </div>
+
+    <div class="cover-right">
+      <div class="cover-glow"></div>
+      <div class="cover-phone">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="_assets/12429-15701.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <span><span class="accent">— 01 / Cover</span></span>
+    <span>Mobile · Gaming · AI · Telegram</span>
+  </div>
+</body></html>
