@@ -3,132 +3,138 @@
 <link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="_theme.css">
 <style>
-  .grid { flex: 1; display: grid; grid-template-columns: 0.7fr 1.8fr; gap: 60px; align-items: center; }
-
-  /* Roster bento — mix of full character art and stat-cards, all isolated
-     duck assets sourced from individual Figma nodes rather than frame crops. */
-  .roster {
+  /* Full-bleed deck view: small left intro + 4 horizontal trays of cards. */
+  .layout {
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
-    height: 720px;
+    grid-template-columns: 0.55fr 1.65fr;
+    gap: 50px;
+    align-items: stretch;
   }
 
-  .cell {
-    position: relative;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 209, 43, 0.18);
-    background: linear-gradient(180deg, #1B1810 0%, #0E0C08 100%);
-    overflow: hidden;
-    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.55);
+  .deck {
     display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: space-between;
+  }
+
+  .tray {
+    display: grid;
+    grid-template-columns: 110px 1fr;
     align-items: center;
-    justify-content: center;
+    gap: 24px;
   }
-
-  .cell img {
-    display: block;
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    z-index: 2;
-  }
-
-  /* Hero cell spans 2x2 */
-  .cell.hero {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 2;
-    background:
-      radial-gradient(ellipse at center, rgba(255, 209, 43, 0.22), transparent 70%),
-      linear-gradient(180deg, #1B1810 0%, #0E0C08 100%);
-  }
-  .cell.hero img { max-width: 75%; max-height: 85%; }
-
-  /* Stat-card variants — already framed in Figma export, fill more of cell */
-  .cell.card-art img { max-width: 75%; max-height: 95%; }
-
-  /* Arena / scene — fill completely */
-  .cell.scene { padding: 0; }
-  .cell.scene img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .cell-tag {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+  .tray-label {
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.16em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--bv-blue);
-    z-index: 3;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    line-height: 1.3;
   }
-  .cell.scene .cell-tag {
-    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
-    padding: 12px 14px 10px;
-    margin: 0;
-    bottom: 0; left: 0; right: 0;
+  .tray-label .n {
+    display: block;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--bv-blue);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .tray-cards {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    overflow: hidden;
+  }
+  .tray-cards img {
+    display: block;
+    height: 165px;
+    width: auto;
+    border-radius: 8px;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55));
   }
 </style></head>
 <body><div class="slide">
   <div class="slide-top">
-    <span>— 07 / AI roster</span>
+    <span>— 07 / Game cards · the deck</span>
     <span class="mark">Duck Master</span>
     <span class="right"><span class="accent">●</span> 07 / 15</span>
   </div>
 
-  <div class="grid">
+  <div class="layout">
     <div>
-      <span class="eyebrow">— Roster</span>
-      <h1 class="headline">A consistent<br/>duck, every <em>time</em>.</h1>
-      <p class="caption">
-        Sample of card art and character variants generated, curated and
-        shipped across game systems. Each piece changes wardrobe, props,
-        and setting — but the mascot's silhouette, eye, beak and
-        proportions read as one character every time.
+      <span class="eyebrow">— The cards</span>
+      <h1 class="headline headline-sm">28 cards.<br/>Four <em>categories</em>.</h1>
+      <p class="caption" style="margin-top: 18px;">
+        The full deck. Each card is its own AI-generated illustration —
+        same duck mascot, dropped into a unique outfit and scene. Players
+        collect them across the game's progression loop and slot four
+        into their active deck at a time.
       </p>
-      <p class="kicker">— Sampled from Career · Cards · Districts</p>
+      <p class="kicker" style="margin-top: 16px;">— Job · Trading · Chill · Special</p>
     </div>
 
-    <div class="roster">
-      <!-- Hero: 2×2 — the standing business duck -->
-      <div class="cell hero">
-        <img src="_assets/card_12429-15800.png" alt="">
-        <div class="cell-tag">— Hero · base mascot</div>
+    <div class="deck">
+      <div class="tray">
+        <div class="tray-label"><span class="n">7</span>Job</div>
+        <div class="tray-cards">
+          <img src="_assets/card-job-01-taxi.png" alt="">
+          <img src="_assets/card-job-02-courier.png" alt="">
+          <img src="_assets/card-job-03-furniture.png" alt="">
+          <img src="_assets/card-job-04-sales-mgr.png" alt="">
+          <img src="_assets/card-job-05-own-company.png" alt="">
+          <img src="_assets/card-job-06-wall-st.png" alt="">
+          <img src="_assets/card-job-07-hedge-fund.png" alt="">
+        </div>
       </div>
 
-      <!-- Top row right -->
-      <div class="cell card-art">
-        <img src="_assets/card_12429-15735.png" alt="">
-        <div class="cell-tag">— Card · Job · Taxi</div>
-      </div>
-      <div class="cell card-art">
-        <img src="_assets/card_12429-15736.png" alt="">
-        <div class="cell-tag">— Card · Trading</div>
+      <div class="tray">
+        <div class="tray-label"><span class="n">7</span>Trading</div>
+        <div class="tray-cards">
+          <img src="_assets/card-trading-01-futures.png" alt="">
+          <img src="_assets/card-trading-02-tradingview.png" alt="">
+          <img src="_assets/card-trading-03-community.png" alt="">
+          <img src="_assets/card-trading-04-money-mgmt.png" alt="">
+          <img src="_assets/card-trading-05-fraud.png" alt="">
+          <img src="_assets/card-trading-06-insider.png" alt="">
+          <img src="_assets/card-trading-07-fbi.png" alt="">
+        </div>
       </div>
 
-      <!-- Bottom row right -->
-      <div class="cell">
-        <img src="_assets/card_12429-15765.png" alt="">
-        <div class="cell-tag">— Duck · with money</div>
+      <div class="tray">
+        <div class="tray-label"><span class="n">8</span>Chill</div>
+        <div class="tray-cards">
+          <img src="_assets/card-chill-01-porsche.png" alt="">
+          <img src="_assets/card-chill-02-yoga.png" alt="">
+          <img src="_assets/card-chill-03-golf.png" alt="">
+          <img src="_assets/card-chill-04-spa.png" alt="">
+          <img src="_assets/card-chill-05-yacht.png" alt="">
+          <img src="_assets/card-chill-06-vip.png" alt="">
+          <img src="_assets/card-chill-07-airplane.png" alt="">
+          <img src="_assets/card-chill-08-space.png" alt="">
+        </div>
       </div>
-      <div class="cell scene">
-        <img src="_assets/card_12429-15762.png" alt="">
-        <div class="cell-tag">— Scene · taxi district</div>
+
+      <div class="tray">
+        <div class="tray-label"><span class="n">6</span>Special</div>
+        <div class="tray-cards">
+          <img src="_assets/card-special-01-wife.png" alt="">
+          <img src="_assets/card-special-02-lover.png" alt="">
+          <img src="_assets/card-special-03-toilet.png" alt="">
+          <img src="_assets/card-special-04-podcast.png" alt="">
+          <img src="_assets/card-special-05-shredder.png" alt="">
+          <img src="_assets/card-special-06-friend.png" alt="">
+        </div>
       </div>
     </div>
   </div>
 
   <div class="slide-bottom">
-    <span>Roster</span>
-    <span>— Isolated assets · all AI-generated · all curated</span>
+    <span>Cards</span>
+    <span>— 28 cards · 28 distinct duck portraits · all AI-generated</span>
   </div>
 </div></body></html>
