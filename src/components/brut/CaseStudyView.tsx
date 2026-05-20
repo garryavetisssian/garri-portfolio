@@ -151,13 +151,14 @@ function Gallery({ assets, priority = 0 }: { assets: CaseAsset[]; priority?: num
 
 function TabbedGallery({
   tabs,
-  defaultTab,
+  active,
+  onActiveChange,
 }: {
   tabs: CaseTab[];
-  defaultTab: number;
+  active: number;
+  onActiveChange: (i: number) => void;
 }) {
   const { t } = useLanguage();
-  const [active, setActive] = useState(defaultTab);
   const current = tabs[active];
 
   return (
@@ -168,7 +169,7 @@ function TabbedGallery({
           {tabs.map((tab, i) => (
             <button
               key={tab.name}
-              onClick={() => setActive(i)}
+              onClick={() => onActiveChange(i)}
               className={`mono px-4 py-3 whitespace-nowrap transition-colors border-b-2 ${
                 i === active
                   ? "border-acid text-acid"
@@ -213,11 +214,23 @@ export default function CaseStudyView({
   const hasGallery = !caseAssets.isEmpty;
   const hasTabs = caseAssets.tabs.length > 0;
 
-  // Cover image for the laptop screen — prefer the root cover, fall back to
-  // the default tab's cover (cases with sub-tabs like Ineed keep cover inside
-  // the version folder).
+  // Active tab is lifted here so both the gallery and the laptop screen
+  // react to it. Defaults to the "Release Version" tab when tabs exist.
+  const [activeTab, setActiveTab] = useState(caseAssets.defaultTab);
+
+  // Cover image for the laptop screen:
+  //   1. Prefer the cover of the currently active tab (if the case has tabs)
+  //   2. Otherwise fall back to the root cover
+  //   3. Final fallback: first image asset (in case no Cover file is named)
+  const firstImageSrc =
+    caseAssets.assets.find((a) => a.type === "image")?.src ??
+    caseAssets.tabs[activeTab]?.assets.find((a) => a.type === "image")?.src ??
+    null;
+
   const coverSrc =
-    caseAssets.cover ?? caseAssets.tabs[caseAssets.defaultTab]?.cover ?? null;
+    (hasTabs ? caseAssets.tabs[activeTab]?.cover : caseAssets.cover) ??
+    caseAssets.cover ??
+    firstImageSrc;
 
   return (
     <article>
@@ -324,7 +337,11 @@ export default function CaseStudyView({
           </div>
 
           {hasTabs ? (
-            <TabbedGallery tabs={caseAssets.tabs} defaultTab={caseAssets.defaultTab} />
+            <TabbedGallery
+              tabs={caseAssets.tabs}
+              active={activeTab}
+              onActiveChange={setActiveTab}
+            />
           ) : (
             <Gallery assets={caseAssets.assets} priority={1} />
           )}

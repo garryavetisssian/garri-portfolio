@@ -17,6 +17,7 @@
  */
 
 import {
+  AnimatePresence,
   motion,
   useScroll,
   useTransform,
@@ -118,13 +119,22 @@ export default function LaptopReveal({ src }: LaptopRevealProps) {
                         scale: screenScale,
                       }}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={src}
-                        alt=""
-                        draggable={false}
-                        className="laptop-screen-img"
-                      />
+                      {/* Crossfade when the cover image source changes (e.g.,
+                          user switches between First / Release tabs). The
+                          incoming image fades in over the outgoing one. */}
+                      <AnimatePresence initial={false}>
+                        <motion.img
+                          key={src}
+                          src={src}
+                          alt=""
+                          draggable={false}
+                          className="laptop-screen-img"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        />
+                      </AnimatePresence>
                     </motion.div>
                     <motion.div
                       className="laptop-screen-sweep"
