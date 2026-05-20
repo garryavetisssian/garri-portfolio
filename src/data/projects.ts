@@ -19,31 +19,31 @@ export const projects: CaseStudy[] = [
     color: "#2563EB",
     brief: {
       narrative:
-        "Twelve journalists, fourteen manual publishing steps, one editorial AI that learned to stop at every red light.",
+        "An AI editorial platform that helps journalists publish across web, social, and newsletter — faster, without giving up control of the story.",
       tiles: [
-        { kind: "stat", value: "12", label: "User interviews", span: 3 },
-        { kind: "stat", value: "14", suffix: "→2", label: "Steps to publish", span: 3 },
+        { kind: "stat", value: "12", label: "Journalists interviewed", span: 3 },
+        { kind: "stat", value: "14", suffix: "→2", label: "Steps to publish an article", span: 3 },
         {
           kind: "quote",
-          text: "AI as copilot, not autopilot.",
-          cite: "Design principle 01",
+          text: "AI assists. The journalist decides.",
+          cite: "Design principle",
           span: 6,
         },
         {
           kind: "label",
-          key: "Stack",
-          value: "Figma · GPT-4 · Dev Mode",
+          key: "Tools used",
+          value: "Figma · GPT-4 · Figma Dev Mode",
           span: 4,
         },
         {
           kind: "tags",
-          label: "Methods",
+          label: "How I worked",
           items: [
-            "Contextual inquiry",
-            "Journey maps",
-            "Competitive audit",
+            "User interviews",
+            "Journey mapping",
+            "Competitive research",
             "A/B testing",
-            "Trust calibration",
+            "Usability testing",
           ],
           span: 8,
         },
@@ -146,26 +146,26 @@ export const projects: CaseStudy[] = [
     color: "#8B5CF6",
     brief: {
       narrative:
-        "Two audiences. One product. The word “wallet” was the most expensive thing we removed.",
+        "A Web3 lottery and NFT marketplace designed for two very different audiences: crypto-native users, and people who just want to buy a ticket without learning crypto first.",
       tiles: [
-        { kind: "stat", value: "2", label: "Audiences served", span: 3 },
-        { kind: "stat", value: "23", suffix: "%", label: "Lift from re-labelling CTA", span: 3 },
+        { kind: "stat", value: "2", label: "Audiences in one product", span: 3 },
+        { kind: "stat", value: "23", suffix: "%", label: "Lift after renaming the buy button", span: 3 },
         {
           kind: "quote",
-          text: "Language design IS UX design.",
+          text: "The words on a button matter as much as the layout.",
           cite: "Lesson from launch",
           span: 6,
         },
         {
           kind: "label",
-          key: "Scale",
-          value: "Dual-track onboarding · custodial + on-chain",
+          key: "Onboarding approach",
+          value: "Two paths — easy for newcomers, full control for crypto users",
           span: 6,
         },
         {
           kind: "tags",
-          label: "Surfaces",
-          items: ["Lottery", "Marketplace", "Wallet", "Live draw", "Tickets", "Profile"],
+          label: "Product surfaces",
+          items: ["Lottery", "NFT marketplace", "Wallet", "Live draw", "Tickets", "Profile"],
           span: 6,
         },
       ],
@@ -265,28 +265,28 @@ export const projects: CaseStudy[] = [
     color: "#F59E0B",
     brief: {
       narrative:
-        "A casual game built around three nested engagement loops — seconds, minutes, days.",
+        "A casual Telegram mini-game designed to bring people back daily and pull their friends in — through quick play, weekly leaderboards, and share-worthy moments.",
       tiles: [
-        { kind: "stat", value: "3", label: "Engagement loops", span: 3 },
-        { kind: "stat", value: "22", suffix: "%", label: "Share rate per session", span: 3 },
-        { kind: "stat", value: "35", suffix: "%", label: "Day 7 retention", span: 3 },
-        { kind: "stat", value: "4:12", label: "Avg session length", span: 3 },
+        { kind: "stat", value: "35", suffix: "%", label: "Day 7 retention (3x category avg)", span: 3 },
+        { kind: "stat", value: "22", suffix: "%", label: "Sessions that end in a share", span: 3 },
+        { kind: "stat", value: "40", suffix: "%", label: "New players from organic shares", span: 3 },
+        { kind: "stat", value: "4:12", label: "Average session length", span: 3 },
         {
           kind: "quote",
-          text: "The share moment must be designed, not bolted on.",
-          cite: "Research finding",
+          text: "Share moments should feel natural — not like the game asking you for a favor.",
+          cite: "Research insight",
           span: 8,
         },
         {
           kind: "label",
-          key: "Constraint",
-          value: "Telegram viewport · no push · in-chat attention",
+          key: "Platform limits",
+          value: "Telegram chat viewport · no push notifications",
           span: 4,
         },
         {
           kind: "tags",
-          label: "Systems",
-          items: ["Streaks", "Leaderboards", "Cosmetics", "Haptics", "Share cards"],
+          label: "What I designed",
+          items: ["Daily streaks", "Leaderboards", "Collectible skins", "Haptic feedback", "Share cards"],
           span: 12,
         },
       ],
@@ -371,28 +371,28 @@ export const projects: CaseStudy[] = [
     color: "#38BDF8",
     brief: {
       narrative:
-        "Two apps, one trust loop. Two design phases — first the concept, then everything refined.",
+        "A two-sided service marketplace with separate mobile apps for clients and professionals. I designed it end-to-end through two full iterations — the initial concept, then the polished release.",
       tiles: [
-        { kind: "stat", value: "2", label: "Native apps shipped", span: 3 },
-        { kind: "stat", value: "2", label: "Design iterations", span: 3 },
+        { kind: "stat", value: "2", label: "Native apps (client + pro)", span: 3 },
+        { kind: "stat", value: "2", label: "Full design iterations", span: 3 },
         {
           kind: "quote",
-          text: "Trust has to build on both sides simultaneously.",
-          cite: "Reflection from release",
+          text: "A marketplace works only when both sides trust it equally.",
+          cite: "Reflection after release",
           span: 6,
         },
         {
           kind: "label",
-          key: "Scope",
-          value: "Discovery · Booking · Profiles · Comms",
+          key: "Product scope",
+          value: "Search · Booking · Profiles · Messaging · Payments",
           span: 4,
         },
         {
           kind: "tags",
-          label: "Surfaces",
+          label: "Main flows designed",
           items: [
             "Onboarding",
-            "Search",
+            "Search & filters",
             "Booking",
             "Chat",
             "Payment",
@@ -426,25 +426,25 @@ export const projects: CaseStudy[] = [
     color: "#F59E0B",
     brief: {
       narrative:
-        "A productivity hub where automation feels helpful — never autonomous.",
+        "An AI productivity platform that helps teams automate routine work — while keeping people in charge of every decision the AI suggests.",
       tiles: [
-        { kind: "stat", value: "4", suffix: "mo", label: "Concept → hi-fi", span: 3 },
+        { kind: "stat", value: "4", suffix: " months", label: "From concept to hi-fi UI", span: 3 },
         {
           kind: "label",
-          key: "Stage",
-          value: "Concept · Prototype",
+          key: "Project stage",
+          value: "Concept · Interactive prototype",
           span: 3,
         },
         {
           kind: "quote",
-          text: "Helpful, not autonomous.",
+          text: "AI should be helpful, never autonomous.",
           cite: "Core design principle",
           span: 6,
         },
         {
           kind: "tags",
-          label: "Surfaces",
-          items: ["Workflows", "Suggestions", "Dashboard", "Collab", "Settings"],
+          label: "What I designed",
+          items: ["Automated workflows", "Smart suggestions", "Team dashboard", "Collaboration", "Settings"],
           span: 12,
         },
       ],
@@ -470,25 +470,25 @@ export const projects: CaseStudy[] = [
     color: "#EF4444",
     brief: {
       narrative:
-        "Real-time data without the firehose — information hierarchy as a UX problem.",
+        "A real-time logistics dashboard for fleet operators. Live vehicle tracking, automated routing, and driver chat — all in one screen, organized around what the dispatcher needs to act on right now.",
       tiles: [
-        { kind: "stat", value: "1", label: "Unified ops surface", span: 3 },
+        { kind: "stat", value: "1", label: "Dashboard replacing 4+ tools", span: 3 },
         {
           kind: "label",
           key: "Domain",
-          value: "Fleet · Dispatch · Live tracking",
+          value: "Fleet management · Dispatching · Live tracking",
           span: 5,
         },
         {
           kind: "quote",
-          text: "Operators need what matters now, not everything at once.",
+          text: "Show what needs action now — not everything that could ever matter.",
           cite: "Design principle",
           span: 4,
         },
         {
           kind: "tags",
-          label: "Components",
-          items: ["Live map", "Route optimization", "Driver chat", "Alerts", "Cohort view"],
+          label: "Key components designed",
+          items: ["Live map", "Route optimization", "Driver chat", "Real-time alerts", "Trip history"],
           span: 12,
         },
       ],
@@ -514,25 +514,25 @@ export const projects: CaseStudy[] = [
     color: "#8B5CF6",
     brief: {
       narrative:
-        "Users think in rooms and routines. Devices and protocols come last.",
+        "A single smart home app that replaces the half-dozen device-specific apps people usually juggle — organized around how users actually think: by rooms and routines, not brands or protocols.",
       tiles: [
-        { kind: "stat", value: "1", label: "App replacing 5+", span: 3 },
+        { kind: "stat", value: "1", label: "App replacing 5+ device apps", span: 3 },
         {
           kind: "label",
-          key: "Mental model",
+          key: "How the app is organized",
           value: "Rooms · Devices · Automations",
           span: 5,
         },
         {
           kind: "quote",
-          text: "The mental model isn’t devices — it’s rooms and routines.",
-          cite: "IA insight",
+          text: "People don't think in devices — they think in rooms and daily routines.",
+          cite: "Research insight",
           span: 4,
         },
         {
           kind: "tags",
-          label: "Screens",
-          items: ["Home", "Room", "Device", "Automation", "Energy", "Scenes"],
+          label: "Main screens",
+          items: ["Home overview", "Room view", "Device control", "Automations", "Energy use", "Scenes"],
           span: 12,
         },
       ],
@@ -558,26 +558,26 @@ export const projects: CaseStudy[] = [
     color: "#00FF7F",
     brief: {
       narrative:
-        "Two weeks. Solo. One question: can gaming look gaming without sacrificing readability?",
+        "A two-week solo design exploration asking a simple question: can a gaming brand's UI feel unmistakably gaming and still be clean, fast, and easy to read?",
       tiles: [
-        { kind: "stat", value: "2", suffix: "wk", label: "Sprint length", span: 3 },
-        { kind: "stat", value: "1", label: "Designer · solo", span: 3 },
+        { kind: "stat", value: "2", suffix: " weeks", label: "Project length", span: 3 },
+        { kind: "stat", value: "1", label: "Designer (solo project)", span: 3 },
         {
           kind: "quote",
-          text: "Gaming aesthetic ≠ unusable interface.",
-          cite: "Thesis",
+          text: "Gaming aesthetics shouldn't get in the way of using the product.",
+          cite: "Project thesis",
           span: 6,
         },
         {
           kind: "tags",
-          label: "Exploration",
+          label: "What I explored",
           items: [
             "Typography",
-            "Iconography",
-            "Density",
-            "Motion",
+            "Custom iconography",
+            "Information density",
+            "Motion design",
             "Color systems",
-            "Hierarchy",
+            "Visual hierarchy",
           ],
           span: 12,
         },

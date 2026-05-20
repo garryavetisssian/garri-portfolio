@@ -651,3 +651,334 @@ textarea.form-input {
   }
   .row-link:hover { padding-left: 0; }
 }
+
+/* ─── LaptopReveal — Apple-style scroll-driven 3D laptop ─────────── */
+
+/* Sizing tokens — keep the laptop comfortable across viewports */
+.laptop-reveal {
+  /* Tall track so we have room for sticky scroll-through animation */
+  min-height: 220vh;
+  overflow: hidden;
+  isolation: isolate;
+  --laptop-w: clamp(420px, 76vw, 1040px);
+  --laptop-h: calc(var(--laptop-w) * 0.625); /* 16:10 lid */
+  --laptop-base-h: clamp(18px, 2.4vw, 32px);
+  --laptop-bezel: clamp(8px, 1vw, 16px);
+}
+
+.laptop-reveal-track {
+  position: relative;
+  height: 100%;
+}
+
+.laptop-reveal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: 0 var(--gutter);
+}
+
+.laptop-reveal-label,
+.laptop-reveal-caption {
+  white-space: nowrap;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.laptop-reveal-label::before,
+.laptop-reveal-caption::after {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--line-strong);
+  vertical-align: middle;
+  margin: 0 0.6em;
+}
+
+.laptop-reveal-caption::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--line-strong);
+  vertical-align: middle;
+  margin: 0 0.6em;
+}
+
+/* 3D stage — perspective lives here so all children share the same camera */
+.laptop-stage {
+  position: relative;
+  width: var(--laptop-w);
+  height: calc(var(--laptop-h) + var(--laptop-base-h) + 80px);
+  perspective: 1900px;
+  perspective-origin: 50% 38%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Laptop wrap — sits centered, base at bottom, lid hinges from top of base */
+.laptop {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+/* ── Base / chassis ──────────────────────────────────────────────── */
+
+.laptop-base {
+  position: relative;
+  width: 100%;
+  height: var(--laptop-base-h);
+  transform-style: preserve-3d;
+  transform: rotateX(6deg);
+  transform-origin: 50% 0%;
+  z-index: 1;
+}
+
+.laptop-base-top {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      #2a2a30 0%,
+      #1a1a1e 35%,
+      #131316 100%);
+  border-radius: 3px 3px 0 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Faint keyboard hint — repeating tiny rectangles, very subtle */
+.laptop-base-keyboard {
+  position: absolute;
+  top: 30%;
+  left: 8%;
+  right: 8%;
+  bottom: 30%;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 4.2% 100%, 100% 25%;
+  opacity: 0.6;
+}
+
+/* Trackpad notch */
+.laptop-base-trackpad {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+}
+
+/* Curved front edge (the lip you'd open the laptop from) */
+.laptop-base-front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 14px;
+  background: linear-gradient(180deg, #0e0e10 0%, #050507 100%);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 18px 50px -8px rgba(0, 0, 0, 0.7);
+}
+
+/* ── Lid (hinged) ────────────────────────────────────────────────── */
+
+.laptop-lid {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: var(--laptop-h);
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  /* Default closed-ish; framer drives via inline style */
+  transform: rotateX(-2deg);
+  will-change: transform;
+}
+
+/* Lid back face — aluminum shell — visible only while closed */
+.laptop-lid-shell {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #2c2c32 0%, #1c1c20 45%, #0e0e10 100%);
+  border-radius: 14px 14px 4px 4px;
+  /* Pre-rotated 180° around X — sits on the opposite face of the lid plane */
+  transform: rotateX(180deg) translateZ(0.1px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Tiny logo glyph in the middle of the shell */
+.laptop-lid-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: var(--acid);
+  opacity: 0.08;
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+/* Lid front face — screen + bezel — visible when open */
+.laptop-lid-face {
+  position: absolute;
+  inset: 0;
+  background: #050506;
+  border-radius: 14px 14px 4px 4px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: var(--laptop-bezel);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.laptop-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #050506;
+  border-radius: 4px;
+  padding: 14px 6px 6px;
+}
+
+/* Camera dot in the top bezel */
+.laptop-camera {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* The screen itself */
+.laptop-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #0a0a0c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.laptop-screen-inner {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, transform;
+}
+
+.laptop-screen-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Glossy reflection sweep — diagonal band that travels across the screen */
+.laptop-screen-sweep {
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.05) 56%,
+    transparent 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+/* Static screen gloss — subtle top-down vignette */
+.laptop-screen-gloss {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(150% 100% at 50% -10%, rgba(255, 255, 255, 0.06), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 30%);
+  pointer-events: none;
+}
+
+/* Bloom under the laptop — soft acid glow */
+.laptop-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 80px;
+  background:
+    radial-gradient(50% 100% at 50% 50%, var(--acid-faint), transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Reduced-motion fallback (static, fully open) ────────────────── */
+
+.laptop-static-wrap {
+  position: relative;
+  width: clamp(420px, 80vw, 1040px);
+  aspect-ratio: 16 / 10;
+  background: #050506;
+  border-radius: 14px;
+  padding: clamp(8px, 1vw, 16px);
+  box-shadow:
+    0 30px 80px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.laptop-static-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Print: hide the laptop reveal entirely (CV layout) */
+@media print {
+  .laptop-reveal { display: none !important; }
+}
+
+/* Smaller screens: shorten the scroll track and reduce travel; effect still
+   reads at smaller sizes without locking the page too long */
+@media (max-width: 640px) {
+  .laptop-reveal {
+    min-height: 170vh;
+    --laptop-base-h: 16px;
+    --laptop-bezel: 8px;
+  }
+  .laptop-base-keyboard { display: none; }
+}

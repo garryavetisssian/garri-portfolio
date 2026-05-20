@@ -6,6 +6,7 @@ import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import Brief from "./Brief";
+import LaptopReveal from "./LaptopReveal";
 
 function VideoBlock({ src }: { src: string }) {
   const { t } = useLanguage();
@@ -212,6 +213,12 @@ export default function CaseStudyView({
   const hasGallery = !caseAssets.isEmpty;
   const hasTabs = caseAssets.tabs.length > 0;
 
+  // Cover image for the laptop screen — prefer the root cover, fall back to
+  // the default tab's cover (cases with sub-tabs like Ineed keep cover inside
+  // the version folder).
+  const coverSrc =
+    caseAssets.cover ?? caseAssets.tabs[caseAssets.defaultTab]?.cover ?? null;
+
   return (
     <article>
       {/* Reading progress bar */}
@@ -281,6 +288,15 @@ export default function CaseStudyView({
 
       {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
       <Brief brief={project.brief} slug={project.slug} />
+
+      {/* Laptop reveal — Apple-style scroll-driven cover image moment. */}
+      {coverSrc && (
+        <LaptopReveal
+          src={coverSrc}
+          label={`— ${project.title} · Cover`}
+          caption={`${t.caseStudy.visuals} ahead`}
+        />
+      )}
 
       {/* Overview */}
       <section className="py-16 border-t border-line-strong">
