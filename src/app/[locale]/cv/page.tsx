@@ -67,6 +67,10 @@ export default async function CvPage({ params }: PageProps) {
               <a className="cv-contact-value" href={`mailto:${SITE.email}`}>{SITE.email}</a>
             </div>
             <div>
+              <span className="cv-contact-label">{t.cv.phone}</span>
+              <a className="cv-contact-value" href={`tel:${SITE.phone.replace(/\s+/g, "")}`}>{SITE.phone}</a>
+            </div>
+            <div>
               <span className="cv-contact-label">{t.cv.linkedin}</span>
               <a className="cv-contact-value" href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
                 {SITE.linkedin.replace("https://", "")}

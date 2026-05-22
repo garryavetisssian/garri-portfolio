@@ -127,6 +127,7 @@ export interface Dictionary {
     contact: string;
     location: string;
     email: string;
+    phone: string;
     linkedin: string;
     summaryTitle: string;
     skillsTitle: string;
@@ -324,6 +325,7 @@ const en: Dictionary = {
     contact: "Contact",
     location: "Location",
     email: "Email",
+    phone: "Phone",
     linkedin: "LinkedIn",
     summaryTitle: "Summary",
     skillsTitle: "Skills",
@@ -555,6 +557,7 @@ const ru: Dictionary = {
     contact: "Контакты",
     location: "Локация",
     email: "Email",
+    phone: "Телефон",
     linkedin: "LinkedIn",
     summaryTitle: "О себе",
     skillsTitle: "Навыки",
@@ -785,6 +788,7 @@ const hy: Dictionary = {
     contact: "Կապ",
     location: "Գտնվելու վայր",
     email: "Email",
+    phone: "Հեռախոս",
     linkedin: "LinkedIn",
     summaryTitle: "Համառոտ",
     skillsTitle: "Հմտություններ",

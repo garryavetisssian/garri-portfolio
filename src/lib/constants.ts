@@ -5,6 +5,7 @@ export const SITE = {
     "Product Designer with 5+ years of experience designing complex systems across AI, Web3, SaaS, and marketplaces. Based in Yerevan, Armenia.",
   url: "https://garri.design",
   email: "garryavetissian@gmail.com",
+  phone: "+374 55 42 54 08",
   linkedin: "https://linkedin.com/in/garri-avetisyan",
   resume: "/resume.pdf",
 } as const;
