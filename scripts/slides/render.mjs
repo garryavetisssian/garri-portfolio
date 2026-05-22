@@ -46,6 +46,7 @@ console.log(`Rendering ${files.length} slides for "${deck}"...`);
 const browser = await puppeteer.launch({
   headless: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  protocolTimeout: 120_000,
 });
 const page = await browser.newPage();
 await page.setViewport({ width: 1600, height: 1000, deviceScaleFactor: 2 });

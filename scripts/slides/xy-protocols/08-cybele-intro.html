@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  :root { --proto: var(--xy-violet); }
+  body {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(167, 139, 250, 0.20), transparent 70%),
+      linear-gradient(180deg, #0A0810 0%, #14101C 50%, #0A0810 100%);
+  }
+  .body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .left .eyebrow { color: var(--proto); }
+  .left .headline em { color: var(--proto); }
+
+  .altar {
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--proto) 30%, transparent);
+    border-radius: 20px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.18), transparent 60%),
+      radial-gradient(circle at 50% 100%, rgba(167, 139, 250, 0.25), transparent 60%),
+      linear-gradient(135deg, #14101C, #0A0810);
+    padding: 36px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 60px 120px -30px rgba(0,0,0,0.7), 0 0 100px rgba(167,139,250,0.08);
+  }
+
+  .sigil-ring {
+    width: 320px; height: 320px;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--proto) 40%, transparent);
+    box-shadow: 0 0 60px rgba(167,139,250,0.10) inset;
+  }
+  .sigil-ring.r2 { width: 220px; height: 220px; border: 1px dashed color-mix(in srgb, var(--proto) 50%, transparent); }
+  .sigil-ring.r3 { width: 140px; height: 140px; border: 1px solid color-mix(in srgb, var(--proto) 60%, transparent); background: rgba(167,139,250,0.05); }
+
+  .glyph-mark {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: var(--display); font-weight: 800; font-size: 70px;
+    color: var(--proto); text-shadow: 0 0 30px var(--proto);
+    z-index: 2;
+  }
+  .rune {
+    position: absolute; font-family: var(--display); font-weight: 800;
+    color: var(--proto); opacity: 0.55; font-size: 28px;
+  }
+  .rune.t1 { top: 8%; left: 50%; transform: translateX(-50%); }
+  .rune.t2 { bottom: 8%; left: 50%; transform: translateX(-50%); }
+  .rune.t3 { top: 50%; left: 8%; transform: translateY(-50%); }
+  .rune.t4 { top: 50%; right: 8%; transform: translateY(-50%); }
+  .rune.s1 { top: 20%; left: 20%; font-size: 18px; opacity: 0.4; }
+  .rune.s2 { top: 20%; right: 20%; font-size: 18px; opacity: 0.4; }
+  .rune.s3 { bottom: 20%; left: 20%; font-size: 18px; opacity: 0.4; }
+  .rune.s4 { bottom: 20%; right: 20%; font-size: 18px; opacity: 0.4; }
+
+  .altar-meta {
+    position: absolute; bottom: 28px; left: 28px; right: 28px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint);
+    z-index: 3;
+  }
+  .altar-meta .accent { color: var(--proto); }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · Cybele's Rite</span>
+    <span><span style="color: var(--xy-violet);">08</span> / 16 · The ritual</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">Cybele's Rite · 01 of 03</div>
+      <h1 class="headline">A protocol<br>that <em>feels like</em> a ceremony.</h1>
+      <p class="caption">Cybele's Rite is the only protocol in the ecosystem that isn't a screen of numbers. It's a weekly ritual — a sacrifice of XYU, a draw of one of 412 cards, and a result that propagates back into marketplace floor prices. The design challenge was tonal: blockchain transparency meets mythic UX.</p>
+      <div class="kicker">Weekly ritual · 412 cards · On-chain randomness · Burn + mint</div>
+    </div>
+    <div class="altar">
+      <div class="sigil-ring"></div>
+      <div class="sigil-ring r2"></div>
+      <div class="sigil-ring r3"></div>
+      <div class="rune t1">⌬</div>
+      <div class="rune t2">⌬</div>
+      <div class="rune t3">⌬</div>
+      <div class="rune t4">⌬</div>
+      <div class="rune s1">·</div>
+      <div class="rune s2">·</div>
+      <div class="rune s3">·</div>
+      <div class="rune s4">·</div>
+      <div class="glyph-mark">CR</div>
+      <div class="altar-meta">
+        <span class="accent">— Season 4 · Week 12</span>
+        <span>412 cards · 1 ritual</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span style="color: var(--xy-violet);">— Cybele's Rite</span>
+    <span>Weekly · On-chain · Tonal design</span>
+  </div>
+</div>
+</body></html>

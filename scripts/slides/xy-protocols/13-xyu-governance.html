@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  :root { --proto: var(--xy-cyan); }
+  .body { flex: 1; display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: center; }
+  .left .eyebrow { color: var(--proto); }
+  .left .headline em { color: var(--proto); }
+
+  .gov {
+    background: #0E0F14; border: 1px solid var(--rule-strong); border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 40px 100px -30px rgba(0,0,0,0.7);
+  }
+  .gov-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 18px; }
+  .gov-head .h { font-family: var(--display); font-weight: 700; font-size: 17px; color: var(--text); }
+  .gov-head .vp { font-family: var(--mono); font-size: 11px; color: var(--proto); letter-spacing: 0.14em; }
+
+  .prop {
+    background: rgba(56,189,248,0.04); border: 1px solid color-mix(in srgb, var(--proto) 20%, transparent);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 10px;
+  }
+  .prop-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .prop-head .id { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--text-muted); }
+  .prop-head .pill { font-family: var(--mono); font-size: 10px; padding: 4px 9px; border-radius: 999px; letter-spacing: 0.12em; }
+  .prop-head .pill.live { background: rgba(56,189,248,0.14); color: var(--proto); border: 1px solid color-mix(in srgb, var(--proto) 40%, transparent); }
+  .prop-head .pill.done { background: rgba(74,222,128,0.10); color: var(--xy-mint); border: 1px solid color-mix(in srgb, var(--xy-mint) 40%, transparent); }
+  .prop-head .pill.fail { background: rgba(244,114,182,0.10); color: var(--xy-pink); border: 1px solid color-mix(in srgb, var(--xy-pink) 40%, transparent); }
+  .prop-title { font-family: var(--display); font-weight: 600; font-size: 15px; color: var(--text); margin-bottom: 6px; }
+  .prop-desc { font-family: var(--body); font-size: 12px; color: var(--text-muted); line-height: 1.45; }
+  .prop-bar { margin-top: 12px; display: grid; grid-template-columns: 40px 1fr 60px; gap: 10px; align-items: center; font-family: var(--mono); font-size: 10px; }
+  .prop-bar .bar { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.06); overflow: hidden; display: flex; }
+  .prop-bar .bar .yes { background: var(--xy-mint); height: 100%; }
+  .prop-bar .bar .no { background: var(--xy-pink); height: 100%; }
+  .prop-bar .pct { color: var(--xy-mint); text-align: right; }
+  .prop-meta {
+    display: flex; gap: 16px; margin-top: 8px;
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em;
+  }
+  .prop-meta .accent { color: var(--proto); }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · XYU Token</span>
+    <span><span style="color: var(--xy-cyan);">13</span> / 16 · Governance</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">XYU Token · 03 of 03</div>
+      <h1 class="headline">Votes that<br>actually <em>steer</em> the ecosystem.</h1>
+      <p class="caption">Holders stake XYU to vote. Proposals are short, scoped, and on chain — they change real parameters: marketplace fee, vault risk caps, rite cadence, treasury allocation. The interface keeps three things visible at all times: what the proposal does, what it costs if it passes, and who voted what.</p>
+      <div class="kicker">Proposals · Vote · Effects · Treasury · Quorum</div>
+    </div>
+    <div class="gov">
+      <div class="gov-head">
+        <div class="h">XYU Governance · Open proposals</div>
+        <div class="vp">Your voting power · 8,420 vXYU</div>
+      </div>
+      <div class="prop">
+        <div class="prop-head"><span class="id">XYU-IP-024 · 2 days remaining</span><span class="pill live">LIVE</span></div>
+        <div class="prop-title">Lower marketplace royalty floor from 5% → 2.5%</div>
+        <div class="prop-desc">Reduces the protocol-mandated minimum creator royalty to compete with newer marketplaces. Creators can still set higher royalties manually.</div>
+        <div class="prop-bar"><span style="color: var(--xy-mint);">FOR</span><div class="bar"><div class="yes" style="width: 68%;"></div><div class="no" style="width: 22%;"></div></div><span class="pct">68% · 12.4M</span></div>
+        <div class="prop-meta"><span>Quorum · <span class="accent">reached</span></span><span>Treasury cost · $0</span><span>Effects in · 48h after pass</span></div>
+      </div>
+      <div class="prop">
+        <div class="prop-head"><span class="id">XYU-IP-023 · ended 5 days ago</span><span class="pill done">PASSED</span></div>
+        <div class="prop-title">Add Cybele's Rite Reliquary as a Earn vault</div>
+        <div class="prop-desc">NFT-backed lending vault using Cybele cards as collateral. 24.1% APY · risk tier 3/5 · isolated from XYU Stable Pool.</div>
+        <div class="prop-bar"><span style="color: var(--xy-mint);">FOR</span><div class="bar"><div class="yes" style="width: 82%;"></div><div class="no" style="width: 8%;"></div></div><span class="pct">82% · 18.2M</span></div>
+        <div class="prop-meta"><span>Status · <span class="accent">deployed</span></span><span>Treasury · −80K XYU bootstrap</span><span>Effect · live</span></div>
+      </div>
+      <div class="prop">
+        <div class="prop-head"><span class="id">XYU-IP-022 · ended 9 days ago</span><span class="pill fail">REJECTED</span></div>
+        <div class="prop-title">Pause XYGO weekly draw for governance audit</div>
+        <div class="prop-desc">Proposal to pause the lottery draws during the contract audit window.</div>
+        <div class="prop-bar"><span style="color: var(--xy-pink);">AGAINST</span><div class="bar"><div class="yes" style="width: 24%;"></div><div class="no" style="width: 62%;"></div></div><span class="pct" style="color: var(--xy-pink);">62% no</span></div>
+        <div class="prop-meta"><span>Status · <span class="accent">no change</span></span><span>Quorum · reached</span><span>—</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span style="color: var(--xy-cyan);">— XYU Token</span>
+    <span>Governance · Stake · Vote · On-chain effect</span>
+  </div>
+</div>
+</body></html>

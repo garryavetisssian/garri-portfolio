@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  :root { --proto: var(--xy-violet); }
+  body {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(167, 139, 250, 0.18), transparent 70%),
+      linear-gradient(180deg, #0A0810 0%, #14101C 50%, #0A0810 100%);
+  }
+  .body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .left .eyebrow { color: var(--proto); }
+  .left .headline em { color: var(--proto); }
+
+  .steps { display: flex; flex-direction: column; gap: 14px; }
+  .step {
+    background: rgba(167, 139, 250, 0.04);
+    border: 1px solid color-mix(in srgb, var(--proto) 25%, transparent);
+    border-radius: 14px; padding: 18px 22px;
+    display: grid; grid-template-columns: 48px 1fr auto; gap: 18px; align-items: center;
+  }
+  .step .n {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(167, 139, 250, 0.10); border: 1px solid color-mix(in srgb, var(--proto) 50%, transparent);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--proto);
+  }
+  .step.live { border-color: var(--proto); background: rgba(167, 139, 250, 0.08); }
+  .step.live .n { background: var(--proto); color: #0A0810; }
+  .step .body-t .t { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--text); }
+  .step .body-t .d { font-family: var(--body); font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .step .pill {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; color: var(--proto);
+    border: 1px solid color-mix(in srgb, var(--proto) 40%, transparent);
+  }
+  .step.done .pill { color: var(--xy-mint); border-color: color-mix(in srgb, var(--xy-mint) 40%, transparent); }
+  .step.pending .pill { color: var(--text-faint); border-color: var(--rule); }
+  .step.pending { opacity: 0.6; }
+
+  .progress {
+    margin-top: 22px;
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .progress .bar { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.05); position: relative; overflow: hidden; }
+  .progress .bar .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--proto); }
+  .progress .v { color: var(--proto); }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · Cybele's Rite</span>
+    <span><span style="color: var(--xy-violet);">09</span> / 16 · The mechanic</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">Cybele's Rite · 02 of 03</div>
+      <h1 class="headline">A four-act flow<br>that <em>feels</em> ceremonial.</h1>
+      <p class="caption">The mechanic is structured like a rite, not a transaction. Each step has its own pacing: pledge, kindle, draw, reveal. The transaction is real and verifiable on chain — but the surface design borrows from ritual, not from finance.</p>
+      <div class="kicker">Pledge · Kindle · Draw · Reveal</div>
+    </div>
+    <div>
+      <div class="steps">
+        <div class="step done">
+          <div class="n">I</div>
+          <div class="body-t"><div class="t">Pledge · 12 XYU</div><div class="d">Token transferred to the rite escrow. Refundable only until kindle.</div></div>
+          <div class="pill">DONE</div>
+        </div>
+        <div class="step done">
+          <div class="n">II</div>
+          <div class="body-t"><div class="t">Kindle · choose your sigil</div><div class="d">One of 9 sigils. Sigil influences which card subset enters the draw.</div></div>
+          <div class="pill">DONE</div>
+        </div>
+        <div class="step live">
+          <div class="n">III</div>
+          <div class="body-t"><div class="t">Draw · awaiting block 19,224,418</div><div class="d">Verifiable random function (VRF) commits in 2 blocks. Your draw is sealed.</div></div>
+          <div class="pill">LIVE</div>
+        </div>
+        <div class="step pending">
+          <div class="n">IV</div>
+          <div class="body-t"><div class="t">Reveal · open the card</div><div class="d">Mint receipt on chain, card visible in inventory, marketplace floor recomputes.</div></div>
+          <div class="pill">NEXT</div>
+        </div>
+      </div>
+      <div class="progress">
+        <span>Block</span><div class="bar"><div class="fill" style="width: 50%;"></div></div><span class="v">19,224,416 / 18</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span style="color: var(--xy-violet);">— Cybele's Rite</span>
+    <span>Pledge · Kindle · Draw · Reveal · VRF sealed</span>
+  </div>
+</div>
+</body></html>

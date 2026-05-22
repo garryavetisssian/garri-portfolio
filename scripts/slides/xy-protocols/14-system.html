@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .body { flex: 1; display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: center; }
+  .left .eyebrow { color: var(--xy-gold); }
+  .left .headline em { color: var(--xy-gold); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 14px;
+  }
+  .cell {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .cell h4 { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* Colors */
+  .colors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .colors .sw { aspect-ratio: 1; border-radius: 6px; position: relative; }
+  .colors .sw::after {
+    content: attr(data-l); position: absolute; bottom: 4px; left: 4px;
+    font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  /* Type */
+  .type { display: flex; flex-direction: column; gap: 4px; }
+  .type .t1 { font-family: var(--display); font-weight: 700; font-size: 30px; color: var(--text); letter-spacing: -0.022em; line-height: 1; }
+  .type .t2 { font-family: var(--display); font-weight: 600; font-size: 14px; color: var(--text); }
+  .type .t3 { font-family: var(--body); font-size: 12px; color: var(--text-muted); }
+  .type .t4 { font-family: var(--mono); font-size: 9px; color: var(--text-faint); letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* Buttons */
+  .btnrow { display: flex; flex-wrap: wrap; gap: 6px; }
+  .btnrow .b {
+    display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 6px;
+    font-family: var(--body); font-weight: 600; font-size: 10px;
+  }
+  .btnrow .b.p { background: var(--xy-gold); color: var(--xy-amber-ink); }
+  .btnrow .b.s { background: rgba(245,165,36,0.10); color: var(--xy-gold); border: 1px solid color-mix(in srgb, var(--xy-gold) 30%, transparent); }
+  .btnrow .b.g { background: transparent; color: var(--text); border: 1px solid var(--rule-strong); }
+  .btnrow .b.m { background: var(--xy-mint); color: #06120A; }
+  .btnrow .b.v { background: var(--xy-violet); color: #0A0810; }
+  .btnrow .b.c { background: var(--xy-cyan); color: #06121C; }
+
+  /* Chips */
+  .chiprow { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chiprow span {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 999px; border: 1px solid var(--rule); color: var(--text-muted);
+  }
+  .chiprow span.accent { color: var(--xy-gold); border-color: color-mix(in srgb, var(--xy-gold) 40%, transparent); }
+
+  /* Inputs */
+  .inputrow { display: flex; flex-direction: column; gap: 6px; }
+  .inputrow .in {
+    background: rgba(255,240,210,0.03); border: 1px solid var(--rule-strong);
+    border-radius: 6px; padding: 7px 9px; font-family: var(--body); font-size: 11px; color: var(--text);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .inputrow .in .ph { color: var(--text-muted); }
+  .inputrow .in .badge { font-family: var(--mono); font-size: 9px; color: var(--xy-gold); }
+  .inputrow .in.f { border-color: var(--xy-gold); box-shadow: 0 0 0 2px rgba(245,165,36,0.10); }
+
+  /* Numeric */
+  .numrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .numrow .n .v { font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.02em; }
+  .numrow .n .v.a { color: var(--xy-gold); }
+  .numrow .n .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-top: 2px; }
+
+  /* Status indicators */
+  .statusrow { display: flex; flex-direction: column; gap: 6px; }
+  .stat-line {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--text-muted);
+  }
+  .stat-line .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .stat-line .dot.live { background: var(--xy-mint); box-shadow: 0 0 8px var(--xy-mint); }
+  .stat-line .dot.wait { background: var(--xy-gold); }
+  .stat-line .dot.fail { background: var(--xy-pink); }
+  .stat-line .dot.off { background: rgba(255,255,255,0.16); }
+
+  /* Icons */
+  .iconrow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .iconrow .i {
+    aspect-ratio: 1; border: 1px solid var(--rule); border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--text-muted);
+  }
+  .iconrow .i.accent { color: var(--xy-gold); border-color: color-mix(in srgb, var(--xy-gold) 30%, transparent); }
+
+  /* Mockup chrome mini */
+  .chrome {
+    display: flex; align-items: center; gap: 5px;
+    padding: 6px 8px; border-radius: 6px; background: rgba(0,0,0,0.3); border: 1px solid var(--rule);
+  }
+  .chrome .d { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.10); }
+  .chrome .url { flex: 1; text-align: center; font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 0.05em; }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · Design system</span>
+    <span><span class="accent">14</span> / 16 · System</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">Design system · 01</div>
+      <h1 class="headline">One <em>system</em>,<br>five surfaces, one feel.</h1>
+      <p class="caption">The protocols look different but share the same primitives. Tokens, type scale, button shapes, status indicators, transaction language, and chrome. The protocol-specific accent (pink / mint / violet / cyan / gold) is the only thing that changes between surfaces. Everything else is system.</p>
+      <div class="kicker">Tokens · Type · Buttons · Inputs · Status · Chrome</div>
+    </div>
+    <div class="grid">
+      <div class="cell">
+        <h4>Accent palette</h4>
+        <div class="colors">
+          <div class="sw" style="background: var(--xy-gold);" data-l="Gold"></div>
+          <div class="sw" style="background: var(--xy-pink);" data-l="Pink"></div>
+          <div class="sw" style="background: var(--xy-mint);" data-l="Mint"></div>
+          <div class="sw" style="background: var(--xy-violet);" data-l="Violet"></div>
+          <div class="sw" style="background: var(--xy-cyan);" data-l="Cyan"></div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Type scale</h4>
+        <div class="type">
+          <div class="t1">Display 30</div>
+          <div class="t2">Heading 14</div>
+          <div class="t3">Body 12</div>
+          <div class="t4">Mono 9 · uppercase</div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Buttons</h4>
+        <div class="btnrow">
+          <span class="b p">Primary</span><span class="b s">Secondary</span><span class="b g">Ghost</span>
+          <span class="b m">Earn</span><span class="b v">Rite</span><span class="b c">XYU</span>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Chips</h4>
+        <div class="chiprow">
+          <span class="accent">XYGO</span><span>Marketplace</span><span>Earn</span><span>Rite</span><span>XYU</span>
+          <span>LIVE</span><span>STAKED</span><span>VERIFIED</span><span>LOCKED</span>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Inputs</h4>
+        <div class="inputrow">
+          <div class="in f"><span>2,500</span><span class="badge">USDC</span></div>
+          <div class="in"><span class="ph">Search XYU</span><span class="badge">⌘ K</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Numeric</h4>
+        <div class="numrow">
+          <div class="n"><div class="v a">12.4%</div><div class="l">APY</div></div>
+          <div class="n"><div class="v">$2.04</div><div class="l">XYU</div></div>
+          <div class="n"><div class="v">4,612</div><div class="l">Balance</div></div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Status</h4>
+        <div class="statusrow">
+          <div class="stat-line"><span class="dot live"></span>Vault earning · live</div>
+          <div class="stat-line"><span class="dot wait"></span>Awaiting VRF block</div>
+          <div class="stat-line"><span class="dot fail"></span>Tx reverted · gas</div>
+          <div class="stat-line"><span class="dot off"></span>Not deployed</div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Icons</h4>
+        <div class="iconrow">
+          <div class="i accent">⌬</div><div class="i">∞</div><div class="i">↑</div><div class="i">⇄</div><div class="i">●</div><div class="i">▲</div>
+        </div>
+      </div>
+      <div class="cell">
+        <h4>Chrome</h4>
+        <div class="chrome">
+          <span class="d"></span><span class="d"></span><span class="d"></span>
+          <span class="url">xygo.market</span>
+        </div>
+        <div class="chrome" style="margin-top: 5px;">
+          <span class="d"></span><span class="d"></span><span class="d"></span>
+          <span class="url">earn.xygo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span class="accent">— Design system</span>
+    <span>5 accents · 1 system · 1 feel</span>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  :root { --proto: var(--xy-cyan); }
+  .body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .left .eyebrow { color: var(--proto); }
+  .left .headline em { color: var(--proto); }
+
+  .donut-card {
+    background: #0E0F14; border: 1px solid var(--rule-strong); border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 40px 100px -30px rgba(0,0,0,0.7);
+  }
+  .donut-grid { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: center; }
+  .donut {
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background:
+      conic-gradient(
+        var(--xy-gold) 0 30%,
+        var(--xy-cyan) 30% 50%,
+        var(--xy-mint) 50% 65%,
+        var(--xy-violet) 65% 80%,
+        var(--xy-pink) 80% 92%,
+        rgba(255,255,255,0.10) 92% 100%
+      );
+    position: relative;
+  }
+  .donut::after {
+    content: "100M"; position: absolute; inset: 38px;
+    background: #0E0F14; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 800; font-size: 36px; color: var(--text);
+  }
+  .donut-label {
+    position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  .legend { display: flex; flex-direction: column; gap: 10px; }
+  .leg {
+    display: grid; grid-template-columns: 14px 1fr auto; gap: 12px; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--rule);
+  }
+  .leg:last-child { border-bottom: none; }
+  .leg .swatch { width: 14px; height: 14px; border-radius: 4px; }
+  .leg .nm { font-family: var(--body); font-size: 13px; color: var(--text); }
+  .leg .nm small { display: block; font-family: var(--mono); font-size: 10px; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.04em; }
+  .leg .v { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--text); }
+
+  .floor {
+    margin-top: 18px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    padding-top: 18px; border-top: 1px solid var(--rule);
+  }
+  .floor .s { text-align: center; }
+  .floor .s .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+  .floor .s .v { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--text); margin-top: 4px; }
+  .floor .s .v.accent { color: var(--proto); }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · XYU Token</span>
+    <span><span style="color: var(--xy-cyan);">12</span> / 16 · Tokenomics</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">XYU Token · 02 of 03</div>
+      <h1 class="headline">A token<br>that <em>burns</em> as<br>protocols are used.</h1>
+      <p class="caption">100M total supply, capped at mint. Every protocol burns a fraction of the XYU it touches — lottery fees, marketplace royalties, rite pledges, vault performance. The supply curve bends down over time, and the deflation is visible in the wallet, not hidden in a whitepaper.</p>
+      <div class="kicker">100M cap · Deflationary · Allocation visible · Burns receipted</div>
+    </div>
+    <div class="donut-card">
+      <div class="donut-grid">
+        <div style="position: relative;">
+          <div class="donut"></div>
+          <span class="donut-label">100M supply</span>
+        </div>
+        <div class="legend">
+          <div class="leg"><span class="swatch" style="background: var(--xy-gold);"></span><span class="nm">Community<small>Lottery rewards · airdrops · rite</small></span><span class="v">30%</span></div>
+          <div class="leg"><span class="swatch" style="background: var(--xy-cyan);"></span><span class="nm">Liquidity &amp; staking<small>DEX pools · vault incentives</small></span><span class="v">20%</span></div>
+          <div class="leg"><span class="swatch" style="background: var(--xy-mint);"></span><span class="nm">Treasury<small>4-year unlock · DAO-controlled</small></span><span class="v">15%</span></div>
+          <div class="leg"><span class="swatch" style="background: var(--xy-violet);"></span><span class="nm">Team<small>3-year vest · 6-month cliff</small></span><span class="v">15%</span></div>
+          <div class="leg"><span class="swatch" style="background: var(--xy-pink);"></span><span class="nm">Investors<small>2-year vest · 6-month cliff</small></span><span class="v">12%</span></div>
+          <div class="leg"><span class="swatch" style="background: rgba(255,255,255,0.18);"></span><span class="nm">Reserve<small>Insurance · emergency liquidity</small></span><span class="v">8%</span></div>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="s"><div class="l">Burned to date</div><div class="v accent">2,418,400 XYU</div></div>
+        <div class="s"><div class="l">Burn rate · 30d</div><div class="v">+128K / mo</div></div>
+        <div class="s"><div class="l">Circulating</div><div class="v">42.4M</div></div>
+        <div class="s"><div class="l">Staked</div><div class="v">28.1M (66%)</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span style="color: var(--xy-cyan);">— XYU Token</span>
+    <span>Tokenomics · 6 buckets · Deflationary by design</span>
+  </div>
+</div>
+</body></html>
