@@ -388,8 +388,8 @@ body.cv-mode .grain {
     size: A4;
     margin: 14mm 14mm 14mm 14mm;
   }
-  /* Hide site chrome (brutalist header + footer) when printing */
-  header, footer, .grain, .marquee {
+  /* Hide site chrome (brutalist header + footer) when printing — but keep the CV's own header/footer */
+  header:not(.cv-header), footer:not(.cv-footer), .grain, .marquee {
     display: none !important;
   }
   .cv-root {
