@@ -128,10 +128,10 @@ export function hasCaseFolder(slug: string): boolean {
 
 /**
  * Projects array filtered to only those with a case folder on disk,
- * preserving the original order in projects.ts.
+ * reversed so the most recent project (last in projects.ts) appears first.
  */
 export function getAvailableProjects(): CaseStudy[] {
-  return projects.filter((p) => hasCaseFolder(p.slug));
+  return projects.filter((p) => hasCaseFolder(p.slug)).reverse();
 }
 
 export function getAvailableProjectSlugs(): string[] {
