@@ -161,7 +161,12 @@ function Gallery({ assets, priority = 0 }: { assets: CaseAsset[]; priority?: num
   );
 }
 
-function TabbedGallery({
+/**
+ * Standalone tab strip — lives above the LaptopReveal so the user sees the
+ * control alongside *all* the things it changes (cover image + gallery).
+ * Sticks to the top under the nav once scrolled past.
+ */
+function TabStrip({
   tabs,
   active,
   onActiveChange,
@@ -171,34 +176,61 @@ function TabbedGallery({
   onActiveChange: (i: number) => void;
 }) {
   const { t } = useLanguage();
-  const current = tabs[active];
-
   return (
-    <div>
-      {/* Tab bar — sticky under the nav */}
-      <div className="sticky top-[var(--nav-h)] z-20 border-y border-line-strong bg-paper/95 backdrop-blur-sm">
-        <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] flex items-center gap-1 overflow-x-auto">
-          {tabs.map((tab, i) => (
-            <button
-              key={tab.name}
-              onClick={() => onActiveChange(i)}
-              className={`mono px-4 py-3 whitespace-nowrap transition-colors border-b-2 ${
-                i === active
-                  ? "border-acid text-acid"
-                  : "border-transparent text-ink-mute hover:text-ink"
-              }`}
-            >
-              <span className="text-ink-faint mr-1.5">{String(i + 1).padStart(2, "0")}</span>
-              {translateTabName(tab.name, t)}
-              <span className="text-ink-faint ml-2">·</span>
-              <span className="text-ink-faint ml-2">{tab.assets.length}</span>
-            </button>
-          ))}
+    <div className="case-tab-strip sticky top-[var(--nav-h)] z-30 border-y border-line-strong bg-paper/95 backdrop-blur-md">
+      <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
+        <div className="flex items-stretch gap-0 overflow-x-auto">
+          {tabs.map((tab, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={tab.name}
+                onClick={() => onActiveChange(i)}
+                aria-pressed={isActive}
+                className={`relative group flex-1 min-w-[200px] text-left whitespace-nowrap transition-colors px-5 md:px-7 py-5 md:py-6 border-r border-line-strong last:border-r-0 ${
+                  isActive
+                    ? "bg-acid text-paper"
+                    : "bg-paper text-ink-mute hover:text-ink hover:bg-paper-soft"
+                }`}
+              >
+                <span
+                  className={`mono block text-[11px] tracking-[0.16em] uppercase mb-1 ${
+                    isActive ? "text-paper/70" : "text-ink-faint"
+                  }`}
+                >
+                  Tab {String(i + 1).padStart(2, "0")} · {tab.assets.length} {t.ui.filesSuffix}
+                </span>
+                <span
+                  className="block"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 700,
+                    fontSize: "clamp(1rem, 1.6vw, 1.35rem)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {translateTabName(tab.name, t)}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
-      {current && <Gallery assets={current.assets} priority={1} />}
     </div>
   );
+}
+
+function TabbedGallery({
+  tabs,
+  active,
+}: {
+  tabs: CaseTab[];
+  active: number;
+}) {
+  const current = tabs[active];
+  if (!current) return null;
+  return <Gallery assets={current.assets} priority={1} />;
 }
 
 export default function CaseStudyView({
@@ -314,6 +346,17 @@ export default function CaseStudyView({
       {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
       <Brief brief={project.brief} slug={project.slug} />
 
+      {/* Tab strip — for cases with multiple tabs, lives ABOVE everything it
+          controls (the laptop cover + the gallery), so the control sits in
+          the same scroll region as the content that changes. */}
+      {hasTabs && (
+        <TabStrip
+          tabs={caseAssets.tabs}
+          active={activeTab}
+          onActiveChange={setActiveTab}
+        />
+      )}
+
       {/* Laptop reveal — scroll-driven cover image moment, tinted with the
           case's accent color. */}
       {coverSrc && <LaptopReveal src={coverSrc} color={project.color} />}
@@ -350,11 +393,7 @@ export default function CaseStudyView({
           </div>
 
           {hasTabs ? (
-            <TabbedGallery
-              tabs={caseAssets.tabs}
-              active={activeTab}
-              onActiveChange={setActiveTab}
-            />
+            <TabbedGallery tabs={caseAssets.tabs} active={activeTab} />
           ) : (
             <Gallery assets={caseAssets.assets} priority={1} />
           )}

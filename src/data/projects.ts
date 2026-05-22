@@ -492,19 +492,19 @@ export const projects: CaseStudy[] = [
     color: "#F5A524",
     brief: {
       narrative:
-        "XY Ecosystem is a family of four Web3 protocols sharing one token (XYU) and one design system. XY.Market trades coordinate-based Grid NFTs and Parking NFTs; Earn mints LP.NFTs and P.NFTs as tradeable yield positions; Cybele's Rite is an eternal sacrifice ritual; XYU is the engine that ties them together.",
+        "Four Web3 protocols connected by one token (XYU) and one design system — designed end-to-end across web and mobile.",
       tiles: [
-        { kind: "stat", value: "4", label: "Protocols sharing one design system", span: 3 },
-        { kind: "stat", value: "1", label: "Native token (XYU) — BSC", span: 3 },
+        { kind: "stat", value: "4", label: "Protocols, one system", span: 3 },
+        { kind: "stat", value: "1", label: "Native token · BSC", span: 3 },
         {
           kind: "quote",
           text: "Every payout is real capital.",
-          cite: "The XYU manifesto",
+          cite: "XYU manifesto",
           span: 6,
         },
         {
           kind: "label",
-          key: "Protocol surfaces",
+          key: "Surfaces",
           value: "XY.Market · Earn · Cybele's Rite · XYU Token",
           span: 6,
         },
@@ -512,13 +512,11 @@ export const projects: CaseStudy[] = [
           kind: "tags",
           label: "What I led",
           items: [
-            "Coordinate-based NFT marketplace",
-            "Mint flows for P.NFT & LP.NFT",
-            "Sacrifice ritual + leaderboard",
-            "XYU token engine page",
-            "KYC + terms verification flow",
-            "Mobile parity across all 4 protocols",
-            "Shared design system",
+            "NFT marketplace",
+            "P.NFT & LP.NFT mint",
+            "Cybele's Rite ritual",
+            "XYU token engine",
+            "Design system",
           ],
           span: 6,
         },
