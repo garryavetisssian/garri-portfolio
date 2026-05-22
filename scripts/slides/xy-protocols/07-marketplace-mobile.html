@@ -2,15 +2,13 @@
 <html><head><meta charset="utf-8">
 <link rel="stylesheet" href="_theme.css">
 <style>
-  .phones {
-    display: flex; gap: 28px; align-items: center; justify-content: center;
-    transform: translateY(-8px);
+  .mobiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: start;
   }
-  .phones .phone { width: 240px; }
-  .phones .phone:nth-child(1) { transform: rotate(-4deg) translateY(20px); }
-  .phones .phone:nth-child(2) { transform: translateY(-10px); z-index: 2; }
-  .phones .phone:nth-child(3) { transform: rotate(4deg) translateY(20px); }
-  .phone-screen img { object-fit: cover; object-position: top center; height: 100%; }
+  .mobiles .mobile-frame { width: 100%; }
 </style>
 </head><body>
 <div class="slide">
@@ -22,24 +20,33 @@
     <div>
       <div class="eyebrow">Marketplace · 06 of 06</div>
       <h1 class="headline">The same product,<br>on a <em>thumb</em>.</h1>
-      <p class="caption">Mobile re-flows the same five-tab item page into a stack: certificate + listing price at the top, the grid as a square, then the bid list. The big actions — Sell NFT, Recall Bid, Place a Bid — collapse into a fixed bottom dock that follows the user across the protocol.</p>
+      <p class="caption">Modals and panels re-flow to a five-tab bottom dock (Explore · NFT Collections · Earn · Cybele · XYU Token) that follows the user across the whole protocol. Sell, Accept Bid, Sign Terms — every action sheet is layered on the same browser-style overlay, keeping desktop ↔ mobile parity at the modal level.</p>
       <div class="chips">
-        <span class="chip gold"><span class="dot"></span>Explore · Collections · Earn · Cybele · XYU</span>
-        <span class="chip">Long-tap to zoom on the grid</span>
-        <span class="chip">Modals share desktop layout</span>
+        <span class="chip gold"><span class="dot"></span>Five-tab bottom dock</span>
+        <span class="chip">Modal pattern · shared</span>
+        <span class="chip">Long-tap zoom on the grid</span>
         <span class="chip">Settings panel mirrors web</span>
       </div>
-      <div class="kicker">Five protocol tabs in one fixed mobile dock</div>
+      <div class="kicker">Modals · Collections · Action sheets · Bottom dock</div>
     </div>
-    <div class="phones">
-      <div class="phone"><div class="phone-screen"><img src="_assets/marketplace/Listed Grid NFT - Current Bids (Mobile).png" alt=""></div></div>
-      <div class="phone"><div class="phone-screen"><img src="_assets/marketplace/Collections.png" alt=""></div></div>
-      <div class="phone"><div class="phone-screen"><img src="_assets/marketplace/Accept Bid - Double check modal (Mobile).png" alt=""></div></div>
+    <div class="mobiles">
+      <div class="mobile-frame">
+        <div class="top"><span>Sign terms</span><span class="accent">375 × 716</span></div>
+        <div class="body-img"><img src="_assets/marketplace/Sign terms popup (Mobile).png" alt=""></div>
+      </div>
+      <div class="mobile-frame">
+        <div class="top"><span>Accept bid</span><span class="accent">375 × 669</span></div>
+        <div class="body-img"><img src="_assets/marketplace/Accept Bid - Double check modal (Mobile).png" alt=""></div>
+      </div>
+      <div class="mobile-frame">
+        <div class="top"><span>KYC popup</span><span class="accent">375 × 612</span></div>
+        <div class="body-img"><img src="_assets/marketplace/KYC Popup (Mobile).png" alt=""></div>
+      </div>
     </div>
   </div>
   <div class="slide-bot">
     <span class="accent">— Marketplace</span>
-    <span>Mobile · Same five tabs · Action dock</span>
+    <span>Mobile · Shared modals · Five-tab dock</span>
   </div>
 </div>
 </body></html>

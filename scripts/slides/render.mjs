@@ -49,6 +49,8 @@ const browser = await puppeteer.launch({
   protocolTimeout: 120_000,
 });
 const page = await browser.newPage();
+// Keep 2x for retina sharpness but encode to WebP — yields ~5-10x smaller files
+// than PNG at the same visual quality.
 await page.setViewport({ width: 1600, height: 1000, deviceScaleFactor: 2 });
 
 for (const file of files) {
@@ -57,13 +59,13 @@ for (const file of files) {
   // Wait an extra beat for fonts to settle (Google Fonts can race)
   await new Promise((r) => setTimeout(r, 500));
 
-  // 00-cover → Cover.png, 01-brand → 1.png, 11-closing → 11.png
+  // 00-cover → Cover.webp, 01-brand → 1.webp, 11-closing → 11.webp
   const m = file.match(/^(\d{2})-([\w-]+)\.html$/);
   const idx = parseInt(m[1], 10);
-  const outName = idx === 0 ? 'Cover.png' : `${idx}.png`;
+  const outName = idx === 0 ? 'Cover.webp' : `${idx}.webp`;
   const outPath = path.join(outDir, outName);
 
-  await page.screenshot({ path: outPath, type: 'png' });
+  await page.screenshot({ path: outPath, type: 'webp', quality: 82 });
   const rel = path.relative(repoRoot, outPath);
   console.log(`  ✓ ${file.padEnd(22)} → ${rel}`);
 }

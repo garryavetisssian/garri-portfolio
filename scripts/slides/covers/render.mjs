@@ -29,6 +29,7 @@ const TARGETS = [
 const browser = await puppeteer.launch({
   headless: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  protocolTimeout: 120_000,
 });
 const page = await browser.newPage();
 await page.setViewport({ width: 1600, height: 1000, deviceScaleFactor: 2 });
@@ -39,9 +40,11 @@ for (const { html, out } of TARGETS) {
   await new Promise((r) => setTimeout(r, 600));
 
   for (const dest of out) {
-    const absDest = path.join(cases, dest);
+    // Force .webp extension regardless of declared dest, for faster loading.
+    const webpDest = dest.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+    const absDest = path.join(cases, webpDest);
     await mkdir(path.dirname(absDest), { recursive: true });
-    await page.screenshot({ path: absDest, type: 'png' });
+    await page.screenshot({ path: absDest, type: 'webp', quality: 82 });
     console.log(`  ✓ ${html.padEnd(22)} → ${path.relative(repoRoot, absDest)}`);
   }
 }

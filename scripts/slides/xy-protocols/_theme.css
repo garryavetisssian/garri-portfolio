@@ -151,26 +151,55 @@ body::after {
 }
 .shot-caption .accent { color: var(--xy-gold); }
 
-/* ── Phone frame for mobile screens ─────────────────────────────── */
-.phone {
-  width: 100%; max-width: 320px;
-  aspect-ratio: 9 / 19.5;
-  background: #0A0805;
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 36px;
-  padding: 10px;
-  box-shadow:
-    0 50px 100px -30px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(255,240,210,0.04) inset;
-  position: relative;
-}
-.phone-screen {
-  width: 100%; height: 100%;
-  border-radius: 26px;
+/* ── Mobile frame for mobile screens — simple bordered container,
+   keeps full aspect ratio, no cropping. ───────────────────────── */
+.mobile-frame {
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px;
   overflow: hidden;
-  background: #050505;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 30px 80px -30px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,240,210,0.03) inset;
 }
-.phone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.mobile-frame .top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px;
+  background: #0A0807;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.mobile-frame .top .accent { color: var(--xy-gold); }
+.mobile-frame .body-img {
+  /* Image fills container width, height follows intrinsic aspect — no crop. */
+  background: #050505;
+  overflow: hidden;
+}
+.mobile-frame .body-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* When constraining a tall mobile screenshot by SLIDE height instead of width,
+   wrap it in .mobile-tall and the image fills by height keeping aspect. */
+.mobile-tall {
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-tall .mobile-frame { max-height: 100%; }
+.mobile-tall .body-img {
+  flex: 1; min-height: 0;
+  overflow: hidden;
+  display: flex; justify-content: center;
+}
+.mobile-tall .body-img img {
+  height: 100%; width: auto;
+}
 
 /* ── Chips + tags ───────────────────────────────────────────────── */
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }

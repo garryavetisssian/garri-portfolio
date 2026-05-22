@@ -488,7 +488,7 @@ export const projects: CaseStudy[] = [
     role: "Lead Product Designer",
     duration: "12+ months",
     team: "PM, 4 Engineers, Blockchain Dev",
-    thumbnail: "/cases/xy-ecosystem/Cover.png",
+    thumbnail: "/cases/xy-ecosystem/Cover.webp",
     color: "#F5A524",
     brief: {
       narrative:
@@ -545,12 +545,12 @@ export const projects: CaseStudy[] = [
         content:
           "The marketplace is the entry point. Grid NFTs are sold by Layer (L1 = 25% of grid, L2 = 504 NFTs, L3 = 0.25% per NFT) — each one is a zone with X,Y coordinates that earns a percentage of every ticket bought inside it plus a bonus when a jackpot hits there. Parking NFTs trade the LP.NFT and P.NFT positions minted by the Earn protocol — each shows assets locked, value locked, weight, lifetime rewards, and a place-bid action.\n\nEvery item page has the same five tabs (Current Bids, Activity, Statistics, Listings, Description) and the same trust signals: certificate of digital asset ownership, contract address, token standard, last sale date, jackpot history. Big-ticket Genesis NFTs go through a full Terms of Purchase read + email-code verification flow before purchase — KYC isn't an afterthought, it's a first-class screen.",
         images: [
-          "/cases/xy-ecosystem/2 XY Protocols/2.png",
-          "/cases/xy-ecosystem/2 XY Protocols/3.png",
-          "/cases/xy-ecosystem/2 XY Protocols/4.png",
-          "/cases/xy-ecosystem/2 XY Protocols/5.png",
-          "/cases/xy-ecosystem/2 XY Protocols/6.png",
-          "/cases/xy-ecosystem/2 XY Protocols/7.png",
+          "/cases/xy-ecosystem/2 XY Protocols/2.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/3.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/4.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/5.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/6.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/7.webp",
         ],
       },
       {
@@ -559,8 +559,8 @@ export const projects: CaseStudy[] = [
         content:
           "Earn turns a stake into a portable, sellable NFT. Two mint flows share the same form chrome:\n\n**P.NFT — Direct staking.** Stake XYU for 1 / 6 / 12 / 24 months at weights 2000 → 16,000 kg. 100% of earnings go to the holder — no protocol share. The output is a QR-coded NFT that can be listed on XY.Market.\n\n**LP.NFT — Provide liquidity.** Deposit USDT (100 / 250 / 500 / 1k / 10k) into a PancakeSwap LP XYU/USDT pool. The share is split 60% / 40% (Your Share / Protocol Share) with an Instant Protocol Boost of 20%. The math — share, weight, boost, projected rewards — is the form itself; nothing is hidden until sign-time.",
         images: [
-          "/cases/xy-ecosystem/2 XY Protocols/8.png",
-          "/cases/xy-ecosystem/2 XY Protocols/9.png",
+          "/cases/xy-ecosystem/2 XY Protocols/8.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/9.webp",
         ],
       },
       {
@@ -569,8 +569,8 @@ export const projects: CaseStudy[] = [
         content:
           "Cybele's Rite is the only protocol in the ecosystem that doesn't trade in numbers — it trades in weight. Sacrifice XYU at a published conversion rate (1 XYU = 0.25 Weight), gain Weight permanently in the ecosystem, and climb a public leaderboard of Top Sacrifiers. The countdown to *dies Sanguinis* runs at the top.\n\nThe design decision was tonal: this protocol carries the cult-like, ceremonial side of the ecosystem (the name itself is mythic). But the receipts are pure crypto — every sacrifice writes an on-chain transaction with a hash, visible in 'My Sacrifices'. Ceremony on the surface, blockchain underneath.",
         images: [
-          "/cases/xy-ecosystem/2 XY Protocols/10.png",
-          "/cases/xy-ecosystem/2 XY Protocols/11.png",
+          "/cases/xy-ecosystem/2 XY Protocols/10.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/11.webp",
         ],
       },
       {
@@ -579,8 +579,8 @@ export const projects: CaseStudy[] = [
         content:
           "XYU is the long-scroll page that ties the ecosystem together. The hero band shows price, chain (BNB), 24h change, and rank — alongside the Read Whitepaper / View Smart Contract buttons. Underneath, the page walks a reader through:\n\n- **What XYU does for you** — Play in XYGO · Trade NFTs · Earn yield via Parking · Provide liquidity via SL.Mining\n- **How supply works** — L1 / L2 / L3 supply table, Epoch Burns, In-Game Bonus Burns, Parking Locks, Cybele's Protocol (CRP Vault)\n- **Distribution & vesting** — donut chart with 71% L1 Mining + In-Game Reserve, 10% Liquidity Pools, 5% Team, 5% Growth, 3% NFT Investors, 1% Community\n- **Lock duration tiers** — 1m / 6m / 12m / 24m → 51% / 56% / 60% / 70% share\n- **Protocol share routing per epoch** — Parking Vault, SL.Mining Reserve, Cybele's Protocol\n- **Why the economics hold** — Supply Can't Inflate, Demand Is Built Into the Product, Liquidity is Self-Reinforcing\n- **Trust & Security** — Audited, Time-Lock + Multi-Sig, Licensed & Regulated, Fully On-Chain\n- **Roadmap** — Foundation, Expansion, Governance, Ecosystem Growth\n\nClosing line: *Every payout is real capital.*",
         images: [
-          "/cases/xy-ecosystem/2 XY Protocols/12.png",
-          "/cases/xy-ecosystem/2 XY Protocols/13.png",
+          "/cases/xy-ecosystem/2 XY Protocols/12.webp",
+          "/cases/xy-ecosystem/2 XY Protocols/13.webp",
         ],
       },
       {
@@ -588,7 +588,7 @@ export const projects: CaseStudy[] = [
         title: "One design system across four protocols",
         content:
           "The whole ecosystem runs on one design system: dark-on-dark line-art chrome, single gold accent (#F5A524), shared five-tab item page, shared modal pattern (Sell NFT looks like Accept Bid looks like Sign Terms looks like the Sacrifice form), shared QR-coded NFT artwork format, and a mobile dock that surfaces the same four-protocol nav (Explore · NFT Collections · Earn · Cybele · XYU Token) at the bottom of every screen.\n\nThis was the highest-leverage decision in the project. Adding the Cybele's Rite protocol was a matter of reusing the modal, the leaderboard table, and the transaction-list pattern — not redesigning trust from scratch.",
-        images: ["/cases/xy-ecosystem/2 XY Protocols/14.png"],
+        images: ["/cases/xy-ecosystem/2 XY Protocols/14.webp"],
       },
     ],
     metrics: [
