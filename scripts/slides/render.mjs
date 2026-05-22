@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
  * Renders all slide HTML files in scripts/slides/<deck>/ to PNGs in
- * public/cases/<deck>/.  Usage:
+ * public/cases/<deck>/ (or an explicit output path under public/cases/).
  *
  *   node scripts/slides/render.mjs balvoi
+ *   node scripts/slides/render.mjs xy-protocols "xy-ecosystem/2 XY Protocols"
  *
  * File-name convention:
  *   00-cover.html      → Cover.png
@@ -21,13 +22,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..', '..');
 
 const deck = process.argv[2];
+const outSubpath = process.argv[3] ?? deck;
 if (!deck) {
-  console.error('Usage: node scripts/slides/render.mjs <deck>');
+  console.error('Usage: node scripts/slides/render.mjs <deck> [outSubpath]');
   process.exit(1);
 }
 
 const slidesDir = path.join(__dirname, deck);
-const outDir = path.join(repoRoot, 'public', 'cases', deck);
+const outDir = path.join(repoRoot, 'public', 'cases', outSubpath);
 
 const files = (await readdir(slidesDir))
   .filter((f) => /^\d{2}-[\w-]+\.html$/.test(f))

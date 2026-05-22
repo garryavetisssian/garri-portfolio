@@ -98,15 +98,19 @@ export function getCaseAssets(slug: string): CaseAssets {
     const tabs: CaseTab[] = subfolders.map((folder) => {
       const folderPath = path.join(dir, folder);
       const urlPrefix = `/cases/${slug}/${encodeURIComponent(folder)}`;
+      // Strip a leading numeric sort prefix like "1 ", "01 ", "1 — " so the
+      // displayed tab label stays clean while the folder name controls order.
+      const displayName = folder.replace(/^\d+\s*[—–-]?\s*/, "");
       return {
-        name: folder,
+        name: displayName,
         cover: findCover(folderPath, urlPrefix),
         assets: scanDir(folderPath, urlPrefix),
       };
     });
 
-    // Prefer "Release" as the default tab if it exists
-    let defaultTab = tabs.length - 1;
+    // Default to the first tab. Override to a tab containing "release" if one
+    // exists (preserves legacy behavior for Ineed's First/Release Version tabs).
+    let defaultTab = 0;
     const releaseIdx = tabs.findIndex((t) => t.name.toLowerCase().includes("release"));
     if (releaseIdx !== -1) defaultTab = releaseIdx;
 

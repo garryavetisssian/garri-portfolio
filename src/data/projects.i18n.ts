@@ -30,23 +30,23 @@ export const PROJECTS_I18N: Record<string, PerLocale> = {
       team: "PM, 3 ինժեներ, տվյալագետ",
     },
   },
-  xygo: {
+  "xy-ecosystem": {
     en: {
-      subtitle: "Web3 lottery platform with NFT marketplace — making crypto accessible to mainstream users",
-      role: "Product Designer",
-      duration: "8 months",
+      subtitle: "Five interconnected Web3 protocols — a lottery, marketplace, yield engine, ritual game, and native token — designed as one ecosystem",
+      role: "Lead Product Designer",
+      duration: "12+ months",
       team: "PM, 4 Engineers, Blockchain Dev",
     },
     ru: {
-      subtitle: "Web3-платформа лотереи с NFT-маркетплейсом — делает крипту доступной для массовой аудитории",
-      role: "Продуктовый дизайнер",
-      duration: "8 месяцев",
+      subtitle: "Пять взаимосвязанных Web3-протоколов — лотерея, маркетплейс, доходный движок, ритуальная игра и нативный токен — спроектированы как одна экосистема",
+      role: "Ведущий продуктовый дизайнер",
+      duration: "12+ месяцев",
       team: "PM, 4 инженера, блокчейн-разработчик",
     },
     hy: {
-      subtitle: "Web3 լատարեայի հարթակ NFT շուկայահրապարակով՝ դարձնելով կրիպտոն հասանելի սովորական օգտատերերի համար",
-      role: "Պրոդուկտի դիզայներ",
-      duration: "8 ամիս",
+      subtitle: "Հինգ փոխկապակցված Web3 պրոտոկոլներ՝ լատարեա, շուկայահրապարակ, եկամտի շարժիչ, ծիսական խաղ և սեփական թոքեն՝ նախագծված որպես մեկ էկոհամակարգ",
+      role: "Առաջատար պրոդուկտի դիզայներ",
+      duration: "12+ ամիս",
       team: "PM, 4 ինժեներ, բլոկչեյն մշակող",
     },
   },

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_cover.css">
+<style>
+  :root { --accent: #44D62C; }
+  body {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(68, 214, 44, 0.30), transparent 70%),
+      radial-gradient(ellipse 60% 30% at 50% 0%, rgba(68, 214, 44, 0.08), transparent 70%),
+      linear-gradient(180deg, #050606 0%, #0A0B0A 50%, #050606 100%);
+  }
+  .scan {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(68, 214, 44, 0.04) 3px,
+      rgba(68, 214, 44, 0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gp-panel {
+    width: 480px;
+    background: rgba(10, 11, 10, 0.85);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 6px;
+    padding: 24px;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(68, 214, 44, 0.06) inset,
+      0 30px 80px -20px rgba(0,0,0,0.6),
+      0 0 60px color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .gp-panel::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 60px; height: 2px; background: var(--accent);
+  }
+  .gp-head {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+    padding-bottom: 14px; margin-bottom: 18px;
+  }
+  .gp-title { font-family: var(--display); font-weight: 700; font-size: 16px; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; }
+  .gp-meta { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.16em; }
+  .gp-bars { display: flex; flex-direction: column; gap: 12px; }
+  .gp-bar { display: grid; grid-template-columns: 110px 1fr 50px; gap: 12px; align-items: center; font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.7); }
+  .gp-bar .track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; position: relative; overflow: hidden; }
+  .gp-bar .fill { height: 100%; background: var(--accent); box-shadow: 0 0 8px var(--accent); border-radius: 3px; }
+  .gp-bar .val { color: var(--accent); text-align: right; }
+  .gp-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px;
+    border-top: 1px solid rgba(68, 214, 44, 0.18); padding-top: 16px;
+  }
+  .gp-stat .n { font-family: var(--display); font-weight: 800; font-size: 26px; color: var(--accent); }
+  .gp-stat .l { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+</style>
+</head><body>
+<div class="scan"></div>
+<div class="bg-field">
+  <span class="glyph" style="font-size: 320px; top: -40px; left: -30px; color: rgba(68,214,44,0.06);">R</span>
+  <span class="glyph" style="font-size: 240px; top: 30px; right: 40px; color: rgba(68,214,44,0.06);">Z</span>
+  <span class="glyph" style="font-size: 220px; bottom: -40px; left: 38%; color: rgba(68,214,44,0.06);">U</span>
+  <span class="glyph" style="font-size: 180px; top: 60%; left: 4%; color: rgba(68,214,44,0.06);">I</span>
+</div>
+<div class="frame">
+  <div class="top">
+    <span>Razer UI · Case Study</span>
+    <span>Garri Avetisyan · 2022</span>
+  </div>
+  <div class="center has-feature">
+    <div>
+      <div class="title">RAZER<br><span class="accent-word">UI</span></div>
+      <div class="tagline">Gaming aesthetics<span class="dot">·</span>without sacrificing readability</div>
+      <div class="tags">
+        <span>Experimental</span><span>UI Concept</span><span>2 weeks</span><span>Solo</span>
+      </div>
+    </div>
+    <div class="gp-panel">
+      <div class="gp-head"><div class="gp-title">Performance Profile</div><div class="gp-meta">RZR-09 · ACTIVE</div></div>
+      <div class="gp-bars">
+        <div class="gp-bar"><span>DPI</span><div class="track"><div class="fill" style="width: 78%;"></div></div><span class="val">12 400</span></div>
+        <div class="gp-bar"><span>Polling</span><div class="track"><div class="fill" style="width: 92%;"></div></div><span class="val">8 000 Hz</span></div>
+        <div class="gp-bar"><span>Lift-off</span><div class="track"><div class="fill" style="width: 28%;"></div></div><span class="val">0.4 mm</span></div>
+        <div class="gp-bar"><span>Acceleration</span><div class="track"><div class="fill" style="width: 0%;"></div></div><span class="val">OFF</span></div>
+      </div>
+      <div class="gp-stats">
+        <div class="gp-stat"><div class="n">0.02</div><div class="l">click latency ms</div></div>
+        <div class="gp-stat"><div class="n">99.7</div><div class="l">accuracy %</div></div>
+        <div class="gp-stat"><div class="n">14</div><div class="l">macros loaded</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bot">
+    <span class="accent">— 01 / Cover</span>
+    <span>Experimental · Gaming UI · Solo</span>
+  </div>
+</div>
+</body></html>

@@ -475,20 +475,20 @@ export const projects: CaseStudy[] = [
     ],
     reflection:
       "BalVoi taught me that designing for AI-augmented reading is mostly trust design. The bias score and Trust Number could've been black-box outputs. Instead I spent the most time making them legible — every score breaks down into its inputs, every sentence highlight links to its rationale, every disclaimer is visible by default. The goal was a platform that earns reader trust precisely by being transparent about its own confidence.\n\nThe other lesson was that edge cases ARE the product. Most bias tools refuse to handle harassment, non-English text, or unintelligible source articles. Designing the failure states — the explanations, the next-step suggestions, the language-roadmap disclosure — turned out to be where BalVoi's editorial voice came through most clearly.",
-    nextProject: "xygo",
+    nextProject: "xy-ecosystem",
   },
 
-  // ── XYGO ─────────────────────────────────────────────────────────
+  // ── XY Ecosystem ─────────────────────────────────────────────────
   {
-    slug: "xygo",
-    title: "XYGO",
-    subtitle: "Web3 lottery platform with NFT marketplace — making crypto accessible to mainstream users",
-    category: ["Web3", "Marketplace"],
+    slug: "xy-ecosystem",
+    title: "XY Ecosystem",
+    subtitle: "Five interconnected Web3 protocols — a lottery, marketplace, yield engine, ritual game, and native token — designed as one ecosystem",
+    category: ["Web3", "Marketplace", "DeFi"],
     year: "2025 - 2026",
-    role: "Product Designer",
-    duration: "8 months",
+    role: "Lead Product Designer",
+    duration: "12+ months",
     team: "PM, 4 Engineers, Blockchain Dev",
-    thumbnail: "/work/xygo/hero.jpg",
+    thumbnail: "/cases/xy-ecosystem/Cover.png",
     color: "#F5A524",
     brief: {
       narrative:

@@ -1,0 +1,204 @@
+/* Shared base for case cover slides. Per-case HTML overrides accent + content. */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@600;700;800&display=swap');
+
+:root {
+  --bg-1: #07080C;
+  --bg-2: #0F1118;
+  --text: #F2F4F8;
+  --text-mute: rgba(242, 244, 248, 0.62);
+  --text-faint: rgba(242, 244, 248, 0.32);
+  --rule: rgba(242, 244, 248, 0.10);
+  --display: 'Unbounded', 'Inter', system-ui, sans-serif;
+  --body: 'Manrope', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --accent: #F5A524;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1600px;
+  height: 1000px;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 100%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 50% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-1) 100%);
+  color: var(--text);
+  font-family: var(--body);
+  position: relative;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+.bg-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.bg-field .glyph {
+  position: absolute;
+  font-family: var(--display);
+  font-weight: 800;
+  color: color-mix(in srgb, var(--accent) 10%, transparent);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 56px 80px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.top, .bot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.top .accent, .bot .accent { color: var(--accent); }
+
+.center {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+}
+.center.has-feature {
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+}
+
+.title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 180px;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: #fff;
+  text-shadow: 0 0 80px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.title .accent-word { color: var(--accent); }
+.title.lg { font-size: 220px; }
+.title.sm { font-size: 140px; }
+
+.tagline {
+  margin-top: 22px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 26ch;
+}
+.tagline .dot { color: var(--accent); margin: 0 10px; }
+
+.tags {
+  margin-top: 28px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tags span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  border: 1px solid var(--rule);
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Reusable phone mockup frame for product shots */
+.phone {
+  width: 360px;
+  aspect-ratio: 9 / 19.5;
+  background: #0A0C12;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 44px;
+  padding: 14px;
+  box-shadow:
+    0 60px 120px -30px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+  position: relative;
+}
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #14141C 0%, #0A0C12 100%);
+  position: relative;
+}
+
+/* Generic card-stack mockup for non-mobile cases */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 460px;
+}
+.stack .card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(8px);
+}
+.stack .card .dot {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 24%, #1A1C24);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  flex-shrink: 0;
+}
+.stack .card .body { flex: 1; }
+.stack .card .body .l1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.stack .card .body .l2 {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+}
+.stack .card .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

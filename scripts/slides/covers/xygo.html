@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_cover.css">
+<style>
+  :root { --accent: #F5A524; }
+  body {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(245, 165, 36, 0.30), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245, 165, 36, 0.08), transparent 70%),
+      linear-gradient(180deg, #0A0708 0%, #14100C 50%, #0A0708 100%);
+  }
+  .ticket {
+    width: 520px;
+    background: linear-gradient(135deg, #1B140C 0%, #261A10 100%);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(245, 165, 36, 0.06) inset,
+      0 40px 90px -20px rgba(0,0,0,0.7),
+      0 0 80px color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .ticket::before,
+  .ticket::after {
+    content: ""; position: absolute; width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--bg-2, #0F1118);
+    top: 50%; transform: translateY(-50%);
+  }
+  .ticket::before { left: -12px; }
+  .ticket::after { right: -12px; }
+  .tk-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 16px; margin-bottom: 22px;
+    border-bottom: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .tk-brand {
+    font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--accent);
+  }
+  .tk-meta { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.14em; }
+  .tk-balls {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 22px;
+  }
+  .tk-ball {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #FFD17A, #B66B0F);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 800; font-size: 22px; color: #1B140C;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06) inset;
+  }
+  .tk-ball.alt { background: radial-gradient(circle at 35% 30%, #FFFFFF, #C9C2B8); }
+  .tk-foot {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+    border-top: 1px dashed color-mix(in srgb, var(--accent) 30%, transparent);
+    padding-top: 16px;
+  }
+  .tk-foot .l { font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.45); letter-spacing: 0.18em; text-transform: uppercase; }
+  .tk-foot .v { font-family: var(--display); font-weight: 700; font-size: 14px; color: #fff; margin-top: 4px; }
+  .tk-foot .v.accent { color: var(--accent); }
+</style>
+</head><body>
+<div class="bg-field">
+  <span class="glyph" style="font-size: 320px; top: -40px; left: -30px;">X</span>
+  <span class="glyph" style="font-size: 280px; top: 30px; right: 30px;">Y</span>
+  <span class="glyph" style="font-size: 240px; bottom: -40px; left: 36%;">G</span>
+  <span class="glyph" style="font-size: 200px; bottom: 22%; right: 8%;">O</span>
+  <span class="glyph" style="font-size: 140px; top: 38%; left: 4%;">·</span>
+</div>
+<div class="frame">
+  <div class="top">
+    <span>XYGO · Case Study</span>
+    <span>Garri Avetisyan · 2025–26</span>
+  </div>
+  <div class="center has-feature">
+    <div>
+      <div class="title">XY<span class="accent-word">GO</span></div>
+      <div class="tagline">Web3 lottery<span class="dot">·</span>two ways in, one provably-fair draw</div>
+      <div class="tags">
+        <span>Web3</span><span>Marketplace</span><span>Lottery</span><span>NFT</span>
+      </div>
+    </div>
+    <div class="ticket">
+      <div class="tk-head">
+        <div class="tk-brand">XYGO TICKET</div>
+        <div class="tk-meta">DRAW · #2024-44</div>
+      </div>
+      <div class="tk-balls">
+        <div class="tk-ball">07</div>
+        <div class="tk-ball">14</div>
+        <div class="tk-ball">22</div>
+        <div class="tk-ball">31</div>
+        <div class="tk-ball">38</div>
+        <div class="tk-ball alt">09</div>
+      </div>
+      <div class="tk-foot">
+        <div><div class="l">Pool</div><div class="v">14,820 USDC</div></div>
+        <div><div class="l">Players</div><div class="v">2,418</div></div>
+        <div><div class="l">Verified</div><div class="v accent">ON-CHAIN ✓</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bot">
+    <span class="accent">— 01 / XYGO Tab</span>
+    <span>Web3 · Marketplace · 8 months</span>
+  </div>
+</div>
+</body></html>

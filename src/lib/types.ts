@@ -7,6 +7,7 @@ export type ProjectCategory =
   | "SaaS"
   | "Marketplace"
   | "Logistics"
+  | "DeFi"
   | "Experimental";
 
 export interface ProjectMeta {

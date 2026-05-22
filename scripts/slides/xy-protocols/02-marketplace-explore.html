@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  :root { --proto: var(--xy-pink); }
+  .body { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 32px; }
+  .left .eyebrow { color: var(--proto); }
+  .left .headline em { color: var(--proto); }
+  .mockup-viewport { padding: 0; }
+  .mp-app { display: grid; grid-template-columns: 200px 1fr; height: 540px; }
+  .mp-side { background: #0B0907; border-right: 1px solid var(--rule); padding: 18px; }
+  .mp-side h4 { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; color: var(--text-faint); text-transform: uppercase; margin-bottom: 10px; margin-top: 18px; }
+  .mp-side h4:first-child { margin-top: 0; }
+  .mp-side .filt {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 10px; border-radius: 8px;
+    font-family: var(--body); font-size: 12px; color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .mp-side .filt.on { background: rgba(244, 114, 182, 0.10); color: var(--proto); }
+  .mp-side .filt .c { font-family: var(--mono); font-size: 10px; opacity: 0.7; }
+  .mp-grid { padding: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-content: start; }
+  .mp-card {
+    background: #16110D; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .mp-card .art {
+    aspect-ratio: 1;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(244, 114, 182, 0.4), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(245, 165, 36, 0.3), transparent 60%),
+      linear-gradient(135deg, #2A1A1F, #1A100C);
+  }
+  .mp-card.b .art { background: radial-gradient(circle at 70% 30%, rgba(167, 139, 250, 0.45), transparent 60%), linear-gradient(135deg, #1F1A2A, #14101A); }
+  .mp-card.c .art { background: radial-gradient(circle at 30% 70%, rgba(74, 222, 128, 0.40), transparent 60%), linear-gradient(135deg, #1A201A, #0E140E); }
+  .mp-card.d .art { background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.40), transparent 60%), linear-gradient(135deg, #14202A, #0E141A); }
+  .mp-card.e .art { background: radial-gradient(circle at 50% 80%, rgba(245, 165, 36, 0.45), transparent 60%), linear-gradient(135deg, #2A1F0E, #1A1208); }
+  .mp-card.f .art { background: radial-gradient(circle at 20% 50%, rgba(244, 114, 182, 0.35), transparent 65%), radial-gradient(circle at 80% 50%, rgba(56, 189, 248, 0.30), transparent 65%), linear-gradient(135deg, #1A1A24, #100E18); }
+  .mp-card .meta { padding: 12px; }
+  .mp-card .nm { font-family: var(--display); font-weight: 600; font-size: 12px; color: var(--text); }
+  .mp-card .row { display: flex; justify-content: space-between; margin-top: 6px; font-family: var(--mono); font-size: 10px; }
+  .mp-card .row .pr { color: var(--xy-gold); }
+  .mp-card .row .by { color: var(--text-muted); }
+</style></head><body>
+<div class="slide">
+  <div class="slide-top">
+    <span class="mark">XY Protocols · Marketplace</span>
+    <span><span style="color: var(--xy-pink);">02</span> / 16 · Explore</span>
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">Marketplace · 01 of 03</div>
+      <h1 class="headline">An NFT shelf<br>that feels like <em>a shop</em>, not a wallet.</h1>
+      <p class="caption">The marketplace was the first protocol after XYGO. The brief: make a card grid that mainstream collectors recognize from e‑commerce, without losing the verification surface crypto buyers need.</p>
+      <div class="kicker">Filters · Collections · Live floor prices · Sortable rarity</div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-chrome">
+        <div class="mockup-dot r"></div><div class="mockup-dot y"></div><div class="mockup-dot g"></div>
+        <div class="mockup-url"><div class="mockup-url-bar">xygo.market/explore</div></div>
+      </div>
+      <div class="mockup-viewport">
+        <div class="mp-app">
+          <div class="mp-side">
+            <h4>Collection</h4>
+            <div class="filt on">All items <span class="c">2,418</span></div>
+            <div class="filt">Cybele Cards <span class="c">412</span></div>
+            <div class="filt">Genesis Tickets <span class="c">200</span></div>
+            <div class="filt">Vault Keys <span class="c">96</span></div>
+            <h4>Status</h4>
+            <div class="filt">Buy now <span class="c">812</span></div>
+            <div class="filt">On auction <span class="c">142</span></div>
+            <h4>Price</h4>
+            <div class="filt">Under 50 XYU</div>
+            <div class="filt">50–500 XYU</div>
+            <div class="filt">500+ XYU</div>
+          </div>
+          <div class="mp-grid">
+            <div class="mp-card"><div class="art"></div><div class="meta"><div class="nm">Cybele · 014</div><div class="row"><span class="by">@oracle</span><span class="pr">84 XYU</span></div></div></div>
+            <div class="mp-card b"><div class="art"></div><div class="meta"><div class="nm">Genesis Ticket</div><div class="row"><span class="by">@flame</span><span class="pr">112 XYU</span></div></div></div>
+            <div class="mp-card c"><div class="art"></div><div class="meta"><div class="nm">Vault Key · S2</div><div class="row"><span class="by">@cinder</span><span class="pr">340 XYU</span></div></div></div>
+            <div class="mp-card d"><div class="art"></div><div class="meta"><div class="nm">Cybele · 207</div><div class="row"><span class="by">@nyx</span><span class="pr">62 XYU</span></div></div></div>
+            <div class="mp-card e"><div class="art"></div><div class="meta"><div class="nm">Founder Tag</div><div class="row"><span class="by">@arc</span><span class="pr">980 XYU</span></div></div></div>
+            <div class="mp-card f"><div class="art"></div><div class="meta"><div class="nm">Cybele · 029</div><div class="row"><span class="by">@ash</span><span class="pr">76 XYU</span></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bot">
+    <span style="color: var(--xy-pink);">— Marketplace</span>
+    <span>Explore · Filters · Sortable rarity</span>
+  </div>
+</div>
+</body></html>

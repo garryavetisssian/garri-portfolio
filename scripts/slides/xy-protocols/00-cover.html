@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(245, 165, 36, 0.30), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(167, 139, 250, 0.10), transparent 70%),
+      linear-gradient(180deg, var(--slide-bg-1) 0%, var(--slide-bg-2) 50%, var(--slide-bg-1) 100%);
+  }
+  .field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .field .glyph {
+    position: absolute; font-family: var(--display); font-weight: 800;
+    color: rgba(245, 165, 36, 0.08); line-height: 1; letter-spacing: -0.05em;
+  }
+  .stage {
+    position: relative; z-index: 2; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .mark {
+    font-family: var(--display); font-weight: 800;
+    font-size: 200px; line-height: 0.9; letter-spacing: -0.045em;
+    color: #fff;
+    text-shadow: 0 0 80px rgba(245, 165, 36, 0.35);
+    text-align: center;
+  }
+  .mark .accent { color: var(--xy-gold); }
+  .tag {
+    margin-top: 26px;
+    font-family: var(--display); font-weight: 500;
+    font-size: 28px; letter-spacing: -0.01em; color: rgba(255,255,255,0.86);
+    text-align: center;
+  }
+  .tag .sep { color: var(--xy-gold); margin: 0 12px; }
+  .protocols {
+    margin-top: 38px;
+    display: flex; gap: 14px; align-items: center;
+  }
+  .protocols .p {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid var(--rule-strong); padding: 9px 14px; border-radius: 999px;
+    background: rgba(255, 240, 210, 0.04); color: rgba(255,255,255,0.82);
+  }
+  .protocols .p .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .top, .bot {
+    position: absolute; left: 80px; right: 80px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-faint); z-index: 3;
+  }
+  .top { top: 64px; }
+  .bot { bottom: 64px; }
+  .bot .accent { color: var(--xy-gold); }
+</style></head><body>
+<div class="field">
+  <span class="glyph" style="font-size: 320px; top: -40px; left: -30px;">X</span>
+  <span class="glyph" style="font-size: 280px; top: 30px; right: 30px;">Y</span>
+  <span class="glyph" style="font-size: 240px; bottom: -40px; left: 36%;">·</span>
+  <span class="glyph" style="font-size: 200px; bottom: 22%; right: 8%;">∞</span>
+  <span class="glyph" style="font-size: 140px; top: 38%; left: 4%;">⌬</span>
+</div>
+<div class="top">
+  <span>XY Ecosystem · Protocols</span>
+  <span>Garri Avetisyan · 2025–26</span>
+</div>
+<div class="stage">
+  <div class="mark">XY <span class="accent">PROTOCOLS</span></div>
+  <div class="tag">Four protocols<span class="sep">·</span>one ecosystem<span class="sep">·</span>one token</div>
+  <div class="protocols">
+    <span class="p"><span class="dot" style="background: var(--xy-pink);"></span>Marketplace</span>
+    <span class="p"><span class="dot" style="background: var(--xy-mint);"></span>Earn</span>
+    <span class="p"><span class="dot" style="background: var(--xy-violet);"></span>Cybele's Rite</span>
+    <span class="p"><span class="dot" style="background: var(--xy-cyan);"></span>XYU Token</span>
+  </div>
+</div>
+<div class="bot">
+  <span class="accent">— 02 / XY Protocols Tab</span>
+  <span>Web3 · Marketplace · DeFi · Game</span>
+</div>
+</body></html>
