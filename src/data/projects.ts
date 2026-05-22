@@ -492,14 +492,14 @@ export const projects: CaseStudy[] = [
     color: "#F5A524",
     brief: {
       narrative:
-        "XY Ecosystem started as XYGO — a Web3 lottery designed to feel like buying a ticket, not minting an NFT. Once that worked, we extended the same trust patterns into four more protocols that share one token and one design system.",
+        "XY Ecosystem is a family of Web3 protocols sharing one native token (XYU) and one design system. XYGO — the Web3 lottery — was the first protocol; four more are in flight: Marketplace, Earn, Cybele's Rite, and XYU Token.",
       tiles: [
-        { kind: "stat", value: "5", label: "Protocols shipped under one design system", span: 3 },
-        { kind: "stat", value: "1", label: "Native token tying them together (XYU)", span: 3 },
+        { kind: "stat", value: "5", label: "Protocols in the ecosystem", span: 3 },
+        { kind: "stat", value: "1", label: "Native token (XYU) tying them together", span: 3 },
         {
           kind: "quote",
-          text: "The hard part isn't shipping a protocol. It's making five of them feel like one product.",
-          cite: "Core design principle",
+          text: "Five protocols, one ecosystem — same trust patterns across every surface.",
+          cite: "Design principle",
           span: 6,
         },
         {
@@ -510,116 +510,72 @@ export const projects: CaseStudy[] = [
         },
         {
           kind: "tags",
-          label: "What I led",
-          items: [
-            "Cross-protocol IA",
-            "Trust-signal patterns",
-            "Two-track onboarding",
-            "NFT marketplace",
-            "Yield + vault UX",
-            "Ritual game UX",
-            "Tokenomics & governance UI",
-            "Design system",
-          ],
+          label: "Onboarding approach",
+          items: ["Custodial track", "On-chain track", "Single design system", "Shared chrome"],
           span: 6,
         },
       ],
     },
     overview:
-      "XY Ecosystem is a Web3 product family built around a single token (XYU) and a single set of trust patterns. It started with XYGO — a lottery designed to be usable by people who'd never touched crypto — and then expanded into four interconnected protocols: an NFT marketplace, an Earn yield engine, a ritual-game protocol called Cybele's Rite, and the XYU token surface itself (dashboard, tokenomics, governance). My job across 12+ months was to make all of it feel like one product. Same chrome, same trust signals (verified contracts, gas surfaced, royalty visible), same dual-track onboarding (custodial path for newcomers, on-chain path for crypto-native users), same design system across five surfaces and dozens of flows.",
+      "XY Ecosystem is a Web3 product family built around a single token (XYU) and a shared design system. The first protocol — XYGO — is a lottery designed to be usable by people who'd never touched crypto, with a dual-track onboarding: custodial (email → fiat ticket) or on-chain (connect wallet → sign). The ecosystem is expanding into four more protocols sharing the same chrome and trust patterns: an NFT Marketplace, an Earn yield engine, a ritual-game protocol called Cybele's Rite, and the XYU token surface itself.",
     sections: [
       {
         id: "problem",
         title: "The Problem",
         content:
-          "Most Web3 ecosystems ship as five separate products that happen to share a token. Each protocol has its own UX language, its own onboarding, its own way of describing fees and risks — and the user is expected to re-learn everything every time they cross a protocol boundary. That fragmentation is the #1 reason normal users bounce off Web3 after their first transaction.\n\nXY had the opposite ambition: keep the trust patterns identical across every surface, so that a user who learned how XYGO works can read the marketplace, the vaults, and the rite without a second tutorial.",
+          "Existing Web3 lottery platforms were built by developers for developers. They required users to already own a crypto wallet, understand gas fees, and trust smart contracts they couldn't read. This limited the addressable market to roughly 5% of potential users.\n\nThe business opportunity was clear: if you could make a Web3 lottery as easy to use as a traditional one while retaining the transparency benefits of blockchain, you'd unlock a massive new audience.",
       },
       {
         id: "goals",
         title: "Business Goals",
         content:
-          "**Primary goals:**\n- Ship five protocols sharing one design system and one token (XYU)\n- Make the first protocol (XYGO) reachable by mainstream users — measured by % completing first transaction without prior wallet ownership\n- Build trust signals once and reuse them across every protocol — verified contracts, gas estimates, royalty disclosure, risk readings\n- Compose the protocols so usage of one feeds value to the holders of another (lottery fees boost yield, marketplace royalties fund the rite, etc.)",
+          "**Primary goals:**\n- Achieve 10,000 registered users within 3 months of launch\n- Maintain at least 50% non-crypto-native users (measured by first-time wallet creation during onboarding)\n- Generate secondary revenue through NFT marketplace transactions\n- Build trust through provably fair lottery mechanics",
       },
       {
         id: "research",
         title: "Research & Discovery",
         content:
-          "Research happened in two waves, six months apart:\n\n**Wave 1 — XYGO launch (18 interviews):** 8 crypto-native users, 10 mainstream users. Found that the wallet step was the #1 drop-off for newcomers and that vocabulary (\"mint\" vs \"buy\", \"approve\" vs \"confirm\") changed conversion more than any layout decision.\n\n**Wave 2 — Protocol expansion (14 interviews):** Existing XYGO users + new prospects. The key finding: users who learned to trust XYGO transferred that trust to other XY protocols *only if* the visual chrome, transaction language, and trust signals were identical. Anything that looked different read as suspicious.\n\n**Competitive audit:** Mapped 12 Web3 ecosystems (Aave, Uniswap, Yearn, OpenSea, plus newer lottery + game protocols). Almost none had a unified design language across all surfaces.",
-        images: ["/cases/xy-ecosystem/2 XY Protocols/Cover.png"],
+          "I conducted research across two user segments:\n\n**Crypto-native users (8 interviews):** These users valued transparency and decentralization but were frustrated by poor UX across Web3 platforms. They wanted to verify fairness on-chain but didn't need hand-holding.\n\n**Mainstream users (10 interviews):** These users were curious about crypto but intimidated by wallets, seed phrases, and gas fees. They associated Web3 with scams and needed significant trust signals.\n\n**Competitive audit:** Analyzed 6 Web3 lottery platforms and 4 traditional online lottery platforms to map UX patterns across both worlds.",
       },
       {
         id: "insights",
         title: "Key Insights",
         content:
-          "**Insight 1:** Trust transfers through visual language. If two protocols share the same chrome, the same gas-estimate placement, the same \"verified contract\" badge, users assume one team built both — and behave accordingly.\n\n**Insight 2:** Vocabulary is part of UX. \"Buy\" outperforms \"Mint\" by 23%. \"Your account\" outperforms \"Your wallet\" by 41% for non-crypto users. The same lesson applied across all five protocols: name the actions the way the user already thinks about them.\n\n**Insight 3:** Composability needs to be visible, not implied. When a Cybele's Rite reveal recomputes the marketplace floor and pays out XYU stakers, the user needs to *see* that ripple — otherwise the protocols feel disconnected even though they're linked on chain.",
+          "**Insight 1:** The wallet connection step is the #1 drop-off point for non-crypto users. Every platform that led with \"Connect Wallet\" lost 80%+ of mainstream users.\n\n**Insight 2:** Mainstream users understand \"buying a ticket\" but not \"minting an NFT.\" Same action, different framing — language choice determines adoption.\n\n**Insight 3:** Trust in Web3 comes from transparency features that users can verify independently. Showing the smart contract address and explaining provable fairness increased stated trust by 3x in concept testing.",
       },
       {
         id: "strategy",
-        title: "Strategy — Five surfaces, one feel",
+        title: "UX Strategy & Information Architecture",
         content:
-          "I structured the design work around three shared layers that every protocol inherits:\n\n**Layer 1 — Chrome.** Same browser-window header, same navigation grid, same status bar. The protocol-specific accent (gold for XYGO, pink for Marketplace, mint for Earn, violet for Rite, cyan for XYU) is the *only* thing that varies.\n\n**Layer 2 — Trust signals.** Every transaction screen shows the same four facts before the sign button: who minted/owns/holds, gas estimate, royalty/fee split, contract verification. This is the same pattern whether you're buying an NFT, depositing in a vault, or pledging to the Rite.\n\n**Layer 3 — Dual-track onboarding.** Custodial path (email → XY account → fiat) or on-chain path (connect wallet → approve). The user picks once at the ecosystem level, not per-protocol.\n\nIA followed a hub-and-spoke model: the XYU token surface is the home base; each protocol is a spoke. Cross-protocol actions (claim yield from a Cybele card you own) are surfaced *in context*, never tucked into a settings page.",
-        images: ["/cases/xy-ecosystem/2 XY Protocols/1.png"],
+          "I designed a dual-track experience:\n\n**Track 1 (Mainstream):** Email signup → custodial wallet created silently → fiat payment → ticket purchased. The user never sees the word \"blockchain\" unless they look for it.\n\n**Track 2 (Crypto-native):** Connect wallet → approve transaction → ticket purchased. All on-chain data exposed.\n\nBoth tracks converge on the same core experience. The difference is onboarding and payment — not the product itself.\n\nIA was structured around actions (Buy, Play, Win, Trade) rather than crypto concepts (Mint, Stake, Bridge).",
       },
       {
-        id: "marketplace",
-        title: "Protocol — Marketplace",
+        id: "ui-design",
+        title: "UI Design & Visual System",
         content:
-          "The NFT marketplace was the first protocol after XYGO. The brief was to build a card grid that mainstream collectors recognize from e-commerce, without losing the verification surface crypto buyers expect.\n\n**Three slides cover the surface:** an Explore screen with filters and live floor prices, an Item Detail page where the four trust signals (provenance, floor, royalty, contract verification) sit *on the same screen as the buy button*, and a Listing flow that surfaces both the gas estimate and the royalty split upfront — so creators see exactly what they'll take home before they sign.\n\nThe pattern that paid off: 4-step listing instead of 14. Creators don't get surprised by a fee that appears on screen 11.",
-        images: [
-          "/cases/xy-ecosystem/2 XY Protocols/2.png",
-          "/cases/xy-ecosystem/2 XY Protocols/3.png",
-          "/cases/xy-ecosystem/2 XY Protocols/4.png",
-        ],
+          "The visual design had to bridge two worlds: the playfulness of lottery/gaming and the credibility of fintech.\n\n- **Dark mode primary** — Aligned with Web3 conventions and gaming aesthetics.\n- **Accent colors** tied to lottery tiers (Gold, Silver, Bronze) creating a natural visual hierarchy.\n- **Card-based layout** for NFTs and tickets, using familiar e-commerce patterns.\n- **Trust badges and security indicators** placed at every transaction touchpoint.",
       },
       {
-        id: "earn",
-        title: "Protocol — Earn",
+        id: "protocols",
+        title: "The wider ecosystem — Marketplace, Earn, Cybele's Rite, XYU Token",
         content:
-          "Earn is the yield engine: five vaults with strategies ranging from a stablecoin pool to NFT-collateralized lending. The DeFi UX problem is that strategy details are usually buried in docs, while APY is huge in the UI.\n\nI inverted that. Every vault row declares the same five things: strategy, APY, TVL, a 5-light risk reading, and a one-tap deposit. The deposit modal shows the *full math*: the share you'll receive, the net APY after fees, projected yield at 7 / 30 / 90 / 365 days, and the gas estimate — all before you sign.\n\nThe rewards screen turns earning into something visibly continuous: a 90-day curve, a per-vault breakdown, and a single \"claim all → compound to vaults\" action.",
-        images: [
-          "/cases/xy-ecosystem/2 XY Protocols/5.png",
-          "/cases/xy-ecosystem/2 XY Protocols/6.png",
-          "/cases/xy-ecosystem/2 XY Protocols/7.png",
-        ],
+          "The expanded ecosystem case study is in production. Once XYGO shipped, the same design system extended into four more protocols: an NFT Marketplace, an Earn yield engine, the Cybele's Rite ritual protocol, and the XYU Token surface (dashboard / tokenomics / governance). Detailed slides covering each protocol are coming as part of the next portfolio update.",
       },
       {
-        id: "cybele",
-        title: "Protocol — Cybele's Rite",
+        id: "testing",
+        title: "Testing & Iteration",
         content:
-          "Cybele's Rite is the only protocol in the ecosystem that doesn't look like a finance product. It's a weekly ritual: a pledge of XYU, a kindling of a sigil, a draw governed by an on-chain VRF, and a reveal that mints a card from a 412-card season pool.\n\nThe design challenge was tonal. The mechanic is provable, the transaction is on chain — but the surface borrows from ceremony, not from a dashboard. Concentric sigil rings, glyph runes, and a paced four-act flow (Pledge / Kindle / Draw / Reveal) replace the usual modal soup.\n\nThe reveal is where Rite touches the rest of the ecosystem: a successful draw recomputes the marketplace floor, adjusts the Cybele Reliquary vault's collateral, and routes a fraction of the pledge back to XYU stakers. The ripple is *visible* on the same screen — the user sees the cross-protocol effect, not just the card.",
-        images: [
-          "/cases/xy-ecosystem/2 XY Protocols/8.png",
-          "/cases/xy-ecosystem/2 XY Protocols/9.png",
-          "/cases/xy-ecosystem/2 XY Protocols/10.png",
-        ],
-      },
-      {
-        id: "xyu",
-        title: "Protocol — XYU Token",
-        content:
-          "XYU is the home of the ecosystem. The dashboard hides nothing and explains everything: balance, price, earning rate, voting power, and cross-protocol receipts (which Rite you pledged to, which vault you're earning from, which marketplace sale credited your wallet).\n\nTokenomics gets its own surface — 100M cap, six allocation buckets, and a visible burn counter that ticks up as protocols are used. The math isn't hidden in a whitepaper; the wallet shows the supply curve bending down.\n\nGovernance is the third XYU surface. Proposals are short, scoped, and on chain — they change real parameters: marketplace fee floor, vault risk caps, rite cadence, treasury allocation. Every proposal card shows what it does, what it costs the treasury, and who voted what.",
-        images: [
-          "/cases/xy-ecosystem/2 XY Protocols/11.png",
-          "/cases/xy-ecosystem/2 XY Protocols/12.png",
-          "/cases/xy-ecosystem/2 XY Protocols/13.png",
-        ],
-      },
-      {
-        id: "system",
-        title: "One system across five surfaces",
-        content:
-          "The design system carries the load. Five accent colors, one type scale, one set of button shapes, one transaction language, one chrome. Every protocol picks an accent and inherits everything else.\n\nThis was the highest-leverage decision in the project. New protocols (Earn was added six months after the marketplace; Rite eight months in) shipped in weeks rather than months because the chrome, the buttons, the trust signals, and the transaction copy were already written.",
-        images: ["/cases/xy-ecosystem/2 XY Protocols/14.png"],
+          "**Usability testing (Round 1):** 6 non-crypto participants attempted to purchase a ticket. 4/6 completed the task. Failures were caused by confusion around the custodial wallet creation step — users didn't understand why they needed a \"wallet\" for a lottery.\n\n**Fix:** Removed the word \"wallet\" entirely for mainstream flow. Reframed as \"Your XYGO Account\" with a balance.\n\n**Usability testing (Round 2):** 6/6 completion rate. Average time to first purchase: 2 minutes 15 seconds.\n\n**A/B test (live):** Tested \"Buy Ticket\" vs \"Enter Draw\" as primary CTA. \"Buy Ticket\" won with 23% higher conversion — familiarity beats novelty.",
       },
     ],
     metrics: [
-      { label: "Protocols shipped", value: "5" },
-      { label: "Slides across the design deck", value: "16" },
-      { label: "Months of design across the ecosystem", value: "12", suffix: "+" },
-      { label: "Native token (XYU)", value: "1" },
+      { label: "Registered users (3 months)", value: "12,000" },
+      { label: "Non-crypto-native ratio", value: "68", suffix: "%" },
+      { label: "Task completion rate", value: "96", suffix: "%" },
+      { label: "Time to first purchase", value: "2:15" },
     ],
     reflection:
-      "XY Ecosystem taught me that designing for Web3 at this scope is mostly *coherence design*. Any individual protocol is a solvable UX problem — there are good patterns for marketplaces, for vaults, for governance UIs. The hard part is making five of them feel like a single product so that trust transfers across them. The leverage came from the shared layers: chrome, trust signals, dual-track onboarding. Once those were locked, new protocols could ship without re-litigating first-principles questions about how a deposit screen or a transaction language should work.\n\nWhat I'd change: invest more in cross-protocol receipts earlier. The moments where the protocols touch each other — a Cybele reveal moving the marketplace floor, a vault auto-compounding XYU rewards, governance changing a parameter you actively use — are the moments that make the ecosystem feel like one product. We got there, but only in the final season; the earlier versions told users the protocols were connected on chain without *showing* the connection in the UI.",
+      "The biggest lesson from XYGO was that language design is UX design. Changing a single label from \"Mint\" to \"Buy\" had more impact on conversion than any layout or visual change. In Web3, the vocabulary barrier is higher than the usability barrier.\n\nWith the rest of the ecosystem now in design (Marketplace, Earn, Cybele's Rite, XYU Token), the new challenge is coherence: making five protocols feel like one product so that trust transferred from XYGO carries forward to whichever surface a user encounters next.",
     nextProject: "duck-master",
   },
 
