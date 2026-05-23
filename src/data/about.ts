@@ -71,7 +71,7 @@ export interface WorkExperience {
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: "ANUNA LLC",
-    location: "Yerevan",
+    location: "Armenia",
     role: "Product Designer",
     period: "Dec 2025 - Present",
     bullets: [

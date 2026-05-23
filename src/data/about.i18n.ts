@@ -142,7 +142,7 @@ export const WORK_EXPERIENCE_I18N: Record<Locale, WorkExperienceI18n[]> = {
   en: [
     {
       company: "ANUNA LLC",
-      location: "Yerevan",
+      location: "Armenia",
       role: "Product Designer",
       period: "Dec 2025 - Present",
       bullets: [
@@ -196,7 +196,7 @@ export const WORK_EXPERIENCE_I18N: Record<Locale, WorkExperienceI18n[]> = {
   ru: [
     {
       company: "ANUNA LLC",
-      location: "Ереван",
+      location: "Армения",
       role: "Продуктовый дизайнер",
       period: "Дек 2025 - настоящее время",
       bullets: [
@@ -250,7 +250,7 @@ export const WORK_EXPERIENCE_I18N: Record<Locale, WorkExperienceI18n[]> = {
   hy: [
     {
       company: "ANUNA LLC",
-      location: "Երևան",
+      location: "Հայաստան",
       role: "Պրոդուկտի դիզայներ",
       period: "Դեկ 2025 – առ այսօր",
       bullets: [
