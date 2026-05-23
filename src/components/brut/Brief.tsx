@@ -214,6 +214,10 @@ function TileShell({
 /* ─── Tile renderers ─────────────────────────────────────────────── */
 
 function StatTile({ tile, index }: { tile: Extract<BriefTile, { kind: "stat" }>; index: number }) {
+  // Word-like suffixes (e.g. " weeks", " months") shrink so they don't blow
+  // out the cell width; symbol suffixes ("+", "%") render at full size.
+  const suffix = tile.suffix ?? "";
+  const isWordSuffix = /[a-z]/i.test(suffix);
   return (
     <TileShell span={tile.span ?? 3} kind="stat" index={index}>
       <div className="mt-auto">
@@ -225,11 +229,29 @@ function StatTile({ tile, index }: { tile: Extract<BriefTile, { kind: "stat" }>;
             fontSize: "clamp(2.5rem, 5.5vw, 4.25rem)",
             letterSpacing: "-0.04em",
             lineHeight: 0.92,
+            display: "flex",
+            alignItems: "baseline",
+            flexWrap: "wrap",
+            columnGap: "0.18em",
           }}
         >
-          {tile.prefix}
-          <CountUp value={tile.value} />
-          {tile.suffix}
+          <span>
+            {tile.prefix}
+            <CountUp value={tile.value} />
+            {!isWordSuffix && suffix}
+          </span>
+          {isWordSuffix && (
+            <span
+              style={{
+                fontSize: "0.42em",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                textTransform: "lowercase",
+              }}
+            >
+              {suffix.trim()}
+            </span>
+          )}
         </div>
         <p className="mono text-ink-mute mt-4">{tile.label}</p>
       </div>

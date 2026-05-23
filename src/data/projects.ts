@@ -19,7 +19,7 @@ export const projects: CaseStudy[] = [
     color: "#44D62C",
     brief: {
       narrative:
-        "A two-week solo design exploration asking a simple question: can a gaming brand's UI feel unmistakably gaming and still be clean, fast, and easy to read?",
+        "A two-week solo exploration: can gaming UI feel unmistakably gaming and still stay clean, fast, and readable?",
       tiles: [
         { kind: "stat", value: "2", suffix: " weeks", label: "Project length", span: 3 },
         { kind: "stat", value: "1", label: "Designer (solo project)", span: 3 },
@@ -65,7 +65,7 @@ export const projects: CaseStudy[] = [
     color: "#C44545",
     brief: {
       narrative:
-        "A two-sided service marketplace with separate mobile apps for clients and professionals. I designed it end-to-end through two full iterations — the initial concept, then the polished release.",
+        "A two-sided service marketplace with separate mobile apps for clients and professionals — designed end-to-end across two iterations.",
       tiles: [
         { kind: "stat", value: "2", label: "Native apps (client + pro)", span: 3 },
         { kind: "stat", value: "2", label: "Full design iterations", span: 3 },
@@ -120,7 +120,7 @@ export const projects: CaseStudy[] = [
     color: "#22C9A0",
     brief: {
       narrative:
-        "An AI productivity platform that helps teams automate routine work — while keeping people in charge of every decision the AI suggests.",
+        "An AI productivity platform that automates routine work while keeping people in charge of every decision.",
       tiles: [
         { kind: "stat", value: "4", suffix: " months", label: "From concept to hi-fi UI", span: 3 },
         {
@@ -164,7 +164,7 @@ export const projects: CaseStudy[] = [
     color: "#3D6FA8",
     brief: {
       narrative:
-        "A real-time logistics dashboard for fleet operators. Live vehicle tracking, automated routing, and driver chat — all in one screen, organized around what the dispatcher needs to act on right now.",
+        "A real-time logistics dashboard — live tracking, routing, and driver chat in one screen, organized around what dispatchers need now.",
       tiles: [
         { kind: "stat", value: "1", label: "Dashboard replacing 4+ tools", span: 3 },
         {
@@ -208,7 +208,7 @@ export const projects: CaseStudy[] = [
     color: "#5BB5C9",
     brief: {
       narrative:
-        "A single smart home app that replaces the half-dozen device-specific apps people usually juggle — organized around how users actually think: by rooms and routines, not brands or protocols.",
+        "A single smart home app that replaces the device-specific apps people juggle — organized by rooms and routines, not brands.",
       tiles: [
         { kind: "stat", value: "1", label: "App replacing 5+ device apps", span: 3 },
         {
@@ -252,11 +252,11 @@ export const projects: CaseStudy[] = [
     color: "#FFD12B",
     brief: {
       narrative:
-        "A Telegram trading-game hybrid built around one duck mascot. I led the product design AND ran the AI pipeline that generated 300+ on-model character cards, scene art, and game assets across 347 screens.",
+        "A Telegram trading-game hybrid built around one duck mascot — 347 screens, 300+ AI-generated assets, one on-model character.",
       tiles: [
-        { kind: "stat", value: "347", label: "Frames across the design system", span: 3 },
-        { kind: "stat", value: "300", suffix: "+", label: "AI-generated game assets", span: 3 },
-        { kind: "stat", value: "25", label: "Onboarding steps", span: 3 },
+        { kind: "stat", value: "347", label: "Frames across the design system", span: 4 },
+        { kind: "stat", value: "300", suffix: "+", label: "AI-generated game assets", span: 4 },
+        { kind: "stat", value: "25", label: "Onboarding steps", span: 4 },
         {
           kind: "quote",
           text: "One duck, one universe — every variant had to read as the same character.",
@@ -280,7 +280,7 @@ export const projects: CaseStudy[] = [
             "Economy design",
             "Mobile component library",
           ],
-          span: 6,
+          span: 12,
         },
       ],
     },
@@ -364,7 +364,7 @@ export const projects: CaseStudy[] = [
     color: "#0081DD",
     brief: {
       narrative:
-        "BalVoi™ — \"Your Balanced Voice for News.\" A reading platform that pairs every article with an AI bias analysis, a Trust Score, and short lessons in media literacy.",
+        "A reading platform that pairs every article with AI bias analysis, a Trust Score, and short lessons in media literacy.",
       tiles: [
         { kind: "stat", value: "146", label: "Frames across the design system", span: 3 },
         { kind: "stat", value: "4", label: "Canonical breakpoints (1440 / 1024 / 768 / 375)", span: 3 },
