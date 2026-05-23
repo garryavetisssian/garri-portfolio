@@ -24,6 +24,26 @@ function messageText(parts: { type: string; text?: string }[] | undefined) {
     .join("");
 }
 
+// Translate upstream error messages into friendlier copy where we can, but
+// surface unknown ones verbatim so production issues stay debuggable.
+function formatChatError(
+  msg: string | undefined,
+  t: { chat: { rateLimitBurst: string; rateLimitDay: string; errorGeneric: string } }
+) {
+  if (!msg) return t.chat.errorGeneric;
+  const lower = msg.toLowerCase();
+  if (lower.includes("daily")) return t.chat.rateLimitDay;
+  if (lower.includes("429") || lower.includes("too many")) return t.chat.rateLimitBurst;
+  if (lower.includes("not configured")) {
+    return "Chat isn't configured on this deployment yet. The GOOGLE_GEMINI_API_KEY env var is missing.";
+  }
+  if (lower.includes("quota")) {
+    return "Daily Gemini quota reached. Please try again tomorrow.";
+  }
+  // Show the upstream message in dev/preview so we can debug.
+  return msg.length > 280 ? t.chat.errorGeneric : msg;
+}
+
 export default function ChatPanel({
   slug,
   caseTitle,
@@ -272,9 +292,7 @@ export default function ChatPanel({
                 borderRadius: 6,
               }}
             >
-              {error.message?.includes("429")
-                ? t.chat.rateLimitBurst
-                : t.chat.errorGeneric}
+              {formatChatError(error.message, t)}
             </div>
           )}
         </div>

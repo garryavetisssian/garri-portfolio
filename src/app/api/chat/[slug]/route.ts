@@ -28,8 +28,9 @@ export async function POST(
   const { slug } = await params;
 
   if (!process.env.GOOGLE_GEMINI_API_KEY) {
+    console.error("[chat] GOOGLE_GEMINI_API_KEY env var is not set");
     return NextResponse.json(
-      { error: "Chat is not configured." },
+      { error: "Chat is not configured on this deployment." },
       { status: 503 }
     );
   }
