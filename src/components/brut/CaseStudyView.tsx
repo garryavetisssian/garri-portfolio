@@ -6,6 +6,7 @@ import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import Brief from "./Brief";
+import MyRole from "./MyRole";
 import LaptopReveal from "./LaptopReveal";
 
 /**
@@ -360,6 +361,11 @@ export default function CaseStudyView({
       {/* Laptop reveal — scroll-driven cover image moment, tinted with the
           case's accent color. */}
       {coverSrc && <LaptopReveal src={coverSrc} color={project.color} />}
+
+      {/* Role breakdown — discipline-level ownership bars. */}
+      {project.roleBreakdown && (
+        <MyRole data={project.roleBreakdown} slug={project.slug} />
+      )}
 
       {/* Overview */}
       <section className="py-16 border-t border-line-strong">

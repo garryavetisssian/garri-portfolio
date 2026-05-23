@@ -44,6 +44,16 @@ export const projects: CaseStudy[] = [
         },
       ],
     },
+    roleBreakdown: {
+      summary: "Solo two-week visual exploration — concept, UI, and motion, all my call.",
+      tracks: [
+        { label: "Concept", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Visual style", value: 100 },
+        { label: "Motion", value: 60 },
+        { label: "Research", value: 20 },
+      ],
+    },
     overview: "Razer UI is a personal design exploration — a concept project reimagining how a gaming hardware brand's digital experience could look if product design principles were applied to gaming aesthetics.",
     sections: [],
     metrics: [],
@@ -97,6 +107,16 @@ export const projects: CaseStudy[] = [
         },
       ],
     },
+    roleBreakdown: {
+      summary: "Lead designer across two product versions — both apps, end-to-end, two years.",
+      tracks: [
+        { label: "Research", value: 70 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Design system", value: 80 },
+        { label: "PM", value: 30 },
+      ],
+    },
     overview:
       "Ineed is a two-sided service marketplace with dedicated mobile apps for clients and professionals. I shaped the user experience and interface design for both sides, taking the product through two distinct design phases — an initial concept and a polished release version.",
     sections: [],
@@ -143,6 +163,16 @@ export const projects: CaseStudy[] = [
         },
       ],
     },
+    roleBreakdown: {
+      summary: "Designed the product from concept to a clickable hi-fi prototype.",
+      tracks: [
+        { label: "Research", value: 50 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Prototype", value: 100 },
+        { label: "Design system", value: 60 },
+      ],
+    },
     overview: "AI Hive is an AI-powered productivity platform designed to help teams automate repetitive workflows and focus on high-value work.",
     sections: [],
     metrics: [],
@@ -187,6 +217,16 @@ export const projects: CaseStudy[] = [
         },
       ],
     },
+    roleBreakdown: {
+      summary: "Designed the operator dashboard top-to-bottom — live tracking, routing, and chat.",
+      tracks: [
+        { label: "Research", value: 60 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Design system", value: 70 },
+        { label: "PM", value: 30 },
+      ],
+    },
     overview: "Dispatch Center is a SaaS logistics platform that gives fleet managers a real-time view of their entire operation — vehicles, drivers, routes, and deliveries — in a single dashboard.",
     sections: [],
     metrics: [],
@@ -229,6 +269,16 @@ export const projects: CaseStudy[] = [
           items: ["Home overview", "Room view", "Device control", "Automations", "Energy use", "Scenes"],
           span: 12,
         },
+      ],
+    },
+    roleBreakdown: {
+      summary: "Designed the whole app — onboarding, rooms, automations, energy.",
+      tracks: [
+        { label: "Research", value: 70 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Design system", value: 70 },
+        { label: "PM", value: 30 },
       ],
     },
     overview: "NexWave is a smart home management app that gives users full control over their IoT devices, automation scenarios, and home monitoring from a single, intuitive interface.",
@@ -282,6 +332,17 @@ export const projects: CaseStudy[] = [
           ],
           span: 12,
         },
+      ],
+    },
+    roleBreakdown: {
+      summary: "Led product design AND ran the AI asset pipeline — character art, cards, scenes.",
+      tracks: [
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "AI pipeline", value: 100 },
+        { label: "Character art", value: 100 },
+        { label: "Onboarding", value: 100 },
+        { label: "Design system", value: 70 },
       ],
     },
     overview:
@@ -393,6 +454,16 @@ export const projects: CaseStudy[] = [
           ],
           span: 6,
         },
+      ],
+    },
+    roleBreakdown: {
+      summary: "Lead design across marketing, reader, analysis tools, and every edge case.",
+      tracks: [
+        { label: "Research", value: 90 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Design system", value: 90 },
+        { label: "Strategy", value: 80 },
       ],
     },
     overview:
@@ -520,6 +591,16 @@ export const projects: CaseStudy[] = [
           ],
           span: 6,
         },
+      ],
+    },
+    roleBreakdown: {
+      summary: "Lead design across four protocols on one shared system.",
+      tracks: [
+        { label: "Research", value: 70 },
+        { label: "UX", value: 100 },
+        { label: "UI", value: 100 },
+        { label: "Design system", value: 100 },
+        { label: "Strategy", value: 90 },
       ],
     },
     overview:

@@ -66,8 +66,23 @@ export interface CaseStudySection {
   annotations?: { text: string; position: "top-left" | "top-right" | "bottom-left" | "bottom-right" }[];
 }
 
+/* Per-case "Role breakdown" — visualizes how much I owned across each track
+   of the project (Research / UX / UI / Design System / PM / etc.).
+   Tracks are author-chosen per case so AI-heavy or DS-heavy projects can show
+   their distinctive discipline mix. Values are 0–100. */
+export interface RoleTrack {
+  label: string;
+  value: number;
+}
+
+export interface RoleBreakdown {
+  summary?: string;
+  tracks: RoleTrack[];
+}
+
 export interface CaseStudy extends ProjectMeta {
   brief: CaseBrief;
+  roleBreakdown?: RoleBreakdown;
   overview: string;
   sections: CaseStudySection[];
   metrics?: { label: string; value: string; prefix?: string; suffix?: string }[];

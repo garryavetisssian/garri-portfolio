@@ -282,6 +282,28 @@ body {
   color: var(--acid);
 }
 
+/* Role breakdown — segmented progress bars (MyRole.tsx).
+   Filled cells use the acid accent; empty cells use a diagonal hatched
+   pattern so the un-owned portion has visual weight too. */
+.role-seg-filled {
+  background: var(--acid);
+  border: 1px solid var(--acid);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.role-seg-empty {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 3px,
+    rgba(165, 161, 153, 0.28) 3px 4px
+  );
+  border: 1px solid var(--line-strong);
+}
+.role-row:hover .role-seg-filled {
+  box-shadow: var(--acid-glow);
+}
+
 /* Work-row hover — thin acid bar slides up on the left edge, row
    indents slightly, title shifts to acid, arrow translates up-right.
    Replaces the previous full-bg flood (which was too intense). */

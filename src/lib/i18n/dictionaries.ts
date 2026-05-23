@@ -99,6 +99,7 @@ export interface Dictionary {
     team: string;
     year: string;
     brief: string;
+    roleBreakdown: string;
     reflection: string;
     impact: string;
     nextProject: string;
@@ -297,6 +298,7 @@ const en: Dictionary = {
     team: "Team",
     year: "Year",
     brief: "Brief",
+    roleBreakdown: "Role breakdown",
     reflection: "Reflection",
     impact: "Impact",
     nextProject: "Next project",
@@ -529,6 +531,7 @@ const ru: Dictionary = {
     team: "Команда",
     year: "Год",
     brief: "Бриф",
+    roleBreakdown: "Состав роли",
     reflection: "Выводы",
     impact: "Результаты",
     nextProject: "Следующий проект",
@@ -760,6 +763,7 @@ const hy: Dictionary = {
     team: "Թիմ",
     year: "Տարի",
     brief: "Բրիֆ",
+    roleBreakdown: "Դերի կազմը",
     reflection: "Եզրակացություններ",
     impact: "Արդյունքներ",
     nextProject: "Հաջորդ նախագիծ",
