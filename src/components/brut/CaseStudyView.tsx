@@ -8,6 +8,7 @@ import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import Brief from "./Brief";
 import MyRole from "./MyRole";
 import LaptopReveal from "./LaptopReveal";
+import ChatButton from "./ChatButton";
 
 /**
  * VideoBlock — case-study video that:

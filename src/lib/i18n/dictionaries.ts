@@ -117,6 +117,25 @@ export interface Dictionary {
     soundOffAria: string;
     clickToPlayWithSound: string;
   };
+  chat: {
+    fabLabel: string;
+    fabAria: string;
+    heading: string;
+    subheading: string;
+    placeholder: string;
+    send: string;
+    sending: string;
+    close: string;
+    starter1: string;
+    starter2: string;
+    starter3: string;
+    emptyTitle: string;
+    emptyBody: string;
+    errorGeneric: string;
+    rateLimitBurst: string;
+    rateLimitDay: string;
+    disclaimer: string;
+  };
   modal: { close: string; comingSoon: string };
   caseTabs: { firstVersion: string; releaseVersion: string };
   cv: {
@@ -315,6 +334,26 @@ const en: Dictionary = {
     soundOnAria: "Mute video",
     soundOffAria: "Unmute video",
     clickToPlayWithSound: "Click to play with sound",
+  },
+  chat: {
+    fabLabel: "Ask AI about this project",
+    fabAria: "Open chat to ask about this project",
+    heading: "Ask about this project",
+    subheading: "Powered by Gemini — answers grounded in the case data.",
+    placeholder: "Ask anything about the project…",
+    send: "Send",
+    sending: "Sending…",
+    close: "Close",
+    starter1: "What did Garri actually own here?",
+    starter2: "What was the hardest part of this project?",
+    starter3: "What would Garri change next time?",
+    emptyTitle: "Anything you want to know.",
+    emptyBody:
+      "Pick a question or type your own. The chat is grounded in the case study you're reading right now.",
+    errorGeneric: "Something went wrong. Please try again.",
+    rateLimitBurst: "Too many messages — give it a minute.",
+    rateLimitDay: "Daily limit reached — try again tomorrow.",
+    disclaimer: "AI answers can be incomplete. For specifics, contact Garri directly.",
   },
   modal: { close: "Close", comingSoon: "Case study assets coming soon" },
   caseTabs: { firstVersion: "First Version", releaseVersion: "Release Version" },
@@ -549,6 +588,26 @@ const ru: Dictionary = {
     soundOffAria: "Включить звук",
     clickToPlayWithSound: "Нажмите, чтобы воспроизвести со звуком",
   },
+  chat: {
+    fabLabel: "Спросить ИИ о проекте",
+    fabAria: "Открыть чат о проекте",
+    heading: "О проекте",
+    subheading: "На базе Gemini — ответы по данным кейса.",
+    placeholder: "Спросите что-нибудь о проекте…",
+    send: "Отправить",
+    sending: "Отправка…",
+    close: "Закрыть",
+    starter1: "Что Гарри сделал на этом проекте?",
+    starter2: "Что было самым сложным?",
+    starter3: "Что Гарри изменил бы сейчас?",
+    emptyTitle: "Спросите что угодно.",
+    emptyBody:
+      "Выберите вопрос или напишите свой. Чат знает только этот кейс.",
+    errorGeneric: "Что-то пошло не так. Попробуйте ещё раз.",
+    rateLimitBurst: "Слишком много сообщений — подождите минуту.",
+    rateLimitDay: "Лимит на сегодня исчерпан — попробуйте завтра.",
+    disclaimer: "Ответы ИИ могут быть неполными. Для деталей свяжитесь с Гарри напрямую.",
+  },
   modal: { close: "Закрыть", comingSoon: "Материалы кейса скоро появятся" },
   caseTabs: { firstVersion: "Первая версия", releaseVersion: "Релизная версия" },
   cv: {
@@ -780,6 +839,27 @@ const hy: Dictionary = {
     soundOnAria: "Անջատել ձայնը",
     soundOffAria: "Միացնել ձայնը",
     clickToPlayWithSound: "Սեղմեք՝ ձայնով նվագարկելու համար",
+  },
+  chat: {
+    fabLabel: "Հարցրու AI-ին նախագծի մասին",
+    fabAria: "Բացել զրույց՝ նախագծի մասին հարցնելու համար",
+    heading: "Նախագծի մասին",
+    subheading: "Powered by Gemini — պատասխաններ՝ ըստ քեյսի տվյալների։",
+    placeholder: "Հարցրեք ինչ-որ բան նախագծի մասին…",
+    send: "Ուղարկել",
+    sending: "Ուղարկվում է…",
+    close: "Փակել",
+    starter1: "Ի՞նչն իրականում Գարրին արեց այս նախագծում:",
+    starter2: "Ի՞նչն էր ամենադժվարը:",
+    starter3: "Ի՞նչ կփոխեր Գարրին հաջորդ անգամ:",
+    emptyTitle: "Հարցրու ինչ ուզում ես։",
+    emptyBody:
+      "Ընտրիր հարց կամ գրիր քոնը։ Չաթը գիտի միայն այս քեյսի մասին։",
+    errorGeneric: "Ինչ-որ բան սխալ գնաց։ Փորձիր նորից։",
+    rateLimitBurst: "Չափից շատ հաղորդագրություններ — մի րոպե սպասիր:",
+    rateLimitDay: "Օրական սահմանաչափը սպառվել է — փորձիր վաղը:",
+    disclaimer:
+      "AI-ի պատասխանները կարող են լինել թերի։ Մանրամասների համար կապվիր ուղղակիորեն Գարրիի հետ։",
   },
   modal: { close: "Փակել", comingSoon: "Գործի նյութերը շուտով կհայտնվեն" },
   caseTabs: { firstVersion: "Առաջին տարբերակ", releaseVersion: "Թողարկման տարբերակ" },
