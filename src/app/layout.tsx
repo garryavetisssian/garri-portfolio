@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Unbounded, Manrope, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
     <html lang="en" className={`${unbounded.variable} ${manrope.variable} ${jetbrains.variable} h-full`}>
       <body className="min-h-full font-sans antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
   );
