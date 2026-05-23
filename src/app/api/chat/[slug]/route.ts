@@ -84,10 +84,12 @@ export async function POST(
     return NextResponse.json({ error: "Unknown project." }, { status: 404 });
   }
 
+  const modelMessages = await convertToModelMessages(trimmed);
+
   const result = streamText({
-    model: google("gemini-2.0-flash"),
+    model: google("gemini-2.5-flash"),
     system: systemPrompt,
-    messages: convertToModelMessages(trimmed),
+    messages: modelMessages,
     temperature: 0.6,
     maxOutputTokens: 700,
   });

@@ -491,6 +491,9 @@ export default function CaseStudyView({
           </Link>
         </section>
       )}
+
+      {/* Per-case AI chat — floating button + lazy-loaded panel. */}
+      <ChatButton slug={project.slug} caseTitle={project.title} />
     </article>
   );
 }
