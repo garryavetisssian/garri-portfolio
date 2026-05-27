@@ -300,6 +300,16 @@ body {
   );
   border: 1px solid var(--line-strong);
 }
+/* Role breakdown row (MyRole.tsx) — stacks on mobile so the 10-segment bar
+   keeps full width; the fixed label/bar/value track only kicks in ≥640px. */
+.role-row {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .role-row {
+    grid-template-columns: minmax(110px, 1.2fr) minmax(0, 5fr) minmax(64px, auto);
+  }
+}
 .role-row:hover .role-seg-filled {
   box-shadow: var(--acid-glow);
 }
@@ -601,6 +611,48 @@ body {
   word-break: normal;
   hyphens: auto;
   -webkit-hyphens: auto;
+}
+
+/* Brief tile grid (Brief.tsx) — author spans ride in --span-t / --span-d so the
+   grid never collapses into broken implicit columns on small screens:
+   stacked (mobile) → 6-col (≥640px) → author's 12-col (≥768px).
+   min-width:0 lets cells shrink; the break helper stops long words clipping. */
+.brief-grid {
+  grid-template-columns: 1fr;
+}
+.brief-tile {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+@media (min-width: 640px) {
+  .brief-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .brief-tile {
+    grid-column: span var(--span-t);
+  }
+}
+@media (min-width: 768px) {
+  .brief-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .brief-tile {
+    grid-column: span var(--span-d);
+  }
+}
+
+/* Impact metrics grid (CaseStudyView.tsx) — never wider than 2-up on phones,
+   full author count (≤4) on desktop. Counts arrive as --metric-cols-* vars. */
+.metrics-grid {
+  grid-template-columns: repeat(var(--metric-cols-m), minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(var(--metric-cols-d), minmax(0, 1fr));
+  }
 }
 
 /* Body prose */

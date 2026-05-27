@@ -138,7 +138,7 @@ export default function ChatPanel({
         style={{
           right: 0,
           bottom: 0,
-          width: "min(100vw, 420px)",
+          width: "min(100%, 420px)",
           height: "min(100dvh, 640px)",
           maxHeight: "100dvh",
           background: "var(--paper-elev)",

@@ -100,11 +100,7 @@ function RoleRow({
   return (
     <motion.div
       variants={rowReveal}
-      className="role-row group/role grid items-center gap-5 md:gap-7 py-4 md:py-5 border-t border-line-strong transition-transform duration-500"
-      style={{
-        gridTemplateColumns:
-          "minmax(110px, 1.2fr) minmax(0, 5fr) minmax(64px, auto)",
-      }}
+      className="role-row group/role grid sm:items-center gap-3 sm:gap-5 md:gap-7 py-4 md:py-5 border-t border-line-strong transition-transform duration-500"
       whileHover={reduce ? undefined : { x: 4 }}
     >
       <span

@@ -189,7 +189,7 @@ function TabStrip({
                 key={tab.name}
                 onClick={() => onActiveChange(i)}
                 aria-pressed={isActive}
-                className={`relative group flex-1 min-w-[200px] text-left whitespace-nowrap transition-colors px-5 md:px-7 py-5 md:py-6 border-r border-line-strong last:border-r-0 ${
+                className={`relative group flex-1 min-w-[clamp(150px,42vw,200px)] text-left whitespace-nowrap transition-colors px-5 md:px-7 py-5 md:py-6 border-r border-line-strong last:border-r-0 ${
                   isActive
                     ? "bg-acid text-paper"
                     : "bg-paper text-ink-mute hover:text-ink hover:bg-paper-soft"
@@ -418,10 +418,11 @@ export default function CaseStudyView({
               </span>
             </div>
             <div
-              className="grid gap-px bg-line-strong hairline-t hairline-b"
+              className="metrics-grid grid gap-px bg-line-strong hairline-t hairline-b"
               style={{
-                gridTemplateColumns: `repeat(${Math.min(project.metrics.length, 4)}, minmax(0, 1fr))`,
-              }}
+                "--metric-cols-m": Math.min(project.metrics.length, 2),
+                "--metric-cols-d": Math.min(project.metrics.length, 4),
+              } as React.CSSProperties}
             >
               {project.metrics.map((m) => (
                 <div key={m.label} className="bg-paper-soft p-7">

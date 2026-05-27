@@ -199,11 +199,15 @@ function TileShell({
   kind: BriefTile["kind"];
   index: number;
 }) {
-  // 12-col grid on md+, single-col on small screens.
+  // Spans are carried as CSS custom properties and applied per-breakpoint in
+  // globals.css (.brief-grid / .brief-tile): stacked on mobile, a 6-col tablet
+  // track, then the author's 12-col layout on desktop. Tablet span ≈ half the
+  // desktop span, clamped to the 6-col track.
+  const tabletSpan = Math.max(1, Math.min(6, Math.round(span / 2)));
   return (
     <MagneticTile
       className="brief-tile group/tile relative bg-paper p-7 flex flex-col gap-5 min-h-[180px]"
-      style={{ gridColumn: `span ${span} / span ${span}` }}
+      style={{ "--span-d": span, "--span-t": tabletSpan } as React.CSSProperties}
     >
       <CornerMark kind={kind} index={index} />
       {children}
@@ -425,8 +429,9 @@ export default function Brief({
           />
         </motion.div>
 
-        {/* Tile grid — 12 cols on md+, single col on small. */}
-        <div className="brief-grid grid grid-cols-1 md:grid-cols-12 gap-px bg-line-strong hairline-t hairline-b">
+        {/* Tile grid — column track is owned by .brief-grid (globals.css):
+            stacked → 6-col (≥640px) → 12-col (≥768px). */}
+        <div className="brief-grid grid gap-px bg-line-strong hairline-t hairline-b">
           {brief.tiles.map((tile, i) => renderTile(tile, i))}
         </div>
       </div>
