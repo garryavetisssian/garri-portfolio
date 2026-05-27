@@ -1267,24 +1267,31 @@ textarea.form-input {
   .laptop-reveal { display: none !important; }
 }
 
-/* Smaller screens — drop the keyboard detail; hug the laptop.
-   On phones the laptop is sized by 78vw (~200px tall), so the desktop sticky
-   scroll-track (100vh sticky inside a 115vh section) left a huge empty band
-   above and below it. Here we drop the sticky pin and let the section flow at
-   the laptop's own height with modest breathing room. The lid-open reveal still
-   scrubs from scrollYProgress as the section scrolls through the viewport. */
-@media (max-width: 640px) {
+/* Tablet and below — hug the laptop. The desktop scroll-track is a 100vh
+   sticky inside a 130vh section; whenever the laptop is small relative to the
+   viewport (it is sized by 78vw, so on phones AND tablets), that leaves a big
+   empty band above and below it. Here we drop the sticky pin and let the
+   section flow at the laptop's own height with modest breathing room. The
+   lid-open reveal still scrubs from scrollYProgress as the section passes
+   through the viewport. True desktop keeps the pinned sticky reveal. */
+@media (max-width: 900px) {
   .laptop-reveal {
     min-height: 0;
-    --laptop-base-h: 16px;
-    --laptop-bezel: 8px;
   }
   .laptop-reveal-sticky {
     position: relative;
     top: auto;
     height: auto;
-    padding-top: clamp(48px, 13vw, 88px);
-    padding-bottom: clamp(48px, 13vw, 88px);
+    padding-top: clamp(48px, 9vw, 96px);
+    padding-bottom: clamp(48px, 9vw, 96px);
+  }
+}
+
+/* Phones — also drop the keyboard detail and slim the chassis chrome. */
+@media (max-width: 640px) {
+  .laptop-reveal {
+    --laptop-base-h: 16px;
+    --laptop-bezel: 8px;
   }
   .laptop-base-keyboard { display: none; }
 }

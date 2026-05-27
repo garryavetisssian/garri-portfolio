@@ -144,9 +144,18 @@ function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean 
     <img
       src={asset.src}
       alt=""
+      width={asset.width}
+      height={asset.height}
       loading={priority ? "eager" : "lazy"}
       decoding="async"
       className="block w-full h-auto select-none"
+      // Reserve the correct box from the intrinsic ratio so lazy images don't
+      // collapse to 0 height (which made the gallery look like one slide).
+      style={
+        asset.width && asset.height
+          ? { aspectRatio: `${asset.width} / ${asset.height}` }
+          : undefined
+      }
       draggable={false}
     />
   );

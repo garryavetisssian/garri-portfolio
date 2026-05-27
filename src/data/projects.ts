@@ -298,7 +298,7 @@ export const projects: CaseStudy[] = [
     role: "Product Designer",
     duration: "3 months",
     team: "PM, 2 Engineers",
-    thumbnail: "/cases/duck-master/Cover.png",
+    thumbnail: "/cases/duck-master/Cover.webp",
     color: "#FFD12B",
     brief: {
       narrative:
@@ -421,7 +421,7 @@ export const projects: CaseStudy[] = [
     role: "Lead Product Designer",
     duration: "6 months",
     team: "PM, 3 Engineers, Data Scientist",
-    thumbnail: "/cases/balvoi/Cover.png",
+    thumbnail: "/cases/balvoi/Cover.webp",
     color: "#0081DD",
     brief: {
       narrative:
