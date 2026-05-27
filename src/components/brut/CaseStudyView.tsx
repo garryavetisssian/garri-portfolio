@@ -198,14 +198,14 @@ function TabStrip({
                 key={tab.name}
                 onClick={() => onActiveChange(i)}
                 aria-pressed={isActive}
-                className={`relative group flex-1 min-w-[clamp(150px,42vw,200px)] text-left whitespace-nowrap transition-colors px-5 md:px-7 py-5 md:py-6 border-r border-line-strong last:border-r-0 ${
+                className={`relative group flex-1 min-w-[clamp(150px,42vw,200px)] text-left transition-colors px-5 md:px-7 py-5 md:py-6 border-r border-line-strong last:border-r-0 ${
                   isActive
                     ? "bg-acid text-paper"
                     : "bg-paper text-ink-mute hover:text-ink hover:bg-paper-soft"
                 }`}
               >
                 <span
-                  className={`mono block text-[11px] tracking-[0.16em] uppercase mb-1 ${
+                  className={`mono block text-[11px] tracking-[0.16em] uppercase mb-1 whitespace-nowrap ${
                     isActive ? "text-paper/70" : "text-ink-faint"
                   }`}
                 >
@@ -219,6 +219,9 @@ function TabStrip({
                     fontSize: "clamp(1rem, 1.6vw, 1.35rem)",
                     letterSpacing: "-0.02em",
                     lineHeight: 1.1,
+                    overflowWrap: "break-word",
+                    wordBreak: "normal",
+                    hyphens: "auto",
                   }}
                 >
                   {translateTabName(tab.name, t)}
