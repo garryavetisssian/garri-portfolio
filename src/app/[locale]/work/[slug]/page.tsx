@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/brut/CaseStudyView";
 import { getProject } from "@/data/projects";
+import { getLocalizedProject } from "@/data/projects.i18n";
 import {
   getCaseAssets,
   hasCaseFolder,
@@ -53,12 +54,14 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const { locale, slug } = await params;
   if (!localeCodes.includes(locale as Locale)) notFound();
   if (!hasCaseFolder(slug)) notFound();
-  const project = getProject(slug);
+  const project = getLocalizedProject(slug, locale as Locale);
   if (!project) notFound();
 
   const caseAssets = getCaseAssets(slug);
   const nextSlug = getNextProjectSlug(slug);
-  const nextProject = nextSlug ? getProject(nextSlug) : undefined;
+  const nextProject = nextSlug
+    ? getLocalizedProject(nextSlug, locale as Locale)
+    : undefined;
 
   return (
     <CaseStudyView

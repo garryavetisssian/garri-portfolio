@@ -354,7 +354,9 @@ body.cv-mode .grain {
 
 @media (max-width: 720px) {
   .cv-root {
-    padding: 16px 12px 48px;
+    /* Keep the fixed site header from covering the CV actions bar
+       (language pills + Download) on mobile. */
+    padding: calc(var(--nav-h, 64px) + 20px) 12px 48px;
   }
   .cv-page {
     padding: 32px 24px;

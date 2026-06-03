@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
+import { localizeCategory } from "@/data/projects.i18n";
 import Brief from "./Brief";
 import MyRole from "./MyRole";
 import LaptopReveal from "./LaptopReveal";
@@ -316,7 +317,7 @@ export default function CaseStudyView({
               <div className="flex flex-wrap gap-2 mb-6">
                 {(Array.isArray(project.category) ? project.category : [project.category]).map(
                   (c) => (
-                    <span key={c} className="chip chip-acid">{c}</span>
+                    <span key={c} className="chip chip-acid">{localizeCategory(c, locale)}</span>
                   )
                 )}
                 <span className="chip">{project.year}</span>
