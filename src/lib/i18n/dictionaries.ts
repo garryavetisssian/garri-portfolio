@@ -225,6 +225,15 @@ export interface Dictionary {
     blurb: string;
     play: string;
     meetingScheduler: { name: string; description: string };
+    networking: {
+      name: string;
+      description: string;
+      howToBody: string;
+      mustConnectLabel: string;
+      blockedLabel: string;
+      pair: string;
+      blockedPair: string;
+    };
     difficulty: { choose: string; easy: string; medium: string; hard: string };
     viewLeaderboard: string;
     howToTitle: string;
@@ -272,6 +281,16 @@ const en: Dictionary = {
     meetingScheduler: {
       name: "Meeting Scheduler",
       description: "Slot every meeting into the right room and time so all constraints hold.",
+    },
+    networking: {
+      name: "Networking",
+      description: "Connect the right professionals so every relationship rule holds at once.",
+      howToBody:
+        "Connect the professionals so every rule holds at once. Click one node, then another, to toggle a connection. Each person needs exactly the number of connections shown on their node. People from the same company can't be connected directly. Honour the must-connect and blocked clues. Stuck? Spend a hint to fix one connection.",
+      mustConnectLabel: "Must connect",
+      blockedLabel: "Blocked",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
     },
     difficulty: { choose: "Choose difficulty", easy: "Easy", medium: "Medium", hard: "Hard" },
     viewLeaderboard: "View Leaderboard",
@@ -572,6 +591,16 @@ const ru: Dictionary = {
       name: "Планировщик встреч",
       description: "Расставьте каждую встречу в нужную комнату и время так, чтобы выполнялись все условия.",
     },
+    networking: {
+      name: "Нетворкинг",
+      description: "Соедините нужных профессионалов так, чтобы выполнялись все правила связей одновременно.",
+      howToBody:
+        "Соедините профессионалов так, чтобы все правила выполнялись одновременно. Нажмите на один узел, затем на другой, чтобы создать или убрать связь. У каждого человека должно быть ровно столько связей, сколько указано на его узле. Людей из одной компании нельзя соединять напрямую. Соблюдайте подсказки «нужно соединить» и «запрещено». Застряли? Потратьте подсказку, чтобы исправить одну связь.",
+      mustConnectLabel: "Нужно соединить",
+      blockedLabel: "Запрещено",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
+    },
     difficulty: { choose: "Выберите сложность", easy: "Легко", medium: "Средне", hard: "Сложно" },
     viewLeaderboard: "Таблица лидеров",
     howToTitle: "Как играть",
@@ -869,6 +898,16 @@ const hy: Dictionary = {
     meetingScheduler: {
       name: "Հանդիպումների պլանավորիչ",
       description: "Տեղադրեք յուրաքանչյուր հանդիպում ճիշտ սենյակում և ժամին, որպեսզի բոլոր պայմանները բավարարվեն։",
+    },
+    networking: {
+      name: "Նեթվորքինգ",
+      description: "Միացրեք ճիշտ մասնագետներին, որպեսզի կապերի բոլոր կանոնները միաժամանակ բավարարվեն։",
+      howToBody:
+        "Միացրեք մասնագետներին այնպես, որ բոլոր կանոնները միաժամանակ բավարարվեն։ Սեղմեք մեկ հանգույցի, ապա մյուսի վրա՝ կապը ստեղծելու կամ հանելու համար։ Յուրաքանչյուր մարդ պետք է ունենա ճիշտ այնքան կապ, որքան նշված է իր հանգույցի վրա։ Նույն ընկերության մարդկանց չի կարելի ուղղակիորեն միացնել։ Հաշվի առեք «պարտադիր միացնել» և «արգելված» հուշումները։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ կապ ուղղելու համար։",
+      mustConnectLabel: "Պարտադիր միացնել",
+      blockedLabel: "Արգելված",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
     },
     difficulty: { choose: "Ընտրեք բարդությունը", easy: "Հեշտ", medium: "Միջին", hard: "Բարդ" },
     viewLeaderboard: "Առաջատարների աղյուսակ",

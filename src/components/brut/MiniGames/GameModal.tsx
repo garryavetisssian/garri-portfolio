@@ -6,24 +6,40 @@
  * per-difficulty LEADERBOARD view reachable from the difficulty screen.
  *
  * Backdrop + open/close animation follow the ChatPanel pattern (dark overlay,
- * eased transform). Currently hosts a single game: Meeting Scheduler.
+ * eased transform). Game-agnostic: it renders whichever game is passed via the
+ * `game` definition, so it serves both Meeting Scheduler and Networking.
  */
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import MeetingSchedulerGame from "./games/MeetingScheduler/MeetingSchedulerGame";
-import { DIFFICULTIES, type Difficulty } from "./games/MeetingScheduler/types";
-import {
-  addEntry,
-  getEntries,
-  formatTime,
-  type Entry,
-} from "./games/MeetingScheduler/leaderboard";
+import { DIFFICULTIES, formatTime, type Difficulty, type Entry } from "./shared";
+
+/** Everything GameModal needs to host a specific game. */
+export interface GameDefinition {
+  name: string;
+  description: string;
+  howToBody: string;
+  getEntries: (d: Difficulty) => Entry[];
+  addEntry: (d: Difficulty, name: string, seconds: number) => { entries: Entry[]; rank: number };
+  Game: React.ComponentType<{
+    difficulty: Difficulty;
+    onWin: (seconds: number) => void;
+    onExit: () => void;
+  }>;
+}
 
 type Screen = "difficulty" | "leaderboard" | "howto" | "countdown" | "game" | "victory";
 
-export default function GameModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function GameModal({
+  open,
+  onClose,
+  game,
+}: {
+  open: boolean;
+  onClose: () => void;
+  game: GameDefinition;
+}) {
   const { t } = useLanguage();
   const g = t.miniGames;
 
@@ -69,7 +85,7 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
 
   function openLeaderboard(d: Difficulty) {
     setLbDiff(d);
-    setEntries(getEntries(d));
+    setEntries(game.getEntries(d));
     setScreen("leaderboard");
   }
 
@@ -78,12 +94,12 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
     setName("");
     setSubmitted(false);
     setHighlight(-1);
-    setEntries(getEntries(difficulty));
+    setEntries(game.getEntries(difficulty));
     setScreen("victory");
   }
 
   function submitScore() {
-    const { entries: next, rank } = addEntry(difficulty, name, winTime);
+    const { entries: next, rank } = game.addEntry(difficulty, name, winTime);
     setEntries(next);
     setHighlight(rank);
     setSubmitted(true);
@@ -116,7 +132,7 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={g.meetingScheduler.name}
+            aria-label={game.name}
             className="relative w-full max-w-3xl max-h-[92dvh] overflow-y-auto"
             initial={{ scale: 0.96, y: 12, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -146,7 +162,7 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
                   className="text-ink"
                   style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.15rem" }}
                 >
-                  {g.meetingScheduler.name}
+                  {game.name}
                 </h3>
               </div>
               <button
@@ -207,7 +223,7 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
                     {g.howToTitle}
                   </h4>
                   <p style={{ color: "var(--ink-mute)", fontSize: "0.95rem", lineHeight: 1.6 }}>
-                    {g.howToBody}
+                    {game.howToBody}
                   </p>
                   <button
                     type="button"
@@ -225,7 +241,7 @@ export default function GameModal({ open, onClose }: { open: boolean; onClose: (
               )}
 
               {screen === "game" && (
-                <MeetingSchedulerGame
+                <game.Game
                   key={`${difficulty}-${round}`}
                   difficulty={difficulty}
                   onWin={handleWin}
