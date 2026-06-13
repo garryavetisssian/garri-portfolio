@@ -247,6 +247,8 @@ export interface Dictionary {
     rules: string;
     hint: string;
     exit: string;
+    undo: string;
+    clear: string;
     trayLabel: string;
     constraintsLabel: string;
     roomLabel: string;
@@ -309,6 +311,8 @@ const en: Dictionary = {
     rules: "Rules",
     hint: "Hint",
     exit: "Exit",
+    undo: "Undo",
+    clear: "Clear",
     trayLabel: "Meetings",
     constraintsLabel: "Constraints",
     roomLabel: "Room",
@@ -621,6 +625,8 @@ const ru: Dictionary = {
     rules: "Правила",
     hint: "Подсказка",
     exit: "Выход",
+    undo: "Отменить",
+    clear: "Очистить",
     trayLabel: "Встречи",
     constraintsLabel: "Условия",
     roomLabel: "Комната",
@@ -932,6 +938,8 @@ const hy: Dictionary = {
     rules: "Կանոններ",
     hint: "Հուշում",
     exit: "Ելք",
+    undo: "Հետարկել",
+    clear: "Մաքրել",
     trayLabel: "Հանդիպումներ",
     constraintsLabel: "Պայմաններ",
     roomLabel: "Սենյակ",

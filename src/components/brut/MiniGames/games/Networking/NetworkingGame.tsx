@@ -91,6 +91,17 @@ const Ico = {
       <path d="M4 12l5 5L20 6" />
     </svg>
   ),
+  undo: (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 14L4 9l5-5" />
+      <path d="M4 9h11a5 5 0 0 1 0 10h-1" />
+    </svg>
+  ),
+  clear: (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" />
+    </svg>
+  ),
 };
 
 export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
@@ -105,6 +116,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
   const [elapsed, setElapsed] = useState(0);
   const [won, setWon] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [history, setHistory] = useState<string[][]>([]);
 
   const elapsedRef = useRef(0);
   const onWinRef = useRef(onWin);
@@ -172,13 +184,34 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
     }
   }
 
+  // Snapshot the current edges into history, then apply the next state. Every
+  // board-changing action goes through here so Undo can step back one move.
+  function applyEdges(next: Set<string>) {
+    setHistory((h) => [...h, [...edges]]);
+    commit(next);
+  }
+
+  function undo() {
+    if (history.length === 0) return;
+    const prev = history[history.length - 1];
+    setHistory(history.slice(0, -1));
+    setEdges(new Set(prev));
+    setSelected(null);
+  }
+
+  function clearBoard() {
+    if (edges.size === 0) return;
+    setSelected(null);
+    applyEdges(new Set());
+  }
+
   function toggleEdge(a: number, b: number) {
     if (a === b) return;
     const key = edgeKey(a, b);
     const next = new Set(edges);
     if (next.has(key)) next.delete(key);
     else next.add(key);
-    commit(next);
+    applyEdges(next);
   }
 
   function handleNodeClick(id: number) {
@@ -204,7 +237,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       next.delete(wrong);
       setHintsLeft((h) => h - 1);
       setSelected(null);
-      commit(next);
+      applyEdges(next);
       return;
     }
     // No mistakes left — add a missing correct edge (can never overshoot, since
@@ -215,7 +248,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       next.add(missing);
       setHintsLeft((h) => h - 1);
       setSelected(null);
-      commit(next);
+      applyEdges(next);
     }
   }
 
@@ -228,6 +261,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
     elapsedRef.current = 0;
     setElapsed(0);
     setShowRules(false);
+    setHistory([]);
   }
 
   const label = (id: number) => nodes[id]?.label ?? "?";
@@ -250,6 +284,12 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       <div className="flex flex-wrap items-center gap-2">
         <button type="button" onClick={changePuzzle} className={toolbarBtn} style={toolbarStyle}>
           {Ico.shuffle} {g.changePuzzle}
+        </button>
+        <button type="button" onClick={undo} disabled={history.length === 0} className={toolbarBtn} style={toolbarStyle}>
+          {Ico.undo} {g.undo}
+        </button>
+        <button type="button" onClick={clearBoard} disabled={edges.size === 0} className={toolbarBtn} style={toolbarStyle}>
+          {Ico.clear} {g.clear}
         </button>
         <button type="button" onClick={() => setShowRules(true)} className={toolbarBtn} style={toolbarStyle}>
           {Ico.book} {g.rules}
@@ -290,16 +330,6 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
         {/* Canvas */}
         <div className="min-w-0">
-          {selected !== null && (
-            <motion.p
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mono mb-3"
-              style={{ color: "var(--ink-mute)", fontSize: "0.68rem", lineHeight: 1.45 }}
-            >
-              {net.selectPrompt}
-            </motion.p>
-          )}
           <div
             className="relative mx-auto w-full"
             style={{
@@ -540,6 +570,20 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
                 </div>
               );
             })}
+          </div>
+          {/* Prompt sits BELOW the board in a fixed-height slot, so it fades in
+              and out without nudging the canvas up and down on every click. */}
+          <div className="mt-3" style={{ minHeight: 40 }}>
+            {selected !== null && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mono"
+                style={{ color: "var(--ink-mute)", fontSize: "0.68rem", lineHeight: 1.45 }}
+              >
+                {net.selectPrompt}
+              </motion.p>
+            )}
           </div>
         </div>
 

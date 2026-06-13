@@ -54,6 +54,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
   const [won, setWon] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [dragOver, setDragOver] = useState<string | null>(null);
+  const [history, setHistory] = useState<Assignment[]>([]);
 
   const elapsedRef = useRef(0);
   const onWinRef = useRef(onWin);
@@ -81,20 +82,41 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
     }
   }
 
+  // Snapshot the current board into history, then apply the next state. Every
+  // board-changing action goes through here so Undo can step back one move.
+  function applyAssignment(next: Assignment) {
+    setHistory((h) => [...h, assignment.map((p) => (p ? { ...p } : null))]);
+    commit(next);
+  }
+
+  function undo() {
+    if (history.length === 0) return;
+    const prev = history[history.length - 1];
+    setHistory(history.slice(0, -1));
+    setAssignment(prev);
+    setSelected(null);
+  }
+
+  function clearBoard() {
+    if (assignment.every((p) => p === null)) return;
+    setSelected(null);
+    applyAssignment(emptyAssignment(puzzle.meetings.length));
+  }
+
   function placeMeeting(m: number, room: number, slot: number) {
     const next = assignment.slice();
     const occupant = meetingAt(next, room, slot);
     if (occupant !== null && occupant !== m) next[occupant] = null; // bump back to tray
     next[m] = { room, slot };
     setSelected(null);
-    commit(next);
+    applyAssignment(next);
   }
 
   function removeMeeting(m: number) {
     const next = assignment.slice();
     next[m] = null;
     setSelected(null);
-    setAssignment(next); // removing can never complete the puzzle
+    applyAssignment(next); // removing can never complete the puzzle
   }
 
   function handleCellClick(room: number, slot: number) {
@@ -105,8 +127,8 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
       // Pick the meeting back up.
       const next = assignment.slice();
       next[occupant] = null;
-      setAssignment(next);
       setSelected(occupant);
+      applyAssignment(next);
     }
   }
 
@@ -141,6 +163,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
     elapsedRef.current = 0;
     setElapsed(0);
     setShowRules(false);
+    setHistory([]);
   }
 
   // ── drag & drop ──
@@ -204,6 +227,24 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
       <div className="flex flex-wrap items-center gap-2">
         <button type="button" onClick={changePuzzle} className={toolbarBtn} style={toolbarStyle}>
           {g.changePuzzle}
+        </button>
+        <button
+          type="button"
+          onClick={undo}
+          disabled={history.length === 0}
+          className={toolbarBtn}
+          style={toolbarStyle}
+        >
+          {g.undo}
+        </button>
+        <button
+          type="button"
+          onClick={clearBoard}
+          disabled={assignment.every((p) => p === null)}
+          className={toolbarBtn}
+          style={toolbarStyle}
+        >
+          {g.clear}
         </button>
         <button
           type="button"
