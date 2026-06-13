@@ -20,7 +20,7 @@ import {
   type NetNode,
   type NetPuzzle,
 } from "./types";
-import { allowedPairs, classifyNetworkSolutions } from "./solver";
+import { allowedPairs, findSolutions } from "./solver";
 
 function shuffle<T>(arr: T[]): T[] {
   const out = arr.slice();
@@ -153,38 +153,34 @@ export function generateNetworkPuzzle(difficulty: Difficulty): NetPuzzle {
 
     const usedMust = new Set(mustConnect.map(([a, b]) => edgeKey(a, b)));
     const usedBlocked = new Set(blocked.map(([a, b]) => edgeKey(a, b)));
-    const extraMust = mustPool.filter(([a, b]) => !usedMust.has(edgeKey(a, b)));
-    const extraBlocked = blockedPool.filter(([a, b]) => !usedBlocked.has(edgeKey(a, b)));
+    const targetKeys = new Set(solution.map(([a, b]) => edgeKey(a, b)));
 
-    const check = () =>
-      classifyNetworkSolutions({ nodeCount: n, company, targets, mustConnect, blocked });
-
-    if (check() === "unique") {
-      return buildPuzzle(difficulty, company, solution, mustConnect, blocked);
-    }
-
-    // Tighten toward uniqueness. Prefer "blocked" so the puzzle stays deductive
-    // (must-connect hands the player real solution edges), but cap how many
-    // blocked we add before letting the far-more-efficient must-connect close it
-    // out — this keeps the blocked list "more, but not too much".
-    const MAX_EXTRA_BLOCKED = 10;
+    // Tighten toward uniqueness by blocking an edge that belongs to a concrete
+    // ALTERNATIVE solution but not to our target. Each block kills a real
+    // ambiguity (not a random pair), so only a handful are ever needed — keeping
+    // the blocked list "more, but not too much" while never revealing edges.
     let unique = false;
-    let addedBlocked = 0;
-    for (let added = 0; added < 12; added++) {
-      if (addedBlocked < MAX_EXTRA_BLOCKED && extraBlocked.length > 0) {
-        blocked.push(normEdge(...extraBlocked.shift()!));
-        addedBlocked++;
-      } else if (extraMust.length > 0) {
-        mustConnect.push(normEdge(...extraMust.shift()!));
-      } else if (extraBlocked.length > 0) {
-        blocked.push(normEdge(...extraBlocked.shift()!));
-      } else {
+    for (let guard = 0; guard < 24; guard++) {
+      const sols = findSolutions({ nodeCount: n, company, targets, mustConnect, blocked }, 2);
+      if (sols.length <= 1) {
+        unique = sols.length === 1;
         break;
       }
-      if (check() === "unique") {
-        unique = true;
-        break;
-      }
+      const alt = sols.find((s) => {
+        const ks = s.map(([a, b]) => edgeKey(a, b));
+        return ks.length !== targetKeys.size || ks.some((k) => !targetKeys.has(k));
+      });
+      if (!alt) break;
+      const witness = alt.find(
+        ([a, b]) =>
+          company[a] !== company[b] &&
+          !targetKeys.has(edgeKey(a, b)) &&
+          !usedBlocked.has(edgeKey(a, b)) &&
+          !usedMust.has(edgeKey(a, b))
+      );
+      if (!witness) break;
+      blocked.push(normEdge(witness[0], witness[1]));
+      usedBlocked.add(edgeKey(witness[0], witness[1]));
     }
     if (unique) {
       return buildPuzzle(difficulty, company, solution, mustConnect, blocked);
