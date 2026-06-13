@@ -219,9 +219,97 @@ export interface Dictionary {
     contact: string[];
     about: string[];
   };
+  miniGames: {
+    eyebrow: string;
+    heading: string;
+    blurb: string;
+    play: string;
+    meetingScheduler: { name: string; description: string };
+    difficulty: { choose: string; easy: string; medium: string; hard: string };
+    viewLeaderboard: string;
+    howToTitle: string;
+    howToBody: string;
+    gotIt: string;
+    go: string;
+    changePuzzle: string;
+    rules: string;
+    hint: string;
+    exit: string;
+    trayLabel: string;
+    constraintsLabel: string;
+    roomLabel: string;
+    slotLabel: string;
+    timeLabel: string;
+    victoryTitle: string;
+    yourTime: string;
+    enterName: string;
+    namePlaceholder: string;
+    submit: string;
+    playAgain: string;
+    leaderboardTitle: string;
+    rank: string;
+    name: string;
+    time: string;
+    noScores: string;
+    back: string;
+    close: string;
+    constraints: {
+      inRoom: string;
+      before: string;
+      notSameSlot: string;
+      atSlot: string;
+      roomBeforeSlot: string;
+    };
+  };
 }
 
 const en: Dictionary = {
+  miniGames: {
+    eyebrow: "Mini-Games / Take a break",
+    heading: "Mini-Games",
+    blurb: "A little something built for fun. Same brutalist rules — now playable.",
+    play: "Play",
+    meetingScheduler: {
+      name: "Meeting Scheduler",
+      description: "Slot every meeting into the right room and time so all constraints hold.",
+    },
+    difficulty: { choose: "Choose difficulty", easy: "Easy", medium: "Medium", hard: "Hard" },
+    viewLeaderboard: "View Leaderboard",
+    howToTitle: "How to play",
+    howToBody:
+      "Place every meeting into the room × time-slot grid so all constraints are satisfied. Click a meeting, then click a cell to drop it — or drag it. Click a filled cell to pick it back up. Each cell holds one meeting. Constraints tick off as you satisfy them. Stuck? Spend a hint to reveal one correct placement.",
+    gotIt: "Got it!",
+    go: "Go!",
+    changePuzzle: "Change Puzzle",
+    rules: "Rules",
+    hint: "Hint",
+    exit: "Exit",
+    trayLabel: "Meetings",
+    constraintsLabel: "Constraints",
+    roomLabel: "Room",
+    slotLabel: "Slot",
+    timeLabel: "Time",
+    victoryTitle: "Solved!",
+    yourTime: "Your time",
+    enterName: "Enter your name",
+    namePlaceholder: "Your name",
+    submit: "Submit",
+    playAgain: "Play Again",
+    leaderboardTitle: "Leaderboard",
+    rank: "Rank",
+    name: "Name",
+    time: "Time",
+    noScores: "No scores yet — be the first.",
+    back: "Back",
+    close: "Close",
+    constraints: {
+      inRoom: "{m} must be in {room}",
+      before: "{m} must come before {n}",
+      notSameSlot: "{m} & {n} can't share a slot",
+      atSlot: "{m} must be at {slot}",
+      roomBeforeSlot: "{room} needs a meeting before {slot}",
+    },
+  },
   nav: {
     about: "About",
     projects: "Work",
@@ -475,6 +563,52 @@ const en: Dictionary = {
 };
 
 const ru: Dictionary = {
+  miniGames: {
+    eyebrow: "Мини-игры / Передохните",
+    heading: "Мини-игры",
+    blurb: "Небольшая штука, сделанная для удовольствия. Те же брутальные правила — теперь играбельные.",
+    play: "Играть",
+    meetingScheduler: {
+      name: "Планировщик встреч",
+      description: "Расставьте каждую встречу в нужную комнату и время так, чтобы выполнялись все условия.",
+    },
+    difficulty: { choose: "Выберите сложность", easy: "Легко", medium: "Средне", hard: "Сложно" },
+    viewLeaderboard: "Таблица лидеров",
+    howToTitle: "Как играть",
+    howToBody:
+      "Расставьте все встречи в сетке «комната × время» так, чтобы выполнялись все условия. Нажмите на встречу, затем на ячейку, чтобы поставить её, — или перетащите. Нажмите на занятую ячейку, чтобы забрать встречу обратно. В каждой ячейке — одна встреча. Условия отмечаются по мере выполнения. Застряли? Потратьте подсказку, чтобы открыть одно верное размещение.",
+    gotIt: "Понятно!",
+    go: "Старт!",
+    changePuzzle: "Другая задача",
+    rules: "Правила",
+    hint: "Подсказка",
+    exit: "Выход",
+    trayLabel: "Встречи",
+    constraintsLabel: "Условия",
+    roomLabel: "Комната",
+    slotLabel: "Слот",
+    timeLabel: "Время",
+    victoryTitle: "Решено!",
+    yourTime: "Ваше время",
+    enterName: "Введите имя",
+    namePlaceholder: "Ваше имя",
+    submit: "Отправить",
+    playAgain: "Играть снова",
+    leaderboardTitle: "Таблица лидеров",
+    rank: "Место",
+    name: "Имя",
+    time: "Время",
+    noScores: "Пока нет результатов — будьте первым.",
+    back: "Назад",
+    close: "Закрыть",
+    constraints: {
+      inRoom: "{m} должна быть в {room}",
+      before: "{m} должна быть раньше {n}",
+      notSameSlot: "{m} и {n} не могут быть в одном слоте",
+      atSlot: "{m} должна быть в {slot}",
+      roomBeforeSlot: "В {room} должна быть встреча раньше {slot}",
+    },
+  },
   nav: {
     about: "Обо мне",
     projects: "Работы",
@@ -727,6 +861,52 @@ const ru: Dictionary = {
 // Armenian — restored to the original polished, professional tone.
 // New keys added with the same register (warm but not casual).
 const hy: Dictionary = {
+  miniGames: {
+    eyebrow: "Մինի-խաղեր / Հանգստացեք",
+    heading: "Մինի-խաղեր",
+    blurb: "Փոքր բան՝ ստեղծված հաճույքի համար։ Նույն բրուտալիստ կանոնները՝ այժմ խաղալի։",
+    play: "Խաղալ",
+    meetingScheduler: {
+      name: "Հանդիպումների պլանավորիչ",
+      description: "Տեղադրեք յուրաքանչյուր հանդիպում ճիշտ սենյակում և ժամին, որպեսզի բոլոր պայմանները բավարարվեն։",
+    },
+    difficulty: { choose: "Ընտրեք բարդությունը", easy: "Հեշտ", medium: "Միջին", hard: "Բարդ" },
+    viewLeaderboard: "Առաջատարների աղյուսակ",
+    howToTitle: "Ինչպես խաղալ",
+    howToBody:
+      "Տեղադրեք բոլոր հանդիպումները «սենյակ × ժամ» ցանցում այնպես, որ բոլոր պայմանները բավարարվեն։ Սեղմեք հանդիպման վրա, ապա՝ վանդակի վրա՝ տեղադրելու համար, կամ քաշեք այն։ Սեղմեք լրացված վանդակի վրա՝ հանդիպումը հետ վերցնելու համար։ Յուրաքանչյուր վանդակում՝ մեկ հանդիպում։ Պայմանները նշվում են ըստ բավարարման։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ ճիշտ տեղադրում բացելու համար։",
+    gotIt: "Հասկացա՛",
+    go: "Մեկնա՛րկ",
+    changePuzzle: "Այլ խնդիր",
+    rules: "Կանոններ",
+    hint: "Հուշում",
+    exit: "Ելք",
+    trayLabel: "Հանդիպումներ",
+    constraintsLabel: "Պայմաններ",
+    roomLabel: "Սենյակ",
+    slotLabel: "Սլոթ",
+    timeLabel: "Ժամանակ",
+    victoryTitle: "Լուծվա՛ծ է",
+    yourTime: "Ձեր ժամանակը",
+    enterName: "Մուտքագրեք անունը",
+    namePlaceholder: "Ձեր անունը",
+    submit: "Ուղարկել",
+    playAgain: "Խաղալ կրկին",
+    leaderboardTitle: "Առաջատարների աղյուսակ",
+    rank: "Տեղ",
+    name: "Անուն",
+    time: "Ժամանակ",
+    noScores: "Դեռ արդյունքներ չկան — եղեք առաջինը։",
+    back: "Հետ",
+    close: "Փակել",
+    constraints: {
+      inRoom: "{m}-ը պետք է լինի {room}-ում",
+      before: "{m}-ը պետք է լինի {n}-ից առաջ",
+      notSameSlot: "{m}-ը և {n}-ը չեն կարող լինել նույն սլոթում",
+      atSlot: "{m}-ը պետք է լինի {slot}-ում",
+      roomBeforeSlot: "{room}-ում պետք է լինի հանդիպում {slot}-ից առաջ",
+    },
+  },
   nav: {
     about: "Իմ մասին",
     projects: "Նախագծեր",

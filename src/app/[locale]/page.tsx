@@ -5,6 +5,7 @@ import WorkList from "@/components/brut/WorkList";
 import ProcessGrid from "@/components/brut/ProcessGrid";
 import ExperienceStrip from "@/components/brut/ExperienceStrip";
 import ContactStrip from "@/components/brut/ContactStrip";
+import MiniGamesSection from "@/components/brut/MiniGames/MiniGamesSection";
 import { LOCALES, type Locale } from "@/lib/i18n/types";
 import { DICTIONARIES } from "@/lib/i18n/dictionaries";
 import { getAvailableProjects } from "@/lib/case-assets";
@@ -36,6 +37,7 @@ export default async function HomePage({ params }: PageProps) {
       <ProcessGrid />
       <ExperienceStrip />
       <ContactStrip />
+      <MiniGamesSection />
     </>
   );
 }
