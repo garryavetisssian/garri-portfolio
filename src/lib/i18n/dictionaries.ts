@@ -231,6 +231,8 @@ export interface Dictionary {
       howToBody: string;
       mustConnectLabel: string;
       blockedLabel: string;
+      companiesLabel: string;
+      connectionsLabel: string;
       pair: string;
       blockedPair: string;
     };
@@ -289,6 +291,8 @@ const en: Dictionary = {
         "Connect the professionals so every rule holds at once. Click one node, then another, to toggle a connection. Each person needs exactly the number of connections shown on their node. People from the same company can't be connected directly. Honour the must-connect and blocked clues. Stuck? Spend a hint to fix one connection.",
       mustConnectLabel: "Must connect",
       blockedLabel: "Blocked",
+      companiesLabel: "Companies",
+      connectionsLabel: "Connected",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
@@ -598,6 +602,8 @@ const ru: Dictionary = {
         "Соедините профессионалов так, чтобы все правила выполнялись одновременно. Нажмите на один узел, затем на другой, чтобы создать или убрать связь. У каждого человека должно быть ровно столько связей, сколько указано на его узле. Людей из одной компании нельзя соединять напрямую. Соблюдайте подсказки «нужно соединить» и «запрещено». Застряли? Потратьте подсказку, чтобы исправить одну связь.",
       mustConnectLabel: "Нужно соединить",
       blockedLabel: "Запрещено",
+      companiesLabel: "Компании",
+      connectionsLabel: "Связи готовы",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
@@ -906,6 +912,8 @@ const hy: Dictionary = {
         "Միացրեք մասնագետներին այնպես, որ բոլոր կանոնները միաժամանակ բավարարվեն։ Սեղմեք մեկ հանգույցի, ապա մյուսի վրա՝ կապը ստեղծելու կամ հանելու համար։ Յուրաքանչյուր մարդ պետք է ունենա ճիշտ այնքան կապ, որքան նշված է իր հանգույցի վրա։ Նույն ընկերության մարդկանց չի կարելի ուղղակիորեն միացնել։ Հաշվի առեք «պարտադիր միացնել» և «արգելված» հուշումները։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ կապ ուղղելու համար։",
       mustConnectLabel: "Պարտադիր միացնել",
       blockedLabel: "Արգելված",
+      companiesLabel: "Ընկերություններ",
+      connectionsLabel: "Կապերը պատրաստ են",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
