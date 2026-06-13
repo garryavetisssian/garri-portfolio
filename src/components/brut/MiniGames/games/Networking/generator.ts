@@ -163,10 +163,18 @@ export function generateNetworkPuzzle(difficulty: Difficulty): NetPuzzle {
       return buildPuzzle(difficulty, company, solution, mustConnect, blocked);
     }
 
-    // Tighten: add up to 10 more derived clues (prefer must-connect).
+    // Tighten toward uniqueness. Prefer "blocked" so the puzzle stays deductive
+    // (must-connect hands the player real solution edges), but cap how many
+    // blocked we add before letting the far-more-efficient must-connect close it
+    // out — this keeps the blocked list "more, but not too much".
+    const MAX_EXTRA_BLOCKED = 10;
     let unique = false;
-    for (let added = 0; added < 10; added++) {
-      if (extraMust.length > 0) {
+    let addedBlocked = 0;
+    for (let added = 0; added < 12; added++) {
+      if (addedBlocked < MAX_EXTRA_BLOCKED && extraBlocked.length > 0) {
+        blocked.push(normEdge(...extraBlocked.shift()!));
+        addedBlocked++;
+      } else if (extraMust.length > 0) {
         mustConnect.push(normEdge(...extraMust.shift()!));
       } else if (extraBlocked.length > 0) {
         blocked.push(normEdge(...extraBlocked.shift()!));

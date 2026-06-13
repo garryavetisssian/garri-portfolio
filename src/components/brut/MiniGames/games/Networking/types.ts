@@ -21,7 +21,9 @@ export interface NetDifficultyConfig {
 export const NET_DIFFICULTY_CONFIG: Record<Difficulty, NetDifficultyConfig> = {
   easy: { nodes: 5, companies: 2, degMax: 2, mustConnect: 1, blocked: 1 },
   medium: { nodes: 7, companies: 3, degMax: 3, mustConnect: 2, blocked: 2 },
-  hard: { nodes: 9, companies: 4, degMax: 4, mustConnect: 3, blocked: 3 },
+  // Hard intentionally reveals fewer connections (1 must-connect) and leans on
+  // more "blocked" deductions (4) so the player has to reason, not just fill in.
+  hard: { nodes: 9, companies: 4, degMax: 4, mustConnect: 1, blocked: 4 },
 };
 
 export const HINTS_PER_GAME = 3;
