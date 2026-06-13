@@ -194,19 +194,25 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
     if (hintsLeft <= 0 || won) return;
     const solutionKeys = puzzle.solution.map(([a, b]) => edgeKey(a, b));
     const solutionSet = new Set(solutionKeys);
-    const missing = solutionKeys.find((k) => !edges.has(k));
-    if (missing) {
+
+    // Remove a WRONG edge first. Adding a correct edge onto a node already full
+    // of mistakes would push it to 5/4 and leave the player unsure what to undo;
+    // clearing mistakes first keeps every hint unambiguous and never overshoots.
+    const wrong = [...edges].find((k) => !solutionSet.has(k));
+    if (wrong) {
       const next = new Set(edges);
-      next.add(missing);
+      next.delete(wrong);
       setHintsLeft((h) => h - 1);
       setSelected(null);
       commit(next);
       return;
     }
-    const wrong = [...edges].find((k) => !solutionSet.has(k));
-    if (wrong) {
+    // No mistakes left — add a missing correct edge (can never overshoot, since
+    // the current edges are a subset of the unique solution).
+    const missing = solutionKeys.find((k) => !edges.has(k));
+    if (missing) {
       const next = new Set(edges);
-      next.delete(wrong);
+      next.add(missing);
       setHintsLeft((h) => h - 1);
       setSelected(null);
       commit(next);
@@ -284,6 +290,16 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
         {/* Canvas */}
         <div className="min-w-0">
+          {selected !== null && (
+            <motion.p
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mono mb-3"
+              style={{ color: "var(--ink-mute)", fontSize: "0.68rem", lineHeight: 1.45 }}
+            >
+              {net.selectPrompt}
+            </motion.p>
+          )}
           <div
             className="relative mx-auto w-full"
             style={{
@@ -365,6 +381,25 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
               const isSel = selected === node.id;
               const ringColor = violated ? "#ef4444" : satisfied ? "var(--acid)" : "var(--ink-faint)";
               const progress = Math.min(cur / node.degree, 1);
+
+              // When a person is selected, classify every other node as a target:
+              // connected (click to unlink) / valid (glow) / full / invalid
+              // (same-company or blocked). Drives the eligibility highlighting.
+              let targetState: "none" | "connected" | "valid" | "full" | "invalid" = "none";
+              if (selected !== null && selected !== node.id) {
+                const k = edgeKey(selected, node.id);
+                const connected = edges.has(k);
+                const sameCo = nodes[selected].company === node.company;
+                const blockedPair = puzzle.blocked.some(([a, b]) => edgeKey(a, b) === k);
+                const selFull = degreeOf(edges, selected) >= nodes[selected].degree;
+                const nodeFull = cur >= node.degree;
+                if (connected) targetState = "connected";
+                else if (sameCo || blockedPair) targetState = "invalid";
+                else if (selFull || nodeFull) targetState = "full";
+                else targetState = "valid";
+              }
+              const dim = targetState === "invalid" ? 0.38 : targetState === "full" ? 0.6 : 1;
+
               return (
                 <div
                   key={node.id}
@@ -375,6 +410,9 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
                     width: "clamp(56px, 15vw, 70px)",
                     height: "clamp(56px, 15vw, 70px)",
                     transform: "translate(-50%, -50%)",
+                    opacity: dim,
+                    transition: "opacity 0.2s ease",
+                    zIndex: targetState === "valid" ? 2 : 1,
                   }}
                 >
                   {/* progress ring */}
@@ -405,6 +443,40 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
                       transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                       aria-hidden
                     />
+                  )}
+
+                  {/* eligibility highlight (only while another node is selected) */}
+                  {targetState === "valid" && (
+                    <>
+                      <span
+                        className="absolute"
+                        style={{ inset: "6%", borderRadius: "50%", boxShadow: "0 0 16px rgba(155,107,255,0.75)", pointerEvents: "none" }}
+                        aria-hidden
+                      />
+                      <motion.span
+                        className="absolute"
+                        style={{ inset: "5%", borderRadius: "50%", border: "2px dashed var(--acid)", pointerEvents: "none" }}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+                        aria-hidden
+                      />
+                    </>
+                  )}
+                  {targetState === "connected" && (
+                    <span
+                      className="absolute"
+                      style={{ inset: "5%", borderRadius: "50%", border: "2px solid var(--ink-mute)", pointerEvents: "none" }}
+                      aria-hidden
+                    />
+                  )}
+                  {targetState === "invalid" && (
+                    <span
+                      className="absolute flex items-center justify-center"
+                      style={{ top: "2%", left: "2%", width: 16, height: 16, borderRadius: "50%", background: "#ef4444", color: DARK, fontSize: "0.66rem", fontWeight: 700, zIndex: 3, pointerEvents: "none" }}
+                      aria-hidden
+                    >
+                      ✕
+                    </span>
                   )}
 
                   {/* node face */}

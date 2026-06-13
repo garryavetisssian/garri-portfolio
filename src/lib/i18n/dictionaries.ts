@@ -233,6 +233,7 @@ export interface Dictionary {
       blockedLabel: string;
       companiesLabel: string;
       connectionsLabel: string;
+      selectPrompt: string;
       pair: string;
       blockedPair: string;
     };
@@ -293,6 +294,7 @@ const en: Dictionary = {
       blockedLabel: "Blocked",
       companiesLabel: "Companies",
       connectionsLabel: "Connected",
+      selectPrompt: "Pick a glowing partner. Dimmed people are same-company, blocked, or already full — remove a link to free one.",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
@@ -604,6 +606,7 @@ const ru: Dictionary = {
       blockedLabel: "Запрещено",
       companiesLabel: "Компании",
       connectionsLabel: "Связи готовы",
+      selectPrompt: "Выберите подсвеченного партнёра. Затемнённые — из той же компании, запрещены или уже заполнены: уберите связь, чтобы освободить кого-то.",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
@@ -914,6 +917,7 @@ const hy: Dictionary = {
       blockedLabel: "Արգելված",
       companiesLabel: "Ընկերություններ",
       connectionsLabel: "Կապերը պատրաստ են",
+      selectPrompt: "Ընտրեք լուսավորված զուգընկերոջը։ Մգացվածները նույն ընկերությունից են, արգելված են կամ արդեն լրացված — հեռացրեք կապը մեկին ազատելու համար։",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },

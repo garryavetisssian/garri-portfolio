@@ -21,10 +21,10 @@ export interface NetDifficultyConfig {
 export const NET_DIFFICULTY_CONFIG: Record<Difficulty, NetDifficultyConfig> = {
   easy: { nodes: 5, companies: 2, degMax: 2, mustConnect: 1, blocked: 1 },
   medium: { nodes: 7, companies: 3, degMax: 3, mustConnect: 2, blocked: 2 },
-  // Hard reveals only 2 connections; the generator then derives the ~6 "blocked"
-  // deductions needed to force a unique solution, so the player has to reason
-  // rather than just fill in the answer.
-  hard: { nodes: 9, companies: 4, degMax: 4, mustConnect: 2, blocked: 0 },
+  // Hard reveals 4 connections for enough scaffolding to solve by hand; the
+  // generator then derives the few "blocked" deductions needed for a unique
+  // solution. (More reveals also keeps the blocked list short.)
+  hard: { nodes: 9, companies: 4, degMax: 4, mustConnect: 4, blocked: 0 },
 };
 
 export const HINTS_PER_GAME = 3;
