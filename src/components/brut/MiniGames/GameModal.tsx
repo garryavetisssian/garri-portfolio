@@ -11,6 +11,7 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DIFFICULTIES, formatTime, type Difficulty, type Entry } from "./shared";
@@ -110,7 +111,12 @@ export default function GameModal({
     setScreen("countdown");
   }
 
-  return (
+  // Portal to <body> so the modal escapes <main>'s z-10 stacking context and
+  // paints above the fixed header. Guarded for SSR (renders nothing when closed,
+  // so there's no hydration mismatch).
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -195,44 +201,52 @@ export default function GameModal({
               )}
 
               {screen === "leaderboard" && (
-                <div className="flex flex-col gap-5">
-                  <h4
-                    className="text-ink"
-                    style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.4rem" }}
-                  >
-                    {g.leaderboardTitle} · {g.difficulty[lbDiff]}
-                  </h4>
-                  <LeaderboardTable g={g} entries={entries} highlight={-1} />
+                <div className="min-h-full flex flex-col items-center justify-center gap-7 py-8">
+                  <div className="flex flex-col items-center gap-2 text-center">
+                    <span className="mono uppercase" style={{ color: "var(--ink-faint)", fontSize: "0.65rem", letterSpacing: "0.1em" }}>
+                      {g.difficulty[lbDiff]}
+                    </span>
+                    <h4 className="text-ink" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}>
+                      {g.leaderboardTitle}
+                    </h4>
+                  </div>
+                  <div className="w-full max-w-xl">
+                    <LeaderboardTable g={g} entries={entries} highlight={-1} />
+                  </div>
                   <button
                     type="button"
                     onClick={() => setScreen("difficulty")}
-                    className="mono uppercase self-start px-4 py-2 border"
+                    className="mono uppercase px-5 py-3 border"
                     style={btn}
                   >
-                    {g.back}
+                    ← {g.back}
                   </button>
                 </div>
               )}
 
               {screen === "howto" && (
-                <div className="flex flex-col gap-5 max-w-xl">
-                  <h4
-                    className="text-ink"
-                    style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.5rem" }}
-                  >
-                    {g.howToTitle}
-                  </h4>
-                  <p style={{ color: "var(--ink-mute)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+                <div className="min-h-full flex flex-col items-center justify-center text-center gap-8 py-8">
+                  <div className="flex flex-col items-center gap-3">
+                    <span className="mono uppercase" style={{ color: "var(--acid)", fontSize: "0.68rem", letterSpacing: "0.12em" }}>
+                      {game.name}
+                    </span>
+                    <h4 className="text-ink" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2rem, 5vw, 3.2rem)", lineHeight: 1 }}>
+                      {g.howToTitle}
+                    </h4>
+                  </div>
+                  <p className="max-w-2xl" style={{ color: "var(--ink-mute)", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.7 }}>
                     {game.howToBody}
                   </p>
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => setScreen("countdown")}
-                    className="mono uppercase self-start px-5 py-3 border"
-                    style={{ ...btn, background: "var(--acid)", color: "var(--paper)", borderColor: "var(--acid)" }}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="mono uppercase px-8 py-4 border"
+                    style={{ ...btn, background: "var(--acid)", color: "var(--paper)", borderColor: "var(--acid)", fontSize: "0.8rem" }}
                   >
-                    {g.gotIt}
-                  </button>
+                    {g.gotIt} →
+                  </motion.button>
                 </div>
               )}
 
@@ -250,7 +264,7 @@ export default function GameModal({
               )}
 
               {screen === "victory" && (
-                <div className="flex flex-col gap-6">
+                <div className="min-h-full flex flex-col justify-center gap-6 w-full max-w-xl mx-auto">
                   <div className="flex flex-col gap-1">
                     <span
                       className="mono uppercase"
@@ -329,7 +343,8 @@ export default function GameModal({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
 
@@ -353,34 +368,42 @@ function DifficultyScreen({
   onLeaderboard: (d: Difficulty) => void;
 }) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="min-h-full flex flex-col items-center justify-center gap-10 py-8">
       <h4
-        className="text-ink"
-        style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.5rem" }}
+        className="text-ink text-center"
+        style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1 }}
       >
         {g.difficulty.choose}
       </h4>
-      <div className="grid sm:grid-cols-3 gap-3">
-        {DIFFICULTIES.map((d) => (
-          <div
-            key={d}
-            className="flex flex-col gap-3 p-4 border"
-            style={{ borderColor: "var(--line-strong)", background: "var(--paper-soft)" }}
-          >
+      <div className="w-full max-w-4xl grid gap-4 sm:grid-cols-3">
+        {DIFFICULTIES.map((d, i) => (
+          <div key={d} className="flex flex-col gap-2">
             <motion.button
               type="button"
               onClick={() => onStart(d)}
-              whileHover={{ y: -3 }}
-              whileTap={{ scale: 0.97 }}
-              className="text-ink text-left"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.5rem" }}
+              whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex flex-col items-start justify-between gap-10 p-6 border border-line-strong hover:border-[color:var(--acid)] text-left transition-colors duration-200"
+              style={{ background: "var(--paper-soft)", minHeight: 210 }}
             >
-              {g.difficulty[d]}
+              <span className="num-badge">{String(i + 1).padStart(2, "0")}</span>
+              <span
+                className="text-ink"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.9rem", letterSpacing: "-0.02em", lineHeight: 1 }}
+              >
+                {g.difficulty[d]}
+              </span>
+              <span
+                className="mono uppercase inline-flex items-center gap-1.5"
+                style={{ color: "var(--acid)", fontSize: "0.72rem", letterSpacing: "0.08em" }}
+              >
+                {g.play} →
+              </span>
             </motion.button>
             <button
               type="button"
               onClick={() => onLeaderboard(d)}
-              className="mono uppercase self-start"
+              className="mono uppercase self-start py-1 hover:text-ink transition-colors"
               style={{ color: "var(--ink-faint)", fontSize: "0.62rem", letterSpacing: "0.06em" }}
             >
               {g.viewLeaderboard} ↗
