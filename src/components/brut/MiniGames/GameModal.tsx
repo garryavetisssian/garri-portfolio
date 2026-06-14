@@ -114,7 +114,7 @@ export default function GameModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[100] flex items-stretch sm:items-center justify-center sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -133,10 +133,10 @@ export default function GameModal({
             role="dialog"
             aria-modal="true"
             aria-label={game.name}
-            className="relative w-full max-w-3xl max-h-[92dvh] overflow-y-auto"
-            initial={{ scale: 0.96, y: 12, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.97, opacity: 0 }}
+            className="relative w-full h-full sm:h-[94dvh] sm:max-w-[1240px] flex flex-col overflow-hidden"
+            initial={{ scale: 0.97, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.98, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{
               background: "var(--paper-elev)",
@@ -145,7 +145,7 @@ export default function GameModal({
           >
             {/* Header */}
             <header
-              className="sticky top-0 z-20 flex items-center justify-between gap-3 px-5 sm:px-7 py-4"
+              className="shrink-0 flex items-center justify-between gap-3 px-5 sm:px-7 py-4"
               style={{
                 borderBottom: "1px solid var(--line-strong)",
                 background: "var(--paper-elev)",
@@ -189,7 +189,7 @@ export default function GameModal({
               </button>
             </header>
 
-            <div className="px-5 sm:px-7 py-6">
+            <div className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-7 py-6">
               {screen === "difficulty" && (
                 <DifficultyScreen g={g} onStart={startGame} onLeaderboard={openLeaderboard} />
               )}

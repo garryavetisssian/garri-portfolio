@@ -333,7 +333,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
           <div
             className="relative mx-auto w-full"
             style={{
-              maxWidth: 520,
+              maxWidth: 600,
               aspectRatio: "1 / 1",
               background:
                 "radial-gradient(circle at 50% 45%, rgba(155,107,255,0.08), transparent 60%), var(--paper)",

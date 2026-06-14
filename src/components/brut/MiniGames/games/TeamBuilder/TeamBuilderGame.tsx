@@ -238,11 +238,11 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(200px,260px)]">
-        {/* Grid */}
-        <div className="min-w-0 overflow-x-auto -mx-1 px-1">
+        {/* Grid — flexes to fit the panel width (no horizontal scroll) */}
+        <div className="min-w-0">
           <div
-            className="grid w-max"
-            style={{ gridTemplateColumns: `minmax(132px, 1.4fr) repeat(${teams.length}, minmax(104px, 1fr))` }}
+            className="grid w-full"
+            style={{ gridTemplateColumns: `minmax(80px, 1.1fr) repeat(${teams.length}, minmax(0, 1fr))` }}
           >
             {/* header row */}
             <div className="mono uppercase flex items-end pb-2 pr-2" style={{ color: "var(--ink-faint)", fontSize: "0.6rem", letterSpacing: "0.08em" }}>

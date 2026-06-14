@@ -332,12 +332,12 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
             ))}
           </div>
 
-          {/* Grid (scrolls horizontally on small screens) */}
-          <div className="overflow-x-auto -mx-1 px-1">
+          {/* Grid — flexes to fit the panel width (no horizontal scroll) */}
+          <div>
             <div
-              className="grid w-max"
+              className="grid w-full"
               style={{
-                gridTemplateColumns: `auto repeat(${puzzle.slots}, minmax(56px, 1fr))`,
+                gridTemplateColumns: `minmax(38px, auto) repeat(${puzzle.slots}, minmax(0, 1fr))`,
               }}
             >
               {/* header row */}
@@ -528,12 +528,12 @@ function FragmentRow({
                 }}
                 className="font-bold select-none flex items-center justify-center"
                 style={{
-                  width: 38,
-                  height: 38,
+                  width: "min(38px, 80%)",
+                  aspectRatio: "1 / 1",
                   background: m.color,
                   color: "#0B0B0A",
                   fontFamily: "var(--font-display)",
-                  fontSize: "1rem",
+                  fontSize: "clamp(0.8rem, 3.2vw, 1rem)",
                   cursor: "grab",
                 }}
               >
