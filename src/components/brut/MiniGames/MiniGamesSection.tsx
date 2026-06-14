@@ -21,6 +21,11 @@ import {
   getEntries as netGetEntries,
   addEntry as netAddEntry,
 } from "./games/Networking/leaderboard";
+import TeamBuilderGame from "./games/TeamBuilder/TeamBuilderGame";
+import {
+  getEntries as tbGetEntries,
+  addEntry as tbAddEntry,
+} from "./games/TeamBuilder/leaderboard";
 
 export default function MiniGamesSection() {
   const { t } = useLanguage();
@@ -44,6 +49,14 @@ export default function MiniGamesSection() {
         getEntries: netGetEntries,
         addEntry: netAddEntry,
         Game: NetworkingGame,
+      },
+      {
+        name: g.teamBuilder.name,
+        description: g.teamBuilder.description,
+        howToBody: g.teamBuilder.howToBody,
+        getEntries: tbGetEntries,
+        addEntry: tbAddEntry,
+        Game: TeamBuilderGame,
       },
     ],
     [g]

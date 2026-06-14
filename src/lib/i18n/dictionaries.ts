@@ -237,6 +237,17 @@ export interface Dictionary {
       pair: string;
       blockedPair: string;
     };
+    teamBuilder: {
+      name: string;
+      description: string;
+      howToBody: string;
+      teamWord: string;
+      peopleLabel: string;
+      conflictsLabel: string;
+      conflictPair: string;
+      sizeLabel: string;
+      seniorLabel: string;
+    };
     difficulty: { choose: string; easy: string; medium: string; hard: string };
     viewLeaderboard: string;
     howToTitle: string;
@@ -299,6 +310,18 @@ const en: Dictionary = {
       selectPrompt: "Pick a glowing partner. Dimmed people are same-company, blocked, or already full — remove a link to free one.",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
+    },
+    teamBuilder: {
+      name: "Team Builder",
+      description: "Staff every project team with the right roles, seniority, and no conflicts.",
+      howToBody:
+        "Assign every person to exactly one team by clicking a cell. Each team needs a specific mix of roles (shown in its header) and can't exceed its size. Some teams need at least one Senior. Conflicting people can't share a team. A team's header gets a check when it's fully and correctly staffed. Stuck? Spend a hint to place one person correctly.",
+      teamWord: "Team",
+      peopleLabel: "People",
+      conflictsLabel: "Conflicts",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Size",
+      seniorLabel: "Senior",
     },
     difficulty: { choose: "Choose difficulty", easy: "Easy", medium: "Medium", hard: "Hard" },
     viewLeaderboard: "View Leaderboard",
@@ -614,6 +637,18 @@ const ru: Dictionary = {
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
     },
+    teamBuilder: {
+      name: "Сбор команды",
+      description: "Соберите каждую команду с нужными ролями и уровнями — без конфликтов.",
+      howToBody:
+        "Назначьте каждого человека ровно в одну команду, нажимая на ячейку. Каждой команде нужен определённый набор ролей (показан в заголовке), и нельзя превышать её размер. Некоторым командам нужен хотя бы один Senior. Конфликтующие люди не могут быть в одной команде. Заголовок команды отмечается галочкой, когда она укомплектована верно. Застряли? Потратьте подсказку, чтобы правильно поставить одного человека.",
+      teamWord: "Команда",
+      peopleLabel: "Люди",
+      conflictsLabel: "Конфликты",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Размер",
+      seniorLabel: "Senior",
+    },
     difficulty: { choose: "Выберите сложность", easy: "Легко", medium: "Средне", hard: "Сложно" },
     viewLeaderboard: "Таблица лидеров",
     howToTitle: "Как играть",
@@ -926,6 +961,18 @@ const hy: Dictionary = {
       selectPrompt: "Ընտրեք լուսավորված զուգընկերոջը։ Մգացվածները նույն ընկերությունից են, արգելված են կամ արդեն լրացված — հեռացրեք կապը մեկին ազատելու համար։",
       pair: "{a} ↔ {b}",
       blockedPair: "{a} ✕ {b}",
+    },
+    teamBuilder: {
+      name: "Թիմի հավաքում",
+      description: "Համալրեք յուրաքանչյուր թիմ ճիշտ դերերով ու մակարդակներով՝ առանց կոնֆլիկտների։",
+      howToBody:
+        "Նշանակեք յուրաքանչյուր մարդու ճիշտ մեկ թիմում՝ սեղմելով վանդակի վրա։ Յուրաքանչյուր թիմ պահանջում է դերերի որոշակի հավաքածու (նշված է վերնագրում) և չի կարող գերազանցել իր չափը։ Որոշ թիմերի պետք է առնվազն մեկ Senior։ Կոնֆլիկտ ունեցող մարդիկ չեն կարող լինել նույն թիմում։ Թիմի վերնագիրը ստանում է նշան, երբ այն ճիշտ համալրված է։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ մարդու ճիշտ տեղադրելու համար։",
+      teamWord: "Թիմ",
+      peopleLabel: "Մարդիկ",
+      conflictsLabel: "Կոնֆլիկտներ",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Չափ",
+      seniorLabel: "Senior",
     },
     difficulty: { choose: "Ընտրեք բարդությունը", easy: "Հեշտ", medium: "Միջին", hard: "Բարդ" },
     viewLeaderboard: "Առաջատարների աղյուսակ",
