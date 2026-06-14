@@ -81,7 +81,7 @@ export default function GameModal({
 
   function startGame(d: Difficulty) {
     setDifficulty(d);
-    setScreen("howto");
+    setScreen("countdown");
   }
 
   function openLeaderboard(d: Difficulty) {
@@ -197,7 +197,13 @@ export default function GameModal({
 
             <div className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-7 py-6">
               {screen === "difficulty" && (
-                <DifficultyScreen g={g} onStart={startGame} onLeaderboard={openLeaderboard} />
+                <DifficultyScreen
+                  g={g}
+                  howToTitle={g.howToTitle}
+                  howToBody={game.howToBody}
+                  onStart={startGame}
+                  onLeaderboard={openLeaderboard}
+                />
               )}
 
               {screen === "leaderboard" && (
@@ -221,32 +227,6 @@ export default function GameModal({
                   >
                     ← {g.back}
                   </button>
-                </div>
-              )}
-
-              {screen === "howto" && (
-                <div className="min-h-full flex flex-col items-center justify-center text-center gap-8 py-8">
-                  <div className="flex flex-col items-center gap-3">
-                    <span className="mono uppercase" style={{ color: "var(--acid)", fontSize: "0.68rem", letterSpacing: "0.12em" }}>
-                      {game.name}
-                    </span>
-                    <h4 className="text-ink" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2rem, 5vw, 3.2rem)", lineHeight: 1 }}>
-                      {g.howToTitle}
-                    </h4>
-                  </div>
-                  <p className="max-w-2xl" style={{ color: "var(--ink-mute)", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.7 }}>
-                    {game.howToBody}
-                  </p>
-                  <motion.button
-                    type="button"
-                    onClick={() => setScreen("countdown")}
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="mono uppercase px-8 py-4 border"
-                    style={{ ...btn, background: "var(--acid)", color: "var(--paper)", borderColor: "var(--acid)", fontSize: "0.8rem" }}
-                  >
-                    {g.gotIt} →
-                  </motion.button>
                 </div>
               )}
 
@@ -360,15 +340,19 @@ type G = ReturnType<typeof useLanguage>["t"]["miniGames"];
 
 function DifficultyScreen({
   g,
+  howToTitle,
+  howToBody,
   onStart,
   onLeaderboard,
 }: {
   g: G;
+  howToTitle: string;
+  howToBody: string;
   onStart: (d: Difficulty) => void;
   onLeaderboard: (d: Difficulty) => void;
 }) {
   return (
-    <div className="min-h-full flex flex-col items-center justify-center gap-10 py-8">
+    <div className="min-h-full flex flex-col items-center justify-center gap-9 py-8">
       <h4
         className="text-ink text-center"
         style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1 }}
@@ -410,6 +394,14 @@ function DifficultyScreen({
             </button>
           </div>
         ))}
+      </div>
+
+      {/* How to play — merged in so there's no extra screen/click before playing */}
+      <div className="w-full max-w-2xl flex flex-col items-center gap-3 text-center border-t border-line-strong pt-7">
+        <span className="mono uppercase" style={{ color: "var(--acid)", fontSize: "0.64rem", letterSpacing: "0.12em" }}>
+          {howToTitle}
+        </span>
+        <p style={{ color: "var(--ink-mute)", fontSize: "0.92rem", lineHeight: 1.65 }}>{howToBody}</p>
       </div>
     </div>
   );
