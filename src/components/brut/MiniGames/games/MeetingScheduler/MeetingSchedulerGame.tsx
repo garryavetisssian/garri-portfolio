@@ -14,6 +14,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generatePuzzle } from "./generator";
 import { constraintSatisfied, isComplete, allSatisfied } from "./solver";
 import { formatTime } from "./leaderboard";
+import { sfx } from "../../sound";
 import {
   HINTS_PER_GAME,
   type Assignment,
@@ -85,6 +86,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
   // Snapshot the current board into history, then apply the next state. Every
   // board-changing action goes through here so Undo can step back one move.
   function applyAssignment(next: Assignment) {
+    sfx.place();
     setHistory((h) => [...h, assignment.map((p) => (p ? { ...p } : null))]);
     commit(next);
   }

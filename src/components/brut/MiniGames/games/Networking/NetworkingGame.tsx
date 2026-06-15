@@ -19,6 +19,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generateNetworkPuzzle } from "./generator";
 import { formatTime } from "../../shared";
+import { sfx } from "../../sound";
 import { HINTS_PER_GAME, edgeKey, type Difficulty, type Edge, type NetPuzzle } from "./types";
 
 interface Props {
@@ -187,6 +188,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
   // Snapshot the current edges into history, then apply the next state. Every
   // board-changing action goes through here so Undo can step back one move.
   function applyEdges(next: Set<string>) {
+    sfx.place();
     setHistory((h) => [...h, [...edges]]);
     commit(next);
   }

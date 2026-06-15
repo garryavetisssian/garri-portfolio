@@ -15,6 +15,8 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DIFFICULTIES, formatTime, type Difficulty, type Entry } from "./shared";
+import { sfx, isMuted, setMuted } from "./sound";
+import Confetti from "./Confetti";
 
 /** Everything GameModal needs to host a specific game. */
 export interface GameDefinition {
@@ -53,6 +55,13 @@ export default function GameModal({
   const [submitted, setSubmitted] = useState(false);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [highlight, setHighlight] = useState(-1);
+  const [muted, setMutedState] = useState(() => isMuted());
+
+  function toggleMute() {
+    const next = !muted;
+    setMutedState(next);
+    setMuted(next);
+  }
 
   // Reset the flow to the start, then close. Used by every close trigger so the
   // modal always reopens on the difficulty screen (no reset-in-effect needed).
@@ -91,6 +100,7 @@ export default function GameModal({
   }
 
   function handleWin(seconds: number) {
+    sfx.win();
     setWinTime(seconds);
     setName("");
     setSubmitted(false);
@@ -171,6 +181,31 @@ export default function GameModal({
                   {game.name}
                 </h3>
               </div>
+              <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleMute}
+                aria-label={muted ? "Unmute" : "Mute"}
+                aria-pressed={muted}
+                className="shrink-0 flex items-center justify-center"
+                style={{
+                  width: 36,
+                  height: 36,
+                  border: "1px solid var(--line-strong)",
+                  color: muted ? "var(--ink-faint)" : "var(--acid)",
+                  background: "transparent",
+                }}
+              >
+                {muted ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M11 5 6 9H2v6h4l5 4zM22 9l-6 6M16 9l6 6" />
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />
+                  </svg>
+                )}
+              </button>
               <button
                 type="button"
                 onClick={requestClose}
@@ -193,6 +228,7 @@ export default function GameModal({
                   />
                 </svg>
               </button>
+              </div>
             </header>
 
             <div className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-7 py-6">
@@ -244,7 +280,8 @@ export default function GameModal({
               )}
 
               {screen === "victory" && (
-                <div className="min-h-full flex flex-col justify-center gap-6 w-full max-w-xl mx-auto">
+                <div className="relative min-h-full flex flex-col justify-center gap-6 w-full max-w-xl mx-auto">
+                  <Confetti />
                   <div className="flex flex-col gap-1">
                     <span
                       className="mono uppercase"

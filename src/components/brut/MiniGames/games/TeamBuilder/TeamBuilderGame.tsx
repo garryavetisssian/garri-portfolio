@@ -14,6 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generateTeamPuzzle } from "./generator";
 import { formatTime } from "../../shared";
+import { sfx } from "../../sound";
 import {
   HINTS_PER_GAME,
   ROLE_ABBR,
@@ -149,6 +150,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
     }
   }
   function applyAssignment(next: Assignment) {
+    sfx.place();
     setHistory((h) => [...h, assignment.slice()]);
     commit(next);
   }
