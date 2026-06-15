@@ -17,7 +17,7 @@ import {
   type Placement,
   type Puzzle,
 } from "./types";
-import { classifySolutions } from "./solver";
+import { constraintSatisfied, findSolutions } from "./solver";
 
 function shuffle<T>(arr: T[]): T[] {
   const out = arr.slice();
@@ -86,46 +86,20 @@ function deriveTrueConstraints(
   return out;
 }
 
-function kindOf(c: Constraint): Constraint["kind"] {
-  return c.kind;
-}
-
-/**
- * Pick a varied starting set by round-robining across constraint kinds, so the
- * player sees a mix of constraint types rather than (say) five "at-slot" pins.
- */
-function pickVaried(pool: Constraint[], target: number): Constraint[] {
-  const buckets = new Map<Constraint["kind"], Constraint[]>();
-  for (const c of pool) {
-    const k = kindOf(c);
-    if (!buckets.has(k)) buckets.set(k, []);
-    buckets.get(k)!.push(c);
-  }
-  const kinds = shuffle([...buckets.keys()]);
-  const chosen: Constraint[] = [];
-  let progress = true;
-  while (chosen.length < target && progress) {
-    progress = false;
-    for (const k of kinds) {
-      const bucket = buckets.get(k)!;
-      if (bucket.length > 0) {
-        chosen.push(bucket.pop()!);
-        progress = true;
-        if (chosen.length >= target) break;
-      }
-    }
-  }
-  return chosen;
-}
-
-// Prefer high-information constraints when tightening toward uniqueness.
-const TIGHTEN_PRIORITY: Record<Constraint["kind"], number> = {
-  "at-slot": 0,
+// Relational constraints (0) force cross-meeting deduction — they're the puzzle.
+// The direct "pins" (1) just tell you where a meeting goes, so we lean on them
+// only as a last resort when nothing relational can disambiguate.
+const PREF: Record<Constraint["kind"], number> = {
+  before: 0,
+  "not-same-slot": 0,
+  "room-before-slot": 0,
   "in-room": 1,
-  before: 2,
-  "not-same-slot": 3,
-  "room-before-slot": 4,
+  "at-slot": 1,
 };
+
+function meetingOf(c: Constraint): number | null {
+  return c.kind === "in-room" || c.kind === "at-slot" ? c.meeting : null;
+}
 
 function makePuzzle(
   difficulty: Difficulty,
@@ -150,52 +124,68 @@ function makePuzzle(
 }
 
 /**
- * Generate a unique-solution puzzle for the given difficulty.
- * Falls back to a fully-pinned (still valid & unique) constraint set in the
- * astronomically-unlikely event the randomized search never converges.
+ * Generate a unique-solution puzzle that is genuinely *deductive*.
+ *
+ * Instead of pinning meetings ("A is in Room 2"), we start with no clues and
+ * repeatedly add the minimum constraint needed to rule out an alternative
+ * solution — preferring relational constraints (before / not-same-slot /
+ * room-before-slot) so the player has to reason across meetings rather than
+ * just follow instructions. Direct pins are used only when nothing relational
+ * can separate two solutions, and never both on the same meeting.
  */
 export function generatePuzzle(difficulty: Difficulty): Puzzle {
   const cfg = DIFFICULTY_CONFIG[difficulty];
+  const { rooms, slots, meetings } = cfg;
   const MAX_REGEN = 400;
 
   for (let attempt = 0; attempt < MAX_REGEN; attempt++) {
-    const solution = randomSolution(cfg.rooms, cfg.slots, cfg.meetings);
-    const pool = deriveTrueConstraints(solution, cfg.rooms, cfg.slots);
+    const solution = randomSolution(rooms, slots, meetings);
+    const pool = deriveTrueConstraints(solution, rooms, slots);
 
-    const chosen = pickVaried(pool, cfg.constraints);
-    const chosenSet = new Set(chosen);
-
-    if (
-      classifySolutions(cfg.rooms, cfg.slots, cfg.meetings, chosen) === "unique"
-    ) {
-      return makePuzzle(difficulty, cfg.rooms, cfg.slots, cfg.meetings, chosen, solution);
-    }
-
-    // Tighten: add up to 10 more derived constraints, highest-information first.
-    const remaining = pool
-      .filter((c) => !chosenSet.has(c))
-      .sort((a, b) => TIGHTEN_PRIORITY[a.kind] - TIGHTEN_PRIORITY[b.kind]);
-
+    const chosen: Constraint[] = [];
     let unique = false;
-    for (let added = 0; added < 10 && added < remaining.length; added++) {
-      chosen.push(remaining[added]);
-      if (classifySolutions(cfg.rooms, cfg.slots, cfg.meetings, chosen) === "unique") {
-        unique = true;
+
+    for (let guard = 0; guard < 60; guard++) {
+      const sols = findSolutions(rooms, slots, meetings, chosen, 2);
+      if (sols.length <= 1) {
+        unique = sols.length === 1;
         break;
       }
+      const alt = sols.find((s) =>
+        s.some((p, i) => p.room !== solution[i].room || p.slot !== solution[i].slot)
+      );
+      if (!alt) break;
+
+      // True constraints (about the real solution) that this alternative breaks.
+      const cands = pool.filter((c) => !chosen.includes(c) && !constraintSatisfied(c, alt));
+      if (cands.length === 0) break; // can't happen: alt differs ⇒ some clue breaks
+
+      // Never fully pin a meeting (in-room AND at-slot) — that kills the puzzle.
+      const hasPin = (m: number, kind: "in-room" | "at-slot") =>
+        chosen.some((c) => c.kind === kind && meetingOf(c) === m);
+      const safe = cands.filter((c) => {
+        if (c.kind === "in-room") return !hasPin(c.meeting, "at-slot");
+        if (c.kind === "at-slot") return !hasPin(c.meeting, "in-room");
+        return true;
+      });
+      const useList = safe.length ? safe : cands;
+
+      // Prefer relational clues; randomise within the same preference tier.
+      const ranked = shuffle(useList).sort((a, b) => PREF[a.kind] - PREF[b.kind]);
+      chosen.push(ranked[0]);
     }
-    if (unique) {
-      return makePuzzle(difficulty, cfg.rooms, cfg.slots, cfg.meetings, chosen, solution);
+
+    if (unique && chosen.length > 0) {
+      return makePuzzle(difficulty, rooms, slots, meetings, chosen, solution);
     }
-    // else: regenerate from a fresh solution.
   }
 
   // Deterministic fallback — pin every meeting fully (unique by construction).
-  const solution = randomSolution(cfg.rooms, cfg.slots, cfg.meetings);
+  const solution = randomSolution(rooms, slots, meetings);
   const pinned: Constraint[] = [];
-  for (let m = 0; m < cfg.meetings; m++) {
+  for (let m = 0; m < meetings; m++) {
     pinned.push({ kind: "in-room", meeting: m, room: solution[m].room });
     pinned.push({ kind: "at-slot", meeting: m, slot: solution[m].slot });
   }
-  return makePuzzle(difficulty, cfg.rooms, cfg.slots, cfg.meetings, pinned, solution);
+  return makePuzzle(difficulty, rooms, slots, meetings, pinned, solution);
 }

@@ -74,6 +74,98 @@ function unaryOk(meeting: number, cell: Placement, constraints: Constraint[]): b
  * assignments; room-before-slot is verified at complete assignments. Grids are
  * tiny (≤ 8 meetings over ≤ 30 cells), so MRV keeps the search trivial.
  */
+/**
+ * Enumerate up to `limit` complete solutions. The generator uses limit=2 to
+ * check uniqueness AND to obtain a concrete *alternative* solution it can rule
+ * out with a relational constraint.
+ */
+export function findSolutions(
+  rooms: number,
+  slots: number,
+  meetingCount: number,
+  constraints: Constraint[],
+  limit = 2
+): Placement[][] {
+  const allCells: Placement[] = [];
+  for (let r = 0; r < rooms; r++) {
+    for (let s = 0; s < slots; s++) allCells.push({ room: r, slot: s });
+  }
+
+  const domains: Placement[][] = [];
+  for (let m = 0; m < meetingCount; m++) {
+    const dom = allCells.filter((cell) => unaryOk(m, cell, constraints));
+    if (dom.length === 0) return [];
+    domains[m] = dom;
+  }
+
+  const assign: Assignment = new Array(meetingCount).fill(null);
+  const used = new Set<number>();
+  const results: Placement[][] = [];
+
+  function binaryOk(meeting: number, cell: Placement): boolean {
+    for (const c of constraints) {
+      if (c.kind === "before") {
+        if (c.meeting === meeting) {
+          const q = assign[c.other];
+          if (q && !(cell.slot < q.slot)) return false;
+        } else if (c.other === meeting) {
+          const p = assign[c.meeting];
+          if (p && !(p.slot < cell.slot)) return false;
+        }
+      } else if (c.kind === "not-same-slot") {
+        if (c.meeting === meeting) {
+          const q = assign[c.other];
+          if (q && q.slot === cell.slot) return false;
+        } else if (c.other === meeting) {
+          const p = assign[c.meeting];
+          if (p && p.slot === cell.slot) return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function legalCells(meeting: number): Placement[] {
+    return domains[meeting].filter(
+      (cell) => !used.has(cellKey(slots, cell)) && binaryOk(meeting, cell)
+    );
+  }
+
+  function search(): void {
+    if (results.length >= limit) return;
+    let chosen = -1;
+    let chosenCells: Placement[] = [];
+    let best = Infinity;
+    for (let m = 0; m < meetingCount; m++) {
+      if (assign[m] !== null) continue;
+      const cells = legalCells(m);
+      if (cells.length < best) {
+        best = cells.length;
+        chosen = m;
+        chosenCells = cells;
+        if (best === 0) break;
+      }
+    }
+    if (chosen === -1) {
+      if (allSatisfied(constraints, assign)) {
+        results.push(assign.map((p) => ({ room: p!.room, slot: p!.slot })));
+      }
+      return;
+    }
+    for (const cell of chosenCells) {
+      assign[chosen] = cell;
+      used.add(cellKey(slots, cell));
+      search();
+      used.delete(cellKey(slots, cell));
+      assign[chosen] = null;
+      if (results.length >= limit) return;
+    }
+  }
+
+  search();
+  return results;
+}
+
 export function classifySolutions(
   rooms: number,
   slots: number,

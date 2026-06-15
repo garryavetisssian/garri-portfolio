@@ -17,10 +17,13 @@ export interface DifficultyConfig {
   constraints: number;
 }
 
+// Near-full grids (meetings ≈ rooms × slots) so clues interlock tightly and the
+// puzzle is genuinely deductive with a short clue list — not a sparse board that
+// needs a long "do this, then this" checklist.
 export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
-  easy: { rooms: 3, slots: 4, meetings: 4, constraints: 4 },
-  medium: { rooms: 4, slots: 5, meetings: 6, constraints: 6 },
-  hard: { rooms: 5, slots: 6, meetings: 8, constraints: 9 },
+  easy: { rooms: 2, slots: 2, meetings: 4, constraints: 0 },
+  medium: { rooms: 2, slots: 3, meetings: 6, constraints: 0 },
+  hard: { rooms: 3, slots: 3, meetings: 9, constraints: 0 },
 };
 
 /** Hints available per game, regardless of difficulty. */
