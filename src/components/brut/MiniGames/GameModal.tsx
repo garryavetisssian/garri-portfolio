@@ -17,12 +17,14 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DIFFICULTIES, formatTime, type Difficulty, type Entry } from "./shared";
 import { sfx, isMuted, setMuted } from "./sound";
 import Confetti from "./Confetti";
+import { GameCover } from "./covers";
 
 /** Everything GameModal needs to host a specific game. */
 export interface GameDefinition {
   name: string;
   description: string;
   howToBody: string;
+  coverIndex: number;
   getEntries: (d: Difficulty) => Entry[];
   addEntry: (d: Difficulty, name: string, seconds: number) => { entries: Entry[]; rank: number };
   Game: React.ComponentType<{
@@ -235,6 +237,7 @@ export default function GameModal({
               {screen === "difficulty" && (
                 <DifficultyScreen
                   g={g}
+                  coverIndex={game.coverIndex}
                   howToTitle={g.howToTitle}
                   howToBody={game.howToBody}
                   onStart={startGame}
@@ -377,12 +380,14 @@ type G = ReturnType<typeof useLanguage>["t"]["miniGames"];
 
 function DifficultyScreen({
   g,
+  coverIndex,
   howToTitle,
   howToBody,
   onStart,
   onLeaderboard,
 }: {
   g: G;
+  coverIndex: number;
   howToTitle: string;
   howToBody: string;
   onStart: (d: Difficulty) => void;
@@ -390,6 +395,9 @@ function DifficultyScreen({
 }) {
   return (
     <div className="min-h-full flex flex-col items-center justify-center gap-9 py-8">
+      <div className="w-full max-w-md border border-line-strong overflow-hidden">
+        <GameCover index={coverIndex} className="block w-full" style={{ height: 120 }} />
+      </div>
       <h4
         className="text-ink text-center"
         style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1 }}

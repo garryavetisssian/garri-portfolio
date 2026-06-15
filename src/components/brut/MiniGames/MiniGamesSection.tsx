@@ -26,31 +26,10 @@ import {
   getEntries as tbGetEntries,
   addEntry as tbAddEntry,
 } from "./games/TeamBuilder/leaderboard";
+import { GameCover } from "./covers";
 
-/** Per-game accent + glyph so the cards read like playful game tiles. */
+/** Per-game accent so each tile reads as its own game. */
 const GAME_ACCENTS = ["#9B6BFF", "#06B6D4", "#FB7185"];
-
-const GAME_ICONS = [
-  // Meeting Scheduler — grid / calendar
-  <svg key="ms" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <rect x="3" y="3" width="18" height="18" />
-    <path d="M3 9h18M9 9v12" />
-  </svg>,
-  // Networking — connected nodes
-  <svg key="net" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <circle cx="6" cy="7" r="2" />
-    <circle cx="18" cy="7" r="2" />
-    <circle cx="12" cy="18" r="2" />
-    <path d="M8 7.4h8M7.2 8.6 10.8 16.4M16.8 8.6 13.2 16.4" />
-  </svg>,
-  // Team Builder — people
-  <svg key="tb" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <circle cx="9" cy="8" r="3" />
-    <path d="M3.5 19c0-3 2.5-4.6 5.5-4.6S14.5 16 14.5 19" />
-    <circle cx="17.5" cy="8.5" r="2.2" />
-    <path d="M15.5 14.6c2.8.3 5 1.9 5 4.4" />
-  </svg>,
-];
 
 const GamepadIcon = (
   <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -72,6 +51,7 @@ export default function MiniGamesSection() {
         name: g.meetingScheduler.name,
         description: g.meetingScheduler.description,
         howToBody: g.howToBody,
+        coverIndex: 0,
         getEntries: msGetEntries,
         addEntry: msAddEntry,
         Game: MeetingSchedulerGame,
@@ -80,6 +60,7 @@ export default function MiniGamesSection() {
         name: g.networking.name,
         description: g.networking.description,
         howToBody: g.networking.howToBody,
+        coverIndex: 1,
         getEntries: netGetEntries,
         addEntry: netAddEntry,
         Game: NetworkingGame,
@@ -88,6 +69,7 @@ export default function MiniGamesSection() {
         name: g.teamBuilder.name,
         description: g.teamBuilder.description,
         howToBody: g.teamBuilder.howToBody,
+        coverIndex: 2,
         getEntries: tbGetEntries,
         addEntry: tbAddEntry,
         Game: TeamBuilderGame,
@@ -142,19 +124,18 @@ export default function MiniGamesSection() {
                 whileHover={{ y: -8, borderColor: accent }}
                 whileTap={{ scale: 0.99 }}
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group text-left flex flex-col justify-between gap-6 p-6 border"
-                style={{ background: "var(--paper-soft)", borderColor: "var(--line-strong)", minHeight: 230 }}
+                className="group text-left flex flex-col overflow-hidden border"
+                style={{ background: "var(--paper-soft)", borderColor: "var(--line-strong)" }}
               >
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-start justify-between">
-                    <span
-                      className="flex items-center justify-center transition-transform duration-200 group-hover:-rotate-6"
-                      style={{ width: 46, height: 46, background: accent, color: "var(--paper)" }}
-                    >
-                      {GAME_ICONS[i % GAME_ICONS.length]}
-                    </span>
-                    <span className="num-badge">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
+                {/* illustrated cover banner */}
+                <div className="relative" style={{ borderBottom: "1px solid var(--line-strong)" }}>
+                  <GameCover index={game.coverIndex} className="block w-full" style={{ height: 132 }} />
+                  <span className="num-badge absolute" style={{ top: 12, left: 12 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-3 p-6 flex-1">
                   <h3
                     className="text-ink"
                     style={{
@@ -170,14 +151,13 @@ export default function MiniGamesSection() {
                   <p className="prose-brut text-ink-mute" style={{ fontSize: "0.9rem" }}>
                     {game.description}
                   </p>
+                  <span
+                    className="mono uppercase inline-flex items-center gap-2 mt-1 transition-transform duration-200 group-hover:translate-x-1"
+                    style={{ color: accent, fontSize: "0.74rem", letterSpacing: "0.1em" }}
+                  >
+                    {g.play} →
+                  </span>
                 </div>
-
-                <span
-                  className="mono uppercase inline-flex items-center gap-2 transition-transform duration-200 group-hover:translate-x-1"
-                  style={{ color: accent, fontSize: "0.74rem", letterSpacing: "0.1em" }}
-                >
-                  {g.play} →
-                </span>
               </motion.button>
             );
           })}
