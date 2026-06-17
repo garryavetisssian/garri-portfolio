@@ -48,6 +48,24 @@ function tone(freq: number, dur: number, type: OscillatorType, gain: number, del
   osc.stop(t + dur + 0.03);
 }
 
+// ── FX event bus: visual juice (score/combo/particles) subscribes here, so it
+// fires from the same call sites as the sounds with no per-game wiring. ──
+export type FxType = "place" | "error" | "win" | "reset";
+const fxSubs = new Set<(t: FxType) => void>();
+export function subscribeFx(fn: (t: FxType) => void): () => void {
+  fxSubs.add(fn);
+  return () => {
+    fxSubs.delete(fn);
+  };
+}
+function emitFx(t: FxType) {
+  fxSubs.forEach((f) => f(t));
+}
+/** Reset the combo/score juice (call when a new game starts). */
+export function resetFx() {
+  emitFx("reset");
+}
+
 // Combo: rapid consecutive placements pitch up for a satisfying streak.
 let streak = 0;
 let lastPlace = 0;
@@ -55,6 +73,7 @@ let lastPlace = 0;
 export const sfx = {
   /** A blip when a piece is placed — pitch rises with a fast streak. */
   place() {
+    emitFx("place");
     const c = audio();
     const now = c ? c.currentTime : 0;
     if (now - lastPlace > 1.6) streak = 0;
@@ -68,11 +87,13 @@ export const sfx = {
   },
   /** A low buzz for an invalid / conflicting action; breaks the streak. */
   error() {
+    emitFx("error");
     streak = 0;
     tone(150, 0.2, "sawtooth", 0.045);
   },
   /** A little ascending arcade jingle on solve. */
   win() {
+    emitFx("win");
     [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, 0.22, "triangle", 0.06, i * 0.11));
   },
 };

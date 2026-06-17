@@ -15,8 +15,9 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DIFFICULTIES, formatTime, type Difficulty, type Entry } from "./shared";
-import { sfx, isMuted, setMuted } from "./sound";
+import { sfx, isMuted, setMuted, resetFx } from "./sound";
 import Confetti from "./Confetti";
+import JuiceLayer from "./JuiceLayer";
 import { GameCover } from "./covers";
 
 /** Everything GameModal needs to host a specific game. */
@@ -58,6 +59,7 @@ export default function GameModal({
   const [entries, setEntries] = useState<Entry[]>([]);
   const [highlight, setHighlight] = useState(-1);
   const [muted, setMutedState] = useState(() => isMuted());
+  const [finalScore, setFinalScore] = useState(0);
 
   function toggleMute() {
     const next = !muted;
@@ -92,6 +94,7 @@ export default function GameModal({
 
   function startGame(d: Difficulty) {
     setDifficulty(d);
+    resetFx();
     setScreen("countdown");
   }
 
@@ -120,6 +123,7 @@ export default function GameModal({
 
   function playAgain() {
     setRound((r) => r + 1);
+    resetFx();
     setScreen("countdown");
   }
 
@@ -335,6 +339,19 @@ export default function GameModal({
                         {formatTime(winTime)}
                       </span>
                     </div>
+                    {finalScore > 0 && (
+                      <div className="flex items-baseline gap-3">
+                        <span className="mono uppercase" style={{ color: "var(--ink-faint)", fontSize: "0.7rem", letterSpacing: "0.08em" }}>
+                          Score
+                        </span>
+                        <span
+                          className="tabular-nums"
+                          style={{ color: "var(--acid)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "2.2rem", lineHeight: 1 }}
+                        >
+                          {finalScore.toLocaleString()}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {!submitted ? (
@@ -389,6 +406,7 @@ export default function GameModal({
                 </div>
               )}
             </div>
+            <JuiceLayer scoreVisible={screen === "game"} onScoreChange={setFinalScore} />
           </motion.div>
         </motion.div>
       )}
