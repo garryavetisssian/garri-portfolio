@@ -215,7 +215,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
   const satisfiedCount = puzzle.constraints.filter((c) => constraintSatisfied(c, assignment)).length;
 
   const toolbarBtn =
-    "mono uppercase px-3 py-2 border transition-colors duration-200 disabled:opacity-40";
+    "mono uppercase px-4 py-2 border rounded-full transition-colors duration-200 disabled:opacity-40 hover:bg-[var(--paper-soft)]";
   const toolbarStyle: React.CSSProperties = {
     borderColor: "var(--line-strong)",
     color: "var(--ink)",
@@ -318,13 +318,12 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
                 whileTap={{ scale: 0.94 }}
                 className="font-bold select-none cursor-grab active:cursor-grabbing"
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 44,
+                  height: 44,
+                  borderRadius: 12,
                   background: m.color,
                   color: "#0B0B0A",
-                  border: selected === m.id ? "2px solid var(--ink)" : "2px solid transparent",
-                  outline: selected === m.id ? "2px solid var(--acid)" : "none",
-                  outlineOffset: 2,
+                  boxShadow: selected === m.id ? "0 0 0 3px var(--acid)" : "0 4px 0 rgba(0,0,0,0.45)",
                   fontFamily: "var(--font-display)",
                   fontSize: "1.05rem",
                 }}
@@ -339,9 +338,10 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
           {/* Grid on a game-board surface */}
           <BoardFrame>
             <div
-              className="grid w-full"
+              className="grid w-full items-center"
               style={{
                 gridTemplateColumns: `minmax(38px, auto) repeat(${puzzle.slots}, minmax(0, 1fr))`,
+                gap: 8,
               }}
             >
               {/* header row */}
@@ -498,10 +498,18 @@ function FragmentRow({
         const m = occ !== null ? meetings[occ] : null;
         const key = `${room}:${s}`;
         const isOver = dragOver === key;
+        const droppable = selected !== null && m === null;
         return (
-          <button
+          <motion.button
             key={key}
             type="button"
+            draggable={!!m}
+            onDragStart={(e) => {
+              if (m) {
+                e.stopPropagation();
+                onChipDragStart(m.id);
+              }
+            }}
             onClick={() => onCellClick(room, s)}
             onDragOver={(e) => {
               e.preventDefault();
@@ -509,45 +517,29 @@ function FragmentRow({
             }}
             onDragLeave={() => setDragOver(dragOver === key ? null : dragOver)}
             onDrop={() => onCellDrop(room, s)}
-            className="flex items-center justify-center transition-colors duration-150"
+            whileTap={{ scale: 0.9 }}
+            animate={m ? { scale: [0.7, 1] } : { scale: 1 }}
+            transition={{ type: "spring", stiffness: 520, damping: 24 }}
+            className="flex items-center justify-center font-bold select-none"
             style={{
-              height: 56,
-              margin: -0.5,
-              border: "1px solid var(--line-strong)",
-              background: isOver
-                ? "var(--acid-faint)"
-                : selected !== null && m === null
-                ? "var(--paper-soft)"
-                : "transparent",
-              cursor: "pointer",
+              aspectRatio: "1 / 1",
+              minHeight: 46,
+              borderRadius: 14,
+              background: m ? m.color : isOver ? "var(--acid)" : "rgba(242,240,234,0.9)",
+              color: "#0B0B0A",
+              boxShadow: m
+                ? "0 4px 0 rgba(0,0,0,0.45)"
+                : "inset 0 0 0 1.5px rgba(11,11,10,0.14)",
+              outline: droppable ? "2px dashed var(--acid)" : "none",
+              outlineOffset: 2,
+              cursor: m ? "grab" : "pointer",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(0.95rem, 3.6vw, 1.25rem)",
             }}
             aria-label={m ? m.label : `${roomLabel} ${s + 1}`}
           >
-            {m && (
-              <motion.span
-                draggable
-                onDragStart={(e) => {
-                  e.stopPropagation();
-                  onChipDragStart(m.id);
-                }}
-                initial={{ scale: 0.4, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 520, damping: 24 }}
-                className="font-bold select-none flex items-center justify-center"
-                style={{
-                  width: "min(38px, 80%)",
-                  aspectRatio: "1 / 1",
-                  background: m.color,
-                  color: "#0B0B0A",
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(0.8rem, 3.2vw, 1rem)",
-                  cursor: "grab",
-                }}
-              >
-                {m.label}
-              </motion.span>
-            )}
-          </button>
+            {m ? m.label : ""}
+          </motion.button>
         );
       })}
     </>

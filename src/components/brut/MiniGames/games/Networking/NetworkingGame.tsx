@@ -272,7 +272,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
   const satisfiedCount = nodes.filter((n) => !nodeViolation(edges, n.id) && degreeOf(edges, n.id) === n.degree).length;
 
   const toolbarBtn =
-    "mono uppercase inline-flex items-center gap-1.5 px-3 py-2 border transition-colors duration-200 disabled:opacity-40 hover:bg-[var(--paper-soft)]";
+    "mono uppercase inline-flex items-center gap-1.5 px-4 py-2 border rounded-full transition-colors duration-200 disabled:opacity-40 hover:bg-[var(--paper-soft)]";
   const toolbarStyle: React.CSSProperties = {
     borderColor: "var(--line-strong)",
     color: "var(--ink)",

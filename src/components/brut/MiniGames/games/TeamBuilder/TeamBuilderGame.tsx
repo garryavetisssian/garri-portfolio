@@ -199,7 +199,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
   const completeTeams = teams.filter((_, tIdx) => teamComplete(assignment, tIdx)).length;
 
   const toolbarBtn =
-    "mono uppercase inline-flex items-center gap-1.5 px-3 py-2 border transition-colors duration-200 disabled:opacity-40 hover:bg-[var(--paper-soft)]";
+    "mono uppercase inline-flex items-center gap-1.5 px-4 py-2 border rounded-full transition-colors duration-200 disabled:opacity-40 hover:bg-[var(--paper-soft)]";
   const toolbarStyle: React.CSSProperties = {
     borderColor: "var(--line-strong)",
     color: "var(--ink)",
@@ -246,8 +246,8 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
           <ProgressHUD label={g.solved} value={completeTeams} total={teams.length} />
           <BoardFrame>
           <div
-            className="grid w-full"
-            style={{ gridTemplateColumns: `minmax(80px, 1.1fr) repeat(${teams.length}, minmax(0, 1fr))` }}
+            className="grid w-full items-stretch"
+            style={{ gridTemplateColumns: `minmax(80px, 1.1fr) repeat(${teams.length}, minmax(0, 1fr))`, gap: 7 }}
           >
             {/* header row */}
             <div className="mono uppercase flex items-end pb-2 pr-2" style={{ color: "var(--ink-faint)", fontSize: "0.6rem", letterSpacing: "0.08em" }}>
@@ -439,19 +439,22 @@ function RowFragment({
       {Array.from({ length: teams }).map((_, tIdx) => {
         const assigned = assignment[person.id] === tIdx;
         return (
-          <button
+          <motion.button
             key={tIdx}
             type="button"
             onClick={() => onCellClick(person.id, tIdx)}
-            className="flex items-center justify-center transition-colors duration-150"
+            whileTap={{ scale: 0.9 }}
+            className="flex items-center justify-center"
             style={{
-              minHeight: 44,
-              margin: -0.5,
-              border: "1px solid var(--line-strong)",
-              background: assigned ? roleColor : "transparent",
+              minHeight: 46,
+              borderRadius: 12,
+              background: assigned ? roleColor : "rgba(242,240,234,0.9)",
+              boxShadow: assigned
+                ? inConflict
+                  ? "0 0 0 2.5px #ef4444"
+                  : "0 4px 0 rgba(0,0,0,0.45)"
+                : "inset 0 0 0 1.5px rgba(11,11,10,0.14)",
               cursor: "pointer",
-              outline: assigned && inConflict ? "2px solid #ef4444" : "none",
-              outlineOffset: -3,
             }}
             aria-label={`${person.label} → ${tIdx + 1}`}
             aria-pressed={assigned}
@@ -468,7 +471,7 @@ function RowFragment({
                 </svg>
               </motion.span>
             )}
-          </button>
+          </motion.button>
         );
       })}
     </>

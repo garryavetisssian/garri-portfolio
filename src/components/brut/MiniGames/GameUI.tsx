@@ -38,7 +38,7 @@ export function ProgressHUD({
           {value}/{total}
         </span>
       </div>
-      <div style={{ height: 8, background: "var(--line)", overflow: "hidden" }}>
+      <div style={{ height: 9, background: "var(--line)", overflow: "hidden", borderRadius: 999 }}>
         <motion.div
           initial={false}
           animate={{ width: `${pct * 100}%` }}
@@ -46,6 +46,7 @@ export function ProgressHUD({
           style={{
             height: "100%",
             background: accent,
+            borderRadius: 999,
             boxShadow: done ? `0 0 12px ${accent}` : "none",
           }}
         />
@@ -54,23 +55,10 @@ export function ProgressHUD({
   );
 }
 
-function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
-  const base: React.CSSProperties = {
-    position: "absolute",
-    width: 14,
-    height: 14,
-    borderColor: "var(--acid)",
-    pointerEvents: "none",
-  };
-  const map: Record<string, React.CSSProperties> = {
-    tl: { top: -1, left: -1, borderTop: "2px solid", borderLeft: "2px solid" },
-    tr: { top: -1, right: -1, borderTop: "2px solid", borderRight: "2px solid" },
-    bl: { bottom: -1, left: -1, borderBottom: "2px solid", borderLeft: "2px solid" },
-    br: { bottom: -1, right: -1, borderBottom: "2px solid", borderRight: "2px solid" },
-  };
-  return <span aria-hidden style={{ ...base, ...map[pos] }} />;
-}
-
+/**
+ * A clean, rounded "game board" panel (LinkedIn-games style) to sit a chunky
+ * tile grid on. Soft elevation, generous radius, no techy hairlines.
+ */
 export function BoardFrame({
   children,
   className = "",
@@ -82,28 +70,14 @@ export function BoardFrame({
     <div
       className={`relative ${className}`}
       style={{
-        background:
-          "radial-gradient(circle at 50% 35%, rgba(155,107,255,0.07), transparent 62%), var(--paper)",
-        border: "1px solid var(--line-strong)",
-        boxShadow: "inset 0 0 50px rgba(0,0,0,0.45)",
-        padding: 18,
+        background: "var(--paper-elev)",
+        border: "1px solid var(--line)",
+        borderRadius: 18,
+        boxShadow: "0 14px 34px rgba(0,0,0,0.42)",
+        padding: 16,
       }}
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "radial-gradient(var(--line) 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-          opacity: 0.5,
-          pointerEvents: "none",
-        }}
-        aria-hidden
-      />
-      <Corner pos="tl" />
-      <Corner pos="tr" />
-      <Corner pos="bl" />
-      <Corner pos="br" />
-      <div className="relative">{children}</div>
+      {children}
     </div>
   );
 }
