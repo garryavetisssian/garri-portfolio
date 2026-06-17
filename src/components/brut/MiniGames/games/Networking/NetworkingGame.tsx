@@ -341,20 +341,20 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
             style={{
               maxWidth: 600,
               aspectRatio: "1 / 1",
-              background:
-                "radial-gradient(circle at 50% 45%, rgba(155,107,255,0.08), transparent 60%), var(--paper)",
-              backgroundColor: "var(--paper)",
-              border: "1px solid var(--line-strong)",
-              boxShadow: "inset 0 0 60px rgba(0,0,0,0.5)",
+              background: "linear-gradient(180deg, #F6F2EA, #EBE6DB)",
+              border: "1px solid rgba(0,0,0,0.1)",
+              borderRadius: 20,
+              boxShadow: "0 18px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.8)",
             }}
           >
             {/* dotted network grid */}
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: "radial-gradient(var(--line) 1px, transparent 1px)",
+                backgroundImage: "radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px)",
                 backgroundSize: "22px 22px",
-                opacity: 0.6,
+                opacity: 0.7,
+                borderRadius: 20,
                 pointerEvents: "none",
               }}
               aria-hidden
@@ -415,7 +415,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
               const violated = nodeViolation(edges, node.id);
               const satisfied = !violated && cur === node.degree;
               const isSel = selected === node.id;
-              const ringColor = violated ? "#ef4444" : satisfied ? "var(--acid)" : "var(--ink-faint)";
+              const ringColor = violated ? "#ef4444" : satisfied ? "var(--acid)" : "rgba(0,0,0,0.3)";
               const progress = Math.min(cur / node.degree, 1);
 
               // When a person is selected, classify every other node as a target:
@@ -453,7 +453,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
                 >
                   {/* progress ring */}
                   <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }} aria-hidden>
-                    <circle cx="50" cy="50" r={RING_R} fill="none" stroke="var(--line)" strokeWidth="5" />
+                    <circle cx="50" cy="50" r={RING_R} fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="5" />
                     <motion.circle
                       cx="50"
                       cy="50"

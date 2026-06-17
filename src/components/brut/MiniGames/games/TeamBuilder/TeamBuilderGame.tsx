@@ -250,7 +250,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
             style={{ gridTemplateColumns: `minmax(80px, 1.1fr) repeat(${teams.length}, minmax(0, 1fr))`, gap: 7 }}
           >
             {/* header row */}
-            <div className="mono uppercase flex items-end pb-2 pr-2" style={{ color: "var(--ink-faint)", fontSize: "0.6rem", letterSpacing: "0.08em" }}>
+            <div className="mono uppercase flex items-end pb-2 pr-2" style={{ color: "rgba(0,0,0,0.5)", fontSize: "0.6rem", letterSpacing: "0.08em" }}>
               {tb.peopleLabel}
             </div>
             {teams.map((team, tIdx) => {
@@ -262,16 +262,17 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
                   key={team.id}
                   className="p-2 mb-1 flex flex-col gap-1"
                   style={{
-                    border: `1px solid ${done ? "var(--acid)" : "var(--line-strong)"}`,
-                    background: done ? "var(--acid-faint)" : "var(--paper-soft)",
+                    borderRadius: 12,
+                    border: `1.5px solid ${done ? "var(--acid)" : "rgba(0,0,0,0.14)"}`,
+                    background: done ? "rgba(155,107,255,0.18)" : "rgba(255,255,255,0.55)",
                   }}
                 >
                   <div className="flex items-center justify-between gap-1">
-                    <span className="text-ink" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.92rem" }}>
+                    <span style={{ color: DARK, fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.92rem" }}>
                       {tb.teamWord} {tIdx + 1}
                     </span>
                     {done && (
-                      <span className="flex items-center justify-center" style={{ width: 16, height: 16, borderRadius: "50%", background: "var(--acid)", color: DARK }}>
+                      <span className="flex items-center justify-center" style={{ width: 18, height: 18, borderRadius: "50%", background: "var(--acid)", color: "#fff" }}>
                         {Ico.check}
                       </span>
                     )}
@@ -285,9 +286,10 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
                           className="mono"
                           style={{
                             fontSize: "0.58rem",
-                            padding: "1px 4px",
-                            border: `1px solid ${roleCount(assignment, tIdx, r) === req ? "var(--acid)" : "var(--line-strong)"}`,
-                            color: roleCount(assignment, tIdx, r) > req ? "#ef4444" : "var(--ink-mute)",
+                            padding: "1px 5px",
+                            borderRadius: 5,
+                            border: `1px solid ${roleCount(assignment, tIdx, r) === req ? "var(--acid)" : "rgba(0,0,0,0.18)"}`,
+                            color: roleCount(assignment, tIdx, r) > req ? "#dc2626" : "rgba(0,0,0,0.6)",
                           }}
                         >
                           {ROLE_ABBR[r]} {roleCount(assignment, tIdx, r)}/{req}
@@ -295,10 +297,10 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
                       ) : null
                     )}
                   </div>
-                  <div className="flex items-center gap-2 mono" style={{ fontSize: "0.56rem", color: over ? "#ef4444" : "var(--ink-faint)" }}>
+                  <div className="flex items-center gap-2 mono" style={{ fontSize: "0.56rem", color: over ? "#dc2626" : "rgba(0,0,0,0.5)" }}>
                     <span>{tb.sizeLabel} {size}/{team.maxHeadcount}</span>
                     {team.requireSenior && (
-                      <span style={{ color: teamHasSenior(assignment, tIdx) ? "var(--acid)" : "var(--ink-faint)" }}>
+                      <span style={{ color: teamHasSenior(assignment, tIdx) ? "#7c4dff" : "rgba(0,0,0,0.5)" }}>
                         ★ {tb.seniorLabel}
                       </span>
                     )}
@@ -413,13 +415,13 @@ function RowFragment({
     <>
       {/* person info */}
       <div
-        className="flex items-center gap-2 py-2 pr-2 hairline-b"
-        style={{ borderBottom: "1px solid var(--line)" }}
+        className="flex items-center gap-2 py-2 pr-2"
+        style={{ borderBottom: "1px solid rgba(0,0,0,0.1)" }}
       >
-        <span className="text-ink" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", width: 18 }}>
+        <span style={{ color: DARK, fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", width: 18 }}>
           {person.label}
         </span>
-        <span className="mono" style={{ fontSize: "0.6rem", padding: "1px 5px", background: roleColor, color: DARK, fontWeight: 700 }}>
+        <span className="mono" style={{ fontSize: "0.6rem", padding: "1px 5px", borderRadius: 4, background: roleColor, color: DARK, fontWeight: 700 }}>
           {ROLE_ABBR[person.role]}
         </span>
         <span
@@ -427,8 +429,9 @@ function RowFragment({
           style={{
             fontSize: "0.6rem",
             padding: "1px 5px",
-            border: "1px solid var(--line-strong)",
-            color: sen >= SENIOR_LEVEL ? "#FBBF24" : "var(--ink-mute)",
+            borderRadius: 4,
+            border: "1px solid rgba(0,0,0,0.18)",
+            color: sen >= SENIOR_LEVEL ? "#b8860b" : "rgba(0,0,0,0.55)",
             fontWeight: sen >= SENIOR_LEVEL ? 700 : 400,
           }}
         >

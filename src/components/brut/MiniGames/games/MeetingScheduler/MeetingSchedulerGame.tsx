@@ -350,7 +350,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
                 <div
                   key={`h${s}`}
                   className="mono uppercase text-center pb-2"
-                  style={{ color: "var(--ink-faint)", fontSize: "0.6rem", letterSpacing: "0.05em" }}
+                  style={{ color: "rgba(0,0,0,0.5)", fontSize: "0.6rem", letterSpacing: "0.05em" }}
                 >
                   {g.slotLabel} {s + 1}
                 </div>
@@ -489,7 +489,7 @@ function FragmentRow({
     <>
       <div
         className="mono uppercase flex items-center pr-3"
-        style={{ color: "var(--ink-mute)", fontSize: "0.62rem", letterSpacing: "0.05em" }}
+        style={{ color: "rgba(0,0,0,0.55)", fontSize: "0.62rem", letterSpacing: "0.05em" }}
       >
         {roomLabel}
       </div>

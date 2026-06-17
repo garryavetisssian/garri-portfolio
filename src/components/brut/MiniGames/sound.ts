@@ -48,17 +48,27 @@ function tone(freq: number, dur: number, type: OscillatorType, gain: number, del
   osc.stop(t + dur + 0.03);
 }
 
+// Combo: rapid consecutive placements pitch up for a satisfying streak.
+let streak = 0;
+let lastPlace = 0;
+
 export const sfx = {
-  /** A soft blip when a piece is placed / a connection toggled. */
+  /** A blip when a piece is placed — pitch rises with a fast streak. */
   place() {
-    tone(420, 0.09, "triangle", 0.05);
+    const c = audio();
+    const now = c ? c.currentTime : 0;
+    if (now - lastPlace > 1.6) streak = 0;
+    else streak = Math.min(streak + 1, 12);
+    lastPlace = now;
+    tone(380 * Math.pow(1.06, streak), 0.09, "triangle", 0.05);
   },
   /** A lighter tick when selecting. */
   select() {
     tone(640, 0.05, "sine", 0.04);
   },
-  /** A low buzz for an invalid / conflicting action. */
+  /** A low buzz for an invalid / conflicting action; breaks the streak. */
   error() {
+    streak = 0;
     tone(150, 0.2, "sawtooth", 0.045);
   },
   /** A little ascending arcade jingle on solve. */

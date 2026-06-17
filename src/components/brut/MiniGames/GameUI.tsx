@@ -75,10 +75,10 @@ export function BoardFrame({
     <div
       className={`relative ${className}`}
       style={{
-        background: "var(--paper-elev)",
-        border: "1px solid var(--line)",
-        borderRadius: 18,
-        boxShadow: "0 14px 34px rgba(0,0,0,0.42)",
+        background: "linear-gradient(180deg, #F6F2EA, #EBE6DB)",
+        border: "1px solid rgba(0,0,0,0.10)",
+        borderRadius: 20,
+        boxShadow: "0 18px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.8)",
         padding: 16,
       }}
     >
