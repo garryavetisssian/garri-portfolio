@@ -15,6 +15,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generateTeamPuzzle } from "./generator";
 import { formatTime } from "../../shared";
 import { sfx } from "../../sound";
+import { ProgressHUD, BoardFrame } from "../../GameUI";
 import {
   HINTS_PER_GAME,
   ROLE_ABBR,
@@ -240,8 +241,10 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(200px,260px)]">
-        {/* Grid — flexes to fit the panel width (no horizontal scroll) */}
-        <div className="min-w-0">
+        {/* Grid on a game-board surface */}
+        <div className="min-w-0 flex flex-col gap-4">
+          <ProgressHUD label={g.solved} value={completeTeams} total={teams.length} />
+          <BoardFrame>
           <div
             className="grid w-full"
             style={{ gridTemplateColumns: `minmax(80px, 1.1fr) repeat(${teams.length}, minmax(0, 1fr))` }}
@@ -321,6 +324,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
               );
             })}
           </div>
+          </BoardFrame>
         </div>
 
         {/* Conflicts */}
@@ -453,11 +457,16 @@ function RowFragment({
             aria-pressed={assigned}
           >
             {assigned && (
-              <span style={{ color: DARK, display: "flex" }}>
+              <motion.span
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 520, damping: 22 }}
+                style={{ color: DARK, display: "flex" }}
+              >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M4 12l5 5L20 6" />
                 </svg>
-              </span>
+              </motion.span>
             )}
           </button>
         );

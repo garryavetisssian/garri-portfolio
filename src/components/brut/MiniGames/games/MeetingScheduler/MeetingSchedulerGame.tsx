@@ -15,6 +15,7 @@ import { generatePuzzle } from "./generator";
 import { constraintSatisfied, isComplete, allSatisfied } from "./solver";
 import { formatTime } from "./leaderboard";
 import { sfx } from "../../sound";
+import { ProgressHUD, BoardFrame } from "../../GameUI";
 import {
   HINTS_PER_GAME,
   type Assignment,
@@ -279,6 +280,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
         {/* Board + tray */}
         <div className="flex flex-col gap-4 min-w-0">
+          <ProgressHUD label={g.solved} value={satisfiedCount} total={puzzle.constraints.length} />
           {/* Tray */}
           <div
             onDragOver={(e) => {
@@ -334,8 +336,8 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
             ))}
           </div>
 
-          {/* Grid — flexes to fit the panel width (no horizontal scroll) */}
-          <div>
+          {/* Grid on a game-board surface */}
+          <BoardFrame>
             <div
               className="grid w-full"
               style={{
@@ -372,7 +374,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
                 />
               ))}
             </div>
-          </div>
+          </BoardFrame>
         </div>
 
         {/* Constraints */}
@@ -522,12 +524,15 @@ function FragmentRow({
             aria-label={m ? m.label : `${roomLabel} ${s + 1}`}
           >
             {m && (
-              <span
+              <motion.span
                 draggable
                 onDragStart={(e) => {
                   e.stopPropagation();
                   onChipDragStart(m.id);
                 }}
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 520, damping: 24 }}
                 className="font-bold select-none flex items-center justify-center"
                 style={{
                   width: "min(38px, 80%)",
@@ -540,7 +545,7 @@ function FragmentRow({
                 }}
               >
                 {m.label}
-              </span>
+              </motion.span>
             )}
           </button>
         );

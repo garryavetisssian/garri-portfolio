@@ -224,6 +224,7 @@ export interface Dictionary {
     heading: string;
     blurb: string;
     play: string;
+    solved: string;
     meetingScheduler: { name: string; description: string };
     networking: {
       name: string;
@@ -294,6 +295,7 @@ const en: Dictionary = {
     heading: "Mini-Games",
     blurb: "A little something built for fun. Same brutalist rules — now playable.",
     play: "Play",
+    solved: "Solved",
     meetingScheduler: {
       name: "Meeting Scheduler",
       description: "Slot every meeting into the right room and time so all constraints hold.",
@@ -620,6 +622,7 @@ const ru: Dictionary = {
     heading: "Мини-игры",
     blurb: "Небольшая штука, сделанная для удовольствия. Те же брутальные правила — теперь играбельные.",
     play: "Играть",
+    solved: "Решено",
     meetingScheduler: {
       name: "Планировщик встреч",
       description: "Расставьте каждую встречу в нужную комнату и время так, чтобы выполнялись все условия.",
@@ -945,6 +948,7 @@ const hy: Dictionary = {
     heading: "Մինի-խաղեր",
     blurb: "Փոքր բան՝ ստեղծված հաճույքի համար։ Նույն բրուտալիստ կանոնները՝ այժմ խաղալի։",
     play: "Խաղալ",
+    solved: "Լուծված",
     meetingScheduler: {
       name: "Հանդիպումների պլանավորիչ",
       description: "Տեղադրեք յուրաքանչյուր հանդիպում ճիշտ սենյակում և ժամին, որպեսզի բոլոր պայմանները բավարարվեն։",

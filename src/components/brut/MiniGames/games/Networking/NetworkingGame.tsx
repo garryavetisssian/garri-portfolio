@@ -20,6 +20,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generateNetworkPuzzle } from "./generator";
 import { formatTime } from "../../shared";
 import { sfx } from "../../sound";
+import { ProgressHUD } from "../../GameUI";
 import { HINTS_PER_GAME, edgeKey, type Difficulty, type Edge, type NetPuzzle } from "./types";
 
 interface Props {
@@ -332,6 +333,9 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
         {/* Canvas */}
         <div className="min-w-0">
+          <div className="mx-auto w-full mb-3" style={{ maxWidth: 600 }}>
+            <ProgressHUD label={g.solved} value={satisfiedCount} total={nodes.length} />
+          </div>
           <div
             className="relative mx-auto w-full"
             style={{
