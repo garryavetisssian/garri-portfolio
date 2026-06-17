@@ -15,7 +15,7 @@ import { generatePuzzle } from "./generator";
 import { constraintSatisfied, isComplete, allSatisfied } from "./solver";
 import { formatTime } from "./leaderboard";
 import { sfx } from "../../sound";
-import { ProgressHUD, BoardFrame } from "../../GameUI";
+import { ProgressHUD, BoardFrame, tileGradient } from "../../GameUI";
 import {
   HINTS_PER_GAME,
   type Assignment,
@@ -277,9 +277,9 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
         </span>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)] lg:items-start">
+      <div className="flex flex-col lg:flex-row lg:justify-center gap-8 items-start">
         {/* Board + tray */}
-        <div className="flex flex-col gap-4 min-w-0 w-full mx-auto" style={{ maxWidth: 96 + puzzle.slots * 116 }}>
+        <div className="flex flex-col gap-4 min-w-0 w-full" style={{ maxWidth: 96 + puzzle.slots * 116 }}>
           <ProgressHUD label={g.solved} value={satisfiedCount} total={puzzle.constraints.length} />
           {/* Tray */}
           <div
@@ -321,7 +321,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
                   width: 46,
                   height: 46,
                   borderRadius: 12,
-                  background: `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${m.color})`,
+                  background: tileGradient(m.color),
                   color: "#0B0B0A",
                   boxShadow: selected === m.id ? "0 0 0 3px var(--acid)" : "0 4px 0 rgba(0,0,0,0.5)",
                   fontFamily: "var(--font-display)",
@@ -378,7 +378,7 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
         </div>
 
         {/* Constraints */}
-        <aside className="flex flex-col gap-3 min-w-0">
+        <aside className="flex flex-col gap-3 min-w-0 w-full lg:w-[280px] shrink-0">
           <div className="flex items-baseline justify-between gap-2">
             <span
               className="mono uppercase"
@@ -526,10 +526,10 @@ function FragmentRow({
               minHeight: 46,
               borderRadius: 14,
               background: m
-                ? `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${m.color})`
+                ? tileGradient(m.color)
                 : isOver
                 ? "var(--acid)"
-                : "rgba(242,240,234,0.9)",
+                : "linear-gradient(160deg, #FFFFFF, #DCDAD2)",
               color: "#0B0B0A",
               boxShadow: m
                 ? "0 5px 0 rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4)"

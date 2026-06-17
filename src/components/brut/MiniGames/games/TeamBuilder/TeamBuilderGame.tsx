@@ -15,7 +15,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { generateTeamPuzzle } from "./generator";
 import { formatTime } from "../../shared";
 import { sfx } from "../../sound";
-import { ProgressHUD, BoardFrame } from "../../GameUI";
+import { ProgressHUD, BoardFrame, tileGradient } from "../../GameUI";
 import {
   HINTS_PER_GAME,
   ROLE_ABBR,
@@ -240,9 +240,9 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
         </span>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(200px,260px)]">
+      <div className="flex flex-col lg:flex-row lg:justify-center gap-8 items-start">
         {/* Grid on a game-board surface */}
-        <div className="min-w-0 flex flex-col gap-4 w-full mx-auto" style={{ maxWidth: 120 + teams.length * 108 }}>
+        <div className="min-w-0 flex flex-col gap-4 w-full" style={{ maxWidth: 120 + teams.length * 108 }}>
           <ProgressHUD label={g.solved} value={completeTeams} total={teams.length} />
           <BoardFrame>
           <div
@@ -328,7 +328,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
         </div>
 
         {/* Conflicts */}
-        <aside className="flex flex-col gap-2 min-w-0">
+        <aside className="flex flex-col gap-2 min-w-0 w-full lg:w-[260px] shrink-0">
           <span className="mono uppercase" style={{ color: "var(--ink-faint)", fontSize: "0.62rem", letterSpacing: "0.08em" }}>
             {tb.conflictsLabel}
           </span>
@@ -449,8 +449,8 @@ function RowFragment({
               minHeight: 46,
               borderRadius: 12,
               background: assigned
-                ? `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${roleColor})`
-                : "rgba(242,240,234,0.9)",
+                ? tileGradient(roleColor)
+                : "linear-gradient(160deg, #FFFFFF, #DCDAD2)",
               boxShadow: assigned
                 ? inConflict
                   ? "0 0 0 2.5px #ef4444"

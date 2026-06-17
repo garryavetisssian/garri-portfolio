@@ -9,6 +9,11 @@
 
 import { motion } from "framer-motion";
 
+/** Glossy game-piece fill: bright sheen on top → shaded bottom for depth. */
+export function tileGradient(color: string): string {
+  return `linear-gradient(158deg, rgba(255,255,255,0.62), rgba(255,255,255,0.08) 44%, rgba(0,0,0,0.32)), ${color}`;
+}
+
 export function ProgressHUD({
   label,
   value,

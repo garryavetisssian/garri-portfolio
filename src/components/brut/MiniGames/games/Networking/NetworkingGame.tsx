@@ -330,9 +330,9 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
+      <div className="flex flex-col lg:flex-row lg:justify-center gap-8 items-start">
         {/* Canvas */}
-        <div className="min-w-0">
+        <div className="min-w-0 w-full" style={{ maxWidth: 600 }}>
           <div className="mx-auto w-full mb-3" style={{ maxWidth: 600 }}>
             <ProgressHUD label={g.solved} value={satisfiedCount} total={nodes.length} />
           </div>
@@ -594,7 +594,7 @@ export default function NetworkingGame({ difficulty, onWin, onExit }: Props) {
         </div>
 
         {/* Clue cards */}
-        <aside className="flex flex-col gap-5 min-w-0">
+        <aside className="flex flex-col gap-5 min-w-0 w-full lg:w-[280px] shrink-0">
           <ClueGroup
             label={net.mustConnectLabel}
             icon={Ico.link}
