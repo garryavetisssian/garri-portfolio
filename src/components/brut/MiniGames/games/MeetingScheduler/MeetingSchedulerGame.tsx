@@ -277,9 +277,9 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
         </span>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)]">
+      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,300px)] lg:items-start">
         {/* Board + tray */}
-        <div className="flex flex-col gap-4 min-w-0">
+        <div className="flex flex-col gap-4 min-w-0 w-full mx-auto" style={{ maxWidth: 96 + puzzle.slots * 116 }}>
           <ProgressHUD label={g.solved} value={satisfiedCount} total={puzzle.constraints.length} />
           {/* Tray */}
           <div
@@ -318,12 +318,12 @@ export default function MeetingSchedulerGame({ difficulty, onWin, onExit }: Prop
                 whileTap={{ scale: 0.94 }}
                 className="font-bold select-none cursor-grab active:cursor-grabbing"
                 style={{
-                  width: 44,
-                  height: 44,
+                  width: 46,
+                  height: 46,
                   borderRadius: 12,
-                  background: m.color,
+                  background: `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${m.color})`,
                   color: "#0B0B0A",
-                  boxShadow: selected === m.id ? "0 0 0 3px var(--acid)" : "0 4px 0 rgba(0,0,0,0.45)",
+                  boxShadow: selected === m.id ? "0 0 0 3px var(--acid)" : "0 4px 0 rgba(0,0,0,0.5)",
                   fontFamily: "var(--font-display)",
                   fontSize: "1.05rem",
                 }}
@@ -525,10 +525,14 @@ function FragmentRow({
               aspectRatio: "1 / 1",
               minHeight: 46,
               borderRadius: 14,
-              background: m ? m.color : isOver ? "var(--acid)" : "rgba(242,240,234,0.9)",
+              background: m
+                ? `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${m.color})`
+                : isOver
+                ? "var(--acid)"
+                : "rgba(242,240,234,0.9)",
               color: "#0B0B0A",
               boxShadow: m
-                ? "0 4px 0 rgba(0,0,0,0.45)"
+                ? "0 5px 0 rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4)"
                 : "inset 0 0 0 1.5px rgba(11,11,10,0.14)",
               outline: droppable ? "2px dashed var(--acid)" : "none",
               outlineOffset: 2,

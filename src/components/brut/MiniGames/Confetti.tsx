@@ -39,21 +39,21 @@ export default function Confetti() {
     canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
 
-    const N = Math.min(160, Math.round(W / 4));
+    const N = Math.min(300, Math.round(W / 2.2));
     const bits: Bit[] = Array.from({ length: N }, () => ({
-      x: W / 2 + (Math.random() - 0.5) * W * 0.3,
-      y: H * 0.32 + (Math.random() - 0.5) * 40,
-      vx: (Math.random() - 0.5) * 9,
-      vy: -6 - Math.random() * 7,
+      x: W / 2 + (Math.random() - 0.5) * W * 0.45,
+      y: H * 0.36 + (Math.random() - 0.5) * 60,
+      vx: (Math.random() - 0.5) * 15,
+      vy: -8 - Math.random() * 11,
       rot: Math.random() * Math.PI,
-      vr: (Math.random() - 0.5) * 0.4,
-      size: 5 + Math.random() * 7,
+      vr: (Math.random() - 0.5) * 0.6,
+      size: 6 + Math.random() * 10,
       color: COLORS[(Math.random() * COLORS.length) | 0],
     }));
 
     let raf = 0;
     let frame = 0;
-    const MAX = 150; // ~2.5s at 60fps
+    const MAX = 220; // ~3.6s at 60fps
 
     function tick() {
       if (!ctx) return;

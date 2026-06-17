@@ -242,7 +242,7 @@ export default function TeamBuilderGame({ difficulty, onWin, onExit }: Props) {
 
       <div className="grid gap-6 lg:grid-cols-[1fr_minmax(200px,260px)]">
         {/* Grid on a game-board surface */}
-        <div className="min-w-0 flex flex-col gap-4">
+        <div className="min-w-0 flex flex-col gap-4 w-full mx-auto" style={{ maxWidth: 120 + teams.length * 108 }}>
           <ProgressHUD label={g.solved} value={completeTeams} total={teams.length} />
           <BoardFrame>
           <div
@@ -448,11 +448,13 @@ function RowFragment({
             style={{
               minHeight: 46,
               borderRadius: 12,
-              background: assigned ? roleColor : "rgba(242,240,234,0.9)",
+              background: assigned
+                ? `radial-gradient(circle at 32% 26%, rgba(255,255,255,0.5), ${roleColor})`
+                : "rgba(242,240,234,0.9)",
               boxShadow: assigned
                 ? inConflict
                   ? "0 0 0 2.5px #ef4444"
-                  : "0 4px 0 rgba(0,0,0,0.45)"
+                  : "0 5px 0 rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4)"
                 : "inset 0 0 0 1.5px rgba(11,11,10,0.14)",
               cursor: "pointer",
             }}

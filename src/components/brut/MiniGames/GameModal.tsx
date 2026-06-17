@@ -169,19 +169,35 @@ export default function GameModal({
                 background: "var(--paper-elev)",
               }}
             >
-              <div className="flex flex-col">
-                <span
-                  className="mono uppercase"
-                  style={{ color: "var(--ink-faint)", fontSize: "0.65rem", letterSpacing: "0.08em" }}
-                >
-                  {g.heading}
-                </span>
-                <h3
-                  className="text-ink"
-                  style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.15rem" }}
-                >
-                  {game.name}
-                </h3>
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="flex flex-col min-w-0">
+                  <span
+                    className="mono uppercase"
+                    style={{ color: "var(--ink-faint)", fontSize: "0.65rem", letterSpacing: "0.08em" }}
+                  >
+                    {g.heading}
+                  </span>
+                  <h3
+                    className="text-ink truncate"
+                    style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.15rem" }}
+                  >
+                    {game.name}
+                  </h3>
+                </div>
+                {(screen === "game" || screen === "countdown" || screen === "victory") && (
+                  <span
+                    className="mono uppercase shrink-0 px-2.5 py-1 rounded-full"
+                    style={{
+                      background: "var(--acid)",
+                      color: "var(--paper)",
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.08em",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {g.difficulty[difficulty]}
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-2">
               <button
@@ -285,13 +301,26 @@ export default function GameModal({
               {screen === "victory" && (
                 <div className="relative min-h-full flex flex-col justify-center gap-6 w-full max-w-xl mx-auto">
                   <Confetti />
-                  <div className="flex flex-col gap-1">
-                    <span
-                      className="mono uppercase"
-                      style={{ color: "var(--acid)", fontSize: "0.7rem", letterSpacing: "0.1em" }}
+                  <div className="flex flex-col gap-3">
+                    <motion.div
+                      initial={{ scale: 0.3, rotate: -14, opacity: 0 }}
+                      animate={{ scale: 1, rotate: -4, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 12 }}
+                      className="self-start"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 700,
+                        fontSize: "clamp(2.4rem, 7vw, 4rem)",
+                        lineHeight: 0.9,
+                        color: "var(--paper)",
+                        background: "var(--acid)",
+                        padding: "0.2em 0.4em",
+                        boxShadow: "0 8px 0 rgba(0,0,0,0.5)",
+                        textTransform: "uppercase",
+                      }}
                     >
                       {g.victoryTitle}
-                    </span>
+                    </motion.div>
                     <div className="flex items-baseline gap-3">
                       <span
                         className="mono uppercase"
