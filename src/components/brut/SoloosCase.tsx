@@ -1,0 +1,27 @@
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/types";
+import { SOLOOS_REPO, soloosCopy } from "@/data/soloos";
+import styles from "./SoloosCase.module.css";
+
+const excerpts = [
+  { path: "lib/workspace/server.ts", text: 'const { data: { user }, error: authError } =\n  await db.auth.getUser();\nif (authError || !user)\n  return reply({ error: "unauthorized" }, 401);\n\nlet query = db.from(table[kind])\n  .select("*")\n  .eq("user_id", user.id);' },
+  { path: "lib/gemini/prompts.ts", text: 'function safeUserInput(label: string, content: string): string {\n  return [\n    `<<<USER_INPUT:${label}>>>`,\n    content,\n    `<<<END_USER_INPUT:${label}>>>`,\n  ].join("\\n");\n}' },
+];
+
+export default function SoloosCase({ locale }: { locale: Locale }) {
+  const c = soloosCopy[locale];
+  return <article className={styles.case}>
+    <div className={styles.top}><Link href={`/${locale}/work/ai-engineering`}>← {c.back}</Link><span>{c.kind}</span></div>
+    <header className={styles.hero}>
+      <div><p className={styles.eyebrow}>SOLOOS / AI ENGINEERING</p><h1>{c.title}</h1><p className={styles.lead}>{c.subtitle}</p><a className={styles.button} href={SOLOOS_REPO} target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.57.1.78-.24.78-.54v-2.1c-3.17.69-3.84-1.35-3.84-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.65 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.01 0 0 .96-.31 3.1 1.17a10.8 10.8 0 0 1 5.65 0c2.15-1.48 3.1-1.17 3.1-1.17.62 1.56.23 2.72.11 3.01.73.8 1.18 1.82 1.18 3.07 0 4.39-2.66 5.36-5.2 5.64.41.36.77 1.06.77 2.14v3.19c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z"/></svg>{c.github}<span aria-hidden="true">↗</span></a></div>
+      <div className={styles.heroVisual}><span>soloos<span className={styles.dot}>.</span></span><div className={styles.signal}>{c.profile}<b>→</b>{c.research}<b>→</b>{c.letter}</div><div className={styles.paper}><span className={styles.small}>{c.sampleRole} / {c.sampleCompany}</span><p>{c.sampleText}</p><div className={styles.actionTags}>{c.actions.map(a => <span key={a}>{a}</span>)}</div><small>{c.review}</small></div><p className={styles.caption}>{c.demo}</p></div>
+    </header>
+    <p className={styles.intro}>{c.intro}</p>
+    <section className={styles.section}><p className={styles.eyebrow}>01 / CONTEXT</p><h2>{c.workflow}</h2><p>{c.workflowText}</p><ol className={styles.pipeline}>{c.stages.map((s,i) => <li key={s}><span className={styles.index}>0{i+1}</span><h3>{s}</h3><p>{c.stageNotes[i]}</p></li>)}</ol></section>
+    <section className={styles.section}><p className={styles.eyebrow}>02 / PRODUCT</p><h2>{c.product}</h2><p>{c.productText}</p><div className={styles.productViews}><div className={styles.preview}><div className={styles.bar}><span>soloos / {c.cv}</span><span>PDF ↗</span></div><div className={styles.cvView}><div>{c.cvSections.map((s,i) => <div key={s}><h3>{s}</h3><span className={styles.line}/><span className={`${styles.line} ${styles.short}`}/>{i===1&&<span className={styles.line}/>}</div>)}</div><div className={styles.miniPaper}><strong>{c.sampleRole}</strong>{c.cvSections.map(s => <div key={s}><h4>{s}</h4><span className={styles.line}/><span className={styles.line}/></div>)}</div></div></div><div className={styles.preview}><div className={styles.bar}><span>soloos / {c.applications}</span><span>03</span></div><div className={styles.jobs}>{c.statuses.map((s,i) => <div key={s}><span className={styles.index}>0{i+1}</span><div><h3>{c.sampleRole}</h3><p>{c.sampleCompany} {String.fromCharCode(65+i)}</p></div><span className={styles.status}>{s}</span></div>)}</div></div></div><p className={styles.caption}>{c.demo}</p><div className={styles.features}>{c.features.map(([title,body],i) => <div key={title}><span className={styles.index}>0{i+1}</span><h3>{title}</h3><p>{body}</p></div>)}</div></section>
+    <section className={styles.section}><p className={styles.eyebrow}>03 / ARCHITECTURE</p><h2>{c.architecture}</h2><p>{c.architectureText}</p><div className={styles.layers}>{c.layers.map(([title,stack,note]) => <div key={title}><h3>{title}</h3><code>{stack}</code><p>{note}</p></div>)}</div></section>
+    <section className={styles.section}><p className={styles.eyebrow}>04 / SOURCE</p><h2>{c.code}</h2><p>{c.codeText}</p><div className={styles.codeList}>{excerpts.map((e,i) => <div className={styles.codeRow} key={e.path}><div><h3>{c.codeTitles[i]}</h3><p>{c.codeNotes[i]}</p></div><div className={styles.codeWindow}><a href={`${SOLOOS_REPO}/blob/main/${e.path}`} target="_blank" rel="noopener noreferrer">{e.path} ↗</a><pre tabIndex={0}><code>{e.text}</code></pre></div></div>)}</div></section>
+    <section className={styles.section}><p className={styles.eyebrow}>05 / VERIFICATION</p><h2>{c.verification}</h2><div className={styles.review}><div><h3>{c.verified}</h3><p>{c.verifiedText}</p><a className={styles.source} href={`${SOLOOS_REPO}/tree/main/tests`} target="_blank" rel="noopener noreferrer">tests/ ↗</a></div><aside><h3>{c.limits}</h3><ul>{c.limitItems.map(s => <li key={s}>{s}</li>)}</ul></aside></div></section>
+    <footer className={styles.section}><h2>{c.decision}</h2><p>{c.decisionText}</p><Link className={styles.source} href={`/${locale}/work/meridian-hr`}>{c.next} ↗</Link></footer>
+  </article>;
+}

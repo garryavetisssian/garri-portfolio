@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian HR — One login. Every client, their own portal.</title>
+<meta name="description" content="Meridian HR replaces the shared drive, the inbox, and the spreadsheet-per-client with one platform: a branded, self-service portal for every company you serve.">
+<link rel="stylesheet" href="../06_ui_design/foundations.css">
+<link rel="stylesheet" href="landing.css">
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header>
+  <nav class="landing-nav" id="landing-nav" aria-label="Primary">
+    <a class="landing-nav__brand" href="#top" aria-label="Meridian HR home">
+      <svg viewBox="0 0 60.37 40" fill="#001EFF" aria-hidden="true"><path d="M59.37,20.35v15.62c0,1.15-.93,2.08-2.08,2.08h-15.58c-1.15,0-2.08-.93-2.08-2.08v-12.32c0-1.86-2.25-2.79-3.56-1.47l-12.19,12.28c-1.31,1.32-3.56.39-3.56-1.47v-9.35c0-1.86-2.25-2.79-3.56-1.47l-12.19,12.28c-1.31,1.32-3.56.39-3.56-1.47v-13.87c0-.55.22-1.08.6-1.47L17.07,2.07c1.31-1.32,3.56-.39,3.56,1.47v9.35c0,1.86,2.25,2.79,3.56,1.47l12.19-12.28c1.31-1.32,3.56-.39,3.56,1.47v12.64c0,1.15.93,2.08,2.08,2.08h15.26c1.15,0,2.08.93,2.08,2.08Z"/></svg>
+      <span>Meridian<span class="tag">HR</span></span>
+    </a>
+
+    <div class="landing-nav__links" id="landing-nav-links">
+      <a href="#solution">Product</a>
+      <a href="#product">See it in action</a>
+      <a href="#trust">Security</a>
+      <a href="#" class="btn-text">Log In</a>
+      <!-- Mobile-only CTA: at desktop this copy is hidden (the .landing-nav__actions instance below
+           is the one shown there). At <=860px the .landing-nav__actions copy is hidden instead, so
+           the CTA lives inside the mobile menu rather than fighting the brand + toggle for space in
+           a non-wrapping top row — see landing.css "Landing/Nav responsive". -->
+      <a href="#final-cta" class="btn-primary landing-nav__links-cta">Book a Demo</a>
+    </div>
+
+    <div class="landing-nav__actions">
+      <a href="#final-cta" class="btn-primary">Book a Demo</a>
+      <button type="button" class="landing-nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="landing-nav-links" aria-label="Toggle navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="landing-main" id="main-content">
+
+  <!-- Hero -->
+  <section id="top" aria-labelledby="hero-heading" class="hero">
+    <div class="hero__content">
+      <span class="hero__eyebrow">For HR outsourcing &amp; consulting firms</span>
+      <h1 id="hero-heading" class="hero__headline">One login. Every client, their own portal.</h1>
+      <p class="hero__subhead">Meridian HR replaces the shared drive, the inbox, and the spreadsheet-per-client with one platform: a branded, self-service portal for every company you serve — while you run all of them from a single place.</p>
+      <div class="hero__actions">
+        <a href="#final-cta" class="btn-primary">Book a Demo</a>
+      </div>
+      <p class="hero__microcopy">30-minute walkthrough, using a setup that looks like yours.</p>
+      <p class="hero__proof">Built for firms running HR across 5–30 client companies — not a single internal HR team.</p>
+    </div>
+
+    <!-- Real product markup (.detail-header / .status-badge / .message-bubble from foundations.css),
+         not an illustration — a three-step workflow moment, not a static crop: HR asks a question,
+         you reply, the request goes back to HR. Same request, same logic app.js already runs
+         (replying while "Waiting" flips status to "With HR"). Cycles once every ~3s; a single
+         static frame (no cycling) under prefers-reduced-motion — see landing.js. -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="mock-browser">
+        <div class="mock-browser__bar"><span></span><span></span><span></span></div>
+        <div class="mock-browser__body hero-frames">
+          <div class="hero-frame is-active" data-frame="1">
+            <div class="detail-header">
+              <div>
+                <p>Benefits open enrollment question</p>
+                <div class="meta-line">Benefits · Opened 2 days ago</div>
+              </div>
+              <span class="status-badge waiting"><span class="dot"></span>Waiting for you</span>
+            </div>
+            <div class="message-bubble hr">
+              <div class="sender">Priya Nair · HR</div>
+              <p>Which plan are you currently enrolled in, or are you enrolling for the first time?</p>
+            </div>
+          </div>
+          <div class="hero-frame" data-frame="2">
+            <div class="detail-header">
+              <div>
+                <p>Benefits open enrollment question</p>
+                <div class="meta-line">Benefits · Opened 2 days ago</div>
+              </div>
+              <span class="status-badge waiting"><span class="dot"></span>Waiting for you</span>
+            </div>
+            <div class="message-bubble hr">
+              <div class="sender">Priya Nair · HR</div>
+              <p>Which plan are you currently enrolled in, or are you enrolling for the first time?</p>
+            </div>
+            <div class="message-bubble employee">
+              <div class="sender">You</div>
+              <p>Enrolling for the first time — the PPO tier, if that's still open.</p>
+            </div>
+          </div>
+          <div class="hero-frame" data-frame="3">
+            <div class="detail-header">
+              <div>
+                <p>Benefits open enrollment question</p>
+                <div class="meta-line">Benefits · Opened 2 days ago</div>
+              </div>
+              <span class="status-badge with-hr"><span class="dot"></span>With HR</span>
+            </div>
+            <div class="message-bubble employee">
+              <div class="sender">You</div>
+              <p>Enrolling for the first time — the PPO tier, if that's still open.</p>
+            </div>
+            <div class="system-event-group">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              Reply sent — back with HR
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section id="problem" aria-labelledby="problem-heading" class="landing-section reveal">
+    <span class="landing-section__label">The part nobody built software for</span>
+    <h2 id="problem-heading" class="landing-section__headline">You're running six client companies out of a shared drive and a shared inbox.</h2>
+    <p class="landing-section__intro">Every client gets a folder. Every folder gets a naming convention that made sense in month one. Every HR question from every employee at every client lands in the same inbox, with no status, no owner, and no way to show a client's leadership team what's actually outstanding.</p>
+
+    <div class="pain-table" role="table" aria-label="Running it today versus running it on Meridian">
+      <div class="pain-table__col-header pain-table__col-header--old" role="columnheader">Running it today</div>
+      <div class="pain-table__col-header pain-table__col-header--new" role="columnheader">Running it on Meridian</div>
+
+      <div class="pain-table__row" role="row">
+        <div class="pain-table__cell pain-table__cell--old" role="cell">A shared Drive folder per client, renamed "v3_FINAL" more times than anyone wants to admit.</div>
+        <div class="pain-table__cell pain-table__cell--new" role="cell">One workspace. Every client gets their own branded portal, generated once, current forever.</div>
+      </div>
+      <div class="pain-table__row" role="row">
+        <div class="pain-table__cell pain-table__cell--old" role="cell">Employee HR questions land in a shared inbox — no status, no owner, easy to lose.</div>
+        <div class="pain-table__cell pain-table__cell--new" role="cell">Every question becomes a tracked request with a clear status and a clear next step.</div>
+      </div>
+      <div class="pain-table__row" role="row">
+        <div class="pain-table__cell pain-table__cell--old" role="cell">An org chart that was accurate the week you built it.</div>
+        <div class="pain-table__cell pain-table__cell--new" role="cell">A people directory and org chart that update as your clients' teams change.</div>
+      </div>
+      <div class="pain-table__row" role="row">
+        <div class="pain-table__cell pain-table__cell--old" role="cell">Digging through email threads when someone asks "where's my contract."</div>
+        <div class="pain-table__cell pain-table__cell--new" role="cell">Every document, policy, and form, organized by client — not by inbox archaeology.</div>
+      </div>
+      <div class="pain-table__row" role="row">
+        <div class="pain-table__cell pain-table__cell--old" role="cell">One password, shared by whoever's covering that client this week.</div>
+        <div class="pain-table__cell pain-table__cell--new" role="cell">One login for your whole team, scoped per client, per person.</div>
+      </div>
+    </div>
+
+    <p class="landing-section__takeaway">None of this is a headcount problem. It's a systems problem — and it's the one thing every client you serve can actually see.</p>
+  </section>
+
+  <!-- Solution -->
+  <section id="solution" aria-labelledby="solution-heading" class="landing-section reveal">
+    <span class="landing-section__label">What you're actually buying</span>
+    <h2 id="solution-heading" class="landing-section__headline">Three things change the day you turn this on.</h2>
+    <p class="landing-section__intro">One changes how your clients see you. The other two change how much of your week goes to answering the same questions twice.</p>
+
+    <div class="bento-grid">
+      <article class="feature-tile feature-tile--large">
+        <div class="feature-tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
+        <h3>A portal for every client, branded like it's theirs — because it is.</h3>
+        <p>Each client company gets its own space: their logo, their people, their org chart, their policies, their documents. They log in and see a portal that looks like it was built for them specifically — not a shared tool with their name pasted on top. Your clients never see each other, and never see anything that looks like a shared back-office tool.</p>
+      </article>
+      <article class="feature-tile feature-tile--medium">
+        <div class="feature-tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5V14a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4V16.5A2.5 2.5 0 0 1 4 14V5.5Z"/></svg></div>
+        <h3>Every "quick question" becomes a request, not an email.</h3>
+        <p>Certificates, leave, benefits — each opens as a tracked request with a clear status instead of a buried thread. You see every open request across every client in one queue.</p>
+      </article>
+      <article class="feature-tile feature-tile--medium">
+        <div class="feature-tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5c2-1 5-1 8 .5 3-1.5 6-1.5 8-.5v14c-2-1-5-1-8 .5-3-1.5-6-1.5-8-.5v-14Z"/><path d="M12 5v14"/></svg></div>
+        <h3>The policy answer, before the question gets asked.</h3>
+        <p>Publish each client's policies and how-tos once, in their branded knowledge base — instead of it becoming your afternoon.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Product Showcase — real component reuse from 06_ui_design/, not a fabricated dashboard -->
+  <section id="product" aria-labelledby="product-heading" class="landing-section reveal">
+    <span class="landing-section__label">See it in action</span>
+    <h2 id="product-heading" class="landing-section__headline">This is the actual platform — not a mockup of one.</h2>
+    <p class="landing-section__intro">Every screen below uses the same request cards, the same conversation thread, and the same status tracking your employees and HR team would actually use. Nothing here was drawn to look like software — it is the software.</p>
+
+    <div class="product-showcase">
+      <div class="showcase-tabs" role="tablist" aria-label="Product preview">
+        <button type="button" class="showcase-tab is-active" role="tab" id="tab-requests" aria-controls="panel-requests" aria-selected="true" data-select-card="showcase-card-benefits">Requests</button>
+        <button type="button" class="showcase-tab" role="tab" id="tab-conversation" aria-controls="panel-conversation" aria-selected="false" tabindex="-1" data-select-card="showcase-card-benefits">Conversation</button>
+        <button type="button" class="showcase-tab" role="tab" id="tab-resolution" aria-controls="panel-resolution" aria-selected="false" tabindex="-1" data-select-card="showcase-card-bank">Resolved</button>
+      </div>
+
+      <!-- A miniature version of the real app: sidebar + request list stay visible the whole
+           time (exactly like 06_ui_design/02-requests-list.html); only the selected card and the
+           detail pane change as the tabs above are used. Not three disconnected fragments. -->
+      <div class="product-showcase__frame">
+        <div class="mock-browser__bar"><span></span><span></span><span></span></div>
+        <div class="showcase-app">
+
+          <div class="showcase-app__sidebar" aria-hidden="true">
+            <span class="showcase-sidebar__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span>
+            <span class="showcase-sidebar__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.6 2.9-6 5.5-6s5.5 2.4 5.5 6"/></svg></span>
+            <span class="showcase-sidebar__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3.5 3.5V21a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z"/></svg></span>
+            <span class="showcase-sidebar__icon is-active"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5V14a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4V16.5A2.5 2.5 0 0 1 4 14V5.5Z"/></svg></span>
+            <span class="showcase-sidebar__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5c2-1 5-1 8 .5 3-1.5 6-1.5 8-.5v14c-2-1-5-1-8 .5-3-1.5-6-1.5-8-.5v-14Z"/></svg></span>
+          </div>
+
+          <div class="showcase-app__list" aria-hidden="true">
+            <div class="showcase-list-toolbar">
+              <div class="filter-tabs"><span class="filter-tab selected">Needs you</span><span class="filter-tab">All</span></div>
+            </div>
+            <div class="request-list">
+              <div class="request-card needs-you selected" id="showcase-card-benefits">
+                <div class="row-top"><span class="title">Benefits open enrollment question</span><span class="status-badge waiting"><span class="dot"></span>Waiting for you</span></div>
+            <div class="meta"><span class="category-tag">Benefits</span>·<span>2 days ago</span></div>
+              </div>
+              <div class="request-card" id="showcase-card-pto">
+                <div class="row-top"><span class="title">PTO request — May 3–10</span><span class="status-badge with-hr"><span class="dot"></span>With HR</span></div>
+            <div class="meta"><span class="category-tag">Leave</span>·<span>Yesterday</span></div>
+              </div>
+              <div class="request-card" id="showcase-card-bank">
+                <div class="row-top"><span class="title">Updated my bank details</span><span class="status-badge resolved"><span class="dot"></span>Resolved</span></div>
+            <div class="meta"><span class="category-tag">Payroll</span>·<span>1 week ago</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-app__detail">
+
+            <div id="panel-requests" class="showcase-panel is-active" role="tabpanel" aria-labelledby="tab-requests">
+              <div class="request-body">
+                <div class="detail-header">
+                  <div><h3 style="margin:0 0 4px; font-size:18px; font-weight:var(--fw-medium); color:var(--text-primary);">Benefits open enrollment question</h3><div class="meta-line">Benefits · Opened 2 days ago</div></div>
+                  <span class="status-badge waiting"><span class="dot"></span>Waiting for you</span>
+                </div>
+                <div class="progress-tracker" role="img" aria-label="Progress: Submitted, With HR, currently Waiting for you">
+                  <div class="step complete"></div><div class="connector complete"></div>
+                  <div class="step complete"></div><div class="connector complete"></div>
+                  <div class="step current"></div><div class="connector upcoming"></div>
+                  <div class="step upcoming"></div>
+                </div>
+                <div class="action-required">
+                  <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+                  <div><strong>HR needs more information from you</strong><p>Priya asked which plan tier you're enrolling in.</p></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="panel-conversation" class="showcase-panel" role="tabpanel" aria-labelledby="tab-conversation" hidden>
+              <div class="conversation-feed">
+                <div class="message-bubble employee">
+                  <div class="sender">You</div>
+                  <p>Can you share the details of the new benefits plan before open enrollment closes?</p>
+                  <span class="timestamp">2 days ago, 9:14 AM</span>
+                </div>
+                <div class="system-event-group">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  Status updated 2 times
+                </div>
+                <div class="message-bubble hr">
+                  <div class="sender">Priya Nair · HR</div>
+                  <p>Happy to help — we have three tiers this year. Which plan are you currently enrolled in, or are you enrolling for the first time?</p>
+                  <span class="timestamp">Yesterday, 11:02 AM</span>
+                </div>
+                <div class="message-bubble hr">
+                  <div class="sender">Priya Nair · HR</div>
+                  <p>Here's this year's plan comparison in the meantime — let me know if anything's unclear.</p>
+                  <div class="msg-attachments">
+                    <span class="attachment-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 2.5h9l3.5 3.5V21a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z"/></svg>2026-benefits-guide.pdf <span class="size">· 1.2 MB</span></span>
+                  </div>
+                  <span class="timestamp">Yesterday, 11:05 AM</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="panel-resolution" class="showcase-panel" role="tabpanel" aria-labelledby="tab-resolution" hidden>
+              <div class="resolution-body">
+                <div class="detail-header">
+                  <div><h3 style="margin:0 0 4px; font-size:18px; font-weight:var(--fw-medium); color:var(--text-primary);">Updated my bank details</h3><div class="meta-line">Payroll · Opened 1 week ago</div></div>
+                  <span class="status-badge resolved"><span class="dot"></span>Resolved</span>
+                </div>
+                <div class="progress-tracker" role="img" aria-label="Progress: Submitted, With HR, currently Resolved">
+                  <div class="step complete"></div><div class="connector complete"></div>
+                  <div class="step complete"></div><div class="connector complete"></div>
+                  <div class="step current"></div>
+                </div>
+                <div class="resolved-prompt">
+                  <p>Did this answer your question?</p>
+                  <div class="actions"><span class="text-caption text-secondary">No action needed — this closes on its own soon.</span></div>
+                </div>
+                <div class="attachments-summary">
+                  <h3 class="text-h3">Files in this request</h3>
+                  <div class="chip-row">
+                    <span class="attachment-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 2.5h9l3.5 3.5V21a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z"/></svg>voided-check.pdf <span class="size">· 210 KB</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section id="trust" aria-labelledby="trust-heading" class="landing-section reveal">
+    <span class="landing-section__label">How we keep your clients separate</span>
+    <h2 id="trust-heading" class="landing-section__headline">Client A never sees Client B. Not their people, not their documents, not their requests.</h2>
+
+    <div class="trust-band">
+      <p class="trust-band__body">Every client company on Meridian HR is fully data-segregated — not just visually separated by a different logo, but isolated at the platform level. Access is scoped per client and per role: an employee at one company has no path, accidental or otherwise, to another company's information. It's the same guarantee you already make to your clients when you take on their HR — we just make sure the software keeps it too.</p>
+      <ul class="trust-points">
+        <li><strong>Isolated by design.</strong> Each client company's people, documents, and requests are architecturally separated, not just permission-flagged.</li>
+        <li><strong>Role-based access, down to the individual.</strong> What an employee sees is scoped to their own company and their own role — never broader by default.</li>
+        <li><strong>Compliance documentation</strong> available during your demo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="final-cta" aria-labelledby="final-cta-heading" class="final-cta reveal">
+    <h2 id="final-cta-heading">See it running with a setup that looks like yours.</h2>
+    <p>Bring your actual client list to the call if you want — we'll show you what their portals would look like on day one.</p>
+    <button type="button" class="btn-primary" data-action="open-demo-modal">Book a Demo</button>
+    <span class="final-cta__microcopy">30 minutes. No setup required to take the call.</span>
+  </section>
+
+</main>
+
+<!-- Demo request modal — the actual destination for "Book a Demo" (Item #9). Reuses .scrim/.drawer
+     verbatim from foundations.css (the same component the product's Create Request drawer uses),
+     per this page's "no new visual language" constraint. Hidden by default; opened/closed and
+     validated by landing.js. -->
+<div class="scrim" id="demo-modal" hidden>
+  <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+    <div class="drawer-header">
+      <h2 id="demo-modal-title" class="text-h2" style="margin:0">Book a demo</h2>
+      <button type="button" class="btn-text" aria-label="Close" data-action="close-demo-modal">✕</button>
+    </div>
+    <p class="text-body-md text-secondary" style="margin:0">Tell us a bit about your firm and we'll set up a 30-minute walkthrough using a setup that looks like yours.</p>
+    <form id="demo-form" novalidate>
+      <div>
+        <label class="field-label" for="demo-name">Name</label>
+        <input class="input" id="demo-name" name="name" placeholder="Jordan Lee" required>
+      </div>
+      <div style="margin-top:16px">
+        <label class="field-label" for="demo-email">Work email</label>
+        <input class="input" id="demo-email" name="email" type="email" placeholder="jordan@youragency.com" required>
+      </div>
+      <div style="margin-top:16px">
+        <label class="field-label" for="demo-company">Company</label>
+        <input class="input" id="demo-company" name="company" placeholder="Your HR consultancy">
+      </div>
+      <div class="drawer-footer">
+        <button type="button" class="btn-text" data-action="close-demo-modal">Cancel</button>
+        <button type="submit" class="btn-primary">Request demo</button>
+      </div>
+    </form>
+    <div id="demo-confirmation" hidden>
+      <p class="text-body-lg">Thanks — we'll be in touch within one business day to set up your walkthrough.</p>
+      <div class="drawer-footer">
+        <button type="button" class="btn-primary" data-action="close-demo-modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="landing-footer">
+  <div class="landing-footer__top">
+    <div>
+      <div class="landing-footer__brand">
+        <svg viewBox="0 0 60.37 40" fill="#001EFF" aria-hidden="true"><path d="M59.37,20.35v15.62c0,1.15-.93,2.08-2.08,2.08h-15.58c-1.15,0-2.08-.93-2.08-2.08v-12.32c0-1.86-2.25-2.79-3.56-1.47l-12.19,12.28c-1.31,1.32-3.56.39-3.56-1.47v-9.35c0-1.86-2.25-2.79-3.56-1.47l-12.19,12.28c-1.31,1.32-3.56.39-3.56-1.47v-13.87c0-.55.22-1.08.6-1.47L17.07,2.07c1.31-1.32,3.56-.39,3.56,1.47v9.35c0,1.86,2.25,2.79,3.56,1.47l12.19-12.28c1.31-1.32,3.56-.39,3.56,1.47v12.64c0,1.15.93,2.08,2.08,2.08h15.26c1.15,0,2.08.93,2.08,2.08Z"/></svg>
+        <span>Meridian HR</span>
+      </div>
+      <p class="landing-footer__tagline">The client portal for HR outsourcing firms.</p>
+    </div>
+    <div class="landing-footer__columns">
+      <div class="landing-footer__column">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#solution">Portals</a></li>
+          <li><a href="#product">Requests</a></li>
+          <li><a href="#solution">Knowledge Base</a></li>
+        </ul>
+      </div>
+      <div class="landing-footer__column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="landing-footer__column">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#trust">Security</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="landing-footer__bottom">© 2026 Meridian HR</div>
+</footer>
+
+<script src="landing.js"></script>
+</body>
+</html>

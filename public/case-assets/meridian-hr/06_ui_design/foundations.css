@@ -1,0 +1,451 @@
+/* Meridian HR — Foundations
+   Every value below is copied verbatim from 03_tokens/design_tokens.json.
+   No color, spacing, radius, or type value in this file is invented.
+   Refined per 07_review/ui_design_qa.md — see that file for the fix log. */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  /* color.primitive.neutral */
+  --neutral-0: #FFFFFF;
+  --neutral-50: #F5F7FA;
+  --neutral-100: #E6EAEF;
+  --neutral-200: #BCBECC;
+  --neutral-400: #7F8399;
+  --neutral-600: #494D66;
+  --neutral-800: #1F2233;
+  --neutral-950: #000316;
+  --neutral-text-muted: #5A6578;
+
+  /* color.primitive.brand.blue */
+  --blue-50: #F0F2FF;
+  --blue-500: #001EFF;
+  --blue-600: #001AD9;
+  --blue-700: #0015B3;
+
+  /* color.primitive.status */
+  --amber-50: #FEF3E2; --amber-500: #F59E0B; --amber-700: #B45309;
+  --emerald-50: #E2F7F0; --emerald-500: #10B981; --emerald-700: #047857;
+  --red-50: #FDE9E9; --red-500: #EF4444; --red-700: #B91C1C;
+
+  /* color.semantic.background / border / text */
+  --bg-canvas: var(--neutral-50);
+  --bg-surface: var(--neutral-0);
+  --bg-surface-selected: var(--blue-50);
+  --overlay-scrim: rgba(0, 3, 22, 0.32);
+  --border-subtle: var(--neutral-100);
+  --border-strong: var(--neutral-200);
+  --border-focus: var(--blue-500);
+  --text-primary: var(--neutral-950);
+  --text-secondary: var(--neutral-text-muted);
+  --text-disabled: var(--neutral-400);
+  --text-inverse: var(--neutral-0);
+  --text-brand: var(--blue-500);
+  /* neutral-text-muted (5.89:1) was correct on paper for placeholders, but the as-shipped
+     ::placeholder rule measured 3.74:1 once the browser's default UA-stylesheet dimming was
+     applied on top of it — below AA. neutral-600 gives real headroom (8.28:1), and every
+     ::placeholder rule pairs this with opacity:1 so no dimming layers on top (Item F). */
+  --text-placeholder: var(--neutral-600);
+
+  /* color.semantic.employeeStatus */
+  --status-withhr-bg: var(--neutral-100);
+  --status-withhr-text: var(--neutral-text-muted);
+  --status-withhr-dot: var(--neutral-400);
+  --status-waiting-bg: var(--blue-50);
+  --status-waiting-accent: var(--blue-500);
+  --status-waiting-text: var(--blue-700);
+  --status-resolved-bg: var(--emerald-50);
+  --status-resolved-text: var(--emerald-700);
+  --status-resolved-dot: var(--emerald-500);
+  --status-closed-bg: transparent;
+  --status-closed-text: var(--neutral-text-muted);
+  --status-closed-border: var(--neutral-200);
+  --status-closed-dot: var(--neutral-400);
+
+  /* color.semantic.message */
+  --message-employee-bg: var(--blue-50);
+  --message-hr-bg: var(--bg-surface);
+  --message-hr-border: var(--border-subtle);
+  --system-event-text: var(--text-secondary);
+  --system-event-icon: var(--neutral-400);
+
+  /* color.semantic.progressTracker */
+  --step-complete: var(--neutral-950);
+  --step-current: var(--blue-500);
+  --step-upcoming: var(--neutral-200);
+
+  /* typography */
+  --font-primary: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  /* typography.scale — the same seven values that were previously written as 40+33 literal
+     font-size declarations across this file and landing.css (colour, radius, and spacing all
+     already made this trip from JSON into variables; type didn't — Item E). */
+  --text-display: 48px;
+  --text-h1: 32px;
+  --text-h2: 24px;
+  --text-h3: 18px;
+  --text-body-lg: 16px;
+  --text-body-md: 14px;
+  --text-caption: 12px;
+
+  /* radius */
+  --radius-none: 0px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --radius-card: var(--radius-xl);
+  --radius-button: var(--radius-full);
+  --radius-input: var(--radius-md);
+  --radius-badge: var(--radius-full);
+  --radius-chip: var(--radius-full);
+  --radius-bubble: var(--radius-lg);
+
+  /* spacing */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --card-padding: var(--space-6);
+  --component-gap: var(--space-4);
+  --inline-gap: var(--space-2);
+  --page-margin: var(--space-8);
+  --bubble-max-width: 560px;
+
+  /* elevation */
+  --shadow-none: none;
+  --shadow-overlay: 0px 4px 16px rgba(0, 3, 22, 0.06);
+
+  /* focus */
+  --focus-color: var(--blue-500);
+  --focus-width: 2px;
+  --focus-offset: 2px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  font-family: var(--font-primary);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-size: var(--text-body-md);
+  line-height: 1.5;
+  overflow: hidden; /* the app shell owns scrolling internally — see .sidebar/.main/.detail-*-pane */
+}
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+a { color: inherit; text-decoration: none; }
+fieldset { border: none; margin: 0; padding: 0; }
+legend { padding: 0; }
+
+/* Type scale — the only seven font sizes permitted anywhere in this file (12/14/16/18/24/32/48). */
+.text-display { font-size: var(--text-display); line-height: 1.15; font-weight: var(--fw-bold); }
+.text-h1 { font-size: var(--text-h1); line-height: 1.2; font-weight: var(--fw-semibold); }
+.text-h2 { font-size: var(--text-h2); line-height: 1.25; font-weight: var(--fw-semibold); }
+.text-h3 { font-size: var(--text-h3); line-height: 1.3; font-weight: var(--fw-medium); }
+.text-body-lg { font-size: var(--text-body-lg); line-height: 1.5; font-weight: var(--fw-regular); }
+.text-body-md { font-size: var(--text-body-md); line-height: 1.5; font-weight: var(--fw-regular); }
+.text-caption { font-size: var(--text-caption); line-height: 1.4; font-weight: var(--fw-medium); letter-spacing: 0.01em; }
+.text-secondary { color: var(--text-secondary); }
+.text-brand { color: var(--text-brand); }
+
+/* ===== Shell/Sidebar =====
+   height (not min-height) on .app-shell bounds the whole layout to the viewport, so the sidebar never
+   scrolls away with page content — only .main and its inner panes scroll (see below). */
+.app-shell { display: flex; height: 100vh; }
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--bg-canvas); /* component.sidebar.background = color.semantic.background.canvas — no independent value, per the brief's hard constraint */
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-4);
+  overflow-y: auto; /* defensive: if sidebar content ever exceeds viewport height, it scrolls internally rather than pushing the footer off-screen */
+}
+/* A divider under the brand mark, not just whitespace, is what actually creates hierarchy here —
+   without it, the logo and nav read as two loosely-related floating blocks rather than one
+   anchored unit, which is what made the nav look adrift toward the middle of the sidebar. */
+.sidebar .logo { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-subtle); margin-bottom: var(--space-4); }
+.sidebar .logo svg { width: 22px; height: 15px; }
+.sidebar .logo span { font-size: var(--text-body-lg); font-weight: var(--fw-semibold); }
+.sidebar .logo .tag { font-size: var(--text-caption); font-weight: var(--fw-semibold); color: var(--text-secondary); vertical-align: super; }
+.nav-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+/* .nav-item now lives on a real <a> or <button> (QA/role-boundary pass) — reset native control
+   chrome so it reads exactly as it did on the old decorative <li>, while staying focusable and
+   keyboard-operable. */
+.nav-item {
+  display: flex; align-items: center; gap: var(--space-3);
+  width: 100%; padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-badge);
+  background: none; border: none; text-align: left; text-decoration: none;
+  font-family: var(--font-primary);
+  color: var(--text-secondary);
+  font-size: var(--text-body-md); font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+.nav-item svg { width: 18px; height: 18px; stroke: var(--neutral-400); flex-shrink: 0; }
+.nav-item:hover:not(:disabled) { background: var(--bg-surface-selected); }
+.nav-item.active { background: var(--bg-surface-selected); color: var(--text-primary); }
+.nav-item.active svg { stroke: var(--blue-500); }
+/* Sections not built in this prototype get an honest disabled control, not a fake-looking link. */
+.nav-item:disabled { cursor: not-allowed; color: var(--text-disabled); opacity: 0.6; }
+.nav-item:disabled svg { stroke: var(--text-disabled); }
+.sidebar-footer { margin-top: auto; padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+.sidebar-footer .account { padding: var(--space-2) var(--space-3); }
+.sidebar-footer .account .email { font-size: var(--text-body-md); font-weight: var(--fw-medium); color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sidebar-footer .account .role { font-size: var(--text-caption); color: var(--text-secondary); }
+.sidebar-footer .signout { display: block; margin-top: var(--space-2); padding: var(--space-2) var(--space-3); font-size: var(--text-caption); color: var(--text-secondary); background: none; border: none; font-family: var(--font-primary); cursor: pointer; text-align: left; width: 100%; }
+
+/* ===== Shell/PageHeader ===== */
+.main { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; }
+.page-header { padding: var(--space-8) var(--page-margin) var(--space-6); }
+.breadcrumb { font-size: var(--text-caption); color: var(--text-secondary); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2); }
+.page-header .title-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.page-header .title-group { display: flex; align-items: center; gap: var(--space-3); }
+.page-header h1 { margin: 0; }
+.page-header .desc { margin: var(--space-1) 0 0; color: var(--text-secondary); }
+
+/* ===== Controls/Button ===== */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  background: var(--blue-500); color: var(--text-inverse);
+  border: none; border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-primary); font-size: var(--text-body-md); font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--blue-600); }
+.btn-primary:active { background: var(--blue-700); }
+.btn-primary:disabled { background: var(--neutral-200); color: var(--text-disabled); cursor: not-allowed; }
+.btn-text {
+  background: none; border: none; color: var(--text-brand);
+  font-family: var(--font-primary); font-size: var(--text-body-md); font-weight: var(--fw-medium);
+  cursor: pointer; padding: var(--space-2) 0;
+}
+.btn-text:hover { color: var(--blue-600); }
+
+/* ===== Controls/Input ===== */
+.input, textarea.input {
+  width: 100%; font-family: var(--font-primary);
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-input); padding: var(--space-3) var(--space-4);
+  font-size: var(--text-body-md); color: var(--text-primary);
+}
+.input::placeholder { color: var(--text-placeholder); opacity: 1; }
+/* Focus indication uses the global :focus-visible ring (see above) — no outline override here.
+   The border-color shift is an additional, non-exclusive cue on top of the ring, not a replacement for it. */
+.input:focus { border-color: var(--border-focus); }
+.input.has-error { border-color: var(--red-500); }
+.field-label { display: block; font-size: var(--text-caption); font-weight: var(--fw-medium); color: var(--text-primary); margin-bottom: var(--space-2); }
+.field-error { display: block; font-size: var(--text-caption); font-weight: var(--fw-medium); color: var(--red-700); margin-top: var(--space-2); }
+
+/* ===== Card ===== */
+.card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); box-shadow: var(--shadow-none); }
+
+/* ===== Detail/StatusBadge ===== */
+.status-badge {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  border-radius: var(--radius-badge); padding: var(--space-1) var(--space-3);
+  font-size: var(--text-caption); line-height: 1.4; font-weight: var(--fw-medium); letter-spacing: 0.01em;
+  white-space: nowrap;
+  /* Intrinsic width, never stretched by a flex parent — this is what was letting the badge
+     balloon to the full width of a request-card's own flex-column stretch behavior instead of
+     staying sized to its label text (Item A). flex-shrink:0 covers the row-flex case (next to
+     .title, below); align-self:flex-start covers the column-flex case (.request-card itself). */
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+.status-badge .dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+.status-badge.with-hr { background: var(--status-withhr-bg); color: var(--status-withhr-text); }
+.status-badge.with-hr .dot { background: var(--status-withhr-dot); }
+.status-badge.waiting { background: var(--status-waiting-bg); color: var(--status-waiting-text); }
+.status-badge.waiting .dot { background: var(--status-waiting-accent); }
+.status-badge.resolved { background: var(--status-resolved-bg); color: var(--status-resolved-text); }
+.status-badge.resolved .dot { background: var(--status-resolved-dot); }
+.status-badge.closed { background: var(--status-closed-bg); color: var(--status-closed-text); border: 1px solid var(--status-closed-border); }
+.status-badge.closed .dot { background: var(--status-closed-dot); }
+
+/* ===== List/RequestCard =====
+   Semantic <button> per card (research_ux_audit / QA Critical #3) — reset to remove default button chrome
+   while keeping the exact visual result the div-based version had. */
+.request-list { display: flex; flex-direction: column; }
+.request-card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  border-left: 4px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-primary);
+  margin: 0;
+  cursor: pointer; position: relative;
+}
+.request-card.needs-you { border-left-color: var(--status-waiting-accent); }
+.request-card.selected { background: var(--bg-surface-selected); }
+.request-card .row-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+/* .title now shares .row-top with .status-badge (Item A) — flex:1 + min-width:0 lets the title
+   claim all the space the badge doesn't need and truncate gracefully instead of forcing the
+   badge to stretch or the row to wrap. */
+.request-card .title {
+  flex: 1; min-width: 0;
+  font-size: var(--text-body-lg); font-weight: var(--fw-medium); color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.request-card .meta { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-caption); color: var(--text-secondary); }
+.request-card .category-tag { color: var(--text-secondary); }
+
+/* ===== Composer/CategoryChip & Attachment chip =====
+   Both are semantic <button> elements now (QA Critical #3). */
+.category-chip {
+  display: inline-flex; align-items: center; padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-chip); background: var(--neutral-100); color: var(--text-secondary);
+  font-size: var(--text-body-md); font-weight: var(--fw-medium); border: 1px solid transparent;
+  font-family: var(--font-primary); cursor: pointer;
+}
+.category-chip.selected { background: var(--blue-50); color: var(--text-brand); border-color: var(--blue-500); }
+.attachment-chip {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  background: var(--neutral-50); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-chip); padding: var(--space-2) var(--space-4);
+  font-size: var(--text-body-md); color: var(--text-primary);
+}
+.attachment-chip svg { width: 14px; height: 14px; stroke: var(--neutral-400); }
+.attachment-chip .remove {
+  background: none; border: none; padding: 0; margin-left: var(--space-1);
+  display: inline-flex; align-items: center; font-family: inherit;
+  color: var(--text-secondary); cursor: pointer;
+}
+.attachment-chip .remove:hover { color: var(--red-500); }
+.attachment-chip .size { color: var(--text-secondary); }
+
+/* ===== Detail layout ===== */
+.detail-layout { display: flex; flex: 1; min-height: 0; border-top: 1px solid var(--border-subtle); }
+.detail-list-pane { width: 380px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); overflow-y: auto; }
+.detail-main-pane { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-y: auto; padding: var(--space-8); gap: var(--space-6); }
+.list-toolbar { padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); border-bottom: 1px solid var(--border-subtle); }
+.filter-tabs { display: inline-flex; background: var(--neutral-100); border-radius: var(--radius-badge); padding: 4px; gap: 2px; width: fit-content; }
+.filter-tab {
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-badge);
+  font-size: var(--text-body-md); font-weight: var(--fw-medium); color: var(--text-secondary);
+  background: none; border: none; font-family: var(--font-primary); cursor: pointer;
+}
+.filter-tab.selected { background: var(--bg-surface); color: var(--text-brand); }
+
+.detail-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); }
+.detail-header .meta-line { color: var(--text-secondary); font-size: var(--text-caption); margin-top: var(--space-1); }
+
+/* ===== Detail/ProgressTracker =====
+   Steps are rendered per-screen (Submitted / With HR / Waiting for you [conditional] / Resolved) so the
+   tracker always agrees with the Status Badge and Action-Required Callout — QA Critical #2.
+   Each dot now carries its own label directly beneath it (.progress-step), instead of every dot
+   sitting at one end with a single label string starting somewhere to the right of all of them —
+   the mapping from dot to word is now positional and instant, not something the reader has to
+   compute (Item B). align-items:flex-start (not center) so every .progress-step's dot lines up
+   on the same top edge regardless of how tall its label happens to wrap. */
+.progress-tracker { display: flex; align-items: flex-start; gap: var(--space-2); }
+.progress-step { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.progress-tracker .step { width: 8px; height: 8px; border-radius: 50%; }
+.progress-tracker .step.complete { background: var(--step-complete); }
+.progress-tracker .step.current { background: var(--step-current); }
+.progress-tracker .step.upcoming { background: var(--step-upcoming); }
+/* 4px = half the dot's 8px height, so the connector's center lines up with the dot's center
+   rather than its top edge. */
+.progress-tracker .connector { flex: 1; height: 1px; max-width: 40px; margin-top: 4px; }
+.progress-tracker .connector.complete { background: var(--step-complete); }
+.progress-tracker .connector.upcoming { background: var(--step-upcoming); }
+.progress-tracker .step-label { font-size: var(--text-caption); color: var(--text-secondary); white-space: nowrap; }
+
+/* ===== Detail/ActionRequiredCallout ===== */
+.action-required {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  background: var(--status-waiting-bg); border-radius: var(--radius-card);
+  padding: var(--card-padding); border-left: 4px solid var(--status-waiting-accent);
+}
+.action-required .icon { color: var(--status-waiting-accent); flex-shrink: 0; }
+.action-required strong { color: var(--status-waiting-text); display: block; font-size: var(--text-body-md); font-weight: var(--fw-semibold); }
+.action-required p { margin: var(--space-1) 0 0; color: var(--text-primary); font-size: var(--text-body-md); }
+
+/* ===== Detail/ResolvedPrompt (new — QA Critical #5) =====
+   Same shape/pattern as ActionRequiredCallout, using the resolved (emerald) tokens instead of waiting (blue) —
+   no new colors introduced, per instruction to keep the existing palette. */
+.resolved-prompt {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  background: var(--status-resolved-bg); border-radius: var(--radius-card);
+  padding: var(--card-padding); border-left: 4px solid var(--status-resolved-dot);
+}
+.resolved-prompt p { margin: 0; color: var(--status-resolved-text); font-weight: var(--fw-medium); font-size: var(--text-body-md); }
+.resolved-prompt .actions { display: flex; gap: var(--space-4); align-items: center; flex-shrink: 0; }
+
+/* ===== Detail/AttachmentsSummary ===== */
+.attachments-summary h3 { margin: 0 0 var(--space-3); }
+.attachments-summary .chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* ===== Conversation ===== */
+.conversation-feed { display: flex; flex-direction: column; gap: var(--space-4); }
+.message-bubble { max-width: var(--bubble-max-width); padding: var(--space-4); border-radius: var(--radius-bubble); }
+.message-bubble.employee { align-self: flex-end; background: var(--message-employee-bg); }
+.message-bubble.hr { align-self: flex-start; background: var(--message-hr-bg); border: 1px solid var(--message-hr-border); }
+.message-bubble .sender { font-size: var(--text-caption); font-weight: var(--fw-medium); color: var(--text-secondary); margin-bottom: var(--space-1); }
+.message-bubble p { margin: 0; font-size: var(--text-body-lg); color: var(--text-primary); }
+.message-bubble .timestamp { display: block; margin-top: var(--space-2); font-size: var(--text-caption); color: var(--text-secondary); }
+.message-bubble .msg-attachments { margin-top: var(--space-3); display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+.system-event-row { display: flex; align-items: center; gap: var(--space-2); color: var(--system-event-text); font-size: var(--text-caption); padding: var(--space-1) 0; }
+.system-event-row svg { width: 12px; height: 12px; stroke: var(--system-event-icon); flex-shrink: 0; }
+.system-event-group {
+  display: flex; align-items: center; gap: var(--space-2); color: var(--system-event-text);
+  font-size: var(--text-caption); padding: var(--space-2) 0; cursor: default;
+}
+.system-event-group svg { width: 12px; height: 12px; stroke: var(--system-event-icon); }
+
+/* ===== Detail/ClosedNotice ===== */
+.closed-notice { background: var(--neutral-100); color: var(--text-secondary); border-radius: var(--radius-input); padding: var(--space-3) var(--space-4); font-size: var(--text-body-md); }
+
+/* ===== Composer =====
+   .composer.drag-over added (QA Critical/Medium — missing drag-and-drop state on the reply composer). */
+.composer { border: 1px solid var(--border-subtle); border-radius: var(--radius-input); background: var(--bg-surface); padding: var(--space-4); }
+.composer.drag-over { border-color: var(--border-focus); background: var(--blue-50); }
+/* Root cause of the earlier clipped-textarea bug: this element also carries class="input", which sets
+   border-radius: var(--radius-input). This rule overrides border/padding/background but never touched
+   border-radius — so the textarea kept a 12px corner radius with no border/fill to show it, and a
+   textarea's native internal scroll box clips its own text/placeholder/cursor to that radius. One
+   visible rounded container (.composer, below) is correct; this element must have none of its own. */
+/* Minimal formatting affordance (Item G) — two toggle-style buttons that wrap the current
+   textarea selection in markdown markers; see the 'format' action in app.js. Not a rich-text
+   toolbar, but a real, working one instead of the composer's previous total absence of one. */
+.composer-toolbar { display: flex; gap: var(--space-1); margin-bottom: var(--space-2); }
+.composer-format {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: none; border: 1px solid var(--border-subtle); color: var(--text-secondary);
+  font-family: var(--font-primary); font-size: var(--text-body-md); cursor: pointer;
+}
+.composer-format:hover { background: var(--neutral-100); color: var(--text-primary); }
+.composer textarea { border: none; border-radius: var(--radius-none); padding: 0; resize: none; width: 100%; font-family: var(--font-primary); font-size: var(--text-body-md); line-height: 1.5; color: var(--text-primary); min-height: 60px; background: transparent; }
+.composer textarea::placeholder { color: var(--text-placeholder); opacity: 1; }
+.composer-footer { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle); }
+.composer-attach { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-brand); font-size: var(--text-body-md); font-weight: var(--fw-medium); cursor: pointer; background: none; border: none; font-family: var(--font-primary); }
+.composer-attach svg { width: 16px; height: 16px; stroke: var(--blue-500); }
+.composer-dropzone-hint { display: flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-caption); margin-bottom: var(--space-2); }
+.dropzone { border: 1.5px dashed var(--border-strong); border-radius: var(--radius-input); padding: var(--space-6); text-align: center; color: var(--text-secondary); font-size: var(--text-body-md); margin-bottom: var(--space-3); cursor: pointer; }
+.dropzone.drag-over { border-color: var(--border-focus); background: var(--blue-50); color: var(--text-brand); }
+
+/* ===== Empty states ===== */
+.empty-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: var(--space-16); gap: var(--space-4); }
+.empty-state .icon-circle { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.empty-state.invite .icon-circle { background: var(--blue-50); }
+.empty-state.invite .icon-circle svg { stroke: var(--blue-500); }
+.empty-state.neutral .icon-circle { background: var(--neutral-100); }
+.empty-state.neutral .icon-circle svg { stroke: var(--neutral-400); }
+.empty-state h2 { margin: 0; }
+.empty-state p { margin: 0; max-width: 380px; color: var(--text-secondary); }
+.empty-state .actions { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-2); }
+/* Smaller, in-list variant used for the "no results for filter" state (QA Medium — missing second empty-state variant) */
+.empty-state.compact { padding: var(--space-8) var(--space-5); gap: var(--space-3); }
+.empty-state.compact .icon-circle { width: 48px; height: 48px; }
+
+/* ===== Create Request drawer/overlay ===== */
+.scrim { position: fixed; inset: 0; background: var(--overlay-scrim); display: flex; justify-content: flex-end; }
+.drawer { width: 480px; background: var(--bg-surface); height: 100%; box-shadow: var(--shadow-overlay); padding: var(--space-8); overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-6); }
+.drawer-header { display: flex; align-items: center; justify-content: space-between; }
+.drawer-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-4); margin-top: auto; padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+.chip-choices { display: flex; flex-wrap: wrap; gap: var(--space-2); }

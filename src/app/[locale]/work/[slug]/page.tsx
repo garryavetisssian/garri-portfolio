@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/brut/CaseStudyView";
-import { getProject } from "@/data/projects";
+import MeridianCase from "@/components/brut/MeridianCase";
+import SoloosCase from "@/components/brut/SoloosCase";
 import { getLocalizedProject } from "@/data/projects.i18n";
 import {
   getCaseAssets,
@@ -25,7 +26,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!localeCodes.includes(locale as Locale)) return {};
-  const project = getProject(slug);
+  const project = getLocalizedProject(slug, locale as Locale);
   if (!project) return {};
 
   const categoryString = Array.isArray(project.category)
@@ -56,6 +57,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (!hasCaseFolder(slug)) notFound();
   const project = getLocalizedProject(slug, locale as Locale);
   if (!project) notFound();
+
+  if (slug === "meridian-hr") return <MeridianCase locale={locale as Locale} />;
+  if (slug === "soloos") return <SoloosCase locale={locale as Locale} />;
 
   const caseAssets = getCaseAssets(slug);
   const nextSlug = getNextProjectSlug(slug);

@@ -7,12 +7,16 @@ import { useRouter } from "next/navigation";
 import type { CaseStudy } from "@/lib/types";
 import type { Locale } from "@/lib/i18n/types";
 import { DICTIONARIES } from "@/lib/i18n/dictionaries";
+import { meridianCopy } from "@/data/meridian";
+import { soloosCopy } from "@/data/soloos";
 import styles from "./WorkList.module.css";
 
-export type Collection = "products" | "entertainment";
-const collections: Collection[] = ["products", "entertainment"];
+export type Collection = "products" | "entertainment" | "ai-engineering";
+const collections: Collection[] = ["products", "entertainment", "ai-engineering"];
 const showcase: Record<string, { collections: Collection[]; cover: string; entertainmentCover?: string }> = {
-  "xy-ecosystem": { collections, cover: "/cases/xy-ecosystem/2%20XY%20Protocols/Cover.webp", entertainmentCover: "/cases/xy-ecosystem/1%20XYGO%20-%20WEB3%20Lottery/Cover.webp" },
+  "xy-ecosystem": { collections: ["products", "entertainment"], cover: "/cases/xy-ecosystem/2%20XY%20Protocols/Cover.webp", entertainmentCover: "/cases/xy-ecosystem/1%20XYGO%20-%20WEB3%20Lottery/Cover.webp" },
+  "meridian-hr": { collections: ["ai-engineering"], cover: "/cases/meridian-hr/Cover.svg" },
+  soloos: { collections: ["ai-engineering"], cover: "/cases/soloos/Cover.svg" },
   balvoi: { collections: ["products"], cover: "/cases/balvoi/Cover.webp" },
   nexwave: { collections: ["products"], cover: "/cases/nexwave/Cover.webp" },
   "dispatch-center": { collections: ["products"], cover: "/cases/dispatch-center/Cover.webp" },
@@ -24,9 +28,9 @@ const showcase: Record<string, { collections: Collection[]; cover: string; enter
   "razer-ui": { collections: ["products"], cover: "/cases/razer-ui/Cover.webp" },
 };
 const labels = {
-  en: { tabs: ["B2B & Enterprise Products", "iGaming & Entertainment"], hint: "Choose a collection", view: "Explore case", all: "Explore all work", count: "projects" },
-  ru: { tabs: ["B2B и корпоративные продукты", "iGaming и развлечения"], hint: "Выберите коллекцию", view: "Смотреть кейс", all: "Все проекты", count: "проектов" },
-  hy: { tabs: ["B2B և կորպորատիվ պրոդուկտներ", "iGaming և ժամանց"], hint: "Ընտրեք հավաքածուն", view: "Դիտել նախագիծը", all: "Բոլոր նախագծերը", count: "նախագիծ" },
+  en: { tabs: ["B2B & Enterprise Products", "iGaming & Entertainment", "AI Engineering"], hint: "Choose a collection", view: "Explore case", all: "Explore all work", count: "projects" },
+  ru: { tabs: ["B2B и корпоративные продукты", "iGaming и развлечения", "AI Engineering"], hint: "Выберите коллекцию", view: "Смотреть кейс", all: "Все проекты", count: "проектов" },
+  hy: { tabs: ["B2B և կորպորատիվ պրոդուկտներ", "iGaming և ժամանց", "AI Engineering"], hint: "Ընտրեք հավաքածուն", view: "Դիտել նախագիծը", all: "Բոլոր նախագծերը", count: "նախագիծ" },
 };
 
 interface WorkListProps {
@@ -56,7 +60,7 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
     // Upgrade links shared before collections had dedicated routes.
     if (!archive) return;
     const legacy = window.location.hash.slice(1);
-    if (legacy === "products" || legacy === "entertainment") router.replace(`/${locale}/work/${legacy}`, { scroll: false });
+    if (collections.includes(legacy as Collection)) router.replace(`/${locale}/work/${legacy}`, { scroll: false });
   }, [archive, locale, router]);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const id = useId();
@@ -79,9 +83,10 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
             onClick={() => selectCollection(collection)}
             onKeyDown={(event) => {
               let next: number | undefined;
-              if (event.key === "ArrowRight" || event.key === "ArrowLeft") next = 1 - index;
+              if (event.key === "ArrowRight") next = (index + 1) % collections.length;
+              if (event.key === "ArrowLeft") next = (index + collections.length - 1) % collections.length;
               if (event.key === "Home") next = 0;
-              if (event.key === "End") next = 1;
+              if (event.key === "End") next = collections.length - 1;
               if (next !== undefined) { event.preventDefault(); selectCollection(collections[next]); tabs.current[next]?.focus(); }
             }} className={styles.tab}
           >{copy.tabs[index]}<span className={styles.tabCount}>{items.filter((p) => (showcase[p.slug]?.collections ?? ["products"]).includes(collection)).length}</span></button>)}
@@ -100,7 +105,7 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
               </div>
               <div className={styles.meta}>
                 <span className={`mono ${styles.number}`}>{String(index + 1).padStart(2, "0")}</span>
-                <div className={styles.info}><h3>{p.title}</h3><p>{p.subtitle}</p></div>
+                <div className={styles.info}><h3>{p.title}</h3><p>{p.slug === "meridian-hr" ? meridianCopy[locale].subtitle : p.slug === "soloos" ? soloosCopy[locale].subtitle : p.subtitle}</p></div>
                 <span className={`mono ${styles.year}`}>{p.year}</span>
               </div>
               <div className={`mono ${styles.tags}`}>{(Array.isArray(p.category) ? p.category : [p.category]).join(" / ")}</div>

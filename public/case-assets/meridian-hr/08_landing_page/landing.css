@@ -1,0 +1,374 @@
+/* Meridian HR — Landing Page (Part 2)
+   Component styles only. Every color, font-size, radius, and spacing value below is a var()
+   reference into ../06_ui_design/foundations.css's existing token set — no new visual language,
+   per 05_design_system/landing_page_architecture.md §4. Buttons are NOT redefined here; the page
+   uses .btn-primary / .btn-text from foundations.css verbatim. The Product Showcase section reuses
+   .request-card / .status-badge / .message-bubble / .progress-tracker / .resolved-prompt directly
+   from foundations.css — not lookalikes — per the refinement pass's "same platform" requirement. */
+
+html { scroll-behavior: smooth; }
+
+/* foundations.css sets body{overflow:hidden; height:100%} for the PRODUCT app-shell, where the
+   sidebar is fixed and only inner panes scroll (06_ui_design/). This page has no sidebar and no
+   fixed-height shell — it's a normal scrolling marketing page — so that rule is overridden here.
+   This was the actual root cause of the page not scrolling naturally.
+   overflow-x stays hidden (not "visible"): <header> is a sibling of <main>, not a descendant, so
+   .landing-main's own overflow-x:hidden below never contained it — body is the only element both
+   share, so it's the one place a stray-wide nav row (or anything else) can be safely clipped
+   horizontally without also blocking the vertical scroll this rule exists to restore. */
+body { overflow-x: hidden; overflow-y: visible; height: auto; min-height: 100vh; }
+
+.landing-main { overflow-x: hidden; }
+
+/* Skip link — visually hidden until keyboard-focused, standard accessible pattern. */
+.skip-link {
+  position: absolute; left: var(--space-4); top: -48px; z-index: 60;
+  background: var(--blue-500); color: var(--text-inverse);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-input);
+  font-size: var(--text-body-md); font-weight: var(--fw-medium); transition: top 0.15s ease;
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* This page already inherits foundations.css's global :focus-visible rule via the <link> in
+   index.html, but that dependency was silent and easy to break (e.g. if this stylesheet were
+   ever reused standalone) — restated here explicitly so the landing page owns its own keyboard
+   focus visibility rather than relying on import order. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+/* ===== Landing/Nav ===== */
+.landing-nav {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-4) var(--page-margin);
+}
+.landing-nav__brand { display: flex; align-items: center; gap: var(--space-3); }
+.landing-nav__brand svg { width: 22px; height: 15px; }
+.landing-nav__brand span { font-size: var(--text-body-lg); font-weight: var(--fw-semibold); color: var(--text-primary); }
+.landing-nav__brand .tag { font-size: var(--text-caption); font-weight: var(--fw-semibold); color: var(--text-secondary); vertical-align: super; }
+.landing-nav__links { display: flex; align-items: center; gap: var(--space-8); }
+.landing-nav__links a:not(.btn-primary) { font-size: var(--text-body-md); font-weight: var(--fw-medium); color: var(--text-secondary); transition: color 0.15s ease; }
+.landing-nav__links a:not(.btn-primary):hover { color: var(--text-brand); }
+.landing-nav__actions { display: flex; align-items: center; gap: var(--space-6); }
+.landing-nav .btn-primary { white-space: nowrap; flex-shrink: 0; }
+/* Mobile-menu CTA (see index.html "Landing/Nav" markup): hidden at desktop, where the
+   .landing-nav__actions copy is the one shown. Below 860px the two swap. */
+.landing-nav__links-cta { display: none; }
+.landing-nav__toggle {
+  display: none; background: none; border: none; padding: var(--space-2); cursor: pointer;
+}
+.landing-nav__toggle svg { width: 22px; height: 22px; stroke: var(--text-primary); }
+
+/* ===== Landing/Hero ===== */
+.hero {
+  display: flex; align-items: center; gap: var(--space-12);
+  padding: var(--space-20) var(--page-margin);
+  max-width: 1280px; margin: 0 auto;
+  scroll-margin-top: var(--space-16);
+}
+.hero__content { flex: 1; min-width: 0; }
+.hero__eyebrow {
+  display: inline-block; font-size: var(--text-caption); font-weight: var(--fw-semibold); color: var(--text-brand);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: var(--space-4);
+}
+.hero__headline { font-size: var(--text-display); line-height: 1.15; font-weight: var(--fw-bold); color: var(--text-primary); margin: 0 0 var(--space-5); max-width: 18ch; }
+.hero__subhead { font-size: var(--text-body-lg); line-height: 1.5; color: var(--text-secondary); margin: 0 0 var(--space-6); max-width: 46ch; }
+.hero__actions { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3); }
+.hero__microcopy { font-size: var(--text-caption); color: var(--text-secondary); margin: 0 0 var(--space-8); }
+.hero__proof { font-size: var(--text-caption); color: var(--text-secondary); padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); max-width: 42ch; }
+.hero__visual { flex: 1; min-width: 0; display: flex; justify-content: center; }
+
+/* A real-interface preview: a cropped Request Detail view built from the product's own component
+   classes (.detail-header / .status-badge / .message-bubble) — not an illustration, not an
+   invented "dashboard," and not the same content twice — this is what the actual product renders
+   for this exact screen in 06_ui_design/03-request-detail-waiting.html. */
+.mock-browser {
+  width: 100%; max-width: 460px; background: var(--bg-surface);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-card);
+  padding: var(--space-2); box-shadow: var(--shadow-overlay);
+}
+.mock-browser__bar { display: flex; align-items: center; gap: var(--space-1); padding: var(--space-2) var(--space-3); }
+.mock-browser__bar span { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+.mock-browser__body { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-4); }
+/* Same defensive fallback as .showcase-app__detail .detail-header below: once the title is long
+   enough to need the badge's row to itself, wrap instead of squeezing both onto one line. Inert
+   at comfortable widths. */
+.mock-browser__body .detail-header { align-items: center; flex-wrap: wrap; row-gap: var(--space-2); }
+.mock-browser__body .detail-header h3,
+.mock-browser__body .detail-header p,
+.showcase-panel .action-required p { overflow-wrap: break-word; }
+/* The hero's three cycling frames use <p>, not <h3> — they're aria-hidden mockup content, not
+   real document structure, and a heading here would jump straight from the page's <h1> to an
+   <h3> with no <h2> in between (Item #11). Styled identically either way. */
+.mock-browser__body .detail-header h3,
+.mock-browser__body .detail-header p { margin: 0 0 4px; font-size: var(--text-body-lg); font-weight: var(--fw-medium); color: var(--text-primary); }
+.mock-browser__body .message-bubble { max-width: 100%; }
+
+/* Hero workflow sequence: three frames, one visible at a time (JS-driven, see landing.js).
+   Stacking them in the same grid cell (rather than swapping DOM) keeps the frame's own height
+   from jumping the layout as content between frames varies. */
+.hero-frames { position: relative; }
+.hero-frame { display: none; flex-direction: column; gap: var(--space-4); }
+.hero-frame.is-active { display: flex; animation: frameFade 0.4s ease; }
+@keyframes frameFade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero-frame.is-active { animation: none; } }
+
+/* ===== Section shell shared by Pain / Solution / Product / Trust ===== */
+.landing-section { padding: var(--space-16) var(--page-margin); max-width: 1280px; margin: 0 auto; scroll-margin-top: var(--space-16); }
+.landing-section__label { display: block; font-size: var(--text-caption); font-weight: var(--fw-semibold); color: var(--text-brand); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: var(--space-4); }
+.landing-section__headline { font-size: var(--text-h1); line-height: 1.2; font-weight: var(--fw-semibold); color: var(--text-primary); margin: 0 0 var(--space-4); max-width: 24ch; }
+.landing-section__intro { font-size: var(--text-body-lg); line-height: 1.5; color: var(--text-secondary); max-width: 60ch; margin: 0 0 var(--space-8); }
+
+/* ===== Landing/PainComparison ===== */
+.pain-table { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-card); overflow: hidden; }
+.pain-table__col-header { font-size: var(--text-caption); font-weight: var(--fw-semibold); text-transform: uppercase; letter-spacing: 0.04em; padding: var(--space-4) var(--space-6); }
+.pain-table__col-header--old { background: var(--neutral-100); color: var(--text-secondary); }
+.pain-table__col-header--new { background: var(--blue-50); color: var(--text-brand); }
+.pain-table__row { display: contents; }
+.pain-table__cell { padding: var(--space-4) var(--space-6); font-size: var(--text-body-md); line-height: 1.5; border-top: 1px solid var(--border-subtle); }
+.pain-table__cell--old { color: var(--text-secondary); background: var(--neutral-50); }
+.pain-table__cell--new { color: var(--text-primary); background: var(--bg-surface); }
+.landing-section__takeaway { margin-top: var(--space-6); font-size: var(--text-body-lg); font-weight: var(--fw-medium); color: var(--text-primary); }
+
+/* ===== Landing/FeatureTile (bento) ===== */
+/* grid-template-rows was "auto auto" — each row sized independently to its own (short) medium-
+   tile copy, while the large tile spans both rows and inherits their combined height, then
+   centered its shorter content inside the leftover space. "1fr 1fr" makes both rows equal
+   fractions of the grid's own height instead, so the two medium tiles stretch to fill whatever
+   height the large tile's content actually needs — the imbalance was rows sizing independently
+   of each other, not the large tile "needing" less content (Item C). */
+.bento-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: 1fr 1fr; gap: var(--space-5);
+}
+.feature-tile {
+  background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-card);
+  padding: var(--card-padding); box-shadow: var(--shadow-none);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.feature-tile:hover { box-shadow: var(--shadow-overlay); border-color: var(--border-strong); transform: translateY(-2px); }
+/* justify-content:flex-start (not center) — content anchors at the top like every other tile,
+   instead of floating as an island in the middle of a box that's now taller than the others.
+   The larger icon and heading size are the "most important tile" visual weight the research doc
+   calls for (research_landing_cro.md §1.4), not just more layout space. */
+.feature-tile--large { grid-column: 1; grid-row: 1 / span 2; display: flex; flex-direction: column; justify-content: flex-start; }
+.feature-tile--medium:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+.feature-tile--medium:nth-of-type(3) { grid-column: 2; grid-row: 2; }
+.feature-tile__icon { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--blue-50); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); }
+.feature-tile__icon svg { width: 20px; height: 20px; stroke: var(--blue-500); }
+.feature-tile--large .feature-tile__icon { width: 56px; height: 56px; margin-bottom: var(--space-5); }
+.feature-tile--large .feature-tile__icon svg { width: 26px; height: 26px; }
+.feature-tile h3 { font-size: var(--text-h3); line-height: 1.3; font-weight: var(--fw-medium); color: var(--text-primary); margin: 0 0 var(--space-2); }
+.feature-tile--large h3 { font-size: var(--text-h2); line-height: 1.25; margin-bottom: var(--space-3); }
+.feature-tile p { font-size: var(--text-body-md); line-height: 1.5; color: var(--text-secondary); margin: 0; }
+.feature-tile--large p { font-size: var(--text-body-lg); }
+
+/* ===== Landing/ProductShowcase =====
+   Tabs switch between three real product views. Every element inside a .showcase-panel reuses
+   .request-card / .status-badge / .message-bubble / .conversation-feed / .progress-tracker /
+   .resolved-prompt verbatim from foundations.css — this section's own CSS only lays out the tab
+   chrome and the device frame around that real content. */
+.showcase-tabs { display: flex; gap: var(--space-2); margin-bottom: var(--space-5); flex-wrap: wrap; }
+.showcase-tab {
+  font-family: var(--font-primary); font-size: var(--text-body-lg); font-weight: var(--fw-medium);
+  padding: var(--space-2) var(--space-5); border-radius: var(--radius-badge);
+  border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-secondary);
+  cursor: pointer; transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.showcase-tab:hover { color: var(--text-brand); }
+.showcase-tab.is-active { background: var(--blue-500); color: var(--text-inverse); border-color: var(--blue-500); }
+/* 780px made this the smallest, quietest block on the page despite being introduced as "the
+   actual platform, not a mockup of one" — the section this sits inside is 1216px wide (1280px
+   minus --page-margin on each side). 1040px gives it real presence as the dominant element on
+   the page without stretching the detail pane's text lines to an unrealistic width (Item D). */
+.product-showcase__frame {
+  max-width: 1040px; margin: 0 auto; background: var(--bg-surface);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-card);
+  box-shadow: var(--shadow-overlay); overflow: hidden;
+}
+
+/* A miniature version of the real app-shell (sidebar + list + detail), not three isolated
+   fragments — the tabs above change which request is selected and shown in detail; the sidebar
+   and list stay in view the whole time, exactly like the real product. */
+.showcase-app { display: flex; min-height: 360px; }
+.showcase-app__sidebar {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-4) var(--space-2); background: var(--bg-canvas);
+  border-right: 1px solid var(--border-subtle); flex-shrink: 0;
+}
+.showcase-sidebar__icon { width: 32px; height: 32px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; }
+.showcase-sidebar__icon svg { width: 16px; height: 16px; stroke: var(--neutral-400); }
+.showcase-sidebar__icon.is-active { background: var(--bg-surface-selected); }
+.showcase-sidebar__icon.is-active svg { stroke: var(--blue-500); }
+
+.showcase-app__list { width: 240px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); overflow: hidden; }
+.showcase-app__list .request-card { cursor: default; transition: background 0.15s ease; }
+.showcase-app__list .request-card:hover { background: var(--bg-surface-selected); }
+/* Defensive fallback for both the request-card row and the detail-header row: once the title is
+   long enough that it would otherwise be forced to wrap across several lines to make room for the
+   badge on the same line, drop the badge to its own line underneath instead. Inert whenever there's
+   enough width for both on one line, so this doesn't change anything at comfortable widths. */
+.showcase-app__list .request-card .row-top,
+.showcase-app__detail .detail-header { flex-wrap: wrap; row-gap: var(--space-2); }
+
+.showcase-app__detail { flex: 1; min-width: 0; padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+.showcase-panel[hidden] { display: none; }
+.showcase-panel .conversation-feed { display: flex; flex-direction: column; gap: var(--space-3); }
+.showcase-panel .resolution-body,
+.showcase-panel .request-body { display: flex; flex-direction: column; gap: var(--space-4); }
+
+/* ===== Landing/TrustStatement ===== */
+.trust-band { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); padding: var(--card-padding); }
+.trust-band__body { font-size: var(--text-body-lg); line-height: 1.5; color: var(--text-secondary); max-width: 70ch; margin: 0 0 var(--space-6); }
+.trust-points { display: flex; flex-wrap: wrap; gap: var(--space-8); list-style: none; margin: 0; padding: 0; }
+.trust-points li { flex: 1; min-width: 220px; font-size: var(--text-body-md); line-height: 1.5; color: var(--text-secondary); }
+.trust-points strong { display: block; color: var(--text-primary); font-weight: var(--fw-medium); margin-bottom: var(--space-1); }
+
+/* ===== Landing/DemoModal =====
+   .scrim sets display:flex unconditionally in foundations.css (author origin always beats the
+   UA default [hidden]{display:none}, regardless of source order), so the [hidden] toggle landing.js
+   uses to open/close this modal needs its own, more specific override here or the modal would
+   render open on page load. */
+#demo-modal[hidden] { display: none; }
+
+/* ===== Landing/FinalCTA ===== */
+.final-cta { text-align: center; padding: var(--space-20) var(--page-margin); max-width: 720px; margin: 0 auto; scroll-margin-top: var(--space-16); }
+.final-cta h2 { font-size: var(--text-h1); line-height: 1.2; font-weight: var(--fw-semibold); color: var(--text-primary); margin: 0 0 var(--space-4); }
+.final-cta p { font-size: var(--text-body-lg); color: var(--text-secondary); margin: 0 0 var(--space-8); }
+.final-cta .btn-primary { padding: var(--space-4) var(--space-8); }
+.final-cta__microcopy { display: block; margin-top: var(--space-4); font-size: var(--text-caption); color: var(--text-secondary); }
+
+/* ===== Landing/Footer ===== */
+.landing-footer { border-top: 1px solid var(--border-subtle); padding: var(--space-12) var(--page-margin) var(--space-8); max-width: 1280px; margin: 0 auto; }
+.landing-footer__top { display: flex; justify-content: space-between; gap: var(--space-12); margin-bottom: var(--space-8); }
+.landing-footer__brand { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2); }
+.landing-footer__brand svg { width: 20px; height: 14px; }
+.landing-footer__brand span { font-size: var(--text-body-md); font-weight: var(--fw-semibold); color: var(--text-primary); }
+.landing-footer__tagline { font-size: var(--text-caption); color: var(--text-secondary); max-width: 32ch; }
+.landing-footer__columns { display: flex; gap: var(--space-12); }
+.landing-footer__column h4 { font-size: var(--text-caption); font-weight: var(--fw-semibold); color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 var(--space-3); }
+.landing-footer__column ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.landing-footer__column a { font-size: var(--text-caption); color: var(--text-secondary); transition: color 0.15s ease; }
+.landing-footer__column a:hover { color: var(--text-brand); }
+.landing-footer__bottom { padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); font-size: var(--text-caption); color: var(--text-secondary); }
+
+/* ===== Micro-interactions (all scoped to this page's own stylesheet — foundations.css itself
+   is never edited, so none of this can affect the Part 1 product). ===== */
+
+/* Button hover transitions: foundations.css defines the hover colors but no transition timing
+   (that file is shared with the product and isn't touched) — added here so state changes on
+   this page feel deliberate rather than instant. */
+.btn-primary, .btn-text { transition: background 0.15s ease, color 0.15s ease; }
+
+/* A gentle pulse on the "waiting" status dot — not decorative motion, it reinforces the one
+   thing that status actually means (something needs a reply), everywhere it appears on this page. */
+@keyframes statusPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.status-badge.waiting .dot { animation: statusPulse 2s ease-in-out infinite; }
+
+/* Showcase request cards get a subtle hover tint so the list reads as a real, browsable UI
+   rather than three static cards — scoped to the showcase only, not a change to .request-card
+   itself (which intentionally has no hover state in the product; see prototype_qa.md). */
+.showcase-panel .request-card { transition: background 0.15s ease, border-color 0.15s ease; }
+.showcase-panel .request-card:hover { background: var(--bg-surface-selected); }
+
+/* Re-triggerable fade when a showcase panel becomes active (landing.js toggles the class off
+   and back on per switch so this replays every time, not just the first). */
+@keyframes panelFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.showcase-panel.is-active { animation: panelFadeIn 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .status-badge.waiting .dot { animation: none; }
+  .showcase-panel.is-active { animation: none; }
+}
+
+/* Decorative list chrome (search + filter tabs) added to the Requests panel for realism —
+   non-interactive by design: it's establishing "this is a real list view," not offering a
+   second, unexplained interactive layer inside an already-interactive tab panel. */
+.showcase-list-toolbar { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+.showcase-list-toolbar .filter-tabs { pointer-events: none; }
+.showcase-list-toolbar__search { flex: 1; font-size: var(--text-body-md); color: var(--text-secondary); background: var(--neutral-50); border: 1px solid var(--border-subtle); border-radius: var(--radius-input); padding: var(--space-2) var(--space-4); }
+
+/* Mini in-panel header for the Resolution tab, matching the real detail-header pattern. */
+.showcase-panel .detail-header { margin-bottom: 0; }
+.showcase-panel .attachments-summary h3 { font-size: var(--text-body-lg); }
+
+/* ===== Scroll-reveal (subtle, single-use, respects reduced motion) ===== */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .feature-tile:hover { transform: none; }
+}
+
+/* ===== Responsive ===== */
+/* The mini app-shell (sidebar + fixed-240px list + detail) needs more horizontal room than the
+   rest of the page's simple stacked content — it gets its own, wider breakpoint separate from the
+   860px one below, since 860px left it squeezed for roughly a 120px band before the page's other
+   sections needed to adapt. Sidebar is purely decorative and drops out entirely; the list stacks
+   above the detail pane instead of squeezing it into a sliver. */
+@media (max-width: 980px) {
+  .showcase-app { flex-direction: column; min-height: 0; }
+  .showcase-app__sidebar { display: none; }
+  .showcase-app__list { width: 100%; border-right: none; border-bottom: 1px solid var(--border-subtle); }
+  .showcase-app__detail { padding: var(--space-5); }
+}
+
+@media (max-width: 860px) {
+  .landing-nav { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .landing-nav__brand { gap: var(--space-2); }
+
+  /* The top-row CTA (.landing-nav__actions' copy) is what overflowed: flex-shrink:0 +
+     white-space:nowrap on .btn-primary (kept, further up, for the desktop row) meant it could
+     never shrink or wrap to fit next to the brand once space got tight. Rather than fight that
+     with shrink math against font/padding values this stylesheet doesn't own, the CTA moves
+     into the mobile menu instead — the row that's always visible now only ever has to fit the
+     brand and the toggle, both of which are small and/or genuinely shrinkable. */
+  .landing-nav__actions .btn-primary { display: none; }
+  .landing-nav__actions { gap: var(--space-2); }
+
+  .landing-nav__links { display: none; }
+  .landing-nav.is-open .landing-nav__links {
+    display: flex; flex-direction: column; align-items: stretch; gap: var(--space-4);
+    position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-subtle); padding: var(--space-6) var(--page-margin);
+  }
+  .landing-nav__links-cta {
+    display: inline-flex; justify-content: center;
+    margin-top: var(--space-2); text-align: center;
+  }
+  .landing-nav__toggle { display: inline-flex; }
+
+  .hero { flex-direction: column; padding-top: var(--space-12); padding-bottom: var(--space-12); gap: var(--space-8); }
+  .hero__headline { font-size: var(--text-h1); max-width: none; }
+  .hero__subhead { max-width: none; }
+  .hero__actions { flex-direction: column; align-items: stretch; }
+  .hero__actions .btn-primary { text-align: center; }
+
+  .landing-section { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+  .landing-section__headline { font-size: var(--text-h2); max-width: none; }
+
+  .pain-table { grid-template-columns: 1fr; }
+  .pain-table__col-header--new { border-top: 1px solid var(--border-subtle); }
+
+  .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .feature-tile--large, .feature-tile--medium:nth-of-type(2), .feature-tile--medium:nth-of-type(3) { grid-column: 1; grid-row: auto; }
+
+  /* Base rule's `min-width: 220px` (Landing/TrustStatement, above) is a fixed floor that doesn't
+     scale down for mobile — safe in the base 3-up row (each item has room), but a rigid width
+     with no mobile override is exactly the pattern that caused the nav overflow, so it's removed
+     here defensively: once stacked to one column, each item should just take the full row width. */
+  .trust-points { flex-direction: column; gap: var(--space-4); }
+  .trust-points li { min-width: 0; }
+
+  .final-cta { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+
+  .landing-footer__top { flex-direction: column; gap: var(--space-8); }
+  .landing-footer__columns { flex-wrap: wrap; gap: var(--space-8); }
+}
+
+/* Buttons and tabs stay comfortably tappable on touch devices without changing their visual style. */
+@media (max-width: 860px) {
+  .btn-primary, .btn-text, .showcase-tab { min-height: 44px; }
+}

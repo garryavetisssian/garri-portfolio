@@ -1,6 +1,8 @@
 import type { Locale } from "@/lib/i18n/types";
 import type { BriefTile, CaseStudy, ProjectCategory } from "@/lib/types";
 import { getProject } from "./projects";
+import { getMeridianProject } from "./meridian";
+import { getSoloosProject } from "./soloos";
 
 /**
  * Per-case localized text.
@@ -734,6 +736,8 @@ export function getLocalizedProject(
   slug: string,
   locale: Locale
 ): CaseStudy | undefined {
+  if (slug === "meridian-hr") return getMeridianProject(locale);
+  if (slug === "soloos") return getSoloosProject(locale);
   const base = getProject(slug);
   if (!base) return undefined;
   const loc = locale === "en" ? undefined : PROJECT_CONTENT_I18N[slug]?.[locale];

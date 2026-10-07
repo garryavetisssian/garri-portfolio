@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+ <rect width="1600" height="1000" fill="#141315"/>
+ <path d="M0 800H1600M0 200H1600M250 0V1000M1350 0V1000" stroke="#272329"/>
+ <text x="100" y="170" fill="#EEEAE3" font-family="Arial,sans-serif" font-size="94" font-weight="700" letter-spacing="-5">soloos<tspan fill="#A87AFF">.</tspan></text>
+ <text x="101" y="225" fill="#A49CA9" font-family="Arial,sans-serif" font-size="24" letter-spacing="4">CONTEXT → DRAFT → NEXT STEP</text>
+ <rect x="100" y="320" width="1400" height="560" rx="18" fill="#1B181F" stroke="#4C4254" stroke-width="2"/>
+ <path d="M100 395H1500M385 395V880" stroke="#4C4254" stroke-width="2"/>
+ <circle cx="143" cy="358" r="7" fill="#A87AFF"/><circle cx="168" cy="358" r="7" fill="#71647B"/><circle cx="193" cy="358" r="7" fill="#71647B"/>
+ <text x="238" y="369" fill="#A49CA9" font-family="Arial,sans-serif" font-size="20">Career workspace / illustrative view</text>
+ <text x="142" y="464" fill="#D6D0DD" font-family="Arial,sans-serif" font-size="22">Profile &amp; CV</text>
+ <rect x="125" y="495" width="240" height="57" rx="8" fill="#30243C"/><text x="142" y="531" fill="#C9ACEE" font-family="Arial,sans-serif" font-size="22">Cover letters</text>
+ <text x="142" y="594" fill="#A49CA9" font-family="Arial,sans-serif" font-size="22">Applications</text>
+ <text x="142" y="826" fill="#A49CA9" font-family="Arial,sans-serif" font-size="18">EN / RU / HY</text>
+ <rect x="425" y="436" width="610" height="392" rx="9" fill="#EEEAE3"/>
+ <text x="468" y="490" fill="#68616C" font-family="Arial,sans-serif" font-size="18">PRODUCT DESIGNER / EXAMPLE STUDIO</text>
+ <text x="468" y="559" fill="#27222D" font-family="Arial,sans-serif" font-size="31" font-weight="700">Relevant evidence.</text>
+ <text x="468" y="599" fill="#27222D" font-family="Arial,sans-serif" font-size="31" font-weight="700">A focused application.</text>
+ <path d="M468 644H975M468 669H944M468 694H965" stroke="#BCB5C1" stroke-width="7" stroke-linecap="round"/>
+ <rect x="468" y="736" width="125" height="42" rx="5" stroke="#9B90A5"/><text x="493" y="763" fill="#53475F" font-family="Arial,sans-serif" font-size="18">Improve</text>
+ <rect x="608" y="736" width="125" height="42" rx="5" stroke="#9B90A5"/><text x="632" y="763" fill="#53475F" font-family="Arial,sans-serif" font-size="18">Shorten</text>
+ <text x="1080" y="468" fill="#D6D0DD" font-family="Arial,sans-serif" font-size="22">Next steps</text>
+ <path d="M1080 494H1450M1080 595H1450M1080 697H1450" stroke="#4C4254"/>
+ <text x="1080" y="536" fill="#BDB5C5" font-family="Arial,sans-serif" font-size="20">Draft reviewed</text><circle cx="1428" cy="529" r="8" fill="#A87AFF"/>
+ <text x="1080" y="638" fill="#BDB5C5" font-family="Arial,sans-serif" font-size="20">Application saved</text><circle cx="1428" cy="630" r="8" fill="#A87AFF"/>
+ <text x="1080" y="740" fill="#BDB5C5" font-family="Arial,sans-serif" font-size="20">Follow-up scheduled</text><circle cx="1428" cy="732" r="8" fill="#A87AFF"/>
+ <text x="1080" y="815" fill="#A49CA9" font-family="Arial,sans-serif" font-size="17">AI ENGINEERING / 2026</text>
+</svg>
