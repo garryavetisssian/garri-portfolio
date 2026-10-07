@@ -3,7 +3,7 @@ import path from "path";
 import { projects } from "@/data/projects";
 import type { CaseStudy } from "@/lib/types";
 
-const ALLOWED_EXT = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm"];
+const ALLOWED_EXT = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".webm", ".mov"];
 
 /** Public URLs stay clean even when a legacy asset folder has spaces or
  * punctuation. Keeping this mapping here also means the source folders do not
@@ -24,7 +24,7 @@ const CASE_ASSET_ORDER: Record<string, string[]> = {
     "Text 1.png",
     "Slide 2.png",
     "Slide 3.png",
-    "Spearthrone.mp4",
+    "Spearthrone.mov",
     "Text 2.png",
     "Video.webp",
     "Slide 4.png",
@@ -36,7 +36,7 @@ const CASE_ASSET_ORDER: Record<string, string[]> = {
     "Text 1.png",
     "Slide 2.png",
     "Slide 3.png",
-    "Roo's Ruckus.mp4",
+    "Roo's Ruckus.mov",
     "Text 2.png",
     "Slide 4.png",
     "Slide 6.png",
@@ -160,7 +160,7 @@ function numericSort(a: string, b: string): number {
 }
 
 function classify(ext: string): "image" | "video" {
-  return ext === ".mp4" || ext === ".webm" ? "video" : "image";
+  return ext === ".mp4" || ext === ".webm" || ext === ".mov" ? "video" : "image";
 }
 
 function findCover(dirPath: string, urlPrefix: string): string | null {

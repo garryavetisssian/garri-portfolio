@@ -66,7 +66,7 @@ function Spearthrone() {
         </div>
       </section>
 
-      <div className={styles.spearFilm}><header><span>IN MOTION</span><p>From the first drop to the final impact.</p></header><CaseFilm src="/cases/Spearthrone/Spearthrone.mp4" poster="/cases/Spearthrone/Video.webp" label="Spearthrone motion case film" /></div>
+      <div className={styles.spearFilm}><header><span>IN MOTION</span><p>From the first drop to the final impact.</p></header><CaseFilm src="/cases/Spearthrone/Spearthrone.mov" poster="/cases/Spearthrone/Video.webp" label="Spearthrone motion case film" /></div>
 
       <section className={styles.spearSystem}>
         <div><span>03 / GAME INTERFACE</span><h2>The battlefield, at every size.</h2><p>The reel frame remains the focal point. Bet, credit and win information sit around it, with the same gold-and-crimson language on desktop and mobile.</p></div>
@@ -119,7 +119,7 @@ function RoosRuckus() {
         </div>
       </section>
 
-      <CaseFilm src="/cases/Roo's%20Ruckus/Roo's%20Ruckus.mp4" poster={`${R}/game-screen.png`} label="Roo's Ruckus motion case film" />
+      <CaseFilm src="/cases/Roo's%20Ruckus/Roo's%20Ruckus.mov" poster={`${R}/game-screen.png`} label="Roo's Ruckus motion case film" />
 
       <section className={styles.motionLab}>
         <header><span>03 / MOTION LAB</span><h2>Roo is the feedback system.</h2><p>Attitude communicates state before copy does. Idle confidence, anticipation, delight and multiplier changes each have a distinct silhouette.</p></header>

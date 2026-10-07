@@ -67,6 +67,8 @@
 .spearFilm header span{font-size:.6rem;color:#d7b17a}
 .spearFilm header p{font-size:.85rem;color:#bfb4a7;margin:0}
 .spearFilm .film{border:1px solid #d7b17a33}
+.film{max-width:1440px;margin-inline:auto}
+.film video{height:auto;aspect-ratio:auto;object-fit:contain}
 .spearSystem{border-top:1px solid #d7b17a22}
 .spearSystem>div:first-child{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem 5vw;align-items:start}
 .spearSystem>div:first-child>span{grid-column:1/-1;margin:0}
