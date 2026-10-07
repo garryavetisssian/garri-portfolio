@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(0, 129, 221, 0.35), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(233, 74, 32, 0.10), transparent 70%),
+      linear-gradient(180deg, #051428 0%, #07182F 50%, #04101E 100%);
+  }
+  /* Decorative letter-shapes scattered in the background */
+  .letter-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .letter-field span {
+    position: absolute;
+    font-family: var(--display);
+    font-weight: 800;
+    color: rgba(0, 129, 221, 0.10);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+  .cover-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .cover-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .cover-mark .bv {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 240px;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: #fff;
+    text-shadow: 0 0 60px rgba(0, 129, 221, 0.4);
+  }
+  .cover-mark .tm {
+    font-family: var(--body);
+    font-size: 28px;
+    color: var(--bv-orange);
+    vertical-align: super;
+    font-weight: 600;
+  }
+  .cover-tagline {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .cover-tagline .sep {
+    color: var(--bv-orange);
+    margin: 0 14px;
+  }
+  .cover-meta {
+    position: absolute;
+    bottom: 64px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    z-index: 3;
+  }
+  .cover-meta .left { color: var(--bv-orange); }
+  .cover-top {
+    position: absolute;
+    top: 64px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    z-index: 3;
+  }
+</style></head>
+<body>
+  <div class="letter-field">
+    <span style="font-size: 320px; top: -40px; left: -20px;">B</span>
+    <span style="font-size: 260px; top: 30px; right: 60px;">V</span>
+    <span style="font-size: 220px; bottom: -30px; left: 40%;">A</span>
+    <span style="font-size: 280px; bottom: 80px; right: -20px;">L</span>
+    <span style="font-size: 180px; top: 40%; left: -20px;">O</span>
+    <span style="font-size: 200px; top: 50%; right: 8%;">I</span>
+    <span style="font-size: 140px; top: 14%; left: 36%;">N</span>
+    <span style="font-size: 160px; bottom: 18%; left: 8%;">E</span>
+    <span style="font-size: 120px; top: 22%; right: 28%;">W</span>
+    <span style="font-size: 140px; bottom: 30%; right: 36%;">S</span>
+  </div>
+
+  <div class="cover-top">
+    <span>BalVoi · Case Study</span>
+    <span>Garri Avetisyan · 2026</span>
+  </div>
+
+  <div class="cover-inner">
+    <div class="cover-mark">
+      <div class="bv">BalVoi<sup class="tm">™</sup></div>
+    </div>
+    <div class="cover-tagline">
+      Your Balanced<span class="sep">·</span>Voice for News
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <span class="left">— 01 / Cover</span>
+    <span>AI · Journalism · SaaS</span>
+  </div>
+</body></html>

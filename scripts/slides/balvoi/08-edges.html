@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .top-row {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .triptych .mockup {
+    height: 380px;
+  }
+  .triptych .mockup-viewport {
+    height: 340px;
+  }
+  /* Default scroll position for each card image — overridden per card so
+     each frame shows its distinctive edge-case content (modal, warning,
+     guidance copy) rather than the shared article header. */
+  .triptych .mockup-viewport img {
+    position: relative;
+  }
+  .img-harassment   { top: -1000px; }
+  .img-not-english  { top: -1200px; }
+  .img-incoherent   { top: -1400px; }
+  .case-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bv-orange);
+    margin-bottom: 8px;
+  }
+  .case-sub {
+    font-family: var(--body);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 09 / Edge cases</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 09 / 12</span>
+  </div>
+
+  <div class="top-row">
+    <div>
+      <span class="eyebrow">— Designed for the hardest content</span>
+      <h1 class="headline headline-sm">When the article is harassment,<br/>not English, or simply <em>incoherent</em>.</h1>
+    </div>
+    <p class="caption" style="margin-top: 0;">
+      Most bias tools refuse to handle abusive text or non-English content
+      gracefully. BalVoi designs for those failures: the system explains
+      what it can't do, why, and points the user to safer next steps.
+    </p>
+  </div>
+
+  <div class="triptych">
+    <div>
+      <div class="case-label">— 01 / Harassment</div>
+      <div class="mockup mockup-sm">
+        <div class="mockup-chrome">
+          <span class="mockup-dot r"></span>
+          <span class="mockup-dot y"></span>
+          <span class="mockup-dot g"></span>
+        </div>
+        <div class="mockup-viewport"><img src="_assets/1705-43072.png" alt="" class="img-harassment"></div>
+      </div>
+      <p class="case-sub" style="margin-top: 12px;">A guided explanation, not a blocked screen.</p>
+    </div>
+
+    <div>
+      <div class="case-label">— 02 / Not English</div>
+      <div class="mockup mockup-sm">
+        <div class="mockup-chrome">
+          <span class="mockup-dot r"></span>
+          <span class="mockup-dot y"></span>
+          <span class="mockup-dot g"></span>
+        </div>
+        <div class="mockup-viewport"><img src="_assets/2371-27640.png" alt="" class="img-not-english"></div>
+      </div>
+      <p class="case-sub" style="margin-top: 12px;">Roadmap disclosure + accept-rate transparency.</p>
+    </div>
+
+    <div>
+      <div class="case-label">— 03 / Incoherent</div>
+      <div class="mockup mockup-sm">
+        <div class="mockup-chrome">
+          <span class="mockup-dot r"></span>
+          <span class="mockup-dot y"></span>
+          <span class="mockup-dot g"></span>
+        </div>
+        <div class="mockup-viewport"><img src="_assets/2371-28197.png" alt="" class="img-incoherent"></div>
+      </div>
+      <p class="case-sub" style="margin-top: 12px;">Suggest cleaning the source; never silently fail.</p>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Edge cases</span>
+    <span>— Failure as a designed surface</span>
+  </div>
+</div></body></html>

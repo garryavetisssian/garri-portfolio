@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="_theme.css">
+<style>
+  .top {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  /* 20 ducks → 5 columns × 4 rows. Each cell isolates one duck on its
+     own dark card with a tiny level number badge. */
+  .level-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 12px;
+    height: 700px;
+  }
+
+  .lcard {
+    position: relative;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 209, 43, 0.16);
+    background:
+      radial-gradient(ellipse at center, rgba(255, 209, 43, 0.10), transparent 70%),
+      linear-gradient(180deg, #1B1810 0%, #0E0C08 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.55);
+  }
+  .lcard img {
+    display: block;
+    max-width: 88%;
+    max-height: 88%;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+  }
+  .lcard-num {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--bv-blue);
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 3px 7px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 05 / Level Ducks 1–20</span>
+    <span class="mark">Duck Master</span>
+    <span class="right"><span class="accent">●</span> 05 / 15</span>
+  </div>
+
+  <div class="top">
+    <div>
+      <span class="eyebrow">— The progression</span>
+      <h1 class="headline">Twenty ducks.<br/>One <em>character</em>.</h1>
+    </div>
+    <p class="caption" style="margin-top: 0;">
+      As players climb through the game, the duck levels up — new outfit,
+      new accessories, new posture — but the silhouette, the eye, and the
+      beak are dead constant. The hardest part of the AI pipeline was
+      keeping the mascot the same across every variant.
+    </p>
+  </div>
+
+  <div class="level-grid">
+    <div class="lcard"><span class="lcard-num">L 01</span><img src="_assets/level-duck-01.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 02</span><img src="_assets/level-duck-02.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 03</span><img src="_assets/level-duck-03.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 04</span><img src="_assets/level-duck-04.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 05</span><img src="_assets/level-duck-05.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 06</span><img src="_assets/level-duck-06.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 07</span><img src="_assets/level-duck-07.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 08</span><img src="_assets/level-duck-08.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 09</span><img src="_assets/level-duck-09.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 10</span><img src="_assets/level-duck-10.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 11</span><img src="_assets/level-duck-11.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 12</span><img src="_assets/level-duck-12.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 13</span><img src="_assets/level-duck-13.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 14</span><img src="_assets/level-duck-14.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 15</span><img src="_assets/level-duck-15.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 16</span><img src="_assets/level-duck-16.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 17</span><img src="_assets/level-duck-17.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 18</span><img src="_assets/level-duck-18.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 19</span><img src="_assets/level-duck-19.png" alt=""></div>
+    <div class="lcard"><span class="lcard-num">L 20</span><img src="_assets/level-duck-20.png" alt=""></div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Level ducks</span>
+    <span>— 20 progression variants · all AI-generated · all on-model</span>
+  </div>
+</div></body></html>

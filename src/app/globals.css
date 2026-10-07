@@ -1,0 +1,1314 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────
+   BRUTALIST EDITORIAL-TECH SYSTEM
+   Garri Avetisyan — Product Designer / 2026
+   Display: Unbounded · Body: Manrope · Labels: JetBrains Mono
+───────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Surface */
+  --ink: #F2F0EA;
+  --ink-mute: #A5A199;
+  --ink-faint: #76736B;
+  --paper: #0B0B0A;
+  --paper-soft: #131311;
+  --paper-elev: #1A1A17;
+
+  /* Hairlines */
+  --line: rgba(242, 240, 234, 0.10);
+  --line-strong: rgba(242, 240, 234, 0.22);
+  --line-faint: rgba(242, 240, 234, 0.05);
+
+  /* Primary accent — electric violet, Web3 vibe.
+     Variable is still named --acid to keep all downstream styles working;
+     the colour is just a different "acid". */
+  --acid: #9B6BFF;
+  --acid-soft: #B594FFCC;
+  --acid-faint: rgba(155, 107, 255, 0.16);
+  --acid-glow: 0 0 32px rgba(155, 107, 255, 0.45);
+  /* Optional iridescent gradient for hero / CTA flourishes */
+  --acid-gradient: linear-gradient(135deg, #9B6BFF 0%, #F472B6 55%, #06B6D4 100%);
+
+  /* Functional */
+  --warn: #FF5C2A;
+
+  /* Type rhythm */
+  --display-tight: 0.86;
+  --display-track: -0.04em;
+  --mono-track: 0.12em;
+
+  /* Layout */
+  --gutter: clamp(1rem, 2.5vw, 2.5rem);
+  --rule-h: 1px;
+  --nav-h: 64px;
+  --max: 1480px;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-mute: var(--ink-mute);
+  --color-ink-faint: var(--ink-faint);
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-paper-elev: var(--paper-elev);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-acid: var(--acid);
+  --color-warn: var(--warn);
+
+  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ─── Reset / base ──────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  overflow-x: clip;
+  width: 100%;
+  font-feature-settings: "ss01", "ss02", "cv11";
+  font-variant-ligatures: contextual;
+}
+
+::selection { background: var(--acid); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; border-radius: 2px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); }
+::-webkit-scrollbar-thumb:hover { background: var(--acid); }
+
+/* ─── Typography utilities ──────────────────────────────────────── */
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mono-sm {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: var(--display-tight);
+  letter-spacing: var(--display-track);
+}
+
+.display-tight {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.serif-num {
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* ─── Brutalist primitives ──────────────────────────────────────── */
+
+.rule {
+  height: var(--rule-h);
+  background: var(--line-strong);
+}
+
+.rule-faint { background: var(--line); }
+
+.hairline-t { border-top: 1px solid var(--line-strong); }
+.hairline-b { border-bottom: 1px solid var(--line-strong); }
+.hairline-l { border-left: 1px solid var(--line-strong); }
+.hairline-r { border-right: 1px solid var(--line-strong); }
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+/* Grain overlay — subtle film texture */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Vertical column guides (decorative, brutalist editorial feel) */
+.col-guides {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: none;
+}
+@media (min-width: 768px) {
+  .col-guides {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    padding: 0 var(--gutter);
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .col-guides > span {
+    border-right: 1px solid var(--line-faint);
+  }
+  .col-guides > span:last-child { border-right: none; }
+}
+
+/* ─── Animations ────────────────────────────────────────────────── */
+
+@keyframes mask-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes mask-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%, 90%, 100% { opacity: 1; }
+  92% { opacity: 0.4; }
+  94% { opacity: 1; }
+  96% { opacity: 0.2; }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.85); }
+}
+
+@keyframes blink-caret {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -6px, 0); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* Reveal classes — used with CSS-only entrance */
+.reveal-up {
+  display: inline-block;
+  overflow: hidden;
+}
+.reveal-up > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: mask-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-mask {
+  animation: mask-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.flicker { animation: flicker 4s infinite; }
+.pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+.drift { animation: drift 6s ease-in-out infinite; }
+.spin-slow { animation: spin-slow 22s linear infinite; }
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 38s linear infinite;
+}
+
+/* Link underline that scribbles in on hover */
+.link-uline {
+  position: relative;
+  display: inline-block;
+}
+.link-uline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.link-uline:hover::after {
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+
+/* Acid hover swap */
+.hover-acid {
+  transition: color 0.25s ease, background 0.25s ease;
+}
+.hover-acid:hover {
+  color: var(--acid);
+}
+
+/* Role breakdown — segmented progress bars (MyRole.tsx).
+   Filled cells use the acid accent; empty cells use a diagonal hatched
+   pattern so the un-owned portion has visual weight too. */
+.role-seg-filled {
+  background: var(--acid);
+  border: 1px solid var(--acid);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.role-seg-empty {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 3px,
+    rgba(165, 161, 153, 0.28) 3px 4px
+  );
+  border: 1px solid var(--line-strong);
+}
+/* Role breakdown row (MyRole.tsx) — stacks on mobile so the 10-segment bar
+   keeps full width; the fixed label/bar/value track only kicks in ≥640px. */
+.role-row {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .role-row {
+    grid-template-columns: minmax(110px, 1.2fr) minmax(0, 5fr) minmax(64px, auto);
+  }
+}
+.role-row:hover .role-seg-filled {
+  box-shadow: var(--acid-glow);
+}
+
+/* AI Chat — floating button + drawer (ChatButton.tsx / ChatPanel.tsx) */
+.chat-fab:hover {
+  border-color: var(--acid);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55), var(--acid-glow);
+}
+.chat-fab:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 3px;
+}
+.chat-close:hover {
+  color: var(--ink);
+  border-color: var(--acid);
+}
+.chat-starter:hover:not(:disabled) {
+  border-color: var(--acid);
+  color: var(--ink);
+  background: rgba(155, 107, 255, 0.06);
+}
+.chat-starter:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.chat-send:not(:disabled):hover {
+  box-shadow: var(--acid-glow);
+  transform: scale(1.04);
+}
+.chat-stop:hover {
+  border-color: var(--acid);
+}
+.chat-composer:focus-within {
+  border-color: var(--acid);
+}
+.typing-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--ink-mute);
+  animation: typing-bob 1.1s ease-in-out infinite;
+}
+@keyframes typing-bob {
+  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-fab, .chat-panel, .chat-backdrop, .chat-send, .typing-dot {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Work-row hover — thin acid bar slides up on the left edge, row
+   indents slightly, title shifts to acid, arrow translates up-right.
+   Replaces the previous full-bg flood (which was too intense). */
+.row-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: baseline;
+  gap: var(--gutter);
+  padding: 1.6rem 0;
+  padding-left: 0;
+  border-top: 1px solid var(--line-strong);
+  transition: padding-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  color: var(--ink);
+}
+.row-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--acid);
+  box-shadow: 0 0 16px var(--acid-faint);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-link:hover::before { transform: scaleY(1); }
+.row-link:hover { padding-left: 1.5rem; }
+
+/* Title gets acid color on hover */
+.row-title {
+  transition: color 0.3s ease, letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-link:hover .row-title {
+  color: var(--acid);
+  letter-spacing: -0.02em;
+}
+
+/* Other mono labels just brighten slightly (no harsh color change) */
+.row-link:hover .num-badge {
+  color: var(--acid);
+}
+
+/* Ghost row — used as the 5th teaser in WorkList on the homepage.
+   Reads as the list literally fading off into the archive, but the
+   row itself is the clickable "View All" CTA. */
+.row-ghost {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  align-items: baseline;
+  gap: var(--gutter);
+  padding: 1.6rem 0 1.6rem 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  transition: padding-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  color: var(--ink-mute);
+  overflow: hidden;
+}
+.row-ghost::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--acid);
+  box-shadow: 0 0 16px var(--acid-faint);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-ghost::after {
+  /* Left-to-right opacity trail — list "fades off into the archive" */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 12%,
+    rgba(11, 11, 10, 0.05) 40%,
+    rgba(11, 11, 10, 0.35) 75%,
+    rgba(11, 11, 10, 0.7) 100%
+  );
+  transition: opacity 0.5s ease;
+}
+.row-ghost:hover::before { transform: scaleY(1); }
+.row-ghost:hover::after { opacity: 0; }
+.row-ghost:hover { padding-left: 1.5rem; color: var(--ink); }
+.row-ghost .ghost-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink-faint);
+  transition: color 0.3s ease, letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-ghost:hover .ghost-title {
+  color: var(--acid);
+  letter-spacing: -0.02em;
+}
+.row-ghost .ghost-cta {
+  border: 1px solid var(--ink-faint);
+  padding: 6px 12px;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.row-ghost:hover .ghost-cta {
+  border-color: var(--acid);
+  background: var(--acid);
+  color: var(--paper);
+}
+
+/* Next-project link — same restrained pattern */
+.next-project {
+  position: relative;
+  transition: padding-left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--ink);
+}
+.next-project::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--acid);
+  box-shadow: 0 0 24px var(--acid-faint);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.next-project:hover::before { transform: scaleY(1); }
+.next-project:hover { padding-left: 1.5rem; }
+.next-project .next-title {
+  transition: color 0.3s ease;
+}
+.next-project:hover .next-title {
+  color: var(--acid);
+}
+
+.row-arrow {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.row-link:hover .row-arrow {
+  transform: translateX(8px) translateY(-8px);
+}
+
+/* Tag chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-mute);
+}
+
+.chip-acid {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+/* Marquee */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  padding: 14px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--mono-track);
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--acid);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Headline letter wrap helper */
+.project-title-container {
+  container-type: inline-size;
+}
+.project-title {
+  font-size: clamp(1.25rem, 5.6cqw, 4.25rem);
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  text-wrap: balance;
+}
+.project-case .next-title,
+.project-case h2 {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-size: clamp(2rem, 8.5vw, 9rem);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.headline-md {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-size: clamp(1.75rem, 6vw, 5rem);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.headline-sm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Utility for inline display-font elements that aren't using a class */
+.h-break {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Brief tile grid (Brief.tsx) — author spans ride in --span-t / --span-d so the
+   grid never collapses into broken implicit columns on small screens:
+   stacked (mobile) → 6-col (≥640px) → author's 12-col (≥768px).
+   min-width:0 lets cells shrink; the break helper stops long words clipping. */
+.brief-grid {
+  grid-template-columns: 1fr;
+}
+.brief-tile {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+@media (min-width: 640px) {
+  .brief-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .brief-tile {
+    grid-column: span var(--span-t);
+  }
+}
+@media (min-width: 768px) {
+  .brief-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .brief-tile {
+    grid-column: span var(--span-d);
+  }
+}
+
+/* Impact metrics grid (CaseStudyView.tsx) — never wider than 2-up on phones,
+   full author count (≤4) on desktop. Counts arrive as --metric-cols-* vars. */
+.metrics-grid {
+  grid-template-columns: repeat(var(--metric-cols-m), minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(var(--metric-cols-d), minmax(0, 1fr));
+  }
+}
+
+/* Body prose */
+.prose-brut {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.prose-brut p { margin-bottom: 1.25em; }
+.prose-brut p:last-child { margin-bottom: 0; }
+.prose-brut strong { color: var(--acid); font-weight: 600; }
+.prose-brut a { color: var(--acid); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Cursor blink */
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 0.92em;
+  background: var(--acid);
+  vertical-align: -0.15em;
+  margin-left: 0.18em;
+  animation: blink-caret 1.05s steps(1) infinite;
+}
+
+/* Number badge */
+.num-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  min-width: 3ch;
+}
+
+/* Frame box (used around imagery & quote callouts) */
+.frame {
+  border: 1px solid var(--line-strong);
+  background: var(--paper-soft);
+}
+
+.frame-acid {
+  border: 1px solid var(--acid);
+  background: var(--paper-soft);
+}
+
+/* Scroll-triggered reveal — used inside Reveal component */
+.reveal-section {
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up { transform: translateY(28px); }
+.reveal-left { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
+.reveal-fade { transform: none; }
+.reveal-section.revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Decorative giant outline numerals — used as section markers */
+.section-marker {
+  position: absolute;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line);
+  user-select: none;
+  font-size: clamp(8rem, 18vw, 16rem);
+  opacity: 0.7;
+}
+
+/* Form inputs — brutalist, hairline border, acid focus */
+.form-input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  letter-spacing: -0.005em;
+  outline: none;
+}
+.form-input::placeholder {
+  color: var(--ink-faint);
+}
+.form-input:focus {
+  outline: none;
+}
+label:has(.form-input:focus) {
+  background: var(--paper-elev);
+  box-shadow: inset 2px 0 0 var(--acid);
+}
+textarea.form-input {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+/* Image placeholder pattern */
+.img-stub {
+  background:
+    linear-gradient(135deg, transparent 49.5%, var(--line-strong) 49.5%, var(--line-strong) 50.5%, transparent 50.5%),
+    var(--paper-soft);
+  border: 1px solid var(--line-strong);
+}
+
+/* Print: keep CV readable */
+@media print {
+  body { background: white; color: black; }
+  .grain, .col-guides { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .row-link:hover { padding-left: 0; }
+}
+
+/* ─── LaptopReveal — scroll-driven 3D laptop ─────────────────────── */
+
+/* Tokens — sized so the whole laptop always fits within ~72vh of the viewport.
+   Base is now beefier (was 18-28px → 34-58px) so the chassis reads as a real
+   device rather than a thin strip under the lid. */
+.laptop-reveal {
+  min-height: 130vh;
+  overflow: hidden;
+  isolation: isolate;
+  --laptop-w: min(78vw, calc((72vh - 72px) * 1.6));
+  --laptop-h: calc(var(--laptop-w) / 1.6);
+  --laptop-base-h: clamp(34px, 4.2vw, 58px);
+  --laptop-bezel: clamp(10px, 1.1vw, 18px);
+}
+
+.laptop-reveal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  isolation: isolate;
+}
+
+/* ── Mouse-reactive curve atmosphere ─────────────────────────────── */
+.laptop-reveal-atmosphere {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  will-change: opacity;
+}
+
+/* Layered SVG curves — each path gets its own parallax translate driven
+   by framer-motion. preserveAspectRatio="none" lets the curves stretch
+   with the viewport so they always cover the section. */
+.atm-curves {
+  position: absolute;
+  inset: -8% -6%;       /* overflow slightly so translated curves don't
+                            reveal their ends */
+  width: 112%;
+  height: 116%;
+  pointer-events: none;
+}
+
+.atm-curves path {
+  will-change: transform;
+}
+
+/* Vignette to focus the laptop and dim curve ends at the edges */
+.atm-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 55% at center,
+    transparent 30%,
+    rgba(11, 11, 10, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* 3D stage — perspective lives here so all children share the same camera */
+.laptop-stage {
+  position: relative;
+  width: var(--laptop-w);
+  height: calc(var(--laptop-h) + var(--laptop-base-h) + 24px);
+  perspective: 1900px;
+  perspective-origin: 50% 42%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+/* Mouse-parallax wrap — the whole laptop tilts subtly toward the cursor */
+.laptop-tilt-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Laptop wrap — base anchored near the bottom of the stage so the lid has
+   room to swing up without being clipped by the viewport. */
+.laptop {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+/* ── Base / chassis ──────────────────────────────────────────────── */
+
+.laptop-base {
+  position: relative;
+  width: 100%;
+  height: var(--laptop-base-h);
+  transform-style: preserve-3d;
+  transform: rotateX(8deg);
+  transform-origin: 50% 0%;
+  z-index: 1;
+}
+
+.laptop-base-top {
+  position: absolute;
+  inset: 0;
+  background:
+    /* subtle horizontal sheen suggesting brushed aluminium */
+    linear-gradient(180deg,
+      #303036 0%,
+      #1d1d23 22%,
+      #14141a 55%,
+      #0e0e13 100%);
+  border-radius: 4px 4px 0 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+    inset 1px 0 0 rgba(255, 255, 255, 0.05),
+    inset -1px 0 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+/* Speaker grilles flanking the keyboard — perforated metal look */
+.laptop-base-speaker {
+  position: absolute;
+  top: 16%;
+  bottom: 36%;
+  width: 5%;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.10) 0.5px,
+    transparent 1px
+  );
+  background-size: 4px 4px;
+  opacity: 0.55;
+}
+.laptop-base-speaker-l { left: 3%; }
+.laptop-base-speaker-r { right: 3%; }
+
+/* Keyboard hint — recreates a believable 4-row × 14-column key grid using
+   layered repeating gradients. Reads as "keyboard" at a glance without
+   actually drawing keys. */
+.laptop-base-keyboard {
+  position: absolute;
+  top: 16%;
+  left: 10%;
+  right: 10%;
+  bottom: 36%;
+  background:
+    /* vertical key separators */
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.085) 0,
+      rgba(255, 255, 255, 0.085) 1px,
+      transparent 1px,
+      transparent calc(100% / 14)
+    ),
+    /* horizontal row dividers */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px,
+      transparent 25%
+    ),
+    /* very faint key-cap fill so individual keys read as filled rectangles */
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025) 0%,
+      rgba(255, 255, 255, 0.015) 100%
+    );
+  opacity: 0.85;
+}
+
+/* Trackpad — actual rounded rectangle now, not a hairline */
+.laptop-base-trackpad {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26%;
+  height: 22%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+  border-radius: 3px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Front lip — the curved chin you'd open the laptop from. Now with a
+   deeper drop shadow to lift the whole device off the surface. */
+.laptop-base-front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -14px;
+  height: 18px;
+  background: linear-gradient(
+    180deg,
+    #14141a 0%,
+    #08080c 60%,
+    #000000 100%
+  );
+  border-radius: 0 0 24px 24px;
+  box-shadow:
+    0 26px 70px -8px rgba(0, 0, 0, 0.78),
+    0 10px 18px -6px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ── Lid (hinged) ────────────────────────────────────────────────── */
+
+.laptop-lid {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: var(--laptop-h);
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  /* Default closed-ish; framer drives via inline style */
+  transform: rotateX(-2deg);
+  will-change: transform;
+}
+
+/* Lid back face — aluminum shell — visible only while closed */
+.laptop-lid-shell {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #2c2c32 0%, #1c1c20 45%, #0e0e10 100%);
+  border-radius: 14px 14px 4px 4px;
+  /* Pre-rotated 180° around X — sits on the opposite face of the lid plane */
+  transform: rotateX(180deg) translateZ(0.1px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Tiny logo glyph on the back of the shell — tinted with case color */
+.laptop-lid-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: var(--case-color, var(--acid));
+  opacity: 0.14;
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+/* Lid front face — screen + bezel — visible when open. The outer border
+   has a thin metallic highlight that suggests an aluminium frame around
+   the glass. */
+.laptop-lid-face {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #0a0a0e 0%, #050506 100%);
+  border-radius: 14px 14px 4px 4px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: var(--laptop-bezel);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Bezel — matte black surround for the screen, with a slightly taller top
+   strip to leave space for the camera notch. */
+.laptop-bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #050506;
+  border-radius: 5px;
+  padding: 16px 8px 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+/* Camera dot in the top bezel */
+.laptop-camera {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* The screen itself.
+   Behind the image, a soft case-color radial gradient fills the screen
+   surface so that when the cover image is letterboxed (object-fit:contain)
+   the empty bars show a tasteful case-tinted background instead of dead
+   black. */
+.laptop-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #050507;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.laptop-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 75% at 50% 45%,
+      var(--case-color, var(--acid)) 0%,
+      transparent 65%
+    );
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.laptop-screen-inner {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, transform;
+  z-index: 1;
+}
+
+/* Cover image is now always shown in full (object-fit: contain). Different
+   cover aspect ratios will produce letterbox bars — they're filled by the
+   case-color ::before backdrop above. */
+.laptop-screen-img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: opacity;
+}
+
+/* Reflection sweep / power-on / gloss layers sit ABOVE the image */
+.laptop-screen-sweep,
+.laptop-screen-poweron,
+.laptop-screen-gloss {
+  z-index: 2;
+}
+
+/* Glossy reflection sweep — diagonal band that travels across the screen */
+.laptop-screen-sweep {
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.05) 56%,
+    transparent 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+/* Power-on wash — a soft case-color streak that crosses the screen as the
+   lid hinges open. Reads like the display lighting up before the image
+   finishes settling in. */
+.laptop-screen-poweron {
+  position: absolute;
+  inset: -15% -50%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    var(--case-color, var(--acid)) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(14px);
+  will-change: transform, opacity;
+}
+
+/* Static screen gloss — subtle top-down vignette */
+.laptop-screen-gloss {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(150% 100% at 50% -10%, rgba(255, 255, 255, 0.06), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 30%);
+  pointer-events: none;
+}
+
+/* Bloom under the laptop — two-layer soft halo that bathes the floor.
+   The wrapper handles framer-driven opacity (ramps in with the lid open).
+   Inside, two pseudo-children render a wide soft halo + a tighter hot core. */
+.laptop-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -180px;
+  transform: translateX(-50%);
+  width: 180%;
+  height: 360px;
+  pointer-events: none;
+  z-index: -1;        /* sits behind the laptop body */
+  opacity: 0.6;       /* CSS fallback; framer drives the live opacity */
+}
+
+/* Outer halo — very wide, very soft, low opacity. Sells the "ambient light
+   bouncing off a surface" feel. */
+.laptop-glow-halo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    50% 65% at 50% 38%,
+    var(--case-color, var(--acid)) 0%,
+    transparent 70%
+  );
+  filter: blur(72px);
+  opacity: 0.55;
+  will-change: transform, opacity;
+}
+
+/* Inner hot core — tighter, brighter, gently breathes. */
+.laptop-glow-core {
+  position: absolute;
+  inset: 18% 28%;
+  background: radial-gradient(
+    50% 80% at 50% 30%,
+    var(--case-color, var(--acid)) 0%,
+    transparent 65%
+  );
+  filter: blur(30px);
+  opacity: 0.9;
+  animation: glow-breathe 5.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.08); opacity: 1;    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laptop-glow-core { animation: none; }
+}
+
+/* ── Reduced-motion fallback (static, fully open) ────────────────── */
+
+.laptop-static-wrap {
+  position: relative;
+  width: clamp(420px, 80vw, 1040px);
+  aspect-ratio: 16 / 10;
+  background: #050506;
+  border-radius: 14px;
+  padding: clamp(8px, 1vw, 16px);
+  box-shadow:
+    0 30px 80px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.laptop-static-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Print: hide the laptop reveal entirely (CV layout) */
+@media print {
+  .laptop-reveal { display: none !important; }
+}
+
+/* Tablet and below — hug the laptop. The desktop scroll-track is a 100vh
+   sticky inside a 130vh section; whenever the laptop is small relative to the
+   viewport (it is sized by 78vw, so on phones AND tablets), that leaves a big
+   empty band above and below it. Here we drop the sticky pin and let the
+   section flow at the laptop's own height with modest breathing room. The
+   lid-open reveal still scrubs from scrollYProgress as the section passes
+   through the viewport. True desktop keeps the pinned sticky reveal. */
+@media (max-width: 900px) {
+  .laptop-reveal {
+    min-height: 0;
+  }
+  .laptop-reveal-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    padding-top: clamp(48px, 9vw, 96px);
+    padding-bottom: clamp(48px, 9vw, 96px);
+  }
+}
+
+/* Phones — also drop the keyboard detail and slim the chassis chrome. */
+@media (max-width: 640px) {
+  .laptop-reveal {
+    --laptop-base-h: 16px;
+    --laptop-bezel: 8px;
+  }
+  .laptop-base-keyboard { display: none; }
+}

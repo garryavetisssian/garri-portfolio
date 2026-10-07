@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.7fr 1.7fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: 1.8fr 1.3fr 1fr 0.55fr;
+    gap: 18px;
+    align-items: end;
+  }
+  .device {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .device-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .device .mockup {
+    height: 520px;
+  }
+  .device .mockup-viewport {
+    height: 480px;
+  }
+  .device .mockup-viewport img {
+    width: 100%;
+    height: auto;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 10 / Multi-breakpoint</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 10 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <span class="eyebrow">— Responsive system</span>
+      <h1 class="headline headline-sm">Every screen,<br/>at every <em>width</em>.</h1>
+      <p class="caption">
+        The article reader at 1440, 1024, 768, and 375 — same content
+        hierarchy, layout that reflows naturally, no responsive after-thought.
+      </p>
+      <p class="kicker">— 146 frames · 4 canonical breakpoints</p>
+    </div>
+
+    <div class="grid-4">
+      <div class="device">
+        <div class="device-label">1440</div>
+        <div class="mockup mockup-sm">
+          <div class="mockup-chrome">
+            <span class="mockup-dot r"></span>
+            <span class="mockup-dot y"></span>
+            <span class="mockup-dot g"></span>
+          </div>
+          <div class="mockup-viewport"><img src="_assets/1696-40785.png" alt=""></div>
+        </div>
+      </div>
+      <div class="device">
+        <div class="device-label">1024</div>
+        <div class="mockup mockup-sm">
+          <div class="mockup-chrome">
+            <span class="mockup-dot r"></span>
+            <span class="mockup-dot y"></span>
+            <span class="mockup-dot g"></span>
+          </div>
+          <div class="mockup-viewport"><img src="_assets/1696-40910.png" alt=""></div>
+        </div>
+      </div>
+      <div class="device">
+        <div class="device-label">768</div>
+        <div class="mockup mockup-sm">
+          <div class="mockup-chrome">
+            <span class="mockup-dot r"></span>
+            <span class="mockup-dot y"></span>
+            <span class="mockup-dot g"></span>
+          </div>
+          <div class="mockup-viewport"><img src="_assets/1696-41062.png" alt=""></div>
+        </div>
+      </div>
+      <div class="device">
+        <div class="device-label">375</div>
+        <div class="mockup mockup-sm">
+          <div class="mockup-chrome">
+            <span class="mockup-dot r"></span>
+            <span class="mockup-dot y"></span>
+            <span class="mockup-dot g"></span>
+          </div>
+          <div class="mockup-viewport"><img src="_assets/1696-41212.png" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Responsive</span>
+    <span>— One content model, four widths</span>
+  </div>
+</div></body></html>

@@ -1,0 +1,192 @@
+<h2>Proposed Homepage Layout - Phase 1</h2>
+<p class="subtitle">High-contrast Bento-grid structure with visual hierarchy</p>
+
+<div class="mockup">
+  <div class="mockup-header">Homepage Structure Overview</div>
+  <div class="mockup-body">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 1400px; margin: 0 auto; padding: 0 24px;">
+
+      <!-- HERO SECTION -->
+      <section style="border: 2px solid var(--line-strong); background: var(--paper); min-height: 80vh; display: grid; grid-template-columns: 60% 40%; align-items: start;">
+        <div style="background: var(--acid); display: flex; align-items: center; justify-content: center; ">
+          <div style="width: 80%; height: 80%; background: repeating-linear-gradient(45deg, #fff, #fff 10px, #000 10px, #000 20px); border: 2px dashed var(--ink); border-radius: 8px;">
+            <!-- Placeholder for hero asset -->
+            <div style="text-align: center; color: var(--ink); font-family: var(--font-display); padding: 20px;">
+              <div style="font-size: 3rem; margin-bottom: 10px;">HERO</div>
+              <div style="font-size: 1.2rem; opacity: 0.8;">Visual Asset Placeholder</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+          <h1 style="font-family: var(--font-display); font-weight: 900; font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin-bottom: 24px;">
+            GARRY AVETISSIAN<br><span style="color: var(--acid);">.<span style="font-family: mono;">SOFTWARE</span></span>
+          </h1>
+          <p style="font-size: 1.125rem; line-height: 1.6; color: var(--ink-mute); max-width: 40ch;">
+            Product Designer · Creative Technologist · Digital Craftsman
+          </p>
+          <div style="display: flex; gap: 16px; margin-top: 32px;">
+            <a href="/work" style="border: 2px solid var(--acid); color: var(--acid); padding: 12px 24px; font-family: mono; text-decoration: none; position: relative; overflow: hidden;">
+              VIEW WORK<span>WK PROJECTS<span style="position: absolute; right: -100%; top: 0; height: 100%; width: 100%; background: var(--acid); color: var(--paper); display: flex; align-items: center; justify-content: center; transition: right 0.3s ease;">VIEW PROJECTS</span></a>
+            <a href="/contact" style="color: var(--ink-mute); font-family: mono; text-decoration: none; border-bottom: 1px solid currentHeight;">— GET IN TOUCH</a>
+          </div>
+          <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; font-family: mono; font-size: 0.875rem;">
+            <div><span class="text-ink-faint">01</span><span class="text-ink" style="font-family: var(--font-display); font-weight: 800; font-size: 2.5rem;">05+</span><span class="text-ink-mute">YEARS</span></div>
+            <div><span class="text-ink-faint">02</span><span class="text-ink" style="font-family: var(--font-display); font-weight: 800; font-size: 2.5rem;">07</span><span class="text-ink-mute">PROJECTS</span></div>
+            <div><span class="text-ink-faint">03</span><span class="text-ink" style="font-family: var(--font-display); font-weight: 800; font-size: 2.5rem;">04</span><span class="text-ink-mute">INDUSTRIES</span></div>
+            <div><span class="text-ink-faint">04</span><span class="text-ink" style="font-family: var(--font-display); font-weight: 800; font-size: 2.5rem;">03</span><span class="text-ink-mute">LANGUAGES</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CASE SHOWCASE SECTION -->
+      <section style="border: 2px solid var(--line-strong); background: var(--paper);">
+        <div style="padding: 40px;">
+          <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px;">
+            <div>
+              <p style="font-family: mono; color: var(--ink-faint); margin-bottom: 8px;">— CASE STUDIES</p>
+              <h2 style="font-family: var(--font-display); font-weight: 900; font-size: 2.25rem; color: var(--ink);">SELECTED WORK<span class="text-acid">.</span></h2>
+            </div>
+            <div style="font-family: mono; color: var(--ink-mute);">
+              <span style="font-family: mono;">04</span><span style="font-family: mono; color: var(--ink-mute); margin: 0 8px;">•</span><span style="font-family: mono;">08</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- Case Study Item 1 -->
+            <div style="border-left: 3px solid var(--acid); padding-left: 16px;">
+              <div style="font-family: mono; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">01 — DUCK MASTER</div>
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); margin-bottom: 8px;">[GAME DEV · EDUTECH] 2024</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.6;">
+                Educational game teaching DUCKS through interactive quack mechanics. Built with React Three Fiber and custom shaders.
+              </p>
+            </div>
+
+            <!-- Case Study Item 2 -->
+            <div style="border-left: 3px solid var(--acid); padding-left: 16px;">
+              <div style="font-family: mono; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">02 — BALVOI</div>
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); margin-bottom: 8px;">[FINTECH · BLOCKCHAIN] 2023</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.6;">
+                Decentralized finance platform for micro-lending in emerging markets. Zero-knowledge proofs for privacy.
+              </p>
+            </div>
+
+            <!-- Case Study Item 3 -->
+            <div style="border-left: 3px solid var(--acid); padding-left: 16px;">
+              <div style="font-family: mono; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">03 — INEED</div>
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); margin-bottom: 8px;">[HEALTHTECH · AI] 2023</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.6;">
+                AI-powered mental health companion with emotion detection through voice analysis.
+              </p>
+            </div>
+
+            <!-- Case Study Item 4 -->
+            <div style="border-left: 3px solid var(--acid); padding-left: 16px;">
+              <div style="font-family: mono; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">04 — XY ECOSYSTEM</div>
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); margin-bottom: 8px;">[WEB3 · METAVRSE] 2024</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.6;">
+                Interoperable NFT marketplace with cross-chain asset bridging and social features.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE STRIP SECTION -->
+      <section style="border: 2px solid var(--line-strong); background: var(--paper);">
+        <div style="padding: 40px;">
+          <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 32px;">
+            <div>
+              <p style="font-family: mono; color: var(--ink-faint); margin-bottom: 8px;">— EXPERIENCE</p>
+              <h2 style="font-family: var(--font-display); font-weight: 900; font-size: 2.25rem; color: var(--ink);">PROFESSIONAL BACKGROUND<span class="text-acid">.</span></h2>
+            </div>
+            <div style="font-family: mono; color: var(--ink-mute);">
+              08 POSITIONS · FULL-TIME
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--line-strong);"></div>
+          <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: 24px 0; align-items: start;">
+            <!-- Experience items would go here -->
+            <div style="grid-column: 1 / 2; font-family: mono; font-size: 0.875rem; color: var(--ink-faint);">01</div>
+            <div style="grid-column: 2 / 6; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--ink);">STUDIO_NAME</div>
+            <div style="grid-column: 6 / 9; font-family: mono; color: var(--ink-mute); line-height: 1.6;">Senior Product Designer · Remote</div>
+            <div style="grid-column: 9 / 11; font-family: mono; color: var(--ink-faint); text-align: right;">2020-PRESENT</div>
+            <div style="grid-column: 11 / 13; font-family: mono; color: var(--ink-faint); text-align: right;">02</div>
+            <!-- More items would follow similar pattern -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ARCADE WIDGET SECTION (replaces separate MiniGames route) -->
+      <section style="border: 2px solid var(--line-strong); background: var(--paper);">
+        <div style="padding: 40px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div>
+              <p style="font-family: mono; color: var(--ink-faint); margin-bottom: 8px;">— ARCADE</p>
+              <h2 style="font-family: var(--font-display); font-weight: 900; font-size: 2.25rem; color: var(--ink);">INTERACTIVE EXPERIENCES<span class="text-acid">.</span></h2>
+            </div>
+            <div style="font-family: mono; color: var(--ink-mute);">
+              03 GAMES · PLAYABLE
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+            <!-- Arcade Game Card 1 -->
+            <div style="border: 1px solid var(--line-strong); padding: 20px; background: var(--paper-hover);">
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-faint); margin-bottom: 8px;">01 — QUIZZLER</div>
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; color: var(--ink); margin-bottom: 12px;">QUIZ GAME</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.5; height: 48px; overflow: hidden;">
+                Reaction-based quiz game with procedurally generated questions.
+              </p>
+              <div style="margin-top: 16px; padding: 8px 16px; border: 1px solid var(--acid); color: var(--acid); font-family: mono; font-size: 0.875rem; text-align: center; cursor: pointer;">PLAY NOW →</div>
+            </div>
+
+            <!-- Arcade Game Card 2 -->
+            <div style="border: 1px solid var(--line-strong); padding: 20px; background: var(--paper-hover);">
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-faint); margin-bottom: 8px;">02 — CANVASR</div>
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; color: var(--ink); margin-bottom: 12px;">DIGITAL PAINTING</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.5; height: 48px; overflow: hidden;">
+                Experimental canvas with generative brush physics and color theory.
+              </p>
+              <div style="margin-top: 16px; padding: 8px 16px; border: 1px solid var(--acid); color: var(--acid); font-family: mono; font-size: 0.875rem; text-align: center; cursor: pointer;">EXPLORE →</div>
+            </div>
+
+            <!-- Arcade Game Card 3 -->
+            <div style="border: 1px solid var(--line-strong); padding: 20px; background: var(--paper-hover);">
+              <div style="font-family: mono; font-size: 0.875rem; color: var(--ink-faint); margin-bottom: 8px;">03 — SYNTHLAB</div>
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; color: var(--ink); margin-bottom: 12px;">AUDIO SYNTHESIZER</div>
+              <p style="font-family: mono; font-size: 0.875rem; color: var(--ink-mute); line-height: 1.5; height: 48px; overflow: hidden;">
+                WebAudio-based synthesizer with visual oscilloscope and envelope controls.
+              </p>
+              <div style="margin-top: 16px; padding: 8px 16px; border: 1px solid var(--acid); color: var(--acid); font-family: mono; font-size: 0.875rem; text-align: center; cursor: pointer;">PLAY SOUND →</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER SECTION -->
+      <section style="border: 2px solid var(--line-strong); background: var(--paper); padding: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 24px;">
+          <div style="font-family: mono; color: var(--ink-mute); font-size: 0.875rem;">
+            &copy; 2024 GARRY AVETISSIAN. ALL RIGHTS RESERVED.
+          </div>
+          <div style="display: flex; gap: 24px; font-family: mono; color: var(--ink-mute); font-size: 0.875rem;">
+            <a href="/work" style="text-decoration: none;">WORK</a>
+            <a href="/about" style="text-decoration: none;">ABOUT</a>
+            <a href="/contact" style="text-decoration: none;">CONTACT</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- Legend for the mockup -->
+<div style="margin-top: 32px; padding: 20px; background: var(--paper-hover); border: 1px dashed var(--line-strong);">
+  <h3 style="font-family: var(--font-display); color: var(--ink); margin-bottom: 16px;">Design Notes</h3>
+  <ul style="font-family: mono; color: var(--ink-mute); line-height: 1.6;">
+    <li><strong>Bento Grid Structure:</strong> Each section uses bold 2px borders to create distinct visual compartments</li>
+    <li><strong>Hero Layout:</strong> 60/40 split - left side for large visual asset placeholder, right side for text content</li>
+    <li><strong>Case Study Display:</strong> Bold numbered list (01, 02, etc.) with left border accent and metadata badges</li>
+    <li><strong>Arcade Widget:</strong> Integrated games showcase replacing separate mini-games route</li>
+    <li><strong>Typography:</strong> Display font for headings, mono for metadata and details</li>
+    <li><strong>Color System:</strong> Using existing CSS variables (--ink, --acid, --paper, etc.) for consistency</li>
+  </ul>
+</div>

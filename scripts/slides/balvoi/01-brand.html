@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .brand-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .brand-left {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .brand-mark-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .brand-mark-bv {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 128px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #fff;
+    background: var(--bv-blue-deep);
+    padding: 18px 38px;
+  }
+  .brand-mark-word {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    background: var(--bv-orange);
+    padding: 12px 30px;
+  }
+  .brand-right { display: flex; flex-direction: column; gap: 32px; }
+  .brand-spec {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .brand-spec:last-child { border-bottom: 1px solid var(--rule); }
+  .brand-spec dt {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding-top: 4px;
+  }
+  .brand-spec dd {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .palette-swatch {
+    aspect-ratio: 1;
+    border-radius: 4px;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 02 / Brand identity</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 02 / 12</span>
+  </div>
+
+  <div class="brand-grid">
+    <div class="brand-left">
+      <span class="eyebrow">— Brand</span>
+      <h1 class="headline">A name<br/>made of <em>letters</em>.</h1>
+      <p class="caption">
+        BalVoi sits at the intersection of journalism and AI — a name built
+        from the sounds of "balanced" and "voice". The mark splits into two
+        components: a deep-blue badge that holds the abbreviation, and an
+        orange wordmark that always travels with it.
+      </p>
+
+      <div class="brand-mark-wrap">
+        <div class="brand-mark-bv">BV</div>
+        <div class="brand-mark-word">BalVoi</div>
+      </div>
+    </div>
+
+    <div class="brand-right">
+      <dl>
+        <div class="brand-spec"><dt>Sector</dt><dd>AI · Journalism · Subscription SaaS</dd></div>
+        <div class="brand-spec"><dt>Role</dt><dd>Lead Product Designer</dd></div>
+        <div class="brand-spec"><dt>Duration</dt><dd>6 months · 2025</dd></div>
+        <div class="brand-spec"><dt>Team</dt><dd>PM, 3 Engineers, Data Scientist</dd></div>
+        <div class="brand-spec"><dt>Scope</dt><dd>146 frames · 4 breakpoints · full design system</dd></div>
+      </dl>
+
+      <div>
+        <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint);">— Palette</span>
+        <div class="palette">
+          <div class="palette-swatch" style="background: #EEF8FF"></div>
+          <div class="palette-swatch" style="background: #DDF1FF"></div>
+          <div class="palette-swatch" style="background: #B2E4FF"></div>
+          <div class="palette-swatch" style="background: #6FD1FF"></div>
+          <div class="palette-swatch" style="background: #6FD1FF"></div>
+          <div class="palette-swatch" style="background: #00A2FF"></div>
+          <div class="palette-swatch" style="background: #0081DD"></div>
+          <div class="palette-swatch" style="background: #0066B3"></div>
+          <div class="palette-swatch" style="background: #005693"></div>
+          <div class="palette-swatch" style="background: #01497C"></div>
+          <div class="palette-swatch" style="background: #012C50"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Brand</span>
+    <span>Your Balanced Voice for News</span>
+  </div>
+</div></body></html>

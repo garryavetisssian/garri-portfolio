@@ -1,0 +1,50 @@
+{
+  "en": {
+    "name": "Garri Avetisyan", "role": "Product Designer", "location": "Yerevan, Armenia · Remote",
+    "summaryTitle": "Profile", "experienceTitle": "Experience", "projectsTitle": "Selected projects", "skillsTitle": "Skills and tools", "languagesTitle": "Languages", "portfolioLabel": "View portfolio",
+    "summary": "Product Designer with 5+ years of experience across AI, SaaS, Web3, marketplaces and entertainment. Turns complex requirements into clear user journeys, prototypes and scalable interfaces. Works with product managers and engineers from research through implementation.",
+    "jobs": [
+      {"company":"Freelance", "role":"Product Designer", "period":"2026–Present", "bullets":["Independent client work across UX flows, interactive prototypes, UI design and developer handoff."]},
+      {"company":"ANUNA LLC", "role":"Product Designer", "period":"Dec 2025–May 2026", "bullets":["Designed end-to-end product flows and high-fidelity prototypes, informed by user research and competitive analysis.","Partnered with product and engineering leads to validate concepts and support implementation."]},
+      {"company":"Duck Master", "role":"Creative Director", "period":"Sep 2024–May 2025", "bullets":["Led creative and UX/UI design for a Telegram mini-game, including engagement loops, prototypes and iterative improvements."]},
+      {"company":"Ineed Inc", "role":"Product Designer", "period":"May 2022–May 2024", "bullets":["Designed mobile experiences for clients and service professionals, plus the landing page; refined flows through research and usability testing."]},
+      {"company":"TIRSoft LLC", "role":"UX/UI Designer", "period":"Oct 2020–May 2024", "bullets":["Translated requirements into user flows, sitemaps, UI mockups and prototypes; resolved UX issues with product and engineering teams."]}
+    ],
+    "projects":["BalVoi — AI-assisted news and editorial workflows; research, UI and a reusable component system.","XY Ecosystem — connected Web3 lottery, marketplace and protocol experiences with consistent onboarding and a shared design system."],
+    "skills":"UX strategy · User research · Information architecture · Interaction design · Usability testing · Prototyping · UI design · Design systems",
+    "tools":"Figma · Adobe Creative Suite · Maze · Whimsical · Notion · Linear · ChatGPT · Claude Code",
+    "languages":"Armenian — Native · Russian — Fluent · English — Professional"
+  },
+  "ru": {
+    "name":"Гарри Аветисян", "role":"Продуктовый дизайнер", "location":"Ереван, Армения · Удалённо",
+    "summaryTitle":"Профиль", "experienceTitle":"Опыт работы", "projectsTitle":"Избранные проекты", "skillsTitle":"Навыки и инструменты", "languagesTitle":"Языки", "portfolioLabel":"Открыть портфолио",
+    "summary":"Продуктовый дизайнер с опытом 5+ лет в AI, SaaS, Web3, маркетплейсах и развлечениях. Упрощаю сложные сценарии, создаю прототипы и масштабируемые интерфейсы. Работаю с продактами и инженерами от исследования до реализации.",
+    "jobs":[
+      {"company":"Фриланс", "role":"Продуктовый дизайнер", "period":"2026–настоящее время", "bullets":["Независимый дизайн для клиентов: UX-сценарии, интерактивные прототипы, UI и передача в разработку."]},
+      {"company":"ANUNA LLC", "role":"Продуктовый дизайнер", "period":"Дек 2025–Май 2026", "bullets":["Проектировал сценарии и прототипы на основе исследований и анализа конкурентов; с продуктовой и инженерной командами проверял концепции и сопровождал реализацию."]},
+      {"company":"Duck Master", "role":"Креативный директор", "period":"Сен 2024–Май 2025", "bullets":["Руководил креативным и UX/UI-дизайном мини-игры в Telegram: механики вовлечения, прототипы и итеративные улучшения."]},
+      {"company":"Ineed Inc", "role":"Продуктовый дизайнер", "period":"Май 2022–Май 2024", "bullets":["Проектировал мобильные приложения для клиентов и исполнителей и лендинг; улучшал сценарии через исследования и юзабилити-тесты."]},
+      {"company":"TIRSoft LLC", "role":"UX/UI-дизайнер", "period":"Окт 2020–Май 2024", "bullets":["Создавал пользовательские потоки, карты сайта, UI-макеты и прототипы; решал UX-проблемы вместе с продактами и инженерами."]}
+    ],
+    "projects":["BalVoi — новостная платформа и редакционные процессы с AI; исследования, UI и система переиспользуемых компонентов.","XY Ecosystem — связанные Web3-лотерея, маркетплейс и протоколы с последовательным онбордингом и общей дизайн-системой."],
+    "skills":"UX-стратегия · Исследования пользователей · Информационная архитектура · Дизайн взаимодействия · Юзабилити-тестирование · Прототипирование · UI-дизайн · Дизайн-системы",
+    "tools":"Figma · Adobe Creative Suite · Maze · Whimsical · Notion · Linear · ChatGPT · Claude Code",
+    "languages":"Армянский — родной · Русский — свободно · Английский — профессиональный"
+  },
+  "hy": {
+    "name":"Գարրի Ավետիսյան", "role":"Պրոդուկտի դիզայներ", "location":"Երևան, Հայաստան · Հեռավար",
+    "summaryTitle":"Մասնագիտական ամփոփում", "experienceTitle":"Աշխատանքային փորձ", "projectsTitle":"Ընտրված նախագծեր", "skillsTitle":"Հմտություններ և գործիքներ", "languagesTitle":"Լեզուներ", "portfolioLabel":"Դիտել պորտֆոլիոն",
+    "summary":"Պրոդուկտի դիզայներ՝ 5+ տարվա փորձով AI, SaaS, Web3, մարքեթփլեյսների և ժամանցի ոլորտներում։ Թիմերի հետ պարզեցնում եմ բարդ հոսքերը և ստեղծում մասշտաբավորվող ինտերֆեյսներ՝ հետազոտությունից մինչև իրականացում։",
+    "jobs":[
+      {"company":"Ֆրիլանս", "role":"Պրոդուկտի դիզայներ", "period":"2026–առ այսօր", "bullets":["Անկախ աշխատանք հաճախորդների համար՝ UX հոսքեր, ինտերակտիվ նախատիպեր, UI և փոխանցում մշակողներին։"]},
+      {"company":"ANUNA LLC", "role":"Պրոդուկտի դիզայներ", "period":"Դեկ 2025–Մայիս 2026", "bullets":["Հետազոտությունների հիման վրա նախագծել եմ հոսքեր ու նախատիպեր․ թիմերի հետ ստուգել եմ գաղափարները և աջակցել իրականացմանը։"]},
+      {"company":"Duck Master", "role":"Կրեատիվ տնօրեն", "period":"Սեպ 2024–Մայիս 2025", "bullets":["Ղեկավարել եմ Telegram մինի խաղի կրեատիվ և UX/UI դիզայնը՝ ներգրավման մեխանիկաներ, նախատիպեր և բարելավումներ։"]},
+      {"company":"Ineed Inc", "role":"Պրոդուկտի դիզայներ", "period":"Մայիս 2022–Մայիս 2024", "bullets":["Նախագծել եմ հաճախորդների ու մասնագետների մոբայլ հավելվածները և լենդինգը․ բարելավել եմ հոսքերը հետազոտություններով ու թեստերով։"]},
+      {"company":"TIRSoft LLC", "role":"UX/UI դիզայներ", "period":"Հոկ 2020–Մայիս 2024", "bullets":["Ստեղծել եմ օգտատիրոջ հոսքեր, կայքի քարտեզներ, UI մակետներ և նախատիպեր․ թիմերի հետ լուծել եմ UX խնդիրները։"]}
+    ],
+    "projects":["BalVoi — AI լուրերի հարթակ․ հետազոտություն, խմբագրական հոսքեր, UI և բաղադրիչների համակարգ։","XY Ecosystem — Web3 վիճակախաղ, մարքեթփլեյս և պրոտոկոլներ՝ միասնական օնբորդինգով ու դիզայն համակարգով։"],
+    "skills":"UX ռազմավարություն · Օգտատերերի հետազոտություն · Տեղեկատվական ճարտարապետություն · Փոխազդեցության դիզայն · Օգտագործելիության թեստավորում · Նախատիպավորում · UI դիզայն · Դիզայն համակարգեր",
+    "tools":"Figma · Adobe Creative Suite · Maze · Whimsical · Notion · Linear · ChatGPT · Claude Code",
+    "languages":"Հայերեն՝ մայրենի · Ռուսերեն՝ ազատ · Անգլերեն՝ մասնագիտական"
+  }
+}

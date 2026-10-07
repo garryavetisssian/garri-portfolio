@@ -1,0 +1,1270 @@
+import type { Locale } from "./types";
+
+export interface ProcessStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+export interface Dictionary {
+  nav: {
+    about: string;
+    projects: string;
+    experience: string;
+    contact: string;
+    work: string;
+    cv: string;
+    downloadCv: string;
+    menu: string;
+    close: string;
+    language: string;
+    chooseLanguage: string;
+  };
+  hero: {
+    available: string;
+    name: string;
+    role: string;
+    summary: string;
+    viewProjects: string;
+    getInTouch: string;
+    location: string;
+    locationCity: string;
+    locationSub: string;
+    focus: string;
+    focusAreas: string[];
+    years: string;
+    projects: string;
+    industries: string;
+    skills: string;
+    tools: string;
+    languages: string;
+    languageLevels: { native: string; fluent: string; professional: string };
+    headlineLine1: string;
+    headlineLine2: string;
+    headlineLine3: string;
+  };
+  projects: {
+    eyebrow: string;
+    heading: string;
+    inProgress: string;
+    comingSoon: string;
+  };
+  experience: {
+    eyebrow: string;
+    heading: string;
+    fullTime: string;
+    freelance: string;
+    freelancePeriod: string;
+    positions: string;
+  };
+  contact: {
+    eyebrow: string;
+    headingPart1: string;
+    headingAccent: string;
+    headingPart3: string;
+    description: string;
+    sendEmail: string;
+    connect: string;
+    emailLabel: string;
+    linkedinLabel: string;
+    locationFooter: string;
+    // Contact form
+    formHeading: string;
+    formIntro: string;
+    formName: string;
+    formNamePlaceholder: string;
+    formEmail: string;
+    formEmailPlaceholder: string;
+    formSubject: string;
+    formSubjectPlaceholder: string;
+    formMessage: string;
+    formMessagePlaceholder: string;
+    formSubmit: string;
+    formSubmitSending: string;
+    formSubmitDone: string;
+    formCopy: string;
+    formCopied: string;
+    formError: string;
+    formErrorSend: string;
+    formNotConfigured: string;
+    directHeading: string;
+    directLabel: string;
+    rightsReserved: string;
+  };
+  caseStudy: {
+    backToWork: string;
+    overview: string;
+    role: string;
+    duration: string;
+    team: string;
+    year: string;
+    brief: string;
+    roleBreakdown: string;
+    reflection: string;
+    impact: string;
+    nextProject: string;
+    readingProgress: string;
+    heroImage: string;
+    category: string;
+    shortVersion: string;
+    receipts: string;
+    visuals: string;
+    versionsAssets: string;
+    assetsCount: string;
+    soundOn: string;
+    soundOff: string;
+    soundOnAria: string;
+    soundOffAria: string;
+    clickToPlayWithSound: string;
+  };
+  chat: {
+    fabLabel: string;
+    fabAria: string;
+    heading: string;
+    subheading: string;
+    placeholder: string;
+    send: string;
+    sending: string;
+    close: string;
+    starter1: string;
+    starter2: string;
+    starter3: string;
+    emptyTitle: string;
+    emptyBody: string;
+    errorGeneric: string;
+    rateLimitBurst: string;
+    rateLimitDay: string;
+    disclaimer: string;
+  };
+  modal: { close: string; comingSoon: string };
+  caseTabs: { firstVersion: string; releaseVersion: string };
+  cv: {
+    downloadTitle: string;
+    downloadIntro: string;
+    chooseLang: string;
+    downloadPdf: string;
+    print: string;
+    contact: string;
+    location: string;
+    email: string;
+    phone: string;
+    linkedin: string;
+    summaryTitle: string;
+    skillsTitle: string;
+    skillsWhatIDo: string;
+    skillsWhatIUse: string;
+    languagesTitle: string;
+    workExperienceTitle: string;
+    freelanceTitle: string;
+    freelancePeriod: string;
+    generatedOn: string;
+  };
+  languagePicker: { title: string; subtitle: string };
+  footer: {
+    aboutSiteLabel: string;
+    aboutSiteBlurb: string;
+    navigateCol: string;
+    workCol: string;
+    elsewhereCol: string;
+    localeCol: string;
+    madeWith: string;
+    builtLabel: string;
+    setInLabel: string;
+    figuresLabel: string;
+    figureLocales: string;
+    figureCases: string;
+    figureTrackers: string;
+    figureVersion: string;
+  };
+  method: {
+    eyebrow: string;
+    headingLine1: string;
+    headingLine2: string;
+    blurb: string;
+    stepLabel: string;
+    steps: [ProcessStep, ProcessStep, ProcessStep, ProcessStep];
+  };
+  about: {
+    heroLine1: string;
+    heroLine2: string;
+    bioLabel: string;
+    capabilitiesLabel: string;
+    methodLabel: string;
+    experienceLabel: string;
+    freelanceLabel: string;
+  };
+  notFound: {
+    eyebrow: string;
+    title: string;
+    blurb: string;
+    cta: string;
+  };
+  ui: {
+    portfolioStrip: string;
+    caseStudiesStrip: string;
+    archiveLabel: string;
+    filesSuffix: string;
+    selectedWork: string;
+    viewAllCases: string;
+    viewAllShort: string;
+    moreInArchive: string;
+    caseArchiveBlurb: string;
+    visualsLabel: string;
+    aboutEyebrow: string;
+    contactEyebrow: string;
+  };
+  marquees: {
+    home: string[];
+    work: string[];
+    contact: string[];
+    about: string[];
+  };
+  miniGames: {
+    eyebrow: string;
+    heading: string;
+    blurb: string;
+    play: string;
+    solved: string;
+    meetingScheduler: { name: string; description: string };
+    networking: {
+      name: string;
+      description: string;
+      howToBody: string;
+      mustConnectLabel: string;
+      blockedLabel: string;
+      companiesLabel: string;
+      connectionsLabel: string;
+      selectPrompt: string;
+      pair: string;
+      blockedPair: string;
+    };
+    teamBuilder: {
+      name: string;
+      description: string;
+      howToBody: string;
+      teamWord: string;
+      peopleLabel: string;
+      conflictsLabel: string;
+      conflictPair: string;
+      sizeLabel: string;
+      seniorLabel: string;
+    };
+    difficulty: { choose: string; easy: string; medium: string; hard: string };
+    viewLeaderboard: string;
+    howToTitle: string;
+    howToBody: string;
+    gotIt: string;
+    go: string;
+    changePuzzle: string;
+    rules: string;
+    hint: string;
+    exit: string;
+    undo: string;
+    clear: string;
+    trayLabel: string;
+    constraintsLabel: string;
+    roomLabel: string;
+    slotLabel: string;
+    timeLabel: string;
+    victoryTitle: string;
+    yourTime: string;
+    enterName: string;
+    namePlaceholder: string;
+    submit: string;
+    playAgain: string;
+    leaderboardTitle: string;
+    rank: string;
+    name: string;
+    time: string;
+    noScores: string;
+    back: string;
+    close: string;
+    constraints: {
+      inRoom: string;
+      before: string;
+      notSameSlot: string;
+      atSlot: string;
+      roomBeforeSlot: string;
+    };
+  };
+}
+
+const en: Dictionary = {
+  miniGames: {
+    eyebrow: "Mini-Games / Take a break",
+    heading: "Mini-Games",
+    blurb: "A little something built for fun. Same brutalist rules — now playable.",
+    play: "Play",
+    solved: "Solved",
+    meetingScheduler: {
+      name: "Meeting Scheduler",
+      description: "Slot every meeting into the right room and time so all constraints hold.",
+    },
+    networking: {
+      name: "Networking",
+      description: "Connect the right professionals so every relationship rule holds at once.",
+      howToBody:
+        "Connect the professionals so every rule holds at once. Click one node, then another, to toggle a connection. Each person needs exactly the number of connections shown on their node. People from the same company can't be connected directly. Honour the must-connect and blocked clues. Stuck? Spend a hint to fix one connection.",
+      mustConnectLabel: "Must connect",
+      blockedLabel: "Blocked",
+      companiesLabel: "Companies",
+      connectionsLabel: "Connected",
+      selectPrompt: "Pick a glowing partner. Dimmed people are same-company, blocked, or already full — remove a link to free one.",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
+    },
+    teamBuilder: {
+      name: "Team Builder",
+      description: "Staff every project team with the right roles, seniority, and no conflicts.",
+      howToBody:
+        "Assign every person to exactly one team by clicking a cell. Each team needs a specific mix of roles (shown in its header) and can't exceed its size. Some teams need at least one Senior. Conflicting people can't share a team. A team's header gets a check when it's fully and correctly staffed. Stuck? Spend a hint to place one person correctly.",
+      teamWord: "Team",
+      peopleLabel: "People",
+      conflictsLabel: "Conflicts",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Size",
+      seniorLabel: "Senior",
+    },
+    difficulty: { choose: "Choose difficulty", easy: "Easy", medium: "Medium", hard: "Hard" },
+    viewLeaderboard: "View Leaderboard",
+    howToTitle: "How to play",
+    howToBody:
+      "Place every meeting into the room × time-slot grid so all constraints are satisfied. Click a meeting, then click a cell to drop it — or drag it. Click a filled cell to pick it back up. Each cell holds one meeting. Constraints tick off as you satisfy them. Stuck? Spend a hint to reveal one correct placement.",
+    gotIt: "Got it!",
+    go: "Go!",
+    changePuzzle: "Change Puzzle",
+    rules: "Rules",
+    hint: "Hint",
+    exit: "Exit",
+    undo: "Undo",
+    clear: "Clear",
+    trayLabel: "Meetings",
+    constraintsLabel: "Constraints",
+    roomLabel: "Room",
+    slotLabel: "Slot",
+    timeLabel: "Time",
+    victoryTitle: "Solved!",
+    yourTime: "Your time",
+    enterName: "Enter your name",
+    namePlaceholder: "Your name",
+    submit: "Submit",
+    playAgain: "Play Again",
+    leaderboardTitle: "Leaderboard",
+    rank: "Rank",
+    name: "Name",
+    time: "Time",
+    noScores: "No scores yet — be the first.",
+    back: "Back",
+    close: "Close",
+    constraints: {
+      inRoom: "{m} must be in {room}",
+      before: "{m} must come before {n}",
+      notSameSlot: "{m} & {n} can't share a slot",
+      atSlot: "{m} must be at {slot}",
+      roomBeforeSlot: "{room} needs a meeting before {slot}",
+    },
+  },
+  nav: {
+    about: "About",
+    projects: "Work",
+    experience: "Experience",
+    contact: "Contact",
+    work: "Work",
+    cv: "CV",
+    downloadCv: "Download CV",
+    menu: "Menu",
+    close: "Close",
+    language: "Language",
+    chooseLanguage: "Choose language",
+  },
+  hero: {
+    available: "Available for work",
+    name: "Garri Avetisyan",
+    role: "Product Designer",
+    summary:
+      "Product Designer with 5+ years building complex digital products across AI, Web3, SaaS, and marketplaces. I focus on solving the right problems, structuring information clearly, and making complex systems feel simple.",
+    viewProjects: "View Projects",
+    getInTouch: "Get in touch",
+    location: "Location",
+    locationCity: "Yerevan, Armenia",
+    locationSub: "Open to remote worldwide",
+    focus: "Focus areas",
+    focusAreas: ["AI", "Web3", "SaaS", "Marketplace", "Mobile"],
+    years: "Years",
+    projects: "Projects",
+    industries: "Industries",
+    skills: "Skills",
+    tools: "Tools",
+    languages: "Languages",
+    languageLevels: { native: "Native", fluent: "Fluent", professional: "Professional" },
+    headlineLine1: "DESIGN",
+    headlineLine2: "IS A BUSINESS",
+    headlineLine3: "FUNCTION",
+  },
+  projects: {
+    eyebrow: "Selected Work",
+    heading: "Case Studies",
+    inProgress: "In Progress",
+    comingSoon: "Coming soon",
+  },
+  experience: {
+    eyebrow: "Experience",
+    heading: "Work History",
+    fullTime: "Full-time",
+    freelance: "Freelance",
+    freelancePeriod: "May 2025 – Dec 2025",
+    positions: "positions",
+  },
+  contact: {
+    eyebrow: "Contact",
+    headingPart1: "Let's build something",
+    headingAccent: "together",
+    headingPart3: ".",
+    description:
+      "Open to product design roles and freelance collaborations. If you have a challenge worth solving, I'd love to hear about it.",
+    sendEmail: "Send email",
+    connect: "Connect",
+    emailLabel: "Email",
+    linkedinLabel: "LinkedIn",
+    locationFooter: "Yerevan, Armenia · Remote worldwide",
+    formHeading: "Drop a line",
+    formIntro:
+      "Send a message and I'll reply within a day. Prefer email or LinkedIn? Both work — scroll down.",
+    formName: "Name",
+    formNamePlaceholder: "Your name",
+    formEmail: "Email",
+    formEmailPlaceholder: "you@company.com",
+    formSubject: "Subject",
+    formSubjectPlaceholder: "What's it about?",
+    formMessage: "Message",
+    formMessagePlaceholder: "Tell me about the project, role, or just say hi.",
+    formSubmit: "Send message",
+    formSubmitSending: "Sending…",
+    formSubmitDone: "Sent — thanks, I'll get back to you within a day.",
+    formCopy: "Copy",
+    formCopied: "Copied",
+    formError: "Please fill in name, email, and a message.",
+    formErrorSend: "Couldn't send. Please email me directly or try again.",
+    formNotConfigured:
+      "Form delivery isn't configured yet. Please email me directly while it's being set up.",
+    directHeading: "Or reach me directly",
+    directLabel: "Direct",
+    rightsReserved: "All rights reserved",
+  },
+  caseStudy: {
+    backToWork: "Back to work",
+    overview: "Overview",
+    role: "Role",
+    duration: "Duration",
+    team: "Team",
+    year: "Year",
+    brief: "Brief",
+    roleBreakdown: "Role breakdown",
+    reflection: "Reflection",
+    impact: "Impact",
+    nextProject: "Next project",
+    readingProgress: "Reading progress",
+    heroImage: "Hero",
+    category: "Category",
+    shortVersion: "THE SHORT VERSION",
+    receipts: "THE RECEIPTS",
+    visuals: "Visuals",
+    versionsAssets: "{count} versions · {total} assets",
+    assetsCount: "{count} assets",
+    soundOn: "Sound on",
+    soundOff: "Sound off",
+    soundOnAria: "Mute video",
+    soundOffAria: "Unmute video",
+    clickToPlayWithSound: "Click to play with sound",
+  },
+  chat: {
+    fabLabel: "Ask AI about this project",
+    fabAria: "Open chat to ask about this project",
+    heading: "Ask about this project",
+    subheading: "Powered by Gemini — answers grounded in the case data.",
+    placeholder: "Ask anything about the project…",
+    send: "Send",
+    sending: "Sending…",
+    close: "Close",
+    starter1: "What did Garri actually own here?",
+    starter2: "What was the hardest part of this project?",
+    starter3: "What would Garri change next time?",
+    emptyTitle: "Anything you want to know.",
+    emptyBody:
+      "Pick a question or type your own. The chat is grounded in the case study you're reading right now.",
+    errorGeneric: "Something went wrong. Please try again.",
+    rateLimitBurst: "Too many messages — give it a minute.",
+    rateLimitDay: "Daily limit reached — try again tomorrow.",
+    disclaimer: "AI answers can be incomplete. For specifics, contact Garri directly.",
+  },
+  modal: { close: "Close", comingSoon: "Case study assets coming soon" },
+  caseTabs: { firstVersion: "First Version", releaseVersion: "Release Version" },
+  cv: {
+    downloadTitle: "Download CV",
+    downloadIntro: "Pick the language you'd like the CV in.",
+    chooseLang: "Choose a language",
+    downloadPdf: "Download PDF",
+    print: "Print",
+    contact: "Contact",
+    location: "Location",
+    email: "Email",
+    phone: "Phone",
+    linkedin: "LinkedIn",
+    summaryTitle: "Summary",
+    skillsTitle: "Skills",
+    skillsWhatIDo: "What I do",
+    skillsWhatIUse: "What I use",
+    languagesTitle: "Languages",
+    workExperienceTitle: "Work Experience",
+    freelanceTitle: "Freelance Projects",
+    freelancePeriod: "May 2025 – Dec 2025",
+    generatedOn: "Generated",
+  },
+  languagePicker: {
+    title: "Choose CV language",
+    subtitle: "Pick the language you'd like to download.",
+  },
+  footer: {
+    aboutSiteLabel: "About this site",
+    aboutSiteBlurb:
+      "A brutalist editorial-tech portfolio. Three locales, full case studies, zero tracking.",
+    navigateCol: "Navigate",
+    workCol: "Work",
+    elsewhereCol: "Elsewhere",
+    localeCol: "Locale",
+    madeWith: "Made with care · No tracking",
+    builtLabel: "Built with",
+    setInLabel: "Set in",
+    figuresLabel: "Figures",
+    figureLocales: "Locales",
+    figureCases: "Case studies",
+    figureTrackers: "Trackers",
+    figureVersion: "Version",
+  },
+  method: {
+    eyebrow: "Method / 4-step",
+    headingLine1: "HOW IT GETS",
+    headingLine2: "MADE",
+    blurb:
+      "Evidence before pixels. Strategy before screens. The same loop, every project — research, frame, design, validate.",
+    stepLabel: "Step",
+    steps: [
+      { step: "01", title: "Understand", description: "Research the problem space, talk to users, analyze data, and map the business context. No assumptions — evidence." },
+      { step: "02", title: "Frame", description: "Define the real problem (not the first one), set constraints, identify success metrics, and align stakeholders on direction." },
+      { step: "03", title: "Design", description: "Explore broadly, then converge. Wireframes, prototypes, visual design — always tied back to the strategy. Kill your darlings early." },
+      { step: "04", title: "Validate", description: "Test with real users, measure against goals, iterate based on evidence. Ship, learn, improve. Design doesn't end at handoff." },
+    ],
+  },
+  about: {
+    heroLine1: "DESIGN IS",
+    heroLine2: "A BUSINESS",
+    bioLabel: "Bio",
+    capabilitiesLabel: "Capabilities",
+    methodLabel: "Method",
+    experienceLabel: "Experience",
+    freelanceLabel: "Freelance",
+  },
+  notFound: {
+    eyebrow: "Error / 404",
+    title: "NOT FOUND",
+    blurb: "The page you're looking for doesn't exist or has been moved.",
+    cta: "Back to index",
+  },
+  ui: {
+    portfolioStrip: "Portfolio / 2020—2026",
+    caseStudiesStrip: "Case studies / 2020—2026",
+    archiveLabel: "Archive",
+    filesSuffix: "files",
+    selectedWork: "Selected Work",
+    viewAllCases: "— View all {count} case studies ↗",
+    viewAllShort: "View all",
+    moreInArchive: "more in the archive",
+    caseArchiveBlurb:
+      "Every case is a full story — problem, research, decisions, what worked, and what I'd redo. No mood-board screenshots, no shipped-feature drive-bys. Pick a file and read the receipts.",
+    visualsLabel: "Visuals",
+    aboutEyebrow: "About",
+    contactEyebrow: "Contact / always open",
+  },
+  marquees: {
+    home: [
+      "PRODUCT DESIGNER",
+      "EST. 2020 · YEREVAN",
+      "AI · WEB3 · SAAS · MARKETPLACE",
+      "AVAILABLE FOR WORK",
+      "STRATEGY → RESEARCH → DESIGN → SHIP",
+      "5+ YRS · CASE STUDIES IN 3 LANGUAGES",
+    ],
+    work: [
+      "ALL CASE STUDIES",
+      "PRODUCT DESIGN · UX STRATEGY · DESIGN SYSTEMS",
+      "READ — DON'T JUST SCROLL",
+      "EVIDENCE OVER DECORATION",
+    ],
+    contact: [
+      "AVAILABLE FOR HIRE",
+      "FULL-TIME · CONTRACT · FRACTIONAL",
+      "EN · RU · HY",
+      "OPEN TO REMOTE WORLDWIDE",
+      "REPLY WITHIN 24H",
+    ],
+    about: [
+      "FOCUS · AI · WEB3 · SAAS · MARKETPLACE",
+      "5+ YEARS · 6 CASE STUDIES",
+      "BASED IN YEREVAN · OPEN TO REMOTE",
+      "DESIGN IS A BUSINESS FUNCTION",
+    ],
+  },
+};
+
+const ru: Dictionary = {
+  miniGames: {
+    eyebrow: "Мини-игры / Передохните",
+    heading: "Мини-игры",
+    blurb: "Небольшая штука, сделанная для удовольствия. Те же брутальные правила — теперь играбельные.",
+    play: "Играть",
+    solved: "Решено",
+    meetingScheduler: {
+      name: "Планировщик встреч",
+      description: "Расставьте каждую встречу в нужную комнату и время так, чтобы выполнялись все условия.",
+    },
+    networking: {
+      name: "Нетворкинг",
+      description: "Соедините нужных профессионалов так, чтобы выполнялись все правила связей одновременно.",
+      howToBody:
+        "Соедините профессионалов так, чтобы все правила выполнялись одновременно. Нажмите на один узел, затем на другой, чтобы создать или убрать связь. У каждого человека должно быть ровно столько связей, сколько указано на его узле. Людей из одной компании нельзя соединять напрямую. Соблюдайте подсказки «нужно соединить» и «запрещено». Застряли? Потратьте подсказку, чтобы исправить одну связь.",
+      mustConnectLabel: "Нужно соединить",
+      blockedLabel: "Запрещено",
+      companiesLabel: "Компании",
+      connectionsLabel: "Связи готовы",
+      selectPrompt: "Выберите подсвеченного партнёра. Затемнённые — из той же компании, запрещены или уже заполнены: уберите связь, чтобы освободить кого-то.",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
+    },
+    teamBuilder: {
+      name: "Сбор команды",
+      description: "Соберите каждую команду с нужными ролями и уровнями — без конфликтов.",
+      howToBody:
+        "Назначьте каждого человека ровно в одну команду, нажимая на ячейку. Каждой команде нужен определённый набор ролей (показан в заголовке), и нельзя превышать её размер. Некоторым командам нужен хотя бы один Senior. Конфликтующие люди не могут быть в одной команде. Заголовок команды отмечается галочкой, когда она укомплектована верно. Застряли? Потратьте подсказку, чтобы правильно поставить одного человека.",
+      teamWord: "Команда",
+      peopleLabel: "Люди",
+      conflictsLabel: "Конфликты",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Размер",
+      seniorLabel: "Senior",
+    },
+    difficulty: { choose: "Выберите сложность", easy: "Легко", medium: "Средне", hard: "Сложно" },
+    viewLeaderboard: "Таблица лидеров",
+    howToTitle: "Как играть",
+    howToBody:
+      "Расставьте все встречи в сетке «комната × время» так, чтобы выполнялись все условия. Нажмите на встречу, затем на ячейку, чтобы поставить её, — или перетащите. Нажмите на занятую ячейку, чтобы забрать встречу обратно. В каждой ячейке — одна встреча. Условия отмечаются по мере выполнения. Застряли? Потратьте подсказку, чтобы открыть одно верное размещение.",
+    gotIt: "Понятно!",
+    go: "Старт!",
+    changePuzzle: "Другая задача",
+    rules: "Правила",
+    hint: "Подсказка",
+    exit: "Выход",
+    undo: "Отменить",
+    clear: "Очистить",
+    trayLabel: "Встречи",
+    constraintsLabel: "Условия",
+    roomLabel: "Комната",
+    slotLabel: "Слот",
+    timeLabel: "Время",
+    victoryTitle: "Решено!",
+    yourTime: "Ваше время",
+    enterName: "Введите имя",
+    namePlaceholder: "Ваше имя",
+    submit: "Отправить",
+    playAgain: "Играть снова",
+    leaderboardTitle: "Таблица лидеров",
+    rank: "Место",
+    name: "Имя",
+    time: "Время",
+    noScores: "Пока нет результатов — будьте первым.",
+    back: "Назад",
+    close: "Закрыть",
+    constraints: {
+      inRoom: "{m} должна быть в {room}",
+      before: "{m} должна быть раньше {n}",
+      notSameSlot: "{m} и {n} не могут быть в одном слоте",
+      atSlot: "{m} должна быть в {slot}",
+      roomBeforeSlot: "В {room} должна быть встреча раньше {slot}",
+    },
+  },
+  nav: {
+    about: "Обо мне",
+    projects: "Работы",
+    experience: "Опыт",
+    contact: "Контакты",
+    work: "Работы",
+    cv: "CV",
+    downloadCv: "Скачать резюме",
+    menu: "Меню",
+    close: "Закрыть",
+    language: "Язык",
+    chooseLanguage: "Выбрать язык",
+  },
+  hero: {
+    available: "Открыт для работы",
+    name: "Гарри Аветисян",
+    role: "Продуктовый дизайнер",
+    summary:
+      "Продуктовый дизайнер с опытом 5+ лет. Создаю сложные цифровые продукты в сферах AI, Web3, SaaS и маркетплейсов. Фокусируюсь на решении правильных задач, структурировании информации и превращении сложных систем в простые и понятные.",
+    viewProjects: "Смотреть работы",
+    getInTouch: "Связаться",
+    location: "Локация",
+    locationCity: "Ереван, Армения",
+    locationSub: "Открыт к удалёнке по всему миру",
+    focus: "Ключевые направления",
+    focusAreas: ["AI", "Web3", "SaaS", "Маркетплейсы", "Мобайл"],
+    years: "Лет опыта",
+    projects: "Проектов",
+    industries: "Индустрий",
+    skills: "Навыки",
+    tools: "Инструменты",
+    languages: "Языки",
+    languageLevels: { native: "Родной", fluent: "Свободно", professional: "Профессиональный" },
+    headlineLine1: "ДИЗАЙН",
+    headlineLine2: "— БИЗНЕС-",
+    headlineLine3: "ФУНКЦИЯ",
+  },
+  projects: {
+    eyebrow: "Избранные работы",
+    heading: "Кейсы",
+    inProgress: "В работе",
+    comingSoon: "Скоро",
+  },
+  experience: {
+    eyebrow: "Опыт",
+    heading: "История работы",
+    fullTime: "Фултайм",
+    freelance: "Фриланс",
+    freelancePeriod: "Май 2025 – Дек 2025",
+    positions: "позиций",
+  },
+  contact: {
+    eyebrow: "Контакты",
+    headingPart1: "Давайте создадим что-то",
+    headingAccent: "вместе",
+    headingPart3: ".",
+    description:
+      "Открыт к работе в должности продуктового дизайнера и фриланс-сотрудничеству. Если у вас есть задача, которую стоит решить — с радостью обсужу.",
+    sendEmail: "Написать письмо",
+    connect: "Связь",
+    emailLabel: "Email",
+    linkedinLabel: "LinkedIn",
+    locationFooter: "Ереван, Армения · Удалённо по всему миру",
+    formHeading: "Напишите",
+    formIntro:
+      "Заполните форму — я отвечу в течение дня. Удобнее через email или LinkedIn? Ниже есть прямые контакты.",
+    formName: "Имя",
+    formNamePlaceholder: "Ваше имя",
+    formEmail: "Email",
+    formEmailPlaceholder: "you@company.com",
+    formSubject: "Тема",
+    formSubjectPlaceholder: "О чём пишем?",
+    formMessage: "Сообщение",
+    formMessagePlaceholder: "Расскажите о проекте, роли или просто поздоровайтесь.",
+    formSubmit: "Отправить",
+    formSubmitSending: "Отправка…",
+    formSubmitDone: "Отправлено — спасибо, отвечу в течение дня.",
+    formCopy: "Копировать",
+    formCopied: "Скопировано",
+    formError: "Пожалуйста, заполните имя, email и сообщение.",
+    formErrorSend: "Не удалось отправить. Напишите мне напрямую или попробуйте ещё раз.",
+    formNotConfigured:
+      "Отправка формы пока не настроена. Напишите мне напрямую, пока я её настраиваю.",
+    directHeading: "Или напрямую",
+    directLabel: "Прямой",
+    rightsReserved: "Все права защищены",
+  },
+  caseStudy: {
+    backToWork: "К работам",
+    overview: "Обзор",
+    role: "Роль",
+    duration: "Срок",
+    team: "Команда",
+    year: "Год",
+    brief: "Бриф",
+    roleBreakdown: "Состав роли",
+    reflection: "Выводы",
+    impact: "Результаты",
+    nextProject: "Следующий проект",
+    readingProgress: "Прогресс чтения",
+    heroImage: "Обложка",
+    category: "Категория",
+    shortVersion: "КОРОТКО О ГЛАВНОМ",
+    receipts: "ЦИФРЫ",
+    visuals: "Визуал",
+    versionsAssets: "{count} версии · {total} файлов",
+    assetsCount: "{count} файлов",
+    soundOn: "Звук вкл.",
+    soundOff: "Без звука",
+    soundOnAria: "Выключить звук",
+    soundOffAria: "Включить звук",
+    clickToPlayWithSound: "Нажмите, чтобы воспроизвести со звуком",
+  },
+  chat: {
+    fabLabel: "Спросить ИИ о проекте",
+    fabAria: "Открыть чат о проекте",
+    heading: "О проекте",
+    subheading: "На базе Gemini — ответы по данным кейса.",
+    placeholder: "Спросите что-нибудь о проекте…",
+    send: "Отправить",
+    sending: "Отправка…",
+    close: "Закрыть",
+    starter1: "Что Гарри сделал на этом проекте?",
+    starter2: "Что было самым сложным?",
+    starter3: "Что Гарри изменил бы сейчас?",
+    emptyTitle: "Спросите что угодно.",
+    emptyBody:
+      "Выберите вопрос или напишите свой. Чат знает только этот кейс.",
+    errorGeneric: "Что-то пошло не так. Попробуйте ещё раз.",
+    rateLimitBurst: "Слишком много сообщений — подождите минуту.",
+    rateLimitDay: "Лимит на сегодня исчерпан — попробуйте завтра.",
+    disclaimer: "Ответы ИИ могут быть неполными. Для деталей свяжитесь с Гарри напрямую.",
+  },
+  modal: { close: "Закрыть", comingSoon: "Материалы кейса скоро появятся" },
+  caseTabs: { firstVersion: "Первая версия", releaseVersion: "Релизная версия" },
+  cv: {
+    downloadTitle: "Скачать резюме",
+    downloadIntro: "Выберите язык резюме.",
+    chooseLang: "Выберите язык",
+    downloadPdf: "Скачать PDF",
+    print: "Печать",
+    contact: "Контакты",
+    location: "Локация",
+    email: "Email",
+    phone: "Телефон",
+    linkedin: "LinkedIn",
+    summaryTitle: "О себе",
+    skillsTitle: "Навыки",
+    skillsWhatIDo: "Что я делаю",
+    skillsWhatIUse: "Чем пользуюсь",
+    languagesTitle: "Языки",
+    workExperienceTitle: "Опыт работы",
+    freelanceTitle: "Фриланс-проекты",
+    freelancePeriod: "Май 2025 – Дек 2025",
+    generatedOn: "Создано",
+  },
+  languagePicker: { title: "Язык резюме", subtitle: "Выберите язык для скачивания." },
+  footer: {
+    aboutSiteLabel: "Об этом сайте",
+    aboutSiteBlurb:
+      "Брутальное editorial-tech-портфолио. Три языка, полные кейсы, никаких трекеров.",
+    navigateCol: "Навигация",
+    workCol: "Работы",
+    elsewhereCol: "Где ещё",
+    localeCol: "Язык",
+    madeWith: "Сделано с заботой · Без трекеров",
+    builtLabel: "Построено на",
+    setInLabel: "Шрифты",
+    figuresLabel: "Цифры",
+    figureLocales: "Языков",
+    figureCases: "Кейсов",
+    figureTrackers: "Трекеров",
+    figureVersion: "Версия",
+  },
+  method: {
+    eyebrow: "Метод / 4 шага",
+    headingLine1: "КАК ЭТО",
+    headingLine2: "ДЕЛАЕТСЯ",
+    blurb:
+      "Сначала данные, потом пиксели. Сначала стратегия, потом экраны. Один и тот же цикл в каждом проекте — ресерч, рамка, дизайн, валидация.",
+    stepLabel: "Шаг",
+    steps: [
+      { step: "01", title: "Понять", description: "Изучить проблему, поговорить с пользователями, проанализировать данные и контекст бизнеса. Без догадок — только факты." },
+      { step: "02", title: "Сформулировать", description: "Найти настоящую задачу (а не первую попавшуюся), задать ограничения, метрики успеха и согласовать направление со стейкхолдерами." },
+      { step: "03", title: "Спроектировать", description: "Развернуть широкие варианты, потом сходиться. Вайрфреймы, прототипы, визуал — всё привязано к стратегии. Убивать слабые идеи рано." },
+      { step: "04", title: "Проверить", description: "Тестировать с реальными пользователями, мерить против целей, итерировать на основе данных. Дизайн не заканчивается на хендоффе." },
+    ],
+  },
+  about: {
+    heroLine1: "ДИЗАЙН —",
+    heroLine2: "ЭТО БИЗНЕС",
+    bioLabel: "Био",
+    capabilitiesLabel: "Возможности",
+    methodLabel: "Метод",
+    experienceLabel: "Опыт",
+    freelanceLabel: "Фриланс",
+  },
+  notFound: {
+    eyebrow: "Ошибка / 404",
+    title: "НЕ НАЙДЕНО",
+    blurb: "Страница, которую вы ищете, не существует или была перемещена.",
+    cta: "На главную",
+  },
+  ui: {
+    portfolioStrip: "Портфолио / 2020—2026",
+    caseStudiesStrip: "Кейсы / 2020—2026",
+    archiveLabel: "Архив",
+    filesSuffix: "файлов",
+    selectedWork: "Избранные работы",
+    viewAllCases: "— Все {count} кейсов ↗",
+    viewAllShort: "Все",
+    moreInArchive: "ещё в архиве",
+    caseArchiveBlurb:
+      "Каждый кейс — это полная история: задача, ресерч, решения, что сработало и что я бы переделал. Без скриншотов из мудборда и понтов о фичах. Откройте и читайте по существу.",
+    visualsLabel: "Визуал",
+    aboutEyebrow: "Обо мне",
+    contactEyebrow: "Контакт / всегда открыт",
+  },
+  marquees: {
+    home: [
+      "ПРОДУКТОВЫЙ ДИЗАЙНЕР",
+      "С 2020 · ЕРЕВАН",
+      "AI · WEB3 · SAAS · МАРКЕТПЛЕЙС",
+      "ОТКРЫТ ДЛЯ РАБОТЫ",
+      "СТРАТЕГИЯ → РЕСЕРЧ → ДИЗАЙН → ЗАПУСК",
+      "5+ ЛЕТ · КЕЙСЫ НА 3 ЯЗЫКАХ",
+    ],
+    work: [
+      "ВСЕ КЕЙСЫ",
+      "ПРОДУКТОВЫЙ ДИЗАЙН · UX-СТРАТЕГИЯ · ДИЗАЙН-СИСТЕМЫ",
+      "ЧИТАТЬ — А НЕ ПРОСТО СКРОЛЛИТЬ",
+      "ДОКАЗАТЕЛЬСТВА, А НЕ ДЕКОРАЦИЯ",
+    ],
+    contact: [
+      "ОТКРЫТ ДЛЯ ПРЕДЛОЖЕНИЙ",
+      "ФУЛТАЙМ · КОНТРАКТ · FRACTIONAL",
+      "EN · RU · HY",
+      "УДАЛЁНКА ПО ВСЕМУ МИРУ",
+      "ОТВЕЧАЮ В ТЕЧЕНИЕ 24Ч",
+    ],
+    about: [
+      "ФОКУС · AI · WEB3 · SAAS · МАРКЕТПЛЕЙС",
+      "5+ ЛЕТ · 6 КЕЙСОВ",
+      "ЕРЕВАН · ОТКРЫТ К УДАЛЁНКЕ",
+      "ДИЗАЙН — ЭТО БИЗНЕС-ФУНКЦИЯ",
+    ],
+  },
+};
+
+// Armenian — restored to the original polished, professional tone.
+// New keys added with the same register (warm but not casual).
+const hy: Dictionary = {
+  miniGames: {
+    eyebrow: "Մինի-խաղեր / Հանգստացեք",
+    heading: "Մինի-խաղեր",
+    blurb: "Փոքր բան՝ ստեղծված հաճույքի համար։ Նույն բրուտալիստ կանոնները՝ այժմ խաղալի։",
+    play: "Խաղալ",
+    solved: "Լուծված",
+    meetingScheduler: {
+      name: "Հանդիպումների պլանավորիչ",
+      description: "Տեղադրեք յուրաքանչյուր հանդիպում ճիշտ սենյակում և ժամին, որպեսզի բոլոր պայմանները բավարարվեն։",
+    },
+    networking: {
+      name: "Նեթվորքինգ",
+      description: "Միացրեք ճիշտ մասնագետներին, որպեսզի կապերի բոլոր կանոնները միաժամանակ բավարարվեն։",
+      howToBody:
+        "Միացրեք մասնագետներին այնպես, որ բոլոր կանոնները միաժամանակ բավարարվեն։ Սեղմեք մեկ հանգույցի, ապա մյուսի վրա՝ կապը ստեղծելու կամ հանելու համար։ Յուրաքանչյուր մարդ պետք է ունենա ճիշտ այնքան կապ, որքան նշված է իր հանգույցի վրա։ Նույն ընկերության մարդկանց չի կարելի ուղղակիորեն միացնել։ Հաշվի առեք «պարտադիր միացնել» և «արգելված» հուշումները։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ կապ ուղղելու համար։",
+      mustConnectLabel: "Պարտադիր միացնել",
+      blockedLabel: "Արգելված",
+      companiesLabel: "Ընկերություններ",
+      connectionsLabel: "Կապերը պատրաստ են",
+      selectPrompt: "Ընտրեք լուսավորված զուգընկերոջը։ Մգացվածները նույն ընկերությունից են, արգելված են կամ արդեն լրացված — հեռացրեք կապը մեկին ազատելու համար։",
+      pair: "{a} ↔ {b}",
+      blockedPair: "{a} ✕ {b}",
+    },
+    teamBuilder: {
+      name: "Թիմի հավաքում",
+      description: "Համալրեք յուրաքանչյուր թիմ ճիշտ դերերով ու մակարդակներով՝ առանց կոնֆլիկտների։",
+      howToBody:
+        "Նշանակեք յուրաքանչյուր մարդու ճիշտ մեկ թիմում՝ սեղմելով վանդակի վրա։ Յուրաքանչյուր թիմ պահանջում է դերերի որոշակի հավաքածու (նշված է վերնագրում) և չի կարող գերազանցել իր չափը։ Որոշ թիմերի պետք է առնվազն մեկ Senior։ Կոնֆլիկտ ունեցող մարդիկ չեն կարող լինել նույն թիմում։ Թիմի վերնագիրը ստանում է նշան, երբ այն ճիշտ համալրված է։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ մարդու ճիշտ տեղադրելու համար։",
+      teamWord: "Թիմ",
+      peopleLabel: "Մարդիկ",
+      conflictsLabel: "Կոնֆլիկտներ",
+      conflictPair: "{a} ✕ {b}",
+      sizeLabel: "Չափ",
+      seniorLabel: "Senior",
+    },
+    difficulty: { choose: "Ընտրեք բարդությունը", easy: "Հեշտ", medium: "Միջին", hard: "Բարդ" },
+    viewLeaderboard: "Առաջատարների աղյուսակ",
+    howToTitle: "Ինչպես խաղալ",
+    howToBody:
+      "Տեղադրեք բոլոր հանդիպումները «սենյակ × ժամ» ցանցում այնպես, որ բոլոր պայմանները բավարարվեն։ Սեղմեք հանդիպման վրա, ապա՝ վանդակի վրա՝ տեղադրելու համար, կամ քաշեք այն։ Սեղմեք լրացված վանդակի վրա՝ հանդիպումը հետ վերցնելու համար։ Յուրաքանչյուր վանդակում՝ մեկ հանդիպում։ Պայմանները նշվում են ըստ բավարարման։ Խրվե՞լ եք. ծախսեք հուշում՝ մեկ ճիշտ տեղադրում բացելու համար։",
+    gotIt: "Հասկացա՛",
+    go: "Մեկնա՛րկ",
+    changePuzzle: "Այլ խնդիր",
+    rules: "Կանոններ",
+    hint: "Հուշում",
+    exit: "Ելք",
+    undo: "Հետարկել",
+    clear: "Մաքրել",
+    trayLabel: "Հանդիպումներ",
+    constraintsLabel: "Պայմաններ",
+    roomLabel: "Սենյակ",
+    slotLabel: "Սլոթ",
+    timeLabel: "Ժամանակ",
+    victoryTitle: "Լուծվա՛ծ է",
+    yourTime: "Ձեր ժամանակը",
+    enterName: "Մուտքագրեք անունը",
+    namePlaceholder: "Ձեր անունը",
+    submit: "Ուղարկել",
+    playAgain: "Խաղալ կրկին",
+    leaderboardTitle: "Առաջատարների աղյուսակ",
+    rank: "Տեղ",
+    name: "Անուն",
+    time: "Ժամանակ",
+    noScores: "Դեռ արդյունքներ չկան — եղեք առաջինը։",
+    back: "Հետ",
+    close: "Փակել",
+    constraints: {
+      inRoom: "{m}-ը պետք է լինի {room}-ում",
+      before: "{m}-ը պետք է լինի {n}-ից առաջ",
+      notSameSlot: "{m}-ը և {n}-ը չեն կարող լինել նույն սլոթում",
+      atSlot: "{m}-ը պետք է լինի {slot}-ում",
+      roomBeforeSlot: "{room}-ում պետք է լինի հանդիպում {slot}-ից առաջ",
+    },
+  },
+  nav: {
+    about: "Իմ մասին",
+    projects: "Նախագծեր",
+    experience: "Փորձ",
+    contact: "Կապ",
+    work: "Նախագծեր",
+    cv: "CV",
+    downloadCv: "Ներբեռնել CV-ն",
+    menu: "Ընտրացանկ",
+    close: "Փակել",
+    language: "Լեզու",
+    chooseLanguage: "Ընտրել լեզուն",
+  },
+  hero: {
+    available: "Բաց եմ աշխատանքի համար",
+    name: "Գարրի Ավետիսյան",
+    role: "Պրոդուկտի դիզայներ",
+    summary:
+      "Պրոդուկտի դիզայներ՝ 5+ տարվա փորձով։ Ստեղծում եմ բարդ թվային արտադրանքներ AI, Web3, SaaS և շուկայահրապարակի ոլորտներում։ Կենտրոնանում եմ ճիշտ խնդիրներ լուծելու, տեղեկատվությունը պարզ կառուցելու և բարդ համակարգերը պարզ զգալի դարձնելու վրա։",
+    viewProjects: "Տեսնել նախագծերը",
+    getInTouch: "Կապվել",
+    location: "Գտնվելու վայր",
+    locationCity: "Երևան, Հայաստան",
+    locationSub: "Բաց եմ հեռահար աշխատանքի՝ ամբողջ աշխարհում",
+    focus: "Հիմնական ոլորտներ",
+    focusAreas: ["AI", "Web3", "SaaS", "Շուկայահրապարակ", "Մոբայլ"],
+    years: "Տարի",
+    projects: "Նախագիծ",
+    industries: "Ոլորտ",
+    skills: "Հմտություններ",
+    tools: "Գործիքներ",
+    languages: "Լեզուներ",
+    languageLevels: { native: "Մայրենի", fluent: "Ազատ", professional: "Մասնագիտական" },
+    headlineLine1: "ԴԻԶԱՅՆԸ",
+    headlineLine2: "ԲԻԶՆԵՍ",
+    headlineLine3: "ԳՈՐԾԱՌՈՒՅԹ Է",
+  },
+  projects: {
+    eyebrow: "Ընտրված աշխատանքներ",
+    heading: "Գործեր",
+    inProgress: "Ընթացքում",
+    comingSoon: "Շուտով",
+  },
+  experience: {
+    eyebrow: "Փորձ",
+    heading: "Աշխատանքի պատմություն",
+    fullTime: "Լրիվ դրույք",
+    freelance: "Ֆրիլանս",
+    freelancePeriod: "Մայիս 2025 – Դեկ 2025",
+    positions: "դիրք",
+  },
+  contact: {
+    eyebrow: "Կապ",
+    headingPart1: "Եկեք ստեղծենք ինչ-որ բան",
+    headingAccent: "միասին",
+    headingPart3: "։",
+    description:
+      "Բաց եմ պրոդուկտի դիզայների դիրքերի և ֆրիլանս համագործակցության համար։ Եթե ունեք լուծելու արժանի խնդիր՝ ուրախ կլինեմ լսել։",
+    sendEmail: "Ուղարկել նամակ",
+    connect: "Կապ",
+    emailLabel: "Email",
+    linkedinLabel: "LinkedIn",
+    locationFooter: "Երևան, Հայաստան · Հեռահար՝ ամբողջ աշխարհում",
+    formHeading: "Գրեք ինձ",
+    formIntro:
+      "Լրացրեք ձևը՝ կպատասխանեմ մեկ օրվա ընթացքում։ Կարող եք նաև գրել email-ով կամ LinkedIn-ով՝ ստորև։",
+    formName: "Անուն",
+    formNamePlaceholder: "Ձեր անունը",
+    formEmail: "Email",
+    formEmailPlaceholder: "you@company.com",
+    formSubject: "Թեմա",
+    formSubjectPlaceholder: "Ինչի՞ մասին է",
+    formMessage: "Հաղորդագրություն",
+    formMessagePlaceholder: "Պատմեք նախագծի, դիրքի մասին կամ պարզապես բարևեք։",
+    formSubmit: "Ուղարկել",
+    formSubmitSending: "Ուղարկվում է…",
+    formSubmitDone: "Ուղարկված է — շնորհակալություն, կպատասխանեմ մեկ օրվա ընթացքում։",
+    formCopy: "Պատճենել",
+    formCopied: "Պատճենվեց",
+    formError: "Խնդրում եմ լրացնել անունը, email-ն ու հաղորդագրությունը։",
+    formErrorSend: "Չհաջողվեց ուղարկել։ Գրեք ինձ ուղիղ email-ով կամ փորձեք կրկին։",
+    formNotConfigured:
+      "Ձևի առաքումը դեռ կարգավորված չէ։ Գրեք ինձ ուղիղ email-ով, մինչ կարգավորում եմ։",
+    directHeading: "Կամ ուղիղ կապ",
+    directLabel: "Ուղիղ",
+    rightsReserved: "Բոլոր իրավունքները պաշտպանված են",
+  },
+  caseStudy: {
+    backToWork: "Վերադառնալ աշխատանքներին",
+    overview: "Ընդհանուր",
+    role: "Դեր",
+    duration: "Տևողություն",
+    team: "Թիմ",
+    year: "Տարի",
+    brief: "Բրիֆ",
+    roleBreakdown: "Դերի կազմը",
+    reflection: "Եզրակացություններ",
+    impact: "Արդյունքներ",
+    nextProject: "Հաջորդ նախագիծ",
+    readingProgress: "Ընթերցման ընթացք",
+    heroImage: "Կազմ",
+    category: "Կատեգորիա",
+    shortVersion: "ԿԱՐՃ ՆԿԱՐԱԳԻՐ",
+    receipts: "ԱՐԴՅՈՒՆՔՆԵՐ",
+    visuals: "Վիզուալ",
+    versionsAssets: "{count} տարբերակ · {total} ֆայլ",
+    assetsCount: "{count} ֆայլ",
+    soundOn: "Ձայնը միացված",
+    soundOff: "Անձայն",
+    soundOnAria: "Անջատել ձայնը",
+    soundOffAria: "Միացնել ձայնը",
+    clickToPlayWithSound: "Սեղմեք՝ ձայնով նվագարկելու համար",
+  },
+  chat: {
+    fabLabel: "Հարցրու AI-ին նախագծի մասին",
+    fabAria: "Բացել զրույց՝ նախագծի մասին հարցնելու համար",
+    heading: "Նախագծի մասին",
+    subheading: "Powered by Gemini — պատասխաններ՝ ըստ քեյսի տվյալների։",
+    placeholder: "Հարցրեք ինչ-որ բան նախագծի մասին…",
+    send: "Ուղարկել",
+    sending: "Ուղարկվում է…",
+    close: "Փակել",
+    starter1: "Ի՞նչն իրականում Գարրին արեց այս նախագծում:",
+    starter2: "Ի՞նչն էր ամենադժվարը:",
+    starter3: "Ի՞նչ կփոխեր Գարրին հաջորդ անգամ:",
+    emptyTitle: "Հարցրու ինչ ուզում ես։",
+    emptyBody:
+      "Ընտրիր հարց կամ գրիր քոնը։ Չաթը գիտի միայն այս քեյսի մասին։",
+    errorGeneric: "Ինչ-որ բան սխալ գնաց։ Փորձիր նորից։",
+    rateLimitBurst: "Չափից շատ հաղորդագրություններ — մի րոպե սպասիր:",
+    rateLimitDay: "Օրական սահմանաչափը սպառվել է — փորձիր վաղը:",
+    disclaimer:
+      "AI-ի պատասխանները կարող են լինել թերի։ Մանրամասների համար կապվիր ուղղակիորեն Գարրիի հետ։",
+  },
+  modal: { close: "Փակել", comingSoon: "Գործի նյութերը շուտով կհայտնվեն" },
+  caseTabs: { firstVersion: "Առաջին տարբերակ", releaseVersion: "Թողարկման տարբերակ" },
+  cv: {
+    downloadTitle: "Ներբեռնել CV-ն",
+    downloadIntro: "Ընտրեք CV-ի լեզուն։",
+    chooseLang: "Ընտրեք լեզու",
+    downloadPdf: "Ներբեռնել PDF",
+    print: "Տպել",
+    contact: "Կապ",
+    location: "Գտնվելու վայր",
+    email: "Email",
+    phone: "Հեռախոս",
+    linkedin: "LinkedIn",
+    summaryTitle: "Համառոտ",
+    skillsTitle: "Հմտություններ",
+    skillsWhatIDo: "Ինչ եմ անում",
+    skillsWhatIUse: "Ինչով եմ աշխատում",
+    languagesTitle: "Լեզուներ",
+    workExperienceTitle: "Աշխատանքային փորձ",
+    freelanceTitle: "Ֆրիլանս նախագծեր",
+    freelancePeriod: "Մայիս 2025 – Դեկ 2025",
+    generatedOn: "Ստեղծված է",
+  },
+  languagePicker: { title: "CV-ի լեզու", subtitle: "Ընտրեք ներբեռնման համար լեզուն։" },
+  footer: {
+    aboutSiteLabel: "Այս կայքի մասին",
+    aboutSiteBlurb:
+      "Բրուտալիստ editorial-tech պորտֆոլիո։ Երեք լեզու, ամբողջական գործեր, առանց հետևման։",
+    navigateCol: "Նավիգացիա",
+    workCol: "Նախագծեր",
+    elsewhereCol: "Այլուր",
+    localeCol: "Լեզու",
+    madeWith: "Ստեղծված խնամքով · Առանց հետևման",
+    builtLabel: "Կառուցված է",
+    setInLabel: "Տառատեսակ",
+    figuresLabel: "Թվեր",
+    figureLocales: "Լեզու",
+    figureCases: "Գործ",
+    figureTrackers: "Թրեքեր",
+    figureVersion: "Տարբերակ",
+  },
+  method: {
+    eyebrow: "Մեթոդ / 4 քայլ",
+    headingLine1: "ԻՆՉՊԵՍ Է",
+    headingLine2: "ՍՏԵՂԾՎՈՒՄ",
+    blurb:
+      "Տվյալները՝ պիքսելներից առաջ։ Ստրատեգիան՝ էկրաններից առաջ։ Միևնույն ցիկլը՝ ամեն նախագծում՝ ուսումնասիրել, շրջանակել, դիզայնել, ստուգել։",
+    stepLabel: "Քայլ",
+    steps: [
+      { step: "01", title: "Հասկանալ", description: "Ուսումնասիրել խնդիրը, զրուցել օգտատերերի հետ, վերլուծել տվյալներն ու բիզնեսի համատեքստը։ Առանց ենթադրությունների՝ միայն փաստեր։" },
+      { step: "02", title: "Շրջանակել", description: "Սահմանել իրական խնդիրը (ոչ թե առաջին պատահածը), սահմանել սահմանափակումները, հաջողության մետրիկաները և համաձայնեցնել ուղղությունը շահագրգիռների հետ։" },
+      { step: "03", title: "Դիզայնել", description: "Բացել տարբերակների լայն դաշտ, ապա սահող ֆոկուս։ Վայրֆրեյմեր, նախատիպեր, վիզուալ դիզայն՝ միշտ կապված ստրատեգիայի հետ։ Թույլ գաղափարները շուտ թողնել։" },
+      { step: "04", title: "Ստուգել", description: "Թեստել իրական օգտատերերի հետ, համեմատել նպատակների հետ, փոփոխել՝ տվյալների հիման վրա։ Դիզայնը handoff-ով չի ավարտվում։" },
+    ],
+  },
+  about: {
+    heroLine1: "ԴԻԶԱՅՆԸ",
+    heroLine2: "ԲԻԶՆԵՍ Է",
+    bioLabel: "Իմ մասին",
+    capabilitiesLabel: "Կարողություններ",
+    methodLabel: "Մեթոդ",
+    experienceLabel: "Փորձ",
+    freelanceLabel: "Ֆրիլանս",
+  },
+  notFound: {
+    eyebrow: "Սխալ / 404",
+    title: "ՉԻ ԳՏՆՎԵԼ",
+    blurb: "Այս էջը գոյություն չունի կամ տեղափոխվել է։",
+    cta: "Վերադառնալ գլխավոր",
+  },
+  ui: {
+    portfolioStrip: "Պորտֆոլիո / 2020—2026",
+    caseStudiesStrip: "Գործեր / 2020—2026",
+    archiveLabel: "Արխիվ",
+    filesSuffix: "ֆայլ",
+    selectedWork: "Ընտրված աշխատանքներ",
+    viewAllCases: "— Տեսնել բոլոր {count} գործերը ↗",
+    viewAllShort: "Բոլորը",
+    moreInArchive: "ևս արխիվում",
+    caseArchiveBlurb:
+      "Ամեն գործ՝ ամբողջական պատմություն է. խնդիր, ուսումնասիրություն, որոշումներ, ինչն աշխատեց ու ինչը կփոխեի։ Առանց մուդբորդից սքրինների ու ֆիչաների ցուցադրման։ Բացեք և կարդացեք ըստ էության։",
+    visualsLabel: "Վիզուալ",
+    aboutEyebrow: "Իմ մասին",
+    contactEyebrow: "Կապ / միշտ բաց",
+  },
+  marquees: {
+    home: [
+      "ՊՐՈԴՈՒԿՏԻ ԴԻԶԱՅՆԵՐ",
+      "2020-ից · ԵՐԵՎԱՆ",
+      "AI · WEB3 · SAAS · ՇՈՒԿԱՅԱՀՐԱՊԱՐԱԿ",
+      "ԲԱՑ ԵՄ ԱՇԽԱՏԱՆՔԻ ՀԱՄԱՐ",
+      "ՍՏՐԱՏԵԳԻԱ → ՈՒՍՈՒՄՆԱՍԻՐՈՒԹՅՈՒՆ → ԴԻԶԱՅՆ → ՇԻՓ",
+      "5+ ՏԱՐԻ · ԳՈՐԾԵՐ 3 ԼԵԶՎՈՎ",
+    ],
+    work: [
+      "ԲՈԼՈՐ ԳՈՐԾԵՐԸ",
+      "ՊՐՈԴՈՒԿՏԻ ԴԻԶԱՅՆ · UX ՍՏՐԱՏԵԳԻԱ · ԴԻԶԱՅՆ ՀԱՄԱԿԱՐԳԵՐ",
+      "ԿԱՐԴԱՑԵՔ — ՈՉ ՊԱՐԶԱՊԵՍ ՍՔՐՈԼԵՔ",
+      "ԱՊԱՑՈՒՅՑՆԵՐ՝ ԴԵԿՈՐԱՑԻԱՅԻ ԴԵՄ",
+    ],
+    contact: [
+      "ԲԱՑ ԵՄ ԱՇԽԱՏԱՆՔԻ",
+      "ՖՈՒԼԹԱՅՄ · ԿՈՆՏՐԱԿՏ · FRACTIONAL",
+      "EN · RU · HY",
+      "ՀԵՌԱՀԱՐ՝ ԱՄԲՈՂՋ ԱՇԽԱՐՀՈՒՄ",
+      "ՊԱՏԱՍԽԱՆ 24 ԺԱՄՈՒՄ",
+    ],
+    about: [
+      "ՖՈԿՈՒՍ · AI · WEB3 · SAAS · ՇՈՒԿԱՅԱՀՐԱՊԱՐԱԿ",
+      "5+ ՏԱՐԻ · 6 ԳՈՐԾ",
+      "ԵՐԵՎԱՆ · ԲԱՑ ԵՄ ՀԵՌԱՀԱՐ ԱՇԽԱՏԱՆՔԻ",
+      "ԴԻԶԱՅՆԸ ԲԻԶՆԵՍ ԳՈՐԾԱՌՈՒՅԹ Է",
+    ],
+  },
+};
+
+export const DICTIONARIES: Record<Locale, Dictionary> = { en, ru, hy };

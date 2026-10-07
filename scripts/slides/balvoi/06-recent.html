@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .layout .mockup { height: 720px; }
+  .layout .mockup-viewport { height: 670px; }
+  .layout .mockup-viewport img { position: relative; top: -110px; }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .stat-card {
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 14px;
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--bv-orange);
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: 10px;
+  }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 07 / Recent Analyses</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 07 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <span class="eyebrow">— History</span>
+      <h1 class="headline">An archive<br/>of every <em>check</em>.</h1>
+      <p class="caption">
+        Every analysis is saved automatically — sources, scores, dates,
+        and the full sentence-level breakdown. Researchers and journalists
+        get a working library; casual readers get receipts.
+      </p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">— Stored per user</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">— Click to re-analyze</div>
+        </div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-chrome">
+        <span class="mockup-dot r"></span>
+        <span class="mockup-dot y"></span>
+        <span class="mockup-dot g"></span>
+        <div class="mockup-url"><span class="mockup-url-bar">balvoi.com/debiasit/history</span></div>
+      </div>
+      <div class="mockup-viewport">
+        <img src="_assets/2974-26697.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>Recent Analyses</span>
+    <span>— Persistence + repeat checks</span>
+  </div>
+</div></body></html>

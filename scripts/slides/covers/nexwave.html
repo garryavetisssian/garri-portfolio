@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_cover.css">
+<style>
+  :root { --accent: #5BB5C9; }
+  .nw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    width: 460px;
+  }
+  .nw-tile {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .nw-tile .room {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 10px;
+  }
+  .nw-tile .device {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
+  }
+  .nw-tile .state {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+  }
+  .nw-tile .icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  .nw-tile.on { border-color: color-mix(in srgb, var(--accent) 50%, transparent); box-shadow: 0 0 30px color-mix(in srgb, var(--accent) 18%, transparent) inset; }
+</style>
+</head><body>
+<div class="bg-field">
+  <span class="glyph" style="font-size: 320px; top: -40px; left: -30px;">N</span>
+  <span class="glyph" style="font-size: 260px; top: 30px; right: 30px;">W</span>
+  <span class="glyph" style="font-size: 200px; bottom: -30px; left: 30%;">X</span>
+  <span class="glyph" style="font-size: 180px; bottom: 18%; right: 8%;">V</span>
+  <span class="glyph" style="font-size: 140px; top: 38%; left: 4%;">E</span>
+  <span class="glyph" style="font-size: 120px; top: 18%; left: 36%;">A</span>
+</div>
+<div class="frame">
+  <div class="top">
+    <span>NexWave · Case Study</span>
+    <span>Garri Avetisyan · 2024</span>
+  </div>
+  <div class="center has-feature">
+    <div>
+      <div class="title sm">NEX<br><span class="accent-word">WAVE</span></div>
+      <div class="tagline">A home, in one app<span class="dot">·</span>organised by room, not by brand</div>
+      <div class="tags">
+        <span>SaaS</span><span>Mobile</span><span>IoT</span><span>Smart home</span>
+      </div>
+    </div>
+    <div class="nw-grid">
+      <div class="nw-tile on"><div class="icon"></div><div class="room">Living room</div><div class="device">Ambient lights</div><div class="state">ON · 62%</div></div>
+      <div class="nw-tile"><div class="icon"></div><div class="room">Kitchen</div><div class="device">Climate</div><div class="state">22°C</div></div>
+      <div class="nw-tile on"><div class="icon"></div><div class="room">Hallway</div><div class="device">Auto-routine</div><div class="state">Welcome scene</div></div>
+      <div class="nw-tile"><div class="icon"></div><div class="room">Garage</div><div class="device">Door</div><div class="state">CLOSED</div></div>
+    </div>
+  </div>
+  <div class="bot">
+    <span class="accent">— 01 / Cover</span>
+    <span>SaaS · Mobile · 3 months</span>
+  </div>
+</div>
+</body></html>

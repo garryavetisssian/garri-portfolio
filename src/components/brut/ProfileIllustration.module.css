@@ -1,0 +1,10 @@
+.art { position: relative; width: clamp(160px, 24vw, 300px); aspect-ratio: 1; flex: none; pointer-events: none; }
+.art img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.second { position: absolute; inset: 0; opacity: 0; }
+.animated .first { animation: frameOne .9s steps(1, end) infinite; }
+.animated .second { animation: frameTwo .9s steps(1, end) infinite; }
+.animated[data-playing="false"] img { animation-play-state: paused; }
+.mail { width: clamp(160px, 22vw, 270px); }
+@keyframes frameOne { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes frameTwo { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .animated .first { animation: none; opacity: 1; } .animated .second { animation: none; opacity: 0; } }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(233, 74, 32, 0.22), transparent 65%),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 129, 221, 0.18), transparent 70%),
+      linear-gradient(180deg, #051428 0%, #07182F 50%, #04101E 100%);
+  }
+  .layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 28px;
+  }
+  .closing-mark {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .closing-bv {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 96px;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: #fff;
+    background: var(--bv-blue-deep);
+    padding: 26px 50px;
+  }
+  .closing-word {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 64px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    background: var(--bv-orange);
+    padding: 16px 40px;
+  }
+  .closing-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: -0.01em;
+    margin-top: 24px;
+  }
+  .closing-tag .sep { color: var(--bv-orange); margin: 0 14px; }
+  .closing-signature {
+    margin-top: 48px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .closing-signature .acid { color: var(--bv-orange); }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 12 / End</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 12 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div class="closing-mark">
+      <div class="closing-bv">BV</div>
+      <div class="closing-word">BalVoi</div>
+    </div>
+    <div class="closing-tag">
+      Your Balanced<span class="sep">·</span>Voice for News
+    </div>
+
+    <div class="closing-signature">
+      Designed by Garri Avetisyan<span class="acid"> · </span>2025 — 2026
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>End</span>
+    <span>Thanks for reading</span>
+  </div>
+</div></body></html>

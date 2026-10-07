@@ -1,0 +1,69 @@
+/* Duck Master theme — overrides the shared brand color tokens so the same
+   slide primitives render in dark + yellow. Imported by each Duck Master
+   slide AFTER shared.css. */
+
+:root {
+  /* Override BalVoi blue stack with Duck Master yellows */
+  --bv-blue:        #FFD12B;
+  --bv-blue-deep:   #E6B400;
+  --bv-blue-dark:   #FF9F1C;
+  --bv-blue-ink:    #1A1503;
+
+  /* Sailor red as the secondary accent */
+  --bv-orange:      #FF4D5E;
+  --bv-orange-soft: #FF7E8B;
+
+  /* Dark game-room slide background */
+  --slide-bg-1:     #0B0A08;
+  --slide-bg-2:     #14110A;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 25%, rgba(255, 209, 43, 0.16), transparent 65%),
+    linear-gradient(180deg, #0B0A08 0%, #14110A 60%, #0B0A08 100%);
+}
+
+/* Phone mockup — replaces the browser-chrome mockup for Duck Master's
+   mobile-first frames. 393×852 source, rendered at any height. */
+.phone {
+  position: relative;
+  border-radius: 38px;
+  background: #050505;
+  padding: 14px;
+  box-shadow:
+    0 40px 100px -20px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+.phone-screen {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.phone-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Dynamic island / camera notch */
+.phone-notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 28px;
+  background: #000;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+/* Eyebrow color override - use the yellow for headings' accent words */
+.headline em { color: var(--bv-blue); }
+.eyebrow { color: var(--bv-blue); }

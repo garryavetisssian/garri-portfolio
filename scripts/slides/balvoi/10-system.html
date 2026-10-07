@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.85fr 1.3fr;
+    gap: 60px;
+    align-items: center;
+  }
+  /* System mockup is built from CSS, not a Figma export */
+  .system-board {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--rule-strong);
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.6);
+    padding: 40px 36px;
+    height: 720px;
+    color: #0F1E33;
+    font-family: var(--body);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    overflow: hidden;
+  }
+  .sb-col h3 {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6B7E9B;
+    margin-bottom: 14px;
+  }
+
+  /* Type ramp */
+  .type-ramp { display: flex; flex-direction: column; gap: 10px; }
+  .type-ramp .h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; color: #012C50; }
+  .type-ramp .h2 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 22px; color: #012C50; }
+  .type-ramp .body { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; color: #44546B; }
+  .type-ramp .small { font-family: 'Inter', sans-serif; font-size: 11px; color: #6B7E9B; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Buttons */
+  .btn-row { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 11px 22px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; }
+  .btn-primary { background: var(--bv-blue); color: #fff; }
+  .btn-secondary { background: var(--bv-orange); color: #fff; }
+  .btn-outline { background: transparent; border-color: #C5D2E2; color: #0F1E33; }
+
+  /* Input */
+  .input-field {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #44546B;
+    background: #F6F8FB;
+    border: 1px solid #DAE2EE;
+    border-radius: 6px;
+  }
+  .input-label { font-family: 'Inter', sans-serif; font-size: 11px; color: #44546B; font-weight: 500; margin-bottom: 6px; display: block; }
+
+  /* Trust card */
+  .trust-card { background: #F3F8FE; padding: 16px; border-radius: 8px; border: 1px solid #D4E3F4; }
+  .trust-card .num { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 36px; color: var(--bv-blue); line-height: 1; }
+  .trust-card .lbl { font-family: 'Inter', sans-serif; font-size: 11px; color: #6B7E9B; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Color chips */
+  .chip-row { display: flex; gap: 6px; }
+  .chip { width: 32px; height: 32px; border-radius: 4px; }
+</style></head>
+<body><div class="slide">
+  <div class="slide-top">
+    <span>— 11 / Design system</span>
+    <span class="mark">BalVoi<span class="tm">™</span></span>
+    <span class="right"><span class="accent">●</span> 11 / 12</span>
+  </div>
+
+  <div class="layout">
+    <div>
+      <span class="eyebrow">— The library</span>
+      <h1 class="headline">A system,<br/>not just <em>screens</em>.</h1>
+      <p class="caption">
+        Behind the 146 product frames sits a tight component library —
+        type ramp, button hierarchy, form inputs, trust cards, modals,
+        and the bias visualisation primitives. Hand-off is one Figma
+        Dev Mode share.
+      </p>
+      <p class="kicker">— 60+ components · variants for every state</p>
+    </div>
+
+    <div class="system-board">
+      <div class="sb-col">
+        <h3>Type ramp</h3>
+        <div class="type-ramp">
+          <div class="h1">Bias, measured.</div>
+          <div class="h2">A focused reader for news.</div>
+          <div class="body">Each sentence in the article gets its own bar and color stripe — from green for neutral framing to red for the most loaded phrasing.</div>
+          <div class="small">— Caption · 11 / 0.1em / upper</div>
+        </div>
+
+        <h3 style="margin-top: 24px;">Buttons</h3>
+        <div class="btn-row">
+          <button class="btn btn-primary">Analyze article</button>
+          <button class="btn btn-secondary">Subscribe</button>
+          <button class="btn btn-outline">Cancel</button>
+        </div>
+      </div>
+
+      <div class="sb-col">
+        <h3>Form</h3>
+        <label class="input-label">Article URL</label>
+        <input class="input-field" value="https://example.com/article/lyft-..." />
+
+        <label class="input-label" style="margin-top: 16px;">Or paste content</label>
+        <input class="input-field" placeholder="Paste article text…" />
+
+        <h3 style="margin-top: 24px;">Trust scoring</h3>
+        <div class="trust-card">
+          <div class="num">82</div>
+          <div class="lbl">Trust Score · this article</div>
+        </div>
+
+        <h3 style="margin-top: 24px;">Palette</h3>
+        <div class="chip-row">
+          <span class="chip" style="background: #DDF1FF"></span>
+          <span class="chip" style="background: #6FD1FF"></span>
+          <span class="chip" style="background: #0081DD"></span>
+          <span class="chip" style="background: #005693"></span>
+          <span class="chip" style="background: #012C50"></span>
+          <span class="chip" style="background: #E94A20"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-bottom">
+    <span>System</span>
+    <span>— Components · tokens · documentation</span>
+  </div>
+</div></body></html>

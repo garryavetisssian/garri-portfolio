@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_cover.css">
+<style>
+  :root { --accent: #3D6FA8; }
+  .grid-bg {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(61, 111, 168, 0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(61, 111, 168, 0.10) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 80%);
+  }
+  .pin {
+    position: absolute;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 30px var(--accent), 0 0 0 6px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .route {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform-origin: left center;
+    opacity: 0.5;
+  }
+</style>
+</head><body>
+<div class="grid-bg"></div>
+<div class="bg-field">
+  <span class="pin" style="top: 22%; left: 18%;"></span>
+  <span class="pin" style="top: 60%; left: 32%;"></span>
+  <span class="pin" style="top: 38%; left: 70%;"></span>
+  <span class="pin" style="bottom: 18%; left: 84%;"></span>
+  <span class="route" style="top: 24%; left: 19%; width: 360px; transform: rotate(28deg);"></span>
+  <span class="route" style="top: 60%; left: 33%; width: 480px; transform: rotate(-18deg);"></span>
+</div>
+<div class="frame">
+  <div class="top">
+    <span>Dispatch Center · Case Study</span>
+    <span>Garri Avetisyan · 2023–24</span>
+  </div>
+  <div class="center has-feature">
+    <div>
+      <div class="title sm">DISPATCH<br><span class="accent-word">CENTER</span></div>
+      <div class="tagline">Real-time fleet operations<span class="dot">·</span>one screen, every decision</div>
+      <div class="tags">
+        <span>SaaS</span><span>Logistics</span><span>Live data</span><span>Dashboard</span>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card"><div class="dot"></div><div class="body"><div class="l1">Truck 04 · Route 7B</div><div class="l2">12 stops · on schedule</div></div><div class="meta">LIVE</div></div>
+      <div class="card"><div class="dot"></div><div class="body"><div class="l1">Truck 11 · Route 2A</div><div class="l2">8 stops · 4 min ahead</div></div><div class="meta">+04m</div></div>
+      <div class="card"><div class="dot"></div><div class="body"><div class="l1">Truck 22 · Reroute</div><div class="l2">Traffic on Mashtots Ave.</div></div><div class="meta">ALERT</div></div>
+      <div class="card"><div class="dot"></div><div class="body"><div class="l1">Driver chat · Ararat</div><div class="l2">"At pickup point"</div></div><div class="meta">2 NEW</div></div>
+    </div>
+  </div>
+  <div class="bot">
+    <span class="accent">— 01 / Cover</span>
+    <span>SaaS · Mobile · Logistics · 3 months</span>
+  </div>
+</div>
+</body></html>

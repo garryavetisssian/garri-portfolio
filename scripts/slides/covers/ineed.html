@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="_cover.css">
+<style>
+  :root { --accent: #C44545; }
+  .two-phones {
+    display: flex;
+    gap: 28px;
+    align-items: flex-end;
+    transform: translateY(8px);
+  }
+  .two-phones .phone {
+    width: 220px;
+    border-radius: 32px;
+    padding: 10px;
+  }
+  .two-phones .phone-screen { border-radius: 22px; padding: 22px 18px; }
+  .two-phones .phone:nth-child(1) { transform: rotate(-3deg) translateY(20px); }
+  .two-phones .phone:nth-child(2) { transform: rotate(3deg); }
+  .ph-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding-bottom: 8px;
+  }
+  .ph-row {
+    display: flex; gap: 8px; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ph-row .av { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.10); }
+  .ph-row .nm { font-family: var(--body); font-size: 9px; color: rgba(255,255,255,0.7); flex: 1; }
+  .ph-row .pr { font-family: var(--mono); font-size: 9px; color: var(--accent); }
+  .ph-cta { margin-top: 14px; background: var(--accent); color: #fff; font-family: var(--body); font-weight: 600; font-size: 10px; padding: 8px; border-radius: 8px; text-align: center; }
+</style>
+</head><body>
+<div class="bg-field">
+  <span class="glyph" style="font-size: 320px; top: -40px; left: -30px;">I</span>
+  <span class="glyph" style="font-size: 240px; top: 28%; right: 4%;">N</span>
+  <span class="glyph" style="font-size: 280px; bottom: -50px; left: 36%;">D</span>
+  <span class="glyph" style="font-size: 180px; bottom: 24%; right: 36%;">·</span>
+  <span class="glyph" style="font-size: 160px; top: 60%; left: 6%;">E</span>
+</div>
+<div class="frame">
+  <div class="top">
+    <span>Ineed · Case Study</span>
+    <span>Garri Avetisyan · 2022–24</span>
+  </div>
+  <div class="center has-feature">
+    <div>
+      <div class="title">INEED</div>
+      <div class="tagline">Two apps<span class="dot">·</span>one marketplace<span class="dot">·</span>both sides trusted</div>
+      <div class="tags">
+        <span>Marketplace</span><span>Mobile</span><span>SaaS</span><span>iOS + Android</span>
+      </div>
+    </div>
+    <div class="two-phones">
+      <div class="phone"><div class="phone-screen">
+        <div class="ph-label">Client app</div>
+        <div class="ph-row"><div class="av"></div><div class="nm">Anush · Plumbing</div><div class="pr">★ 4.9</div></div>
+        <div class="ph-row"><div class="av"></div><div class="nm">Levon · Cleaning</div><div class="pr">★ 4.8</div></div>
+        <div class="ph-row"><div class="av"></div><div class="nm">Mariam · Tutor</div><div class="pr">★ 5.0</div></div>
+        <div class="ph-cta">Book a pro</div>
+      </div></div>
+      <div class="phone"><div class="phone-screen">
+        <div class="ph-label">Pro app</div>
+        <div class="ph-row"><div class="av"></div><div class="nm">New request · 14:20</div><div class="pr">8 km</div></div>
+        <div class="ph-row"><div class="av"></div><div class="nm">Today · 3 jobs</div><div class="pr">+$120</div></div>
+        <div class="ph-row"><div class="av"></div><div class="nm">Payout</div><div class="pr">Fri</div></div>
+        <div class="ph-cta">Accept job</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="bot">
+    <span class="accent">— 01 / Cover</span>
+    <span>Marketplace · Mobile · 2 years</span>
+  </div>
+</div>
+</body></html>
