@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import CaseStudyView from "@/components/brut/CaseStudyView";
 import MeridianCase from "@/components/brut/MeridianCase";
 import SoloosCase from "@/components/brut/SoloosCase";
+import VivaroCase from "@/components/brut/VivaroCase";
 import { getLocalizedProject } from "@/data/projects.i18n";
 import {
   getCaseAssets,
@@ -60,6 +61,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   if (slug === "meridian-hr") return <MeridianCase locale={locale as Locale} />;
   if (slug === "soloos") return <SoloosCase locale={locale as Locale} />;
+  if (slug === "vivaro") return <VivaroCase locale={locale as Locale} />;
 
   const caseAssets = getCaseAssets(slug);
   const nextSlug = getNextProjectSlug(slug);

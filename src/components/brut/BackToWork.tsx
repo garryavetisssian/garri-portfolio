@@ -6,7 +6,7 @@ import type { Locale } from "@/lib/i18n/types";
 const subscribe = () => () => {};
 
 export default function BackToWork({ locale, slug, children }: { locale: Locale; slug: string; children: React.ReactNode }) {
-  const fallback = ["meridian-hr", "soloos"].includes(slug) ? "ai-engineering" : ["roos-ruckus", "spearthrone", "duck-master"].includes(slug) ? "entertainment" : "products";
+  const fallback = ["meridian-hr", "soloos"].includes(slug) ? "ai-engineering" : ["vivaro", "roos-ruckus", "spearthrone", "duck-master"].includes(slug) ? "entertainment" : "products";
   const collection = useSyncExternalStore(subscribe, () => {
     let collection: string | null = null;
     try { collection = sessionStorage.getItem(`work-collection-${locale}-${slug}`); } catch { /* Storage is optional. */ }

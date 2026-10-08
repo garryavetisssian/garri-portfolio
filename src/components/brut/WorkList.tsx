@@ -9,6 +9,8 @@ import type { Locale } from "@/lib/i18n/types";
 import { DICTIONARIES } from "@/lib/i18n/dictionaries";
 import { meridianCopy } from "@/data/meridian";
 import { soloosCopy } from "@/data/soloos";
+import { vivaroCopy } from "@/data/vivaro";
+import { orderCollectionItems } from "@/lib/work-order";
 import styles from "./WorkList.module.css";
 
 export type Collection = "products" | "entertainment" | "ai-engineering";
@@ -17,6 +19,7 @@ const showcase: Record<string, { collections: Collection[]; cover: string; enter
   "xy-ecosystem": { collections: ["products", "entertainment"], cover: "/cases/xy-ecosystem/2%20XY%20Protocols/Cover.webp", entertainmentCover: "/cases/xy-ecosystem/1%20XYGO%20-%20WEB3%20Lottery/Cover.webp" },
   "meridian-hr": { collections: ["ai-engineering"], cover: "/cases/meridian-hr/Cover.svg" },
   soloos: { collections: ["ai-engineering"], cover: "/cases/soloos/Cover.svg" },
+  vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/Cover.png" },
   balvoi: { collections: ["products"], cover: "/cases/balvoi/Cover.webp" },
   nexwave: { collections: ["products"], cover: "/cases/nexwave/Cover.webp" },
   "dispatch-center": { collections: ["products"], cover: "/cases/dispatch-center/Cover.webp" },
@@ -64,7 +67,7 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
   }, [archive, locale, router]);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const id = useId();
-  const filtered = items.filter((p) => (showcase[p.slug]?.collections ?? ["products"]).includes(active));
+  const filtered = orderCollectionItems(items.filter((p) => (showcase[p.slug]?.collections ?? ["products"]).includes(active)), active);
   const visible = previewLimit ? filtered.slice(0, previewLimit) : filtered;
 
   return <section id="work" className={styles.section}>
@@ -105,7 +108,7 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
               </div>
               <div className={styles.meta}>
                 <span className={`mono ${styles.number}`}>{String(index + 1).padStart(2, "0")}</span>
-                <div className={styles.info}><h3>{p.title}</h3><p>{p.slug === "meridian-hr" ? meridianCopy[locale].subtitle : p.slug === "soloos" ? soloosCopy[locale].subtitle : p.subtitle}</p></div>
+                <div className={styles.info}><h3>{p.title}</h3><p>{p.slug === "meridian-hr" ? meridianCopy[locale].subtitle : p.slug === "soloos" ? soloosCopy[locale].subtitle : p.slug === "vivaro" ? vivaroCopy[locale].subtitle : p.subtitle}</p></div>
                 <span className={`mono ${styles.year}`}>{p.year}</span>
               </div>
               <div className={`mono ${styles.tags}`}>{(Array.isArray(p.category) ? p.category : [p.category]).join(" / ")}</div>

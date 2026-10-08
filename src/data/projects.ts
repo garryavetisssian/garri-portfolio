@@ -1,6 +1,7 @@
 import type { CaseStudy } from "@/lib/types";
 import { getMeridianProject } from "./meridian";
 import { getSoloosProject } from "./soloos";
+import { getVivaroProject } from "./vivaro";
 
 // ─── Project data ─────────────────────────────────────────────────
 // Each project is a full case study. Images reference /public/work/[slug]/
@@ -811,6 +812,7 @@ export const projects: CaseStudy[] = [
 
   getMeridianProject(),
   getSoloosProject(),
+  getVivaroProject(),
 ];
 
 // Helper to get a project by slug
