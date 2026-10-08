@@ -37,7 +37,9 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+
+const subscribeHydration = () => () => {};
 
 function useLidTransform(rotateX: MotionValue<number>) {
   return useTransform(rotateX, (r) => `rotateX(${r}deg)`);
@@ -125,6 +127,7 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const staticLayout = useSyncExternalStore(subscribeHydration, () => !!reduce, () => false);
 
   /* ── Cursor position normalized to −1..1 inside the sticky bounds ── */
   const mx = useMotionValue(0);
@@ -221,9 +224,10 @@ export default function LaptopReveal({ src, color = "#9B6BFF" }: LaptopRevealPro
     [0.0, 1.0, 1.0, 0.4],
   );
 
-  if (reduce) {
+  if (staticLayout) {
     return (
       <section
+        ref={sectionRef}
         className="laptop-reveal-static relative border-t border-line-strong bg-paper"
         style={{ ["--case-color" as string]: color }}
       >

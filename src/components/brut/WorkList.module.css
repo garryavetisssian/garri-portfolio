@@ -1,12 +1,12 @@
 .section { position: relative; padding: clamp(2rem, 5vw, 5rem) 0; }
 .heading { margin-bottom: 2.5rem; }
 .heading p { margin-bottom: .75rem; }
-.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-bottom: 1px solid #363633; margin-bottom: 2rem; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-bottom: 1px solid var(--line-strong); margin-bottom: 2rem; }
 .tabs { display: flex; flex-wrap: wrap; gap: 0 1.5rem; min-width: 0; }
 .tab { display: flex; align-items: center; gap: .7rem; position: relative; padding: 1.1rem 0; color: var(--ink-mute, #a7a79f); font-size: clamp(.9rem, 1.3vw, 1.15rem); text-align: left; cursor: pointer; background: none; border: 0; line-height: 1.4; }
 .tab[aria-selected="true"] { color: var(--ink, #f2f1eb); }
 .tab[aria-selected="true"]::after { content: ""; position: absolute; height: 2px; background: var(--acid, #9a63ff); bottom: -1px; left: 0; right: 0; }
-.tabCount { font: .7rem var(--font-mono); opacity: .65; }
+.tabCount { font: .7rem var(--font-mono); color: var(--ink-mute); }
 .tab:focus-visible, .card:focus-visible, .viewAll:focus-visible { outline: 2px solid var(--acid, #9a63ff); outline-offset: 5px; }
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 1.5rem; list-style: none; padding: 0; margin: 0; }
 .card { display: block; min-width: 0; color: var(--ink, #f2f1eb); }
@@ -22,7 +22,7 @@
 .info p { margin-top: .6rem; max-width: 52ch; color: var(--ink-mute, #a7a79f); font-size: .9rem; line-height: 1.55; }
 .year { flex-shrink: 0; color: var(--ink-mute, #a7a79f); font-size: .65rem; }
 .tags { margin: 1rem 0 0 2rem; color: var(--ink-mute, #a7a79f); font-size: .6rem; letter-spacing: .09em; }
-.viewAll { display: flex; justify-content: space-between; border-top: 1px solid #363633; margin-top: 3rem; padding: 1.25rem 0; color: var(--ink, #f2f1eb); font-size: 1rem; }
+.viewAll { display: flex; justify-content: space-between; border-top: 1px solid var(--line-strong); margin-top: 3rem; padding: 1.25rem 0; color: var(--ink, #f2f1eb); font-size: 1rem; }
 @media (max-width: 900px) { .collectionCount { display: none; } .tabs { gap: 0 1.5rem; width: 100%; } .tab { flex: 1 1 180px; } }
 @media (max-width: 700px) { .grid { grid-template-columns: 1fr; gap: 2.25rem; } .tabs { gap: 1rem; } .tab { font-size: .85rem; gap: .4rem; } .tabCount { font-size: .6rem; } .meta { gap: .65rem; } .info p { font-size: .85rem; } .explore { opacity: 1; transform: none; padding: .45rem .65rem; } .tags { margin-left: 1.75rem; } }
 @media (prefers-reduced-motion: reduce) { .image, .explore { transition: none; } .card:hover .image, .card:focus-visible .image { transform: none; } }

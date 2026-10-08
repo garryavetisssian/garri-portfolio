@@ -10,14 +10,14 @@
   /* Surface */
   --ink: #F2F0EA;
   --ink-mute: #A5A199;
-  --ink-faint: #76736B;
+  --ink-faint: #A09B91;
   --paper: #0B0B0A;
   --paper-soft: #131311;
   --paper-elev: #1A1A17;
 
   /* Hairlines */
   --line: rgba(242, 240, 234, 0.10);
-  --line-strong: rgba(242, 240, 234, 0.22);
+  --line-strong: rgba(242, 240, 234, 0.42);
   --line-faint: rgba(242, 240, 234, 0.05);
 
   /* Primary accent — electric violet, Web3 vibe.
@@ -32,6 +32,12 @@
 
   /* Functional */
   --warn: #FF5C2A;
+  --game-violet: #9B6BFF;
+  --game-cyan: #06B6D4;
+  --game-rose: #FB7185;
+  --game-green: #00D4AA;
+  --game-lilac: #A78BFA;
+  --game-blue: #3B82F6;
 
   /* Type rhythm */
   --display-tight: 0.86;
@@ -43,7 +49,48 @@
   --rule-h: 1px;
   --nav-h: 64px;
   --max: 1480px;
+  color-scheme: dark;
 }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ink: #201E25;
+  --ink-mute: #54505C;
+  --ink-faint: #625C69;
+  --paper: #F8F6F1;
+  --paper-soft: #EFEBE4;
+  --paper-elev: #E5E0D8;
+  --line: rgba(32, 30, 37, .18);
+  --line-strong: rgba(32, 30, 37, .56);
+  --line-faint: rgba(32, 30, 37, .07);
+  --acid: #6836BA;
+  --acid-soft: #713EC2;
+  --acid-faint: rgba(104, 54, 186, .10);
+  --acid-glow: 0 0 32px rgba(104, 54, 186, .16);
+  --acid-gradient: linear-gradient(135deg, #6836BA, #A92B70 55%, #007A8A);
+  --warn: #B6310B;
+  --game-violet: #6836BA;
+  --game-cyan: #006A7C;
+  --game-rose: #A2224B;
+  --game-green: #006B55;
+  --game-lilac: #6836BA;
+  --game-blue: #2355B5;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--acid); border-color: var(--acid); }
+input::placeholder, textarea::placeholder { color: var(--ink-faint); opacity: 1; }
 
 @theme inline {
   --color-ink: var(--ink);
@@ -446,14 +493,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 12%,
-    rgba(11, 11, 10, 0.05) 40%,
-    rgba(11, 11, 10, 0.35) 75%,
-    rgba(11, 11, 10, 0.7) 100%
-  );
+  background: none;
   transition: opacity 0.5s ease;
 }
 .row-ghost:hover::before { transform: scaleY(1); }

@@ -33,7 +33,10 @@ for(const file of readdirSync('public/cases/vivaro').filter(file=>file.endsWith(
 }
 const component=readFileSync('src/components/brut/VivaroCase.tsx','utf8');
 for(const match of component.matchAll(/name="([\w-]+)"/g)) assert(existsSync(`public/cases/vivaro/${match[1]}.webp`));
-assert(readFileSync('src/components/brut/WorkList.tsx','utf8').includes('vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/Cover.png"'));
+assert(readFileSync('src/components/brut/WorkList.tsx','utf8').includes('vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/CoverEditorial.webp"'));
+const editorial=await sharp('public/cases/vivaro/CoverEditorial.webp').metadata();
+assert.equal(editorial.width,3200);
+assert.equal(editorial.height,2000);
 const cover=await sharp('public/cases/vivaro/Cover.png').metadata();
 assert.equal(cover.width,3840);
 assert.equal(cover.height,2160);

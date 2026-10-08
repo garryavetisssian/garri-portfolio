@@ -253,6 +253,11 @@ export function getCaseAssets(slug: string): CaseAssets {
       };
     });
 
+    // Keep source asset folders intact; Protocols leads the portfolio case.
+    if (slug === "xy-ecosystem") {
+      tabs.sort((a, b) => Number(b.name === "XY Protocols") - Number(a.name === "XY Protocols"));
+    }
+
     // Default to the first tab. Override to a tab containing "release" if one
     // exists (preserves legacy behavior for Ineed's First/Release Version tabs).
     let defaultTab = 0;

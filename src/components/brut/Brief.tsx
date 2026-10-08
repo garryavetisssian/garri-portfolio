@@ -113,7 +113,8 @@ function CountUp({ value }: { value: string }) {
   if (parsed === null) {
     return <span>{value}</span>;
   }
-  return <span ref={ref}>{reduce ? parsed : 0}</span>;
+  // Keep the server and first client render identical; the effect handles reduced motion.
+  return <span ref={ref}>0</span>;
 }
 
 /* ─── Magnetic tile wrapper ─────────────────────────────────────── */

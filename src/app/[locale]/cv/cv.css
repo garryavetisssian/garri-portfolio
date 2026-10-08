@@ -1,5 +1,5 @@
 html.cv-mode, body.cv-mode { background: #f4f5f8 !important; color-scheme: light; }
-body.cv-mode header[class*="fixed"] { background: #0b0b0a !important; border-bottom: 1px solid #333; }
+body.cv-mode header[class*="fixed"] { background: var(--paper) !important; border-bottom: 1px solid var(--line-strong); }
 body.cv-mode .grain { display: none !important; }
 .cv-root { background: #f4f5f8; padding: calc(var(--nav-h, 64px) + 32px) 16px 64px; color: #171923; font-family: var(--font-manrope), Arial, sans-serif; }
 .cv-actions { max-width: 820px; margin: 0 auto 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }

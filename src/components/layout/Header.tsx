@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import type { Locale } from "@/lib/i18n/types";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {
@@ -67,7 +68,7 @@ export default function Header({ locale }: HeaderProps) {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-7">
             {navItems.map((item, i) => (
               <Link
                 key={item.href}
@@ -83,20 +84,28 @@ export default function Header({ locale }: HeaderProps) {
             ))}
             <span className="h-4 w-px bg-line-strong" aria-hidden />
             <LanguageSwitcher />
+            <ThemeToggle locale={locale} />
           </nav>
 
+          <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle locale={locale} />
           <button
             onClick={() => setOpen((v) => !v)}
             className="md:hidden mono text-ink"
             aria-label={t.nav.menu}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
             {open ? t.nav.close.toUpperCase() : t.nav.menu.toUpperCase()}
           </button>
+          </div>
         </div>
       </header>
 
       {/* Mobile overlay */}
       <div
+        id="mobile-navigation"
+        inert={!open}
         className={cn(
           "fixed inset-0 z-30 bg-paper transition-opacity duration-300 md:hidden",
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"

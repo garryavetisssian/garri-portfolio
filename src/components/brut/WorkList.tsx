@@ -19,7 +19,7 @@ const showcase: Record<string, { collections: Collection[]; cover: string; enter
   "xy-ecosystem": { collections: ["products", "entertainment"], cover: "/cases/xy-ecosystem/2%20XY%20Protocols/Cover.webp", entertainmentCover: "/cases/xy-ecosystem/1%20XYGO%20-%20WEB3%20Lottery/Cover.webp" },
   "meridian-hr": { collections: ["ai-engineering"], cover: "/cases/meridian-hr/Cover.svg" },
   soloos: { collections: ["ai-engineering"], cover: "/cases/soloos/Cover.svg" },
-  vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/Cover.png" },
+  vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/CoverEditorial.webp" },
   balvoi: { collections: ["products"], cover: "/cases/balvoi/Cover.webp" },
   nexwave: { collections: ["products"], cover: "/cases/nexwave/Cover.webp" },
   "dispatch-center": { collections: ["products"], cover: "/cases/dispatch-center/Cover.webp" },
@@ -101,7 +101,8 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
           {visible.map((p, index) => {
             const asset = showcase[p.slug];
             const cover = active === "entertainment" ? asset?.entertainmentCover ?? asset?.cover : asset?.cover;
-            return <li key={p.slug}><Link href={`/${locale}/work/${p.slug}`} onClick={() => { try { sessionStorage.setItem(`work-collection-${locale}-${p.slug}`, active); } catch { /* Navigation works without storage. */ } }} className={styles.card}>
+            const section = p.slug === "xy-ecosystem" ? active === "entertainment" ? "#xygo" : "#protocols" : "";
+            return <li key={p.slug}><Link href={`/${locale}/work/${p.slug}${section}`} onClick={() => { try { sessionStorage.setItem(`work-collection-${locale}-${p.slug}`, active); } catch { /* Navigation works without storage. */ } }} className={styles.card}>
               <div className={styles.cover}>
                 {cover && <Image src={cover} alt={`${p.title} — project preview`} fill sizes="(max-width: 700px) 100vw, 50vw" className={styles.image} />}
                 <span className={styles.explore}>{copy.view} <span aria-hidden="true">↗</span></span>

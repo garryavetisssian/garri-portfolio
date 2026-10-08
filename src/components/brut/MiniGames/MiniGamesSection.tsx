@@ -29,7 +29,7 @@ import {
 import { GameCover } from "./covers";
 
 /** Per-game accent so each tile reads as its own game. */
-const GAME_ACCENTS = ["#9B6BFF", "#06B6D4", "#FB7185"];
+const GAME_ACCENTS = ["var(--game-violet)", "var(--game-cyan)", "var(--game-rose)"];
 
 const GamepadIcon = (
   <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

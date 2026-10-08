@@ -76,7 +76,8 @@ function ValueCounter({ value, active }: { value: number; active: boolean }) {
     return () => controls.stop();
   }, [value, active, reduce]);
 
-  return <span ref={ref}>{reduce ? value : 0}</span>;
+  // Keep hydration stable when the OS requests reduced motion.
+  return <span ref={ref}>0</span>;
 }
 
 /* ─── Single discipline row ──────────────────────────────────────── */

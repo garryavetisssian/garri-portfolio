@@ -18,6 +18,7 @@ const cases = path.join(repoRoot, 'public', 'cases');
 // One HTML cover may map to multiple destination files (e.g. Ineed has two tab
 // subfolders that should both show the same generated cover).
 const TARGETS = [
+  { html: 'vivaro.html',          out: ['vivaro/CoverEditorial.webp'] },
   { html: 'aihive.html',          out: ['aihive/Cover.png'] },
   { html: 'dispatch-center.html', out: ['dispatch-center/Cover.png'] },
   { html: 'ineed.html',           out: ['ineed/First Version/Cover.png', 'ineed/Release Version/Cover.png'] },
@@ -34,7 +35,7 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 await page.setViewport({ width: 1600, height: 1000, deviceScaleFactor: 2 });
 
-for (const { html, out } of TARGETS) {
+for (const { html, out } of TARGETS.filter(target => !process.argv[2] || target.html === process.argv[2])) {
   const url = `file://${path.join(__dirname, html)}`;
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 30_000 });
   await new Promise((r) => setTimeout(r, 600));

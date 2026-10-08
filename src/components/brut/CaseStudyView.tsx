@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
@@ -12,6 +12,11 @@ import LaptopReveal from "./LaptopReveal";
 import ChatButton from "./ChatButton";
 import GameCaseExperience from "./game-cases/GameCaseExperience";
 import BackToWork from "./BackToWork";
+
+function subscribeHash(callback: () => void) {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
+}
 
 /** Silent case films play while visible; controls remain unobstructed. */
 function VideoBlock({ src }: { src: string }) {
@@ -108,7 +113,7 @@ function TabStrip({
               >
                 <span
                   className={`mono block text-[11px] tracking-[0.16em] uppercase mb-1 whitespace-nowrap ${
-                    isActive ? "text-paper/70" : "text-ink-faint"
+                    isActive ? "text-paper" : "text-ink-faint"
                   }`}
                 >
                   Tab {String(i + 1).padStart(2, "0")} · {tab.assets.length} {t.ui.filesSuffix}
@@ -180,7 +185,19 @@ export default function CaseStudyView({
 
   // Active tab is lifted here so both the gallery and the laptop screen
   // react to it. Defaults to the "Release Version" tab when tabs exist.
-  const [activeTab, setActiveTab] = useState(caseAssets.defaultTab);
+  const [selectedTab, setSelectedTab] = useState(caseAssets.defaultTab);
+  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash, () => "");
+  const xyTabName = hash === "#xygo" ? "XYGO - WEB3 Lottery" : "XY Protocols";
+  const xyTabIndex = caseAssets.tabs.findIndex(tab => tab.name === xyTabName);
+  const activeTab = project.slug === "xy-ecosystem" && xyTabIndex !== -1 ? xyTabIndex : selectedTab;
+  function setActiveTab(index: number) {
+    setSelectedTab(index);
+    if (project.slug === "xy-ecosystem") {
+      const section = caseAssets.tabs[index]?.name === "XY Protocols" ? "#protocols" : "#xygo";
+      window.history.replaceState(window.history.state, "", section);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    }
+  }
 
   // Cover image for the laptop screen:
   //   1. Prefer the cover of the currently active tab (if the case has tabs)

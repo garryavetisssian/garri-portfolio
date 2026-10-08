@@ -239,7 +239,7 @@ export default async function AboutPage({ params }: PageProps) {
                     >
                       {f.name}
                     </span>
-                    <span className="mono" style={{ color: f.tagColor }}>
+                    <span className="mono" style={{ color: f.tagColor === "#00D4AA" ? "var(--game-green)" : "var(--game-lilac)" }}>
                       [{f.tag}]
                     </span>
                   </div>

@@ -59,7 +59,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${unbounded.variable} ${manrope.variable} ${jetbrains.variable} h-full`}>
+    <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${manrope.variable} ${jetbrains.variable} h-full`}>
+      <head><script dangerouslySetInnerHTML={{ __html: `(function(){var t;try{t=localStorage.getItem('portfolio-theme')}catch(e){}var m=matchMedia('(prefers-color-scheme: light)');function apply(){document.documentElement.dataset.theme=t==='light'||t==='dark'?t:m.matches?'light':'dark'}apply();m.addEventListener('change',function(){try{t=localStorage.getItem('portfolio-theme')}catch(e){}apply()});window.addEventListener('storage',function(e){if(e.key==='portfolio-theme'){t=e.newValue;apply()}})})();` }} /></head>
       <body className="min-h-full font-sans antialiased" suppressHydrationWarning>
         {children}
         <Analytics />
