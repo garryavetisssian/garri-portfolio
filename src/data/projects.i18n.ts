@@ -4,6 +4,7 @@ import { getProject } from "./projects";
 import { getMeridianProject } from "./meridian";
 import { getSoloosProject } from "./soloos";
 import { getVivaroProject } from "./vivaro";
+import { getKenoProject } from "./keno";
 
 /**
  * Per-case localized text.
@@ -737,6 +738,7 @@ export function getLocalizedProject(
   slug: string,
   locale: Locale
 ): CaseStudy | undefined {
+  if (slug === "keno") return getKenoProject(locale);
   if (slug === "meridian-hr") return getMeridianProject(locale);
   if (slug === "soloos") return getSoloosProject(locale);
   if (slug === "vivaro") return getVivaroProject(locale);

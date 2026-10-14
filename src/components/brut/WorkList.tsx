@@ -16,6 +16,7 @@ import styles from "./WorkList.module.css";
 export type Collection = "products" | "entertainment" | "ai-engineering";
 const collections: Collection[] = ["products", "entertainment", "ai-engineering"];
 const showcase: Record<string, { collections: Collection[]; cover: string; entertainmentCover?: string }> = {
+  keno: { collections: ["entertainment"], cover: "/cases/keno/Cover.png" },
   "xy-ecosystem": { collections: ["products", "entertainment"], cover: "/cases/xy-ecosystem/2%20XY%20Protocols/Cover.webp", entertainmentCover: "/cases/xy-ecosystem/1%20XYGO%20-%20WEB3%20Lottery/Cover.webp" },
   "meridian-hr": { collections: ["ai-engineering"], cover: "/cases/meridian-hr/Cover.svg" },
   soloos: { collections: ["ai-engineering"], cover: "/cases/soloos/Cover.svg" },
