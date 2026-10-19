@@ -6,8 +6,9 @@ import type { CaseStudy } from "@/lib/types";
 import type { CaseAssets, CaseTab, CaseAsset } from "@/lib/case-assets";
 import { useLanguage, translateTabName } from "@/lib/i18n/LanguageContext";
 import { localizeCategory } from "@/data/projects.i18n";
+import { getCaseEvidence } from "@/data/case-evidence";
 import Brief from "./Brief";
-import MyRole from "./MyRole";
+import CaseEvidencePanel from "./CaseEvidencePanel";
 import LaptopReveal from "./LaptopReveal";
 import ChatButton from "./ChatButton";
 import GameCaseExperience from "./game-cases/GameCaseExperience";
@@ -42,15 +43,15 @@ function VideoBlock({ src }: { src: string }) {
   );
 }
 
-function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean }) {
+function AssetBlock({ asset, priority, alt }: { asset: CaseAsset; priority?: boolean; alt: string }) {
   if (asset.type === "video") {
     return <VideoBlock src={asset.src} />;
   }
-  /* eslint-disable-next-line @next/next/no-img-element */
-  return (
+  return <a href={asset.src} target="_blank" rel="noopener noreferrer" aria-label={`${alt} — open full size`} className="block cursor-zoom-in focus-visible:outline-acid">
+    {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
       src={asset.src}
-      alt=""
+      alt={alt}
       width={asset.width}
       height={asset.height}
       loading={priority ? "eager" : "lazy"}
@@ -65,15 +66,15 @@ function AssetBlock({ asset, priority }: { asset: CaseAsset; priority?: boolean 
       }
       draggable={false}
     />
-  );
+  </a>;
 }
 
-function Gallery({ assets, priority = 0 }: { assets: CaseAsset[]; priority?: number }) {
+function Gallery({ assets, title, priority = 0 }: { assets: CaseAsset[]; title: string; priority?: number }) {
   if (assets.length === 0) return null;
   return (
     <div className="flex flex-col">
       {assets.map((a, i) => (
-        <AssetBlock key={a.src} asset={a} priority={i < priority} />
+        <AssetBlock key={a.src} asset={a} priority={i < priority} alt={`${title} — visual ${i + 1}`} />
       ))}
     </div>
   );
@@ -145,13 +146,15 @@ function TabStrip({
 function TabbedGallery({
   tabs,
   active,
+  title,
 }: {
   tabs: CaseTab[];
   active: number;
+  title: string;
 }) {
   const current = tabs[active];
   if (!current) return null;
-  return <Gallery assets={current.assets} priority={1} />;
+  return <Gallery assets={current.assets} title={`${title} · ${current.name}`} priority={1} />;
 }
 
 export default function CaseStudyView({
@@ -182,6 +185,7 @@ export default function CaseStudyView({
   // the game rather than repeating the same introduction above its artwork.
   const hasVisualFirstIntro = project.slug === "spearthrone";
   const hasTabs = caseAssets.tabs.length > 0;
+  const hasEvidence = Boolean(getCaseEvidence(project.slug, locale));
 
   // Active tab is lifted here so both the gallery and the laptop screen
   // react to it. Defaults to the "Release Version" tab when tabs exist.
@@ -234,7 +238,7 @@ export default function CaseStudyView({
             <span className="text-ink-mute">{project.slug}</span>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="grid md:grid-cols-12 gap-8 items-start">
             <div className="project-title-container min-w-0 md:col-span-9">
               <div className="flex flex-wrap gap-2 mb-6">
                 {(Array.isArray(project.category) ? project.category : [project.category]).map(
@@ -280,12 +284,12 @@ export default function CaseStudyView({
       </section>
 
       {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
-      {!hasVisualFirstIntro && <Brief brief={project.brief} slug={project.slug} />}
+      {!hasVisualFirstIntro && !hasEvidence && <Brief brief={project.brief} slug={project.slug} />}
 
       {/* Tab strip — for cases with multiple tabs, lives ABOVE everything it
           controls (the laptop cover + the gallery), so the control sits in
           the same scroll region as the content that changes. */}
-      {hasTabs && (
+      {hasTabs && !hasEvidence && (
         <TabStrip
           tabs={caseAssets.tabs}
           active={activeTab}
@@ -295,15 +299,23 @@ export default function CaseStudyView({
 
       {/* Laptop reveal — scroll-driven cover image moment, tinted with the
           case's accent color. */}
-      {coverSrc && !hasBespokeGameCase && <LaptopReveal src={coverSrc} color={project.color} />}
+      {coverSrc && !hasBespokeGameCase && !hasEvidence && <LaptopReveal src={coverSrc} color={project.color} />}
 
-      {/* Role breakdown — discipline-level ownership bars. */}
-      {project.roleBreakdown && !hasVisualFirstIntro && (
-        <MyRole data={project.roleBreakdown} slug={project.slug} />
+      {/* Describe ownership without self-scored percentage bars. */}
+      {project.roleBreakdown && !hasVisualFirstIntro && !hasEvidence && (
+        <section className="border-t border-line-strong py-8" aria-label="Project responsibilities">
+          <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-5">
+            <span className="mono text-ink-mute md:col-span-3">— {t.caseStudy.role}</span>
+            <div className="md:col-span-9">
+              {project.roleBreakdown.summary && <p className="text-ink text-[18px] leading-[1.5] max-w-[62ch]">{project.roleBreakdown.summary}</p>}
+              <p className="mono text-ink-mute mt-3">{project.roleBreakdown.tracks.map(track => track.label).join(" · ")}</p>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Overview */}
-      {!hasVisualFirstIntro && <section className="py-16 border-t border-line-strong">
+      {!hasVisualFirstIntro && !hasEvidence && <section className="py-16 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <p className="md:col-span-3 mono text-ink-mute">— {t.caseStudy.overview}</p>
           <p className="md:col-span-9 prose-brut text-ink text-[19px] leading-[1.55] max-w-[62ch]">
@@ -311,6 +323,12 @@ export default function CaseStudyView({
           </p>
         </div>
       </section>}
+
+      {hasEvidence && <CaseEvidencePanel slug={project.slug} locale={locale} />}
+
+      {hasTabs && hasEvidence && (
+        <TabStrip tabs={caseAssets.tabs} active={activeTab} onActiveChange={setActiveTab} />
+      )}
 
       {/* Image stack — Behance style. Full container width, zero gaps. */}
       {hasBespokeGameCase && <GameCaseExperience slug={project.slug} />}
@@ -336,15 +354,15 @@ export default function CaseStudyView({
           </div>
 
           {hasTabs ? (
-            <TabbedGallery tabs={caseAssets.tabs} active={activeTab} />
+            <TabbedGallery tabs={caseAssets.tabs} active={activeTab} title={project.title} />
           ) : (
-            <Gallery assets={caseAssets.assets} priority={1} />
+            <Gallery assets={caseAssets.assets} title={project.title} priority={1} />
           )}
         </section>
       )}
 
       {/* Metrics — no generic heading, numbers speak */}
-      {project.metrics && project.metrics.length > 0 && (
+      {!hasEvidence && project.metrics && project.metrics.length > 0 && (
         <section className="py-16 border-t border-line-strong bg-paper-soft">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
             <div className="flex items-baseline justify-between mb-8 mono">
@@ -385,7 +403,7 @@ export default function CaseStudyView({
       )}
 
       {/* Reflection */}
-      {project.reflection && project.reflection.trim().length > 0 && (
+      {!hasEvidence && project.reflection && project.reflection.trim().length > 0 && (
         <section className="py-20 border-t border-line-strong">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
             <div className="md:col-span-3">

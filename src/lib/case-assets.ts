@@ -13,7 +13,9 @@ const CASE_FOLDER_ALIASES: Record<string, string> = {
   "roos-ruckus": "Roo's Ruckus",
 };
 
-const IGNORED_CASE_FOLDERS = new Set(["dribbble"]);
+// Evidence captures are presented as annotated flow rails in the editorial
+// case section, so they should not become duplicate gallery tabs.
+const IGNORED_CASE_FOLDERS = new Set(["dribbble", "evidence"]);
 
 /** These two cases arrived as named presentation frames rather than numbered
  * exports. Their editorial sequence is intentional: concept, system, motion,
@@ -249,7 +251,12 @@ export function getCaseAssets(slug: string): CaseAssets {
       return {
         name: displayName,
         cover: findCover(folderPath, urlPrefix),
-        assets: scanDir(folderPath, urlPrefix),
+        // The legacy Ineed release deck ends with a "Like and Subscribe"
+        // presentation card. Keep the source file, but not that card on the
+        // personal portfolio page.
+        assets: scanDir(folderPath, urlPrefix).filter((asset) =>
+          !(slug === "ineed" && folder === "Release Version" && asset.src.endsWith("/17.webp"))
+        ),
       };
     });
 

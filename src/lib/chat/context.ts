@@ -8,6 +8,8 @@
  */
 
 import { getProject } from "@/data/projects";
+import { getCaseEvidence } from "@/data/case-evidence";
+import { getCaseScope } from "@/data/case-scope";
 import { INTRO } from "@/data/about";
 import type { CaseStudy } from "@/lib/types";
 
@@ -40,7 +42,7 @@ function formatRole(c: CaseStudy): string {
   if (!c.roleBreakdown) return "";
   const summary = c.roleBreakdown.summary ?? "";
   const tracks = c.roleBreakdown.tracks
-    .map((t) => `- ${t.label}: ${t.value}/100`)
+    .map((t) => `- ${t.label}`)
     .join("\n");
   return [summary, tracks].filter(Boolean).join("\n");
 }
@@ -84,6 +86,32 @@ export function buildSystemPrompt(slug: string): string | null {
   }
 
   sections.push(``, `## Overview`, trim(c.overview, 1200));
+
+  const evidence = getCaseEvidence(slug, "en");
+  const scope = getCaseScope(slug, "en");
+  if (scope) {
+    sections.push(
+      "",
+      "## Full project scope and ownership",
+      scope.summary,
+      `Owned: ${scope.ownership.join("; ")}`,
+      ...scope.workstreams.map(item => `${item.title}: ${item.description}`),
+      "The decision below is one part of the overall product and design-system work, not the complete case.",
+    );
+  }
+  if (evidence) {
+    sections.push(
+      ``,
+      `## Evidence-bounded product story`,
+      `Status: ${evidence.status}`,
+      `Problem: ${evidence.problem}`,
+      `Design decision: ${evidence.decision}`,
+      `Trade-off: ${evidence.tradeoff}`,
+      `Reported result: ${evidence.result}`,
+      `Limits: ${evidence.resultContext}`,
+      "Do not invent testimonials, analytics, causality, launch status, or financial outcomes. Distinguish example values visible in interface screenshots from measured product results.",
+    );
+  }
 
   const secs = formatSections(c);
   if (secs) {

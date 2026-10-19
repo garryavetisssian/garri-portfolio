@@ -546,7 +546,7 @@ const en: Dictionary = {
     headingLine1: "HOW IT GETS",
     headingLine2: "MADE",
     blurb:
-      "Evidence before pixels. Strategy before screens. The same loop, every project — research, frame, design, validate.",
+      "Start with the problem, make the trade-offs visible, and separate measured outcomes from what still needs validation.",
     stepLabel: "Step",
     steps: [
       { step: "01", title: "Understand", description: "Research the problem space, talk to users, analyze data, and map the business context. No assumptions — evidence." },
@@ -580,7 +580,7 @@ const en: Dictionary = {
     viewAllShort: "View all",
     moreInArchive: "more in the archive",
     caseArchiveBlurb:
-      "Every case is a full story — problem, research, decisions, what worked, and what I'd redo. No mood-board screenshots, no shipped-feature drive-bys. Pick a file and read the receipts.",
+      "Product work, design systems, and concepts at different stages. The deeper cases show decisions and evidence limits; concept projects are labeled as such.",
     visualsLabel: "Visuals",
     aboutEyebrow: "About",
     contactEyebrow: "Contact / always open",
@@ -870,7 +870,7 @@ const ru: Dictionary = {
     headingLine1: "КАК ЭТО",
     headingLine2: "ДЕЛАЕТСЯ",
     blurb:
-      "Сначала данные, потом пиксели. Сначала стратегия, потом экраны. Один и тот же цикл в каждом проекте — ресерч, рамка, дизайн, валидация.",
+      "Начать с проблемы, показать компромиссы и отделить измеренные результаты от того, что ещё требует проверки.",
     stepLabel: "Шаг",
     steps: [
       { step: "01", title: "Понять", description: "Изучить проблему, поговорить с пользователями, проанализировать данные и контекст бизнеса. Без догадок — только факты." },
@@ -904,7 +904,7 @@ const ru: Dictionary = {
     viewAllShort: "Все",
     moreInArchive: "ещё в архиве",
     caseArchiveBlurb:
-      "Каждый кейс — это полная история: задача, ресерч, решения, что сработало и что я бы переделал. Без скриншотов из мудборда и понтов о фичах. Откройте и читайте по существу.",
+      "Продуктовые проекты, дизайн-системы и концепты на разных стадиях. В подробных кейсах показаны решения и границы доказательств; концепты обозначены отдельно.",
     visualsLabel: "Визуал",
     aboutEyebrow: "Обо мне",
     contactEyebrow: "Контакт / всегда открыт",
@@ -1197,7 +1197,7 @@ const hy: Dictionary = {
     headingLine1: "ԻՆՉՊԵՍ Է",
     headingLine2: "ՍՏԵՂԾՎՈՒՄ",
     blurb:
-      "Տվյալները՝ պիքսելներից առաջ։ Ստրատեգիան՝ էկրաններից առաջ։ Միևնույն ցիկլը՝ ամեն նախագծում՝ ուսումնասիրել, շրջանակել, դիզայնել, ստուգել։",
+      "Սկսել խնդրից, ցույց տալ փոխզիջումները և չափված արդյունքները տարանջատել այն ամենից, ինչը դեռ պետք է ստուգել։",
     stepLabel: "Քայլ",
     steps: [
       { step: "01", title: "Հասկանալ", description: "Ուսումնասիրել խնդիրը, զրուցել օգտատերերի հետ, վերլուծել տվյալներն ու բիզնեսի համատեքստը։ Առանց ենթադրությունների՝ միայն փաստեր։" },
@@ -1231,7 +1231,7 @@ const hy: Dictionary = {
     viewAllShort: "Բոլորը",
     moreInArchive: "ևս արխիվում",
     caseArchiveBlurb:
-      "Ամեն գործ՝ ամբողջական պատմություն է. խնդիր, ուսումնասիրություն, որոշումներ, ինչն աշխատեց ու ինչը կփոխեի։ Առանց մուդբորդից սքրինների ու ֆիչաների ցուցադրման։ Բացեք և կարդացեք ըստ էության։",
+      "Պրոդուկտային աշխատանք, դիզայն-համակարգեր և տարբեր փուլերի կոնցեպտներ։ Մանրամասն քեյսերը ցույց են տալիս որոշումներն ու ապացույցների սահմանները, իսկ կոնցեպտները նշված են որպես այդպիսին։",
     visualsLabel: "Վիզուալ",
     aboutEyebrow: "Իմ մասին",
     contactEyebrow: "Կապ / միշտ բաց",

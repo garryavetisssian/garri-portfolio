@@ -5,6 +5,8 @@ import { getMeridianProject } from "./meridian";
 import { getSoloosProject } from "./soloos";
 import { getVivaroProject } from "./vivaro";
 import { getKenoProject } from "./keno";
+import { getCaseEvidence } from "./case-evidence";
+import { getCaseScope } from "./case-scope";
 
 /**
  * Per-case localized text.
@@ -746,6 +748,39 @@ export function getLocalizedProject(
   if (!base) return undefined;
   const loc = locale === "en" ? undefined : PROJECT_CONTENT_I18N[slug]?.[locale];
   if (!loc) return base;
+
+  // These four cases have a deliberately evidence-bounded editorial story.
+  // Do not revive their older claims through the legacy positional translation.
+  const caseEvidence = getCaseEvidence(slug, locale);
+  if (caseEvidence) {
+    const caseScope = getCaseScope(slug, locale);
+    const subtitles: Record<"ru" | "hy", Record<string, string>> = {
+      ru: {
+        "duck-master": "Telegram-игра и визуальная система: торговля, карты, прогрессия и социальные сценарии",
+        ineed: "Двусторонняя сервисная платформа: от первой версии для компаний до релиза с двумя приложениями",
+        balvoi: "Новостная и образовательная платформа: чтение, AI-анализ и адаптивная дизайн-система",
+        "xy-ecosystem": "Единая Web3-система для лотереи, маркетплейса, Earn, Cybele и токена",
+      },
+      hy: {
+        "duck-master": "Telegram խաղ և վիզուալ համակարգ՝ առևտուր, քարտեր, առաջընթաց ու սոցիալական հոսքեր",
+        ineed: "Երկկողմ ծառայություն՝ ընկերությունների առաջին տարբերակից մինչև երկու հավելվածով թողարկում",
+        balvoi: "Լրատվական և մեդիագրագիտության հարթակ՝ ընթերցում, AI վերլուծություն և ադապտիվ դիզայն համակարգ",
+        "xy-ecosystem": "Միասնական Web3 համակարգ՝ վիճակախաղի, շուկայի, Earn-ի, Cybele-ի և թոքենի համար",
+      },
+    };
+    return {
+      ...base,
+      subtitle: subtitles[locale as "ru" | "hy"][slug] ?? loc.subtitle,
+      role: loc.role,
+      duration: slug === "duck-master" ? "2024–2025" : loc.duration,
+      team: loc.team,
+      overview: caseScope?.summary ?? `${caseEvidence.problem} ${caseEvidence.decision}`,
+      reflection: caseEvidence.resultContext,
+      brief: { narrative: caseScope?.summary ?? caseEvidence.problem, tiles: [] },
+      roleBreakdown: undefined,
+      metrics: [],
+    };
+  }
 
   return {
     ...base,

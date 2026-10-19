@@ -23,6 +23,7 @@ const repoRoot = path.resolve(__dirname, '..', '..');
 
 const deck = process.argv[2];
 const outSubpath = process.argv[3] ?? deck;
+const onlySlides = process.argv[4]?.split(',');
 if (!deck) {
   console.error('Usage: node scripts/slides/render.mjs <deck> [outSubpath]');
   process.exit(1);
@@ -33,6 +34,7 @@ const outDir = path.join(repoRoot, 'public', 'cases', outSubpath);
 
 const files = (await readdir(slidesDir))
   .filter((f) => /^\d{2}-[\w-]+\.html$/.test(f))
+  .filter((f) => !onlySlides || onlySlides.includes(f))
   .sort();
 
 if (files.length === 0) {
