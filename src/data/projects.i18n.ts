@@ -747,6 +747,40 @@ export function getLocalizedProject(
   const base = getProject(slug);
   if (!base) return undefined;
   const loc = locale === "en" ? undefined : PROJECT_CONTENT_I18N[slug]?.[locale];
+  const correctedSubtitles: Partial<Record<string, Record<Locale, string>>> = {
+    aihive: {
+      en: "A multi-tool AI creation workspace for writing, images, video, characters, translation and code",
+      ru: "Платформа AI-инструментов для текстов, изображений, видео, персонажей, перевода и кода",
+      hy: "AI ստեղծարար միջավայր՝ տեքստերի, պատկերների, տեսանյութերի, կերպարների, թարգմանության և կոդի համար",
+    },
+    "dispatch-center": {
+      en: "Vehicle-transport workflows across broker, carrier and driver interfaces",
+      ru: "Сценарии перевозки автомобилей для брокера, перевозчика и водителя",
+      hy: "Ավտոմեքենաների փոխադրման հոսքեր՝ բրոքերի, փոխադրողի և վարորդի համար",
+    },
+    nexwave: {
+      en: "A spatial smart-home interface for rooms, device controls, security and pairing",
+      ru: "Пространственный интерфейс умного дома: комнаты, устройства, безопасность и подключение",
+      hy: "Խելացի տան տարածական միջերես՝ սենյակներ, սարքեր, անվտանգություն և միացում",
+    },
+    "razer-ui": {
+      en: "Independent mobile-commerce concept for browsing, buying and tracking gaming hardware",
+      ru: "Независимый концепт мобильного магазина игровой техники: выбор, покупка и отслеживание",
+      hy: "Խաղային սարքերի որոնման, գնման և հետևման անկախ բջջային կոնցեպտ",
+    },
+  };
+  const correctedSubtitle = correctedSubtitles[slug]?.[locale];
+  if (correctedSubtitle) return {
+    ...base,
+    subtitle: correctedSubtitle,
+    role: loc?.role ?? base.role,
+    duration: loc?.duration ?? base.duration,
+    team: loc?.team ?? base.team,
+    brief: { narrative: "", tiles: [] },
+    roleBreakdown: undefined,
+    metrics: [],
+    reflection: "",
+  };
   if (!loc) return base;
 
   // These four cases have a deliberately evidence-bounded editorial story.
@@ -771,7 +805,7 @@ export function getLocalizedProject(
     return {
       ...base,
       subtitle: subtitles[locale as "ru" | "hy"][slug] ?? loc.subtitle,
-      role: loc.role,
+      role: slug === "duck-master" ? (locale === "ru" ? "Креативный директор / продуктовый дизайн" : "Կրեատիվ տնօրեն / պրոդուկտի դիզայն") : loc.role,
       duration: slug === "duck-master" ? "2024–2025" : loc.duration,
       team: loc.team,
       overview: caseScope?.summary ?? `${caseEvidence.problem} ${caseEvidence.decision}`,

@@ -3,12 +3,13 @@ import { getCaseEvidence } from "@/data/case-evidence";
 import { getCaseMetrics } from "@/data/case-metrics";
 import { getCaseScope } from "@/data/case-scope";
 import { getCaseSequences } from "@/data/case-sequences";
+import CaseDecisionMap from "./CaseDecisionMap";
 import styles from "./CaseEvidencePanel.module.css";
 
 const labels = {
-  en: { overview: "The whole project", ownership: "What I designed", system: "The product system", focus: "One decision in context", problem: "Context", decision: "Design response", tradeoff: "Trade-off", result: "Product status and outcome", context: "How to read this", evidence: "Selected interface flows", open: "Open full-size screen", step: "Step", gallery: "More of the work" },
-  ru: { overview: "Весь проект", ownership: "Что я спроектировал", system: "Система продукта", focus: "Одно решение в контексте", problem: "Контекст", decision: "Дизайн-решение", tradeoff: "Компромисс", result: "Статус и результат", context: "Как это понимать", evidence: "Выбранные сценарии", open: "Открыть экран целиком", step: "Шаг", gallery: "Остальная работа" },
-  hy: { overview: "Ամբողջ նախագիծը", ownership: "Իմ նախագծածը", system: "Պրոդուկտի համակարգը", focus: "Մեկ որոշում՝ համատեքստում", problem: "Համատեքստ", decision: "Դիզայնի լուծում", tradeoff: "Փոխզիջում", result: "Վիճակ և արդյունք", context: "Ինչպես հասկանալ", evidence: "Ընտրված հոսքեր", open: "Բացել ամբողջ էկրանը", step: "Քայլ", gallery: "Աշխատանքի մյուս մասը" },
+  en: { overview: "The whole project", ownership: "What I designed", system: "The product system", focus: "One decision in context", problem: "Context", decision: "Design response", tradeoff: "Trade-off", result: "Product status and outcome", context: "How to read this", reflection: "What I would measure next", evidence: "Selected interface flows", open: "Open full-size screen", step: "Step", gallery: "More of the work" },
+  ru: { overview: "Весь проект", ownership: "Что я спроектировал", system: "Система продукта", focus: "Одно решение в контексте", problem: "Контекст", decision: "Дизайн-решение", tradeoff: "Компромисс", result: "Статус и результат", context: "Как это понимать", reflection: "Что я измерял бы дальше", evidence: "Выбранные сценарии", open: "Открыть экран целиком", step: "Шаг", gallery: "Остальная работа" },
+  hy: { overview: "Ամբողջ նախագիծը", ownership: "Իմ նախագծածը", system: "Պրոդուկտի համակարգը", focus: "Մեկ որոշում՝ համատեքստում", problem: "Համատեքստ", decision: "Դիզայնի լուծում", tradeoff: "Փոխզիջում", result: "Վիճակ և արդյունք", context: "Ինչպես հասկանալ", reflection: "Ինչը կչափեի հաջորդ անգամ", evidence: "Ընտրված հոսքեր", open: "Բացել ամբողջ էկրանը", step: "Քայլ", gallery: "Աշխատանքի մյուս մասը" },
 };
 
 const duckComparison = {
@@ -59,6 +60,8 @@ export default function CaseEvidencePanel({ slug, locale }: { slug: string; loca
         </div>)}</div>
       </section>
 
+      <CaseDecisionMap slug={slug} locale={locale} />
+
       <section className={styles.focus} aria-labelledby={`${slug}-focus-heading`}>
         <span className={styles.eyebrow}>— {t.focus}</span>
         <h3 id={`${slug}-focus-heading`}>{scope.focusTitle}</h3>
@@ -72,6 +75,7 @@ export default function CaseEvidencePanel({ slug, locale }: { slug: string; loca
       </section>
 
       <div className={styles.result}><div><span className={styles.eyebrow}>— {t.result}</span><p className={styles.resultText}>{evidence.result}</p></div><div className={styles.context}><span className={styles.eyebrow}>— {t.context}</span><p>{evidence.resultContext}</p></div></div>
+      {evidence.reflection && <div className={styles.reflection}><span className={styles.eyebrow}>— {t.reflection}</span><p>{evidence.reflection}</p></div>}
 
       {sequences.length > 0 && <div className={styles.evidenceIntro}><span className={styles.eyebrow}>— {t.evidence}</span><p>{scope.visualIntro}</p></div>}
       {sequences.map((sequence, sequenceIndex) => <section className={styles.sequence} key={sequence.title} aria-labelledby={`${slug}-sequence-${sequenceIndex}`}>
@@ -79,7 +83,7 @@ export default function CaseEvidencePanel({ slug, locale }: { slug: string; loca
         <div className={styles.frameRail} role="group" aria-label={sequence.title}>{sequence.frames.map((frame, index) => <figure className={`${styles.frame} ${frame.shape === "desktop" ? styles.frameDesktop : styles.framePhone}`} key={frame.src}>
           <a href={frame.src} target="_blank" rel="noopener noreferrer" aria-label={`${t.open}: ${frame.title}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={frame.src} alt={`${frame.title}: ${frame.detail}`} loading="lazy" />
+            <img src={frame.src} alt={`${frame.title}: ${frame.detail}`} loading="lazy" style={frame.focusY === undefined ? undefined : { objectPosition: `center ${frame.focusY}%` }} />
             <span className={styles.frameOpen}>↗</span>
           </a>
           <figcaption><span>{t.step} {String(index + 1).padStart(2, "0")} / {String(sequence.frames.length).padStart(2, "0")}</span><strong>{frame.title}</strong><p>{frame.detail}</p></figcaption>

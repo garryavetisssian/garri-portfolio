@@ -1,0 +1,19 @@
+.section{padding:clamp(2.5rem,5vw,5rem) 0;border-top:1px solid var(--line-strong)}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:2rem;align-items:start}
+.eyebrow,.index{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.intro h3{font-family:var(--font-display);font-size:clamp(2rem,3.7vw,3.8rem);line-height:1.06;letter-spacing:-.045em;margin:0;max-width:18ch}
+.intro p{grid-column:2;max-width:68ch;font-size:.9rem;line-height:1.6;color:var(--ink-mute);margin:1.2rem 0 0}
+.tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2.4rem}
+.track{border:1px solid var(--line-strong);min-width:0;background:var(--paper)}
+.track:only-child{grid-column:1/-1}
+.trackHeader{padding:1.25rem 1.4rem;border-bottom:1px solid var(--line-strong)}
+.trackHeader h4{font-family:var(--font-display);font-size:clamp(1.3rem,2vw,2rem);line-height:1.1;letter-spacing:-.03em;margin:.65rem 0 0}
+.track ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;padding:0;margin:0}
+.track:only-child ol{grid-template-columns:repeat(5,minmax(0,1fr))}
+.track li{display:flex;gap:.75rem;min-width:0;padding:1.3rem 1.15rem 1.6rem}
+.track li+li{border-left:1px solid var(--line-strong)}
+.index{color:var(--acid);flex:none}
+.track strong{display:block;font-family:var(--font-display);font-size:clamp(1rem,1.25vw,1.25rem);line-height:1.2}
+.track li p{font-size:.9rem;line-height:1.5;color:var(--ink-mute);margin:.6rem 0 0}
+@media(max-width:1000px){.track:only-child ol{grid-template-columns:repeat(3,minmax(0,1fr))}.track:only-child li:nth-child(4){border-left:0;border-top:1px solid var(--line-strong)}.track:only-child li:nth-child(5){border-top:1px solid var(--line-strong)}}
+@media(max-width:720px){.intro,.tracks{grid-template-columns:1fr}.intro h3{margin-top:1rem}.intro p{grid-column:1}.track:only-child{grid-column:1}.track ol,.track:only-child ol{grid-template-columns:1fr}.track li+li,.track:only-child li:nth-child(4),.track:only-child li:nth-child(5){border-left:0;border-top:1px solid var(--line-strong)}}

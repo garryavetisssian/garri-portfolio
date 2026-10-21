@@ -546,13 +546,13 @@ const en: Dictionary = {
     headingLine1: "HOW IT GETS",
     headingLine2: "MADE",
     blurb:
-      "Start with the problem, make the trade-offs visible, and separate measured outcomes from what still needs validation.",
+      "The cases show how I connect product structure, interaction rules and visual systems—and where the available evidence stops.",
     stepLabel: "Step",
     steps: [
-      { step: "01", title: "Understand", description: "Research the problem space, talk to users, analyze data, and map the business context. No assumptions — evidence." },
-      { step: "02", title: "Frame", description: "Define the real problem (not the first one), set constraints, identify success metrics, and align stakeholders on direction." },
-      { step: "03", title: "Design", description: "Explore broadly, then converge. Wireframes, prototypes, visual design — always tied back to the strategy. Kill your darlings early." },
-      { step: "04", title: "Validate", description: "Test with real users, measure against goals, iterate based on evidence. Ship, learn, improve. Design doesn't end at handoff." },
+      { step: "01", title: "Map the system", description: "Model roles, states and dependencies before drawing screens—from Ineed's two-sided service to XY's connected products." },
+      { step: "02", title: "Choose the focus", description: "Make a trade-off visible: Ineed narrowed to home appliances; Duck Master made one market round understandable at a glance." },
+      { step: "03", title: "Build the language", description: "Carry the decision through flows, components, visual rules and motion, including the states people actually encounter." },
+      { step: "04", title: "Separate proof", description: "Show launched work, approved pre-production and concepts honestly. Label what a number measures—and what it cannot prove." },
     ],
   },
   about: {
@@ -609,7 +609,7 @@ const en: Dictionary = {
     ],
     about: [
       "FOCUS · AI · WEB3 · SAAS · MARKETPLACE",
-      "5+ YEARS · 6 CASE STUDIES",
+      "5+ YEARS · 14 CASE STUDIES",
       "BASED IN YEREVAN · OPEN TO REMOTE",
       "DESIGN IS A BUSINESS FUNCTION",
     ],
@@ -870,13 +870,13 @@ const ru: Dictionary = {
     headingLine1: "КАК ЭТО",
     headingLine2: "ДЕЛАЕТСЯ",
     blurb:
-      "Начать с проблемы, показать компромиссы и отделить измеренные результаты от того, что ещё требует проверки.",
+      "Кейсы показывают, как я связываю структуру продукта, правила взаимодействия и визуальную систему — и где заканчиваются доказательства.",
     stepLabel: "Шаг",
     steps: [
-      { step: "01", title: "Понять", description: "Изучить проблему, поговорить с пользователями, проанализировать данные и контекст бизнеса. Без догадок — только факты." },
-      { step: "02", title: "Сформулировать", description: "Найти настоящую задачу (а не первую попавшуюся), задать ограничения, метрики успеха и согласовать направление со стейкхолдерами." },
-      { step: "03", title: "Спроектировать", description: "Развернуть широкие варианты, потом сходиться. Вайрфреймы, прототипы, визуал — всё привязано к стратегии. Убивать слабые идеи рано." },
-      { step: "04", title: "Проверить", description: "Тестировать с реальными пользователями, мерить против целей, итерировать на основе данных. Дизайн не заканчивается на хендоффе." },
+      { step: "01", title: "Карта системы", description: "Сначала роли, состояния и зависимости: от двустороннего сервиса Ineed до связанных продуктов XY." },
+      { step: "02", title: "Выбор фокуса", description: "Показать компромисс: Ineed сузился до бытовой техники, а раунд Duck Master стал понятен с первого взгляда." },
+      { step: "03", title: "Язык продукта", description: "Провести решение через сценарии, компоненты, визуальные правила и движение, включая реальные состояния." },
+      { step: "04", title: "Границы доказательств", description: "Разделять релизы, утверждённую предпродакшн-работу и концепты. Указывать, что число измеряет и чего не доказывает." },
     ],
   },
   about: {
@@ -933,7 +933,7 @@ const ru: Dictionary = {
     ],
     about: [
       "ФОКУС · AI · WEB3 · SAAS · МАРКЕТПЛЕЙС",
-      "5+ ЛЕТ · 6 КЕЙСОВ",
+      "5+ ЛЕТ · 14 КЕЙСОВ",
       "ЕРЕВАН · ОТКРЫТ К УДАЛЁНКЕ",
       "ДИЗАЙН — ЭТО БИЗНЕС-ФУНКЦИЯ",
     ],
@@ -1197,13 +1197,13 @@ const hy: Dictionary = {
     headingLine1: "ԻՆՉՊԵՍ Է",
     headingLine2: "ՍՏԵՂԾՎՈՒՄ",
     blurb:
-      "Սկսել խնդրից, ցույց տալ փոխզիջումները և չափված արդյունքները տարանջատել այն ամենից, ինչը դեռ պետք է ստուգել։",
+      "Քեյսերը ցույց են տալիս, թե ինչպես եմ կապում պրոդուկտի կառուցվածքը, փոխազդեցության կանոնները և վիզուալ համակարգը՝ նշելով ապացույցների սահմանը։",
     stepLabel: "Քայլ",
     steps: [
-      { step: "01", title: "Հասկանալ", description: "Ուսումնասիրել խնդիրը, զրուցել օգտատերերի հետ, վերլուծել տվյալներն ու բիզնեսի համատեքստը։ Առանց ենթադրությունների՝ միայն փաստեր։" },
-      { step: "02", title: "Շրջանակել", description: "Սահմանել իրական խնդիրը (ոչ թե առաջին պատահածը), սահմանել սահմանափակումները, հաջողության մետրիկաները և համաձայնեցնել ուղղությունը շահագրգիռների հետ։" },
-      { step: "03", title: "Դիզայնել", description: "Բացել տարբերակների լայն դաշտ, ապա սահող ֆոկուս։ Վայրֆրեյմեր, նախատիպեր, վիզուալ դիզայն՝ միշտ կապված ստրատեգիայի հետ։ Թույլ գաղափարները շուտ թողնել։" },
-      { step: "04", title: "Ստուգել", description: "Թեստել իրական օգտատերերի հետ, համեմատել նպատակների հետ, փոփոխել՝ տվյալների հիման վրա։ Դիզայնը handoff-ով չի ավարտվում։" },
+      { step: "01", title: "Քարտեզագրել", description: "Նախ՝ դերերը, վիճակներն ու կախվածությունները՝ Ineed-ի երկկողմ ծառայությունից մինչև XY-ի կապված պրոդուկտները։" },
+      { step: "02", title: "Ընտրել ֆոկուսը", description: "Ցույց տալ փոխզիջումը. Ineed-ը կենտրոնացավ կենցաղային տեխնիկայի վրա, իսկ Duck Master-ի շուկայական փուլը դարձավ ընթեռնելի։" },
+      { step: "03", title: "Ստեղծել լեզուն", description: "Որոշումը տանել հոսքերով, բաղադրիչներով, վիզուալ կանոններով և շարժմամբ՝ ներառյալ իրական վիճակները։" },
+      { step: "04", title: "Սահմանել ապացույցը", description: "Տարբերակել թողարկված աշխատանքը, հաստատված նախաարտադրությունն ու կոնցեպտը. նշել, թե թիվն ինչ է չափում։" },
     ],
   },
   about: {
@@ -1260,7 +1260,7 @@ const hy: Dictionary = {
     ],
     about: [
       "ՖՈԿՈՒՍ · AI · WEB3 · SAAS · ՇՈՒԿԱՅԱՀՐԱՊԱՐԱԿ",
-      "5+ ՏԱՐԻ · 6 ԳՈՐԾ",
+      "5+ ՏԱՐԻ · 14 ԳՈՐԾ",
       "ԵՐԵՎԱՆ · ԲԱՑ ԵՄ ՀԵՌԱՀԱՐ ԱՇԽԱՏԱՆՔԻ",
       "ԴԻԶԱՅՆԸ ԲԻԶՆԵՍ ԳՈՐԾԱՌՈՒՅԹ Է",
     ],

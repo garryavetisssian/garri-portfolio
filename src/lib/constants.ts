@@ -1,8 +1,8 @@
 export const SITE = {
   name: "Garri Avetisyan",
-  title: "Garri Avetisyan — Product Designer",
+  title: "Garri Avetisyan — Senior Product Designer · iGaming",
   description:
-    "Product Designer with 5+ years of experience designing complex systems across AI, Web3, SaaS, and marketplaces. Based in Yerevan, Armenia.",
+    "Portfolio of Garri Avetisyan, a product designer focused on senior iGaming roles. Shipped game design, two-sided marketplaces, AI editorial workflows and connected Web3 systems.",
   url: "https://garri.design",
   email: "garryavetissian@gmail.com",
   phone: "+374 55 42 54 08",

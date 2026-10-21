@@ -13,6 +13,13 @@ import LaptopReveal from "./LaptopReveal";
 import ChatButton from "./ChatButton";
 import GameCaseExperience from "./game-cases/GameCaseExperience";
 import BackToWork from "./BackToWork";
+import LegacyCaseNarrative, { hasLegacyNarrative } from "./LegacyCaseNarrative";
+
+const sourceArchiveCopy = {
+  en: { title: "Explore the original project boards", note: "The full source deck is preserved here. Its presentation copy reflects the original project stage; the case above is the current, status-accurate account.", film: "XYGO case film · original motion artifact" },
+  ru: { title: "Открыть исходные экраны проекта", note: "Полная презентация сохранена здесь. Её тексты относятся к исходному этапу проекта; выше изложен актуальный статус.", film: "Видео XYGO · оригинальный материал" },
+  hy: { title: "Բացել նախագծի սկզբնական էկրանները", note: "Ամբողջ սկզբնական ներկայացումը պահված է այստեղ։ Դրա տեքստը վերաբերում է նախագծի այն փուլին. վերևում ներկայացված է ընթացիկ կարգավիճակը։", film: "XYGO տեսանյութ · սկզբնական նյութ" },
+};
 
 function subscribeHash(callback: () => void) {
   window.addEventListener("hashchange", callback);
@@ -20,32 +27,45 @@ function subscribeHash(callback: () => void) {
 }
 
 /** Silent case films play while visible; controls remain unobstructed. */
-function VideoBlock({ src }: { src: string }) {
+function VideoBlock({ src, label }: { src: string; label: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let inView = false;
+    const syncPlayback = () => {
+      if (inView && !document.hidden && !motionPreference.matches) {
+        void el.play().catch(() => undefined);
+      } else {
+        el.pause();
+      }
+    };
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
-          void el.play().catch(() => undefined);
-        } else if (!entry.isIntersecting || entry.intersectionRatio < 0.15) {
-          el.pause();
-        }
+        if (entry.intersectionRatio >= 0.45) inView = true;
+        else if (!entry.isIntersecting || entry.intersectionRatio < 0.15) inView = false;
+        syncPlayback();
       },
       { threshold: [0, 0.15, 0.45, 0.75] },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    document.addEventListener("visibilitychange", syncPlayback);
+    motionPreference.addEventListener("change", syncPlayback);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", syncPlayback);
+      motionPreference.removeEventListener("change", syncPlayback);
+    };
   }, []);
   return (
-    <video ref={videoRef} src={src} muted loop playsInline controls preload="metadata" className="block w-full h-auto" />
+    <video ref={videoRef} src={src} aria-label={label} muted loop playsInline controls preload="metadata" className="block w-full h-auto" />
   );
 }
 
 function AssetBlock({ asset, priority, alt }: { asset: CaseAsset; priority?: boolean; alt: string }) {
   if (asset.type === "video") {
-    return <VideoBlock src={asset.src} />;
+    return <VideoBlock src={asset.src} label={alt} />;
   }
   return <a href={asset.src} target="_blank" rel="noopener noreferrer" aria-label={`${alt} — open full size`} className="block cursor-zoom-in focus-visible:outline-acid">
     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -186,6 +206,7 @@ export default function CaseStudyView({
   const hasVisualFirstIntro = project.slug === "spearthrone";
   const hasTabs = caseAssets.tabs.length > 0;
   const hasEvidence = Boolean(getCaseEvidence(project.slug, locale));
+  const hasCorrectedNarrative = hasLegacyNarrative(project.slug);
 
   // Active tab is lifted here so both the gallery and the laptop screen
   // react to it. Defaults to the "Release Version" tab when tabs exist.
@@ -194,6 +215,9 @@ export default function CaseStudyView({
   const xyTabName = hash === "#xygo" ? "XYGO - WEB3 Lottery" : "XY Protocols";
   const xyTabIndex = caseAssets.tabs.findIndex(tab => tab.name === xyTabName);
   const activeTab = project.slug === "xy-ecosystem" && xyTabIndex !== -1 ? xyTabIndex : selectedTab;
+  const currentGalleryAssets = hasTabs ? caseAssets.tabs[activeTab]?.assets ?? [] : caseAssets.assets;
+  const featuredVideo = hasEvidence && project.slug === "xy-ecosystem" ? currentGalleryAssets.find(asset => asset.type === "video") : undefined;
+  const archiveAssets = featuredVideo ? currentGalleryAssets.filter(asset => asset !== featuredVideo) : currentGalleryAssets;
   function setActiveTab(index: number) {
     setSelectedTab(index);
     if (project.slug === "xy-ecosystem") {
@@ -266,7 +290,7 @@ export default function CaseStudyView({
             </div>
 
             {/* Sidebar meta */}
-            <aside className="md:col-span-3 hairline-t pt-6 space-y-5">
+            <aside className="md:col-span-3 hairline-t pt-6 grid grid-cols-2 gap-x-4 gap-y-5 md:block md:space-y-5">
               {[
                 { label: t.caseStudy.role, value: project.role },
                 { label: t.caseStudy.duration, value: project.duration },
@@ -284,7 +308,7 @@ export default function CaseStudyView({
       </section>
 
       {/* Brief — bespoke per-case primer (replaces legacy TL;DR strip). */}
-      {!hasVisualFirstIntro && !hasEvidence && <Brief brief={project.brief} slug={project.slug} />}
+      {!hasVisualFirstIntro && !hasEvidence && !hasCorrectedNarrative && <Brief brief={project.brief} slug={project.slug} />}
 
       {/* Tab strip — for cases with multiple tabs, lives ABOVE everything it
           controls (the laptop cover + the gallery), so the control sits in
@@ -299,10 +323,10 @@ export default function CaseStudyView({
 
       {/* Laptop reveal — scroll-driven cover image moment, tinted with the
           case's accent color. */}
-      {coverSrc && !hasBespokeGameCase && !hasEvidence && <LaptopReveal src={coverSrc} color={project.color} />}
+      {coverSrc && !hasBespokeGameCase && !hasEvidence && !hasCorrectedNarrative && <LaptopReveal src={coverSrc} color={project.color} />}
 
       {/* Describe ownership without self-scored percentage bars. */}
-      {project.roleBreakdown && !hasVisualFirstIntro && !hasEvidence && (
+      {project.roleBreakdown && !hasVisualFirstIntro && !hasEvidence && !hasCorrectedNarrative && (
         <section className="border-t border-line-strong py-8" aria-label="Project responsibilities">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-5">
             <span className="mono text-ink-mute md:col-span-3">— {t.caseStudy.role}</span>
@@ -315,7 +339,7 @@ export default function CaseStudyView({
       )}
 
       {/* Overview */}
-      {!hasVisualFirstIntro && !hasEvidence && <section className="py-16 border-t border-line-strong">
+      {!hasVisualFirstIntro && !hasEvidence && !hasCorrectedNarrative && <section className="py-16 border-t border-line-strong">
         <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
           <p className="md:col-span-3 mono text-ink-mute">— {t.caseStudy.overview}</p>
           <p className="md:col-span-9 prose-brut text-ink text-[19px] leading-[1.55] max-w-[62ch]">
@@ -325,6 +349,7 @@ export default function CaseStudyView({
       </section>}
 
       {hasEvidence && <CaseEvidencePanel slug={project.slug} locale={locale} />}
+      {hasCorrectedNarrative && <LegacyCaseNarrative slug={project.slug} locale={locale} />}
 
       {hasTabs && hasEvidence && (
         <TabStrip tabs={caseAssets.tabs} active={activeTab} onActiveChange={setActiveTab} />
@@ -333,7 +358,24 @@ export default function CaseStudyView({
       {/* Image stack — Behance style. Full container width, zero gaps. */}
       {hasBespokeGameCase && <GameCaseExperience slug={project.slug} />}
 
-      {hasGallery && !hasBespokeGameCase && (
+      {hasGallery && !hasBespokeGameCase && hasEvidence && (
+        <section className="border-t border-line-strong bg-paper" aria-label={t.caseStudy.visuals}>
+          {featuredVideo && <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-10">
+            <p className="mono text-ink-mute mb-4">— {sourceArchiveCopy[locale].film}</p>
+            <div className="max-w-[1440px] mx-auto border border-line-strong"><VideoBlock src={featuredVideo.src} label={sourceArchiveCopy[locale].film} /></div>
+          </div>}
+          <details key={project.slug === "xy-ecosystem" ? activeTab : project.slug} className="group border-t border-line-strong">
+            <summary className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-6 min-h-16 cursor-pointer list-none flex items-center justify-between gap-5 focus-visible:outline-acid [&::-webkit-details-marker]:hidden">
+              <span className="font-display text-[clamp(1.15rem,2vw,1.6rem)] font-bold">{sourceArchiveCopy[locale].title}</span>
+              <span className="mono text-ink-mute shrink-0">{archiveAssets.length} {t.ui.filesSuffix} <span aria-hidden="true" className="inline-block ml-3 transition-transform group-open:rotate-45">＋</span></span>
+            </summary>
+            <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] pb-6 text-ink-mute max-w-[72ch] leading-relaxed">{sourceArchiveCopy[locale].note}</div>
+            <Gallery assets={archiveAssets} title={project.title} />
+          </details>
+        </section>
+      )}
+
+      {hasGallery && !hasBespokeGameCase && !hasEvidence && (
         <section className="border-t border-line-strong bg-paper">
           {/* Strip label above the stack */}
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-6 flex items-center justify-between mono">
@@ -362,7 +404,7 @@ export default function CaseStudyView({
       )}
 
       {/* Metrics — no generic heading, numbers speak */}
-      {!hasEvidence && project.metrics && project.metrics.length > 0 && (
+      {!hasEvidence && !hasCorrectedNarrative && project.metrics && project.metrics.length > 0 && (
         <section className="py-16 border-t border-line-strong bg-paper-soft">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
             <div className="flex items-baseline justify-between mb-8 mono">
@@ -403,7 +445,7 @@ export default function CaseStudyView({
       )}
 
       {/* Reflection */}
-      {!hasEvidence && project.reflection && project.reflection.trim().length > 0 && (
+      {!hasEvidence && !hasCorrectedNarrative && project.reflection && project.reflection.trim().length > 0 && (
         <section className="py-20 border-t border-line-strong">
           <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] grid md:grid-cols-12 gap-8">
             <div className="md:col-span-3">

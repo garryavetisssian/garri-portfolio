@@ -147,6 +147,8 @@ export default function ContactForm() {
             placeholder={t.contact.formNamePlaceholder}
             className="form-input"
             autoComplete="name"
+            aria-required="true"
+            aria-invalid={status === "error" && errorKey === "formError" && !data.name.trim()}
             disabled={isPending}
           />
         </Field>
@@ -158,6 +160,8 @@ export default function ContactForm() {
             placeholder={t.contact.formEmailPlaceholder}
             className="form-input"
             autoComplete="email"
+            aria-required="true"
+            aria-invalid={status === "error" && errorKey === "formError" && !isValidEmail(data.email)}
             disabled={isPending}
           />
         </Field>
@@ -180,6 +184,8 @@ export default function ContactForm() {
           onChange={update("message")}
           placeholder={t.contact.formMessagePlaceholder}
           rows={7}
+          aria-required="true"
+          aria-invalid={status === "error" && errorKey === "formError" && !data.message.trim()}
           className="form-input resize-y min-h-[150px]"
           disabled={isPending}
         />
@@ -189,6 +195,7 @@ export default function ContactForm() {
         <div className="mono text-[11px] max-w-[52ch] leading-[1.5] min-h-[1.5em] flex flex-col gap-1">
           {statusLine ? (
             <span
+              role={statusLine.tone === "warn" ? "alert" : "status"}
               className={
                 statusLine.tone === "ok"
                   ? "text-acid"

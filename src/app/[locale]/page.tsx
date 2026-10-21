@@ -30,6 +30,7 @@ export default async function HomePage({ params }: PageProps) {
         locale={locale as Locale}
         items={available}
         previewLimit={4}
+        collection="entertainment"
         totalCount={available.length}
         heading={t.projects.heading.toUpperCase()}
         eyebrow={`— ${t.projects.eyebrow}`}

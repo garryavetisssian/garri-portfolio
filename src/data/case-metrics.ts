@@ -22,17 +22,17 @@ const metrics: Record<string, Record<Locale, CaseMetrics>> = {
     ] },
   },
   "duck-master": {
-    en: { heading: "Audience and round design", context: "Audience figures are approximate historical Google Analytics numbers over the first three months of our work; they do not isolate the effect of the trading round.", items: [
+    en: { heading: "Early audience and round design", context: "Approximate historical Google Analytics figures from the first three months of our work. The product later closed; these numbers do not show retention or isolate the effect of the trading round.", items: [
       { value: "~300", label: "starting audience" },
       { value: "~2,000", label: "audience after 3 months" },
       { value: "10s", label: "directional choice window" },
     ] },
-    ru: { heading: "Аудитория и механика раунда", context: "Аудитория — приблизительные исторические данные Google Analytics за первые три месяца нашей работы; они не выделяют эффект торгового раунда.", items: [
+    ru: { heading: "Ранняя аудитория и раунд", context: "Приблизительные исторические данные Google Analytics за первые три месяца нашей работы. Позже продукт закрылся; цифры не показывают удержание и не выделяют эффект торгового раунда.", items: [
       { value: "~300", label: "начальная аудитория" },
       { value: "~2 000", label: "аудитория через 3 месяца" },
       { value: "10 с", label: "время выбора направления" },
     ] },
-    hy: { heading: "Լսարան և փուլի մեխանիկա", context: "Լսարանի թվերը մեր աշխատանքի առաջին երեք ամիսների Google Analytics-ի պատմական մոտավոր տվյալներն են. դրանք չեն առանձնացնում առևտրային փուլի ազդեցությունը։", items: [
+    hy: { heading: "Վաղ լսարան և փուլի մեխանիկա", context: "Մեր աշխատանքի առաջին երեք ամիսների Google Analytics-ի պատմական մոտավոր թվերն են։ Պրոդուկտը հետո փակվեց. տվյալները չեն ցույց տալիս պահպանումը կամ առևտրային փուլի առանձին ազդեցությունը։", items: [
       { value: "~300", label: "սկզբնական լսարան" },
       { value: "~2,000", label: "լսարան 3 ամիս անց" },
       { value: "10 վ", label: "ուղղության ընտրության ժամանակ" },

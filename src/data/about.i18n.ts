@@ -10,8 +10,8 @@ export const BIO: Record<Locale, BioContent> = {
   en: {
     headline: "Design is a business function, not an aesthetic one.",
     bio: [
-      "I'm Garri Avetisyan, a Product Designer based in Yerevan, Armenia. For the past 5+ years, I've been designing complex digital products across AI, Web3, SaaS, and marketplaces — the kind of products where getting the UX wrong means real business consequences.",
-      "I believe the best design work happens at the intersection of user needs and business goals. A beautiful interface that doesn't drive outcomes isn't design — it's decoration. I focus on solving the right problems, structuring information clearly, and making complex systems feel simple.",
+      "I'm Garri Avetisyan, a Product Designer based in Yerevan. Over 5+ years I have worked across a Telegram game that launched and later closed, a two-sided service marketplace, an AI-assisted news product and connected Web3 experiences. I am now focused on senior product-design roles in iGaming.",
+      "My strength is giving complex systems a usable shape: making a game round understandable in seconds, connecting two sides of a service request, or letting an editor inspect and revise an AI suggestion. I design both the interaction model and the visual system behind it.",
       "Before every pixel, I ask: what's the business goal? Who's the user? What does success look like? This thinking shapes everything from information architecture to micro-interactions.",
     ],
     collaboration:
@@ -20,8 +20,8 @@ export const BIO: Record<Locale, BioContent> = {
   ru: {
     headline: "Дизайн — это бизнес-функция, а не эстетика.",
     bio: [
-      "Я Гарри Аветисян, продуктовый дизайнер из Еревана, Армения. Последние 5+ лет проектирую сложные цифровые продукты в сферах AI, Web3, SaaS и маркетплейсов — там, где неверный UX превращается в реальные бизнес-последствия.",
-      "Я убеждён, что лучший дизайн рождается на стыке потребностей пользователей и целей бизнеса. Красивый интерфейс без влияния на метрики — это декорация, а не дизайн. Фокусируюсь на решении правильных задач, чёткой структуре информации и упрощении сложных систем.",
+      "Я Гарри Аветисян, продуктовый дизайнер из Еревана. За 5+ лет работал над Telegram-игрой, которая запустилась и позже закрылась, двусторонним маркетплейсом услуг, новостным AI-продуктом и связанными Web3-сценариями. Сейчас ищу роль Senior Product Designer в iGaming.",
+      "Моя сильная сторона — придать сложной системе понятную форму: сделать игровой раунд ясным за секунды, связать две стороны сервисного заказа или дать редактору возможность проверить и изменить подсказку AI. Проектирую и механику взаимодействия, и визуальную систему.",
       "Перед каждым пикселем задаю себе вопросы: какая бизнес-цель? Кто пользователь? Как выглядит успех? Это мышление определяет всё — от архитектуры информации до микровзаимодействий.",
     ],
     collaboration:
@@ -30,8 +30,8 @@ export const BIO: Record<Locale, BioContent> = {
   hy: {
     headline: "Դիզայնը բիզնես գործառույթ է, ոչ թե էսթետիկ։",
     bio: [
-      "Ես Գարրի Ավետիսյանն եմ՝ պրոդուկտի դիզայներ Երևանից, Հայաստան։ Վերջին 5+ տարիների ընթացքում նախագծել եմ բարդ թվային արտադրանքներ AI, Web3, SaaS և շուկայահրապարակային ոլորտներում՝ այնտեղ, որտեղ UX-ի սխալը նշանակում է իրական բիզնես հետևանքներ։",
-      "Հավատում եմ, որ լավագույն դիզայնը ծնվում է օգտատիրոջ կարիքների և բիզնեսի նպատակների հատման կետում։ Գեղեցիկ ինտերֆեյսը, որը չի ազդում արդյունքների վրա, դիզայն չէ, այլ դեկորացիա։ Կենտրոնանում եմ ճիշտ խնդիրներ լուծելու, տեղեկատվությունը հստակ կառուցելու և բարդ համակարգերը պարզ զգալի դարձնելու վրա։",
+      "Ես Գարրի Ավետիսյանն եմ՝ պրոդուկտի դիզայներ Երևանից։ 5+ տարվա ընթացքում աշխատել եմ Telegram խաղի վրա, որը թողարկվեց և հետո փակվեց, ինչպես նաև երկկողմ ծառայության, AI լրատվական պրոդուկտի և կապված Web3 փորձառությունների վրա։ Այժմ կենտրոնացած եմ iGaming-ում Senior Product Designer դերի վրա։",
+      "Իմ ուժեղ կողմը բարդ համակարգերը հասկանալի դարձնելն է՝ խաղային փուլը պարզեցնել վայրկյանների ընթացքում, կապել ծառայության երկու կողմերին կամ խմբագրին տալ AI առաջարկը ստուգելու և փոխելու հնարավորություն։ Նախագծում եմ և փոխազդեցությունը, և տեսողական համակարգը։",
       "Մինչև ամեն պիքսել հարցնում եմ. ո՞րն է բիզնեսի նպատակը, ո՞վ է օգտատերը, ինչպիսի՞ն է հաջողության պատկերը։ Այս մտածողությունը ձևավորում է ամեն ինչ՝ տեղեկատվական ճարտարապետությունից մինչև միկրո-փոխազդեցություններ։",
     ],
     collaboration:

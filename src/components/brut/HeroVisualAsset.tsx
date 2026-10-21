@@ -16,6 +16,27 @@ export default function HeroVisualAsset({ className = "" }: HeroVisualAssetProps
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const drawBackground = () => {
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "#0f1a3d");
+      gradient.addColorStop(1, "#00f3ff");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
+    const drawParticles = () => {
+      for (let i = 0; i < 30; i++) {
+        const x = (Math.sin(Date.now() * 0.001 + i) * canvas.width * 0.5) + canvas.width * 0.5;
+        const y = (Math.cos(Date.now() * 0.0015 + i) * canvas.height * 0.5) + canvas.height * 0.5;
+        const radius = Math.random() * 2 + 1;
+        const alpha = Math.random() * 0.5 + 0.5;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.fill();
+      }
+    };
+
     const resizeCanvas = () => {
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
@@ -23,67 +44,21 @@ export default function HeroVisualAsset({ className = "" }: HeroVisualAssetProps
       drawParticles();
     };
 
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, []);
-
-  const drawBackground = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Create gradient background: deep indigo to electric cyan
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, "#0f1a3d"); // deep indigo
-    gradient.addColorStop(1, "#00f3ff"); // electric cyan
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  };
-
-  // Simple particle system for floating effect
-  const drawParticles = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Clear with transparent to let gradient show
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw some floating dots/particles
-    const particleCount = 30;
-    for (let i = 0; i < particleCount; i++) {
-      const x = (Math.sin(Date.now() * 0.001 + i) * canvas.width * 0.5) + canvas.width * 0.5;
-      const y = (Math.cos(Date.now() * 0.0015 + i) * canvas.height * 0.5) + canvas.height * 0.5;
-      const radius = Math.random() * 2 + 1;
-      const alpha = Math.random() * 0.5 + 0.5;
-
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-      ctx.fill();
-    }
-  };
-
-  // Animation loop
-  useEffect(() => {
+    let frame = 0;
     const animate = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
       drawBackground();
       drawParticles();
-
-      requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
     };
 
-    animate();
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    frame = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (

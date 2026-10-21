@@ -22,6 +22,7 @@
 .info p { margin-top: .6rem; max-width: 52ch; color: var(--ink-mute, #a7a79f); font-size: .9rem; line-height: 1.55; }
 .year { flex-shrink: 0; color: var(--ink-mute, #a7a79f); font-size: .65rem; }
 .tags { margin: 1rem 0 0 2rem; color: var(--ink-mute, #a7a79f); font-size: .6rem; letter-spacing: .09em; }
+.stage { display: inline-block; margin: .8rem 0 0 2rem; border: 1px solid var(--line-strong); color: var(--ink); padding: .3rem .55rem; font: .62rem var(--font-mono); letter-spacing: .04em; }
 .viewAll { display: flex; justify-content: space-between; border-top: 1px solid var(--line-strong); margin-top: 3rem; padding: 1.25rem 0; color: var(--ink, #f2f1eb); font-size: 1rem; }
 @media (max-width: 900px) { .collectionCount { display: none; } .tabs { gap: 0 1.5rem; width: 100%; } .tab { flex: 1 1 180px; } }
 @media (max-width: 700px) { .grid { grid-template-columns: 1fr; gap: 2.25rem; } .tabs { gap: 1rem; } .tab { font-size: .85rem; gap: .4rem; } .tabCount { font-size: .6rem; } .meta { gap: .65rem; } .info p { font-size: .85rem; } .explore { opacity: 1; transform: none; padding: .45rem .65rem; } .tags { margin-left: 1.75rem; } }

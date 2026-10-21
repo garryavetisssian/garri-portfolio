@@ -13,7 +13,7 @@ export const projects: CaseStudy[] = [
   {
     slug: "razer-ui",
     title: "Razer UI",
-    subtitle: "UI concept and design exploration for a gaming hardware brand's digital product experience",
+    subtitle: "Independent mobile-commerce concept for browsing, buying and tracking gaming hardware",
     category: "Experimental",
     year: "2022",
     role: "UI Designer",
@@ -134,7 +134,7 @@ export const projects: CaseStudy[] = [
   {
     slug: "aihive",
     title: "AI Hive",
-    subtitle: "AI-powered productivity platform that streamlines team workflows with intelligent automation",
+    subtitle: "A multi-tool AI creation workspace for writing, images, video, characters, translation and code",
     category: ["AI", "SaaS"],
     year: "2023",
     role: "Product Designer",
@@ -188,7 +188,7 @@ export const projects: CaseStudy[] = [
   {
     slug: "dispatch-center",
     title: "Dispatch Center",
-    subtitle: "Real-time logistics dashboard for managing fleet operations, dispatching, and delivery tracking",
+    subtitle: "Vehicle-transport workflows across broker, carrier and driver interfaces",
     category: ["SaaS", "Mobile", "Logistics"],
     year: "2023 - 2024",
     role: "Product Designer",
@@ -242,7 +242,7 @@ export const projects: CaseStudy[] = [
   {
     slug: "nexwave",
     title: "NexWave",
-    subtitle: "Smart home management app for controlling IoT devices, automation, and monitoring",
+    subtitle: "A spatial smart-home interface for rooms, device controls, security and pairing",
     category: ["SaaS", "Mobile"],
     year: "2024",
     role: "Product Designer",
@@ -299,7 +299,7 @@ export const projects: CaseStudy[] = [
     subtitle: "A Telegram game and visual system spanning trading, collecting, progression and social play",
     category: ["Mobile", "Gaming"],
     year: "2024 - 2025",
-    role: "Product Designer",
+    role: "Creative Director / Product Design",
     duration: "2024–2025",
     team: "PM, 2 Engineers",
     thumbnail: "/cases/duck-master/Cover.webp",

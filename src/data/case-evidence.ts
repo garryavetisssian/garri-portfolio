@@ -7,6 +7,7 @@ export interface CaseEvidence {
   tradeoff: string;
   result: string;
   resultContext: string;
+  reflection?: string;
   visual: { src: string; title: string; note: string };
   needed: string[];
 }
@@ -14,32 +15,35 @@ export interface CaseEvidence {
 const evidence: Record<string, Record<Locale, CaseEvidence>> = {
   "duck-master": {
     en: {
-      status: "Released Telegram mini-game · historical Google Analytics figures",
+      status: "Shipped Telegram mini-game · discontinued about a year later",
       problem: "The founder's original trading session asked players to read a price chart and decide when to buy or sell a coin. That imported the mental model of trading into a fast mini-game.",
       decision: "I proposed a timed up-or-down round: players have ten seconds to choose whether the price line will finish above or below a horizontal threshold. The final distance from that line determines whether the stake is lost or returns a variable multiplier.",
       tradeoff: "The ten-second choice is easier to grasp than buy/sell timing, while the moving line keeps the tension of a market. It also makes the wager and possible loss more immediate, so the threshold, countdown, stake and outcome need to stay legible.",
-      result: "The team reported a better response to the revised round. Google Analytics showed the audience rising from roughly 300 to 2,000 users during the first three months of our work.",
-      resultContext: "The Google Analytics project is no longer accessible, so these are approximate historical figures, not a retained report. Audience growth is context, not a measured causal effect of this mechanic alone.",
+      result: "Duck Master launched, but the product failed to sustain and closed about a year later. During the first three months of our work, Google Analytics showed the audience rising from roughly 300 to 2,000 users; the team also reported a better response to the revised round.",
+      resultContext: "The Analytics project is no longer accessible, so the audience figures are approximate historical recollections, not a retained report. They do not isolate the effect of this mechanic or demonstrate retention or product-market fit. The reason for closure is not documented in this case.",
+      reflection: "The early audience increase did not become a lasting product. I cannot attribute the closure to the market round, the wider game, or distribution without cohort and exit data. On a similar launch, I would track first-round comprehension, repeat play, D1/D7 retention and where players leave the progression loop before expanding the feature set.",
       visual: { src: "/cases/duck-master/evidence/trading-session.jpg", title: "The timed trading round in the Telegram mini-app", note: "A real product capture shows the moving line, the short betting window, live cash-outs and the stake-selection layer. This is product UI, not a reconstruction of player feedback." },
       needed: ["Original crypto flow and revised gamified flow, or permission to recreate them with an explicit reconstruction label", "Dated player feedback or support excerpts about the change", "Source, definition, and dates for the ~300 → ~2,000 audience estimate", "Confirmed start and end dates of your contribution"],
     },
     ru: {
-      status: "Выпущенная Telegram-мини-игра · исторические данные Google Analytics",
+      status: "Запущенная Telegram-игра · закрыта примерно через год",
       problem: "Изначальная торговая сессия предлагала читать график цены и решать, когда покупать или продавать монету. Для быстрой мини-игры это требовало слишком сложной торговой модели мышления.",
       decision: "Я предложил короткий раунд «вверх или вниз»: за десять секунд игрок выбирает, окажется ли ценовая линия выше или ниже горизонтального порога. Расстояние от порога в конце раунда определяет потерю ставки или переменный множитель выигрыша.",
       tradeoff: "Выбор за десять секунд проще, чем поиск момента покупки и продажи, но движение линии сохраняет напряжение рынка. При этом ставка и риск потери становятся непосредственнее — порог, таймер, ставка и результат должны быть понятны с первого взгляда.",
-      result: "Команда отмечала лучшую реакцию на обновлённый раунд. По данным Google Analytics за первые три месяца нашей работы аудитория выросла примерно с 300 до 2 000 пользователей.",
-      resultContext: "Доступа к проекту Google Analytics больше нет, поэтому цифры приблизительные и отчёт не сохранился. Рост аудитории — контекст, а не доказанный эффект одной механики.",
+      result: "Duck Master запустился, но не удержался как продукт и закрылся примерно через год. За первые три месяца нашей работы аудитория по Google Analytics выросла примерно с 300 до 2 000 пользователей; команда также отмечала лучшую реакцию на новый раунд.",
+      resultContext: "Доступа к проекту Analytics больше нет: цифры приблизительны, отчёт не сохранился. Они не выделяют эффект одной механики и не доказывают удержание или соответствие рынку. Причина закрытия в этом кейсе не документирована.",
+      reflection: "Ранний рост аудитории не превратился в устойчивый продукт. Без когортных данных и анализа ухода игроков я не могу связать закрытие с рыночным раундом, остальной игрой или дистрибуцией. В похожем запуске я бы отслеживал понимание первого раунда, повторные сессии, удержание D1/D7 и точки выхода из прогрессии до расширения набора механик.",
       visual: { src: "/cases/duck-master/evidence/trading-session.jpg", title: "Торговый раунд в Telegram-мини-приложении", note: "Настоящий экран продукта показывает график, короткое окно для ставки, выплаты других игроков и выбор пакета. Это интерфейс продукта, а не реконструкция отзывов." },
       needed: ["Исходный криптосценарий и новая игровая версия либо разрешение показать обозначенную реконструкцию", "Датированные отзывы игроков об изменении", "Источник, определение и период оценки аудитории ~300 → ~2 000", "Подтверждённые даты участия в проекте"],
     },
     hy: {
-      status: "Թողարկված Telegram մինի-խաղ · Google Analytics-ի պատմական տվյալներ",
+      status: "Թողարկված Telegram խաղ · փակվել է մոտ մեկ տարի անց",
       problem: "Սկզբնական առևտրային փուլում խաղացողը պետք է կարդար գնի գրաֆիկը և որոշեր՝ երբ գնել կամ վաճառել մետաղադրամը։ Արագ մինի-խաղի համար սա պահանջում էր բարդ առևտրային մտածողություն։",
       decision: "Ես առաջարկեցի «վերև կամ ներքև» կարճ փուլ․ խաղացողը տասը վայրկյանում ընտրում է՝ գնի գիծը վերջում հորիզոնական սահմանից վերև, թե ներքև կլինի։ Վերջնական հեռավորությունը որոշում է՝ խաղադրույքը կորում է, թե վերադարձվում է փոփոխական բազմապատկիչով։",
       tradeoff: "Տասը վայրկյանի ընտրությունը պարզ է գնման ու վաճառքի պահը գտնելուց, բայց շարժվող գիծը պահպանում է շուկայի լարվածությունը։ Միաժամանակ կորուստը դառնում է անմիջական, ուստի սահմանը, ժամանակաչափը, խաղադրույքն ու արդյունքը պետք է պարզ երևան։",
-      result: "Թիմը ավելի լավ արձագանք էր նկատում նոր փուլին։ Google Analytics-ի տվյալներով՝ մեր աշխատանքի առաջին երեք ամիսներին լսարանը մոտ 300-ից հասել էր 2,000 օգտատիրոջ։",
-      resultContext: "Google Analytics-ի տվյալ նախագծին հասանելիություն այլևս չկա, ուստի թվերը մոտավոր են, իսկ հաշվետվությունը պահպանված չէ։ Լսարանի աճը համատեքստ է, ոչ միայն այս մեխանիկայի չափված ազդեցությունը։",
+      result: "Duck Master-ը թողարկվեց, սակայն պրոդուկտը չպահպանվեց և մոտ մեկ տարի անց փակվեց։ Մեր աշխատանքի առաջին երեք ամիսներին Google Analytics-ում լսարանը մոտ 300-ից հասել էր 2,000-ի. թիմը նաև ավելի լավ արձագանք էր նկատում նոր փուլին։",
+      resultContext: "Analytics նախագծին հասանելիություն այլևս չկա. թվերը մոտավոր պատմական հիշողություն են, ոչ պահպանված հաշվետվություն։ Դրանք չեն մեկուսացնում մեխանիկայի ազդեցությունը և չեն ապացուցում պահպանում կամ շուկայի համապատասխանություն։ Փակման պատճառը այս քեյսում փաստագրված չէ։",
+      reflection: "Լսարանի վաղ աճը չվերածվեց կայուն պրոդուկտի։ Առանց կոհորտային և դուրս գալու տվյալների չեմ կարող փակումը վերագրել շուկայական փուլին, խաղի այլ մասերին կամ տարածմանը։ Նման թողարկման դեպքում մինչև նոր մեխանիկաներ ավելացնելը կհետևեի առաջին փուլի ընկալմանը, կրկնվող խաղին, D1/D7 պահպանմանը և առաջընթացից դուրս գալու կետերին։",
       visual: { src: "/cases/duck-master/evidence/trading-session.jpg", title: "Առևտրային փուլը Telegram մինի-հավելվածում", note: "Իրական էկրանը ցույց է տալիս շարժվող գիծը, կարճ խաղադրույքի պատուհանը, այլ խաղացողների վճարումները և փաթեթի ընտրությունը։" },
       needed: ["Սկզբնական կրիպտո և վերամշակված խաղային հոսքերը կամ հստակ նշված վերակառուցման թույլտվություն", "Փոփոխության վերաբերյալ թվագրված օգտատերերի արձագանք", "~300 → ~2,000 լսարանի գնահատման աղբյուրը, սահմանումը և ժամանակահատվածը", "Նախագծում մասնակցության հաստատված ամսաթվերը"],
     },

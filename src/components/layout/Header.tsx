@@ -31,6 +31,15 @@ export default function Header({ locale }: HeaderProps) {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   const navItems = [
     { href: `/${locale}/work`, label: t.nav.work },
     { href: `/${locale}/about`, label: t.nav.about },
@@ -52,7 +61,7 @@ export default function Header({ locale }: HeaderProps) {
         )}
       >
         <div className="mx-auto flex h-[var(--nav-h)] max-w-[var(--max)] items-center justify-between px-[var(--gutter)]">
-          <Link href={`/${locale}`} className="group flex items-center gap-2.5">
+          <Link href={`/${locale}`} className="group flex min-h-11 items-center gap-2.5">
             <span className="block h-2.5 w-2.5 bg-acid group-hover:rotate-45 transition-transform duration-500" aria-hidden />
             <span className="mono text-ink">
               {(() => {
@@ -74,7 +83,7 @@ export default function Header({ locale }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "mono link-uline transition-colors",
+                  "mono link-uline inline-flex min-h-11 items-center transition-colors",
                   isActive(item.href) ? "text-acid" : "text-ink-mute hover:text-ink"
                 )}
               >
@@ -91,8 +100,8 @@ export default function Header({ locale }: HeaderProps) {
           <ThemeToggle locale={locale} />
           <button
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden mono text-ink"
-            aria-label={t.nav.menu}
+            className="md:hidden mono text-ink inline-flex min-h-11 min-w-11 items-center justify-center"
+            aria-label={open ? t.nav.close : t.nav.menu}
             aria-expanded={open}
             aria-controls="mobile-navigation"
           >

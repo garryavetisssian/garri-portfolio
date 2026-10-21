@@ -26,6 +26,10 @@ function catLabel(c: string | string[]): string {
   return Array.isArray(c) ? c[0] : c;
 }
 
+function persistLocale(next: Locale) {
+  document.cookie = `locale=${next}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export default function Footer({ locale, projects = [] }: FooterProps) {
   const { t } = useLanguage();
   const router = useRouter();
@@ -34,7 +38,7 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
 
   const switchLocale = (next: Locale) => {
     if (next === locale) return;
-    document.cookie = `locale=${next}; path=/; max-age=31536000; samesite=lax`;
+    persistLocale(next);
     router.push(swapLocale(pathname, next));
   };
 

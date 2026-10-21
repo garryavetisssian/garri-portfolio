@@ -11,6 +11,7 @@ import { meridianCopy } from "@/data/meridian";
 import { soloosCopy } from "@/data/soloos";
 import { vivaroCopy } from "@/data/vivaro";
 import { orderCollectionItems } from "@/lib/work-order";
+import { getLocalizedProject } from "@/data/projects.i18n";
 import styles from "./WorkList.module.css";
 
 export type Collection = "products" | "entertainment" | "ai-engineering";
@@ -23,8 +24,8 @@ const showcase: Record<string, { collections: Collection[]; cover: string; enter
   vivaro: { collections: ["products", "entertainment"], cover: "/cases/vivaro/CoverEditorial.webp" },
   balvoi: { collections: ["products"], cover: "/cases/balvoi/Cover.webp" },
   nexwave: { collections: ["products"], cover: "/cases/nexwave/Cover.webp" },
-  "dispatch-center": { collections: ["products"], cover: "/cases/dispatch-center/Cover.webp" },
-  aihive: { collections: ["products"], cover: "/cases/aihive/Cover.webp" },
+  "dispatch-center": { collections: ["products"], cover: "/cases/dispatch-center/9.webp" },
+  aihive: { collections: ["products"], cover: "/cases/aihive/10.webp" },
   ineed: { collections: ["products"], cover: "/cases/ineed/Release%20Version/Cover.webp" },
   "roos-ruckus": { collections: ["entertainment"], cover: "/case-assets/roos-ruckus/promo.png" },
   spearthrone: { collections: ["entertainment"], cover: "/cases/Spearthrone/Cover.png" },
@@ -35,6 +36,22 @@ const labels = {
   en: { tabs: ["B2B & Enterprise Products", "iGaming & Entertainment", "AI Engineering"], hint: "Choose a collection", view: "Explore case", all: "Explore all work", count: "projects" },
   ru: { tabs: ["B2B и корпоративные продукты", "iGaming и развлечения", "AI Engineering"], hint: "Выберите коллекцию", view: "Смотреть кейс", all: "Все проекты", count: "проектов" },
   hy: { tabs: ["B2B և կորպորատիվ պրոդուկտներ", "iGaming և ժամանց", "AI Engineering"], hint: "Ընտրեք հավաքածուն", view: "Դիտել նախագիծը", all: "Բոլոր նախագծերը", count: "նախագիծ" },
+};
+const stages: Record<string, Record<Locale, string>> = {
+  keno: { en: "Designed game UI", ru: "Дизайн игрового UI", hy: "Խաղի UI դիզայն" },
+  "duck-master": { en: "Shipped · now closed", ru: "Запущена · затем закрыта", hy: "Թողարկվել է · այժմ փակված է" },
+  "xy-ecosystem": { en: "Approved pre-production", ru: "Утверждённый препродакшен", hy: "Հաստատված նախաարտադրություն" },
+  ineed: { en: "Released product", ru: "Продукт выпущен", hy: "Թողարկված պրոդուկտ" },
+  balvoi: { en: "Live in supported regions", ru: "Работает в доступных регионах", hy: "Գործում է հասանելի տարածաշրջաններում" },
+  vivaro: { en: "Independent concept", ru: "Независимый концепт", hy: "Անկախ կոնցեպտ" },
+  "roos-ruckus": { en: "Independent concept", ru: "Независимый концепт", hy: "Անկախ կոնցեպտ" },
+  spearthrone: { en: "Independent concept", ru: "Независимый концепт", hy: "Անկախ կոնցեպտ" },
+  "razer-ui": { en: "Independent concept", ru: "Независимый концепт", hy: "Անկախ կոնցեպտ" },
+  soloos: { en: "Independent build", ru: "Самостоятельная разработка", hy: "Անկախ մշակում" },
+  "meridian-hr": { en: "Recruitment exercise", ru: "Тестовое задание", hy: "Թեստային առաջադրանք" },
+  aihive: { en: "Designed experience", ru: "Спроектированный интерфейс", hy: "Նախագծված միջերես" },
+  "dispatch-center": { en: "Designed platform", ru: "Спроектированная платформа", hy: "Նախագծված հարթակ" },
+  nexwave: { en: "Designed app", ru: "Спроектированное приложение", hy: "Նախագծված հավելված" },
 };
 
 interface WorkListProps {
@@ -110,9 +127,10 @@ export default function WorkList({ locale, items, showHeading = true, heading, e
               </div>
               <div className={styles.meta}>
                 <span className={`mono ${styles.number}`}>{String(index + 1).padStart(2, "0")}</span>
-                <div className={styles.info}><h3>{p.title}</h3><p>{p.slug === "meridian-hr" ? meridianCopy[locale].subtitle : p.slug === "soloos" ? soloosCopy[locale].subtitle : p.slug === "vivaro" ? vivaroCopy[locale].subtitle : p.subtitle}</p></div>
+                <div className={styles.info}><h3>{p.title}</h3><p>{p.slug === "meridian-hr" ? meridianCopy[locale].subtitle : p.slug === "soloos" ? soloosCopy[locale].subtitle : p.slug === "vivaro" ? vivaroCopy[locale].subtitle : getLocalizedProject(p.slug, locale)?.subtitle ?? p.subtitle}</p></div>
                 <span className={`mono ${styles.year}`}>{p.year}</span>
               </div>
+              {stages[p.slug] && <span className={styles.stage}>{stages[p.slug][locale]}</span>}
               <div className={`mono ${styles.tags}`}>{(Array.isArray(p.category) ? p.category : [p.category]).join(" / ")}</div>
             </Link></li>;
           })}

@@ -1,0 +1,33 @@
+{
+  "contract": "portfolio-redesign-contract-2026-10-21.md",
+  "targetViewports": ["384x831", "1434x900", "390x844", "768x1024", "1440x900"],
+  "accessibility": {
+    "status": "partial",
+    "evidence": "Navigation labels and image alternatives were inspected in the browser accessibility tree. Work collection, source-board disclosure, mobile menu and language chooser were exercised by keyboard. Header targets were enlarged to 44px. Empty form submission exposes an alert and marks required fields invalid. A full screen-reader, contrast and reduced-motion browser-emulation sweep was not completed."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Home, Work, About, CV, Contact and all 14 cases were checked at 390px and 1440px; tablet-width routes were checked at 768px. No horizontal overflow or broken first-viewport image was observed. Editorial maps were checked at narrow and wide widths. This is responsive QA, not visual regression against baselines."
+  },
+  "contentStates": {
+    "loading": { "status": "not-applicable", "reason": "The revised homepage and editorial case sections contain static content." },
+    "empty": { "status": "not-applicable", "reason": "The revised sections do not accept user data or render a variable list that can be empty." },
+    "error": { "status": "pass", "evidence": "Submitting the contact form empty displayed a visible warning with role=alert and aria-invalid on the required fields. No real message was sent." },
+    "partial": { "status": "pass", "evidence": "The case narratives explicitly identify limits of the available evidence instead of presenting missing outcomes as proven." },
+    "success": { "status": "pass", "evidence": "Homepage case and collection links were visible; Work collection switched by touch and keyboard, source archives opened and closed with Enter, XY case tabs switched between #protocols and #xygo, and the XYGO film played in view, paused offscreen and resumed." },
+    "permission": { "status": "not-applicable", "reason": "No permission-gated action exists in the revised static sections." }
+  },
+  "renderedEvidence": [
+    { "viewport": "384x831", "artifact": "portfolio-home-mobile-384x831.jpg", "observation": "Before the closure-copy update, the hero headline, introduction and CTAs fit the narrow viewport without clipping." },
+    { "viewport": "1434x900", "artifact": "portfolio-home-desktop-1434x900.jpg", "observation": "Before the closure-copy update, positioning, primary CTA and shipped-game entry were visible in the first desktop viewport." },
+    { "viewport": "390x844", "artifact": "portfolio-home-mobile-390x844-latest.png", "observation": "The latest senior/iGaming positioning, CTAs and closed-project label fit the mobile first viewport." },
+    { "viewport": "1440x900", "artifact": "portfolio-home-desktop-1440x900-latest.png", "observation": "The latest headline, actions and Duck Master status are visible together on desktop." },
+    { "viewport": "390x844", "artifact": "ineed-map-mobile-390x844.png", "observation": "The Ineed pivot map stacks into one readable column without horizontal overflow." },
+    { "viewport": "1440x900", "artifact": "ineed-map-desktop-1440x900.png", "observation": "The company-led and released marketplace models sit side by side." },
+    { "viewport": "390x844", "artifact": "balvoi-map-mobile-390x844.png", "observation": "BalVoi's annotated workflow remains legible in a narrow column." },
+    { "viewport": "1440x900", "artifact": "balvoi-map-desktop-1440x900.png", "observation": "The DeBiasIt editorial sequence reads left to right without clipping." },
+    { "viewport": "1440x900", "artifact": "xy-map-desktop-1440x900.png", "observation": "XYGO and connected XY surfaces are visually distinct while the pre-production caveat remains adjacent." },
+    { "viewport": "1440x900", "artifact": "xygo-video-in-viewport-1440x900.png", "observation": "XYGO's original case film is present in the active tab and loaded in the browser." },
+    { "viewport": "1440x900", "artifact": "balvoi-gallery-focus-1440x900.png", "observation": "The sentence-editing preview cards now center the actual editing interface; original full screenshots remain linked." }
+  ]
+}

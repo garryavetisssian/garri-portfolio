@@ -1,113 +1,85 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import type { Locale } from "@/lib/i18n/types";
-import Link from "next/link";
-import ProfileIllustration from "./ProfileIllustration";
 
-interface HeroProps {
-  locale: Locale;
-}
+const copy = {
+  en: {
+    eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + COMPLEX PRODUCTS",
+    headline: "I design the systems behind the experience.",
+    intro: "I’m Garri Avetisyan. I turn game mechanics, two-sided journeys and complex product rules into interfaces people can understand and use. I own the work from product structure through visual system and delivery.",
+    primary: "Explore iGaming work",
+    secondary: "See all 14 cases",
+    featured: "START HERE / SHIPPED GAME",
+    project: "Duck Master",
+    projectDetail: "A Telegram game spanning progression, cards and market play. It launched, then closed roughly a year later.",
+    status: "NOW CLOSED",
+    read: "Read the case",
+    proof: "The portfolio distinguishes shipped work—including products that later closed—from approved pre-production and independent concepts. Outcomes are labelled by source and scope.",
+  },
+  ru: {
+    eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + СЛОЖНЫЕ ПРОДУКТЫ",
+    headline: "Проектирую системы, на которых держится опыт.",
+    intro: "Я Гарри Аветисян. Превращаю игровые механики, двусторонние сценарии и сложные правила продукта в понятные интерфейсы. Отвечаю за путь от структуры продукта до визуальной системы и передачи в разработку.",
+    primary: "Смотреть iGaming",
+    secondary: "Все 14 кейсов",
+    featured: "НАЧНИТЕ ЗДЕСЬ / ЗАПУЩЕННАЯ ИГРА",
+    project: "Duck Master",
+    projectDetail: "Telegram-игра с прогрессией, картами и торговым раундом. После запуска проект закрылся примерно через год.",
+    status: "ЗАКРЫТА",
+    read: "Открыть кейс",
+    proof: "В портфолио различаются запущенные продукты — включая закрывшиеся позже, — утверждённый препродакшен и независимые концепты. Результаты подписаны с указанием источника и границ данных.",
+  },
+  hy: {
+    eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + ԲԱՐԴ ՊՐՈԴՈՒԿՏՆԵՐ",
+    headline: "Նախագծում եմ փորձառության հիմքում ընկած համակարգերը։",
+    intro: "Ես Գարրի Ավետիսյանն եմ։ Խաղային մեխանիկաները, երկկողմանի հոսքերն ու բարդ կանոնները վերածում եմ հասկանալի միջերեսների։ Աշխատում եմ կառուցվածքից մինչև տեսողական համակարգ և փոխանցում մշակմանը։",
+    primary: "Տեսնել iGaming նախագծերը",
+    secondary: "Բոլոր 14 գործերը",
+    featured: "ՍԿՍԵՔ ԱՅՍՏԵՂԻՑ / ԹՈՂԱՐԿՎԱԾ ԽԱՂ",
+    project: "Duck Master",
+    projectDetail: "Telegram խաղ՝ առաջընթացով, քարտերով և շուկայական փուլով։ Թողարկումից մոտ մեկ տարի անց այն փակվեց։",
+    status: "ՓԱԿՎԱԾ Է",
+    read: "Բացել գործը",
+    proof: "Պորտֆոլիոն տարանջատում է թողարկված աշխատանքը՝ ներառյալ հետագայում փակված պրոդուկտները, հաստատված նախաարտադրությունն ու անկախ կոնցեպտները։ Արդյունքները նշված են աղբյուրով ու սահմաններով։",
+  },
+} as const;
 
-export default function Hero({ locale }: HeroProps) {
+export default function Hero({ locale }: { locale: Locale }) {
   const { t } = useLanguage();
+  const c = copy[locale];
 
-  return (
-    <section className="relative pt-[calc(var(--nav-h)+5rem)] pb-20 overflow-hidden">
-      {/* Decorative bg numerals */}
-      <span
-        aria-hidden
-        className="absolute -top-[12vw] -right-[3vw] select-none text-line"
-        style={{
-          fontFamily: "var(--font-display)",
-          fontWeight: 900,
-          fontSize: "min(34vw, 540px)",
-          lineHeight: 1,
-          color: "transparent",
-          WebkitTextStroke: "1px var(--line-strong)",
-        }}
-      >
-        26
-      </span>
-
-      <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
-        {/* Top mono row */}
-        <div className="flex flex-wrap items-baseline justify-between gap-3 mb-8 mono">
-          <span className="text-ink-mute">— {t.ui.portfolioStrip}</span>
-          <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-acid pulse-dot rounded-full" />
-            <span className="text-ink-mute">{t.hero.available.toUpperCase()}</span>
-          </span>
-        </div>
-
-        {/* Type-tower headline */}
-        <h1 className="headline text-ink select-none">
-          <span className="block reveal-up" style={{ animationDelay: "0.0s" }}>
-            <span style={{ animationDelay: "0.0s" }}>{t.hero.headlineLine1}</span>
-            <span className="text-acid ml-2" aria-hidden>↗</span>
-          </span>
-          <span className="block reveal-up" style={{ animationDelay: "0.12s" }}>
-            <span style={{ animationDelay: "0.12s" }}>{t.hero.headlineLine2.replace(/ /g, " ")}</span>
-          </span>
-          <span className="block reveal-up" style={{ animationDelay: "0.22s" }}>
-            <span style={{ animationDelay: "0.22s" }}>{t.hero.headlineLine3}<span className="text-acid">.</span></span>
-          </span>
-        </h1>
-
-        {/* Sub headline + CTA */}
-        <div className="mt-12 grid gap-8 md:grid-cols-12 items-center">
-          <div className="md:col-span-7 prose-brut text-ink-mute text-[17px] leading-[1.55] max-w-[42ch]">
-            <p>
-              <span className="text-ink">{t.hero.name}</span> — {t.hero.role}.
-              {" "}{t.hero.summary}
-            </p>
-          </div>
-
-          <div className="md:col-span-5 flex flex-col gap-3 items-start md:items-end">
-            <ProfileIllustration animated className="self-center md:self-end" />
-            <Link
-              href={`/${locale}/work`}
-              className="group inline-flex items-center gap-3 border border-acid px-5 py-3.5 mono text-acid hover:bg-acid hover:text-paper transition-colors"
-            >
-              <span>{t.hero.viewProjects}</span>
-              <span className="transition-transform duration-500 group-hover:translate-x-1">↗</span>
-            </Link>
-            <Link
-              href={`/${locale}/contact`}
-              className="mono text-ink-mute link-uline hover:text-ink"
-            >
-              — {t.hero.getInTouch}
-            </Link>
-          </div>
-        </div>
-
-        {/* Stat strip */}
-        <div className="mt-20 hairline-t grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 pt-8">
-          {[
-            { v: "05+", l: t.hero.years },
-            { v: "07", l: t.hero.projects },
-            { v: "04", l: t.hero.industries },
-            { v: "03", l: t.hero.languages },
-          ].map((s, i) => (
-            <div key={s.l} className="flex flex-col gap-2">
-              <span className="mono text-ink-faint">{String(i + 1).padStart(2, "0")}</span>
-              <span
-                className="text-ink"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 800,
-                  fontSize: "clamp(2.25rem, 4.5vw, 4rem)",
-                  lineHeight: 0.9,
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                {s.v}
-              </span>
-              <span className="mono text-ink-mute">{s.l}</span>
-            </div>
-          ))}
-        </div>
+  return <section className="border-b border-line-strong pt-[calc(var(--nav-h)+3rem)] pb-14 md:pt-[calc(var(--nav-h)+5rem)] md:pb-20">
+    <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
+      <div className="flex flex-wrap justify-between gap-3 mono text-ink-mute text-[11px] tracking-[.14em]">
+        <span>— {c.eyebrow}</span>
+        <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-acid pulse-dot" />{t.hero.available.toUpperCase()}</span>
       </div>
-    </section>
-  );
+
+      <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(290px,.55fr)] lg:items-end">
+        <div>
+          <h1 className="max-w-[12ch] text-ink font-[family-name:var(--font-display)] font-extrabold leading-[.95] tracking-[-.06em] text-[clamp(3.4rem,8.2vw,8.8rem)]">
+            {c.headline}
+          </h1>
+          <p className="mt-8 max-w-[62ch] text-ink-mute text-[clamp(1.05rem,1.55vw,1.4rem)] leading-[1.5]">{c.intro}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link href={`/${locale}/work/entertainment`} className="inline-flex min-h-12 items-center gap-8 bg-acid px-5 py-3 text-paper hover:opacity-85 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-acid">{c.primary}<span aria-hidden>↗</span></Link>
+            <Link href={`/${locale}/work`} className="inline-flex min-h-12 items-center border-b border-ink-mute text-ink hover:border-acid hover:text-acid transition-colors">{c.secondary} ↗</Link>
+          </div>
+        </div>
+
+        <Link href={`/${locale}/work/duck-master`} className="group block border border-line-strong bg-paper-soft p-5 md:p-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-acid">
+          <div className="flex justify-between gap-3 mono text-[10px] tracking-[.13em] text-ink-mute"><span>{c.featured}</span><span className="text-acid">{c.status}</span></div>
+          <div className="mt-12 border-t border-line-strong pt-5">
+            <span className="block text-[clamp(2rem,3.4vw,3.6rem)] font-[family-name:var(--font-display)] font-bold leading-none tracking-[-.05em] text-ink">{c.project}<span className="text-acid">.</span></span>
+            <p className="mt-4 max-w-[36ch] text-ink-mute leading-[1.5]">{c.projectDetail}</p>
+            <span className="mt-8 flex justify-between border-t border-line-strong pt-4 mono text-xs text-ink group-hover:text-acid transition-colors"><span>{c.read}</span><span aria-hidden>↗</span></span>
+          </div>
+        </Link>
+      </div>
+
+      <p className="mt-16 max-w-[90ch] border-t border-line-strong pt-4 mono text-[11px] leading-[1.7] text-ink-mute">{c.proof}</p>
+    </div>
+  </section>;
 }

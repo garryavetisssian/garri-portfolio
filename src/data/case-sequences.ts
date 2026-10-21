@@ -1,16 +1,39 @@
 import type { Locale } from "@/lib/i18n/types";
 
-type Frame = { src: string; title: string; detail: string; shape: "phone" | "desktop" };
+type Frame = { src: string; title: string; detail: string; shape: "phone" | "desktop"; focusY?: number };
 export type CaseSequence = { title: string; intro: string; frames: Frame[] };
+
+const balvoiFrameFocus: Record<string, number> = {
+  "debias-01.png": 18,
+  "debias-02.png": 22,
+  "debias-03.png": 22,
+  "debias-04.png": 34,
+  "debias-05.png": 45,
+  "debias-06.png": 34,
+  "debias-07.png": 43,
+  "debias-08.png": 50,
+};
 
 const frame = (root: string, name: string, title: string, detail: string, shape: Frame["shape"] = "phone"): Frame => ({
   src: `/cases/${root}/evidence/${name}`,
   title,
   detail,
   shape,
+  focusY: root === "balvoi" ? balvoiFrameFocus[name] : undefined,
 });
 
 const sequences: Record<string, Partial<Record<Locale, CaseSequence[]>>> = {
+  "duck-master": {
+    en: [{ title: "The released trading round", intro: "A product capture, not a simulated testimonial or evidence that the mechanic caused retention.", frames: [
+      frame("duck-master", "trading-session.jpg", "Ten seconds to choose a direction", "The betting window, live line and stake selection are visible together in the Telegram mini-app."),
+    ] }],
+    ru: [{ title: "Выпущенный торговый раунд", intro: "Экран продукта, а не вымышленный отзыв или доказательство влияния механики на удержание.", frames: [
+      frame("duck-master", "trading-session.jpg", "Десять секунд на выбор направления", "Окно ставки, движущаяся линия и выбор суммы видны вместе в Telegram-мини-приложении."),
+    ] }],
+    hy: [{ title: "Թողարկված առևտրային փուլ", intro: "Պրոդուկտի էկրան է, ոչ հորինված արձագանք կամ պահպանման վրա մեխանիկայի ազդեցության ապացույց։", frames: [
+      frame("duck-master", "trading-session.jpg", "Տասը վայրկյան՝ ուղղությունն ընտրելու համար", "Խաղադրույքի պատուհանը, գիծը և գումարի ընտրությունը տեսանելի են Telegram մինի-հավելվածում։"),
+    ] }],
+  },
   ineed: {
     en: [
       { title: "Customer journey", intro: "One request moves from a specific appliance problem to a matched professional and a visible job state.", frames: [
