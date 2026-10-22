@@ -7,9 +7,9 @@ import CaseDecisionMap from "./CaseDecisionMap";
 import styles from "./CaseEvidencePanel.module.css";
 
 const labels = {
-  en: { overview: "The whole project", ownership: "What I designed", system: "The product system", focus: "One decision in context", problem: "Context", decision: "Design response", tradeoff: "Trade-off", result: "Product status and outcome", context: "How to read this", reflection: "What I would measure next", evidence: "Selected interface flows", open: "Open full-size screen", step: "Step", gallery: "More of the work" },
-  ru: { overview: "Весь проект", ownership: "Что я спроектировал", system: "Система продукта", focus: "Одно решение в контексте", problem: "Контекст", decision: "Дизайн-решение", tradeoff: "Компромисс", result: "Статус и результат", context: "Как это понимать", reflection: "Что я измерял бы дальше", evidence: "Выбранные сценарии", open: "Открыть экран целиком", step: "Шаг", gallery: "Остальная работа" },
-  hy: { overview: "Ամբողջ նախագիծը", ownership: "Իմ նախագծածը", system: "Պրոդուկտի համակարգը", focus: "Մեկ որոշում՝ համատեքստում", problem: "Համատեքստ", decision: "Դիզայնի լուծում", tradeoff: "Փոխզիջում", result: "Վիճակ և արդյունք", context: "Ինչպես հասկանալ", reflection: "Ինչը կչափեի հաջորդ անգամ", evidence: "Ընտրված հոսքեր", open: "Բացել ամբողջ էկրանը", step: "Քայլ", gallery: "Աշխատանքի մյուս մասը" },
+  en: { overview: "The whole project", ownership: "What I designed", system: "The product system", focus: "One decision in context", problem: "Context", decision: "Design response", tradeoff: "Trade-off", result: "Product status and outcome", context: "How to read this", reflection: "What I would measure next", evidence: "Selected interface flows", open: "Open full-size screen", step: "Step", gallery: "More of the work", source: "Source", window: "Period / stage", limit: "What it cannot prove" },
+  ru: { overview: "Весь проект", ownership: "Что я спроектировал", system: "Система продукта", focus: "Одно решение в контексте", problem: "Контекст", decision: "Дизайн-решение", tradeoff: "Компромисс", result: "Статус и результат", context: "Как это понимать", reflection: "Что я измерял бы дальше", evidence: "Выбранные сценарии", open: "Открыть экран целиком", step: "Шаг", gallery: "Остальная работа", source: "Источник", window: "Период / этап", limit: "Чего это не доказывает" },
+  hy: { overview: "Ամբողջ նախագիծը", ownership: "Իմ նախագծածը", system: "Պրոդուկտի համակարգը", focus: "Մեկ որոշում՝ համատեքստում", problem: "Համատեքստ", decision: "Դիզայնի լուծում", tradeoff: "Փոխզիջում", result: "Վիճակ և արդյունք", context: "Ինչպես հասկանալ", reflection: "Ինչը կչափեի հաջորդ անգամ", evidence: "Ընտրված հոսքեր", open: "Բացել ամբողջ էկրանը", step: "Քայլ", gallery: "Աշխատանքի մյուս մասը", source: "Աղբյուր", window: "Ժամանակահատված / փուլ", limit: "Ինչը չի ապացուցում" },
 };
 
 const duckComparison = {
@@ -50,6 +50,9 @@ export default function CaseEvidencePanel({ slug, locale }: { slug: string; loca
         <dl className={styles.metricGrid}>{metrics.items.map(item => <div className={styles.metric} key={item.label}>
           <dt>{item.label}</dt><dd>{item.value}</dd>
         </div>)}</dl>
+        {metrics.provenance && <dl className={styles.provenance} aria-label={`${metrics.heading} — ${t.source}`}>
+          {(["source", "window", "limit"] as const).map(key => <div key={key}><dt>{t[key]}</dt><dd>{metrics.provenance?.[key]}</dd></div>)}
+        </dl>}
       </section>}
 
       <section className={styles.system} aria-labelledby={`${slug}-system-heading`}>
@@ -60,7 +63,7 @@ export default function CaseEvidencePanel({ slug, locale }: { slug: string; loca
         </div>)}</div>
       </section>
 
-      <CaseDecisionMap slug={slug} locale={locale} />
+      {slug !== "ineed" && slug !== "balvoi" && slug !== "xy-ecosystem" && <CaseDecisionMap slug={slug} locale={locale} />}
 
       <section className={styles.focus} aria-labelledby={`${slug}-focus-heading`}>
         <span className={styles.eyebrow}>— {t.focus}</span>

@@ -6,19 +6,19 @@ type Narrative = { status: string; thesis: string; scope: string; decision: stri
 
 const cases: Record<string, Record<Locale, Narrative>> = {
   aihive: {
-    en: { status: "Designed product experience", thesis: "Many AI tools, one understandable workspace.", scope: "The available designs show a creator platform spanning chat, writing, image, video, character, translation and code tools. My work here is the product structure and interface language across those distinct tasks—not a team automation dashboard.", decision: "Give each creation tool its own controls while preserving a consistent way to discover tools, enter a task and understand the output. The character and writing flows demonstrate that balance between shared navigation and task-specific depth.", limitation: "The available material documents designed screens, not measured adoption or a released team workflow. No conversion or productivity outcome is claimed.", chapters: [
-      { title: "01 / Discover the toolset", body: "The home surface groups different creation modes before a user commits to a workflow.", image: "/cases/aihive/7.gif", caption: "Original project presentation · tool discovery" },
-      { title: "02 / Configure the work", body: "Task-specific controls make a character or content request more precise than a single generic prompt box.", image: "/cases/aihive/10.webp", caption: "Original project presentation · creation controls" },
+    en: { status: "Designed product experience", thesis: "One workspace. Many creation modes.", scope: "The available designs show a creator platform spanning chat, writing, image, video, character, translation and code tools. My work here is the product structure and interface language across those distinct tasks—not a team automation dashboard.", decision: "Give each creation tool its own controls while preserving a consistent way to discover tools, enter a task and understand the output. The character and writing flows demonstrate that balance between shared navigation and task-specific depth.", limitation: "The available material documents designed screens, not measured adoption or a released team workflow. No conversion or productivity outcome is claimed.", chapters: [
+      { title: "01 / Configure the work", body: "The character-generation UI makes inputs, output size and candidate results visible in one task-specific workspace.", image: "/cases/aihive/10.webp", caption: "Original project presentation · character creation workspace" },
+      { title: "02 / Discover the toolset", body: "The home surface groups different creation modes before a user commits to a workflow.", image: "/cases/aihive/7.gif", caption: "Original project presentation · tool discovery" },
       { title: "03 / Read the output", body: "The code-generation example makes one output format visible; the broader result system still needs more evidence.", image: "/cases/aihive/13.webp", caption: "Original project presentation · output example" },
     ] },
-    ru: { status: "Спроектированный продукт", thesis: "Много AI-инструментов — одно понятное рабочее пространство.", scope: "На экранах показана платформа для создания контента: чат, тексты, изображения, видео, персонажи, перевод и код. Моя работа здесь — структура продукта и общий язык интерфейса, а не командный дашборд автоматизации.", decision: "У каждого инструмента — свои настройки, но путь к выбору инструмента, постановке задачи и чтению результата остаётся последовательным. Сценарии персонажей и текстов показывают баланс между общим каркасом и глубиной отдельной задачи.", limitation: "Доступные материалы подтверждают спроектированные экраны, но не измеренное использование или запущенный командный процесс. Конверсии и прирост продуктивности не заявлены.", chapters: [
-      { title: "01 / Выбор инструмента", body: "Главный экран группирует разные способы создания контента до входа в сценарий.", image: "/cases/aihive/7.gif", caption: "Оригинальная презентация · выбор инструмента" },
-      { title: "02 / Настройка задачи", body: "Специальные поля делают запрос точнее, чем одно универсальное поле ввода.", image: "/cases/aihive/10.webp", caption: "Оригинальная презентация · настройки" },
+    ru: { status: "Спроектированный продукт", thesis: "Одно пространство. Разные AI-инструменты.", scope: "На экранах показана платформа для создания контента: чат, тексты, изображения, видео, персонажи, перевод и код. Моя работа здесь — структура продукта и общий язык интерфейса, а не командный дашборд автоматизации.", decision: "У каждого инструмента — свои настройки, но путь к выбору инструмента, постановке задачи и чтению результата остаётся последовательным. Сценарии персонажей и текстов показывают баланс между общим каркасом и глубиной отдельной задачи.", limitation: "Доступные материалы подтверждают спроектированные экраны, но не измеренное использование или запущенный командный процесс. Конверсии и прирост продуктивности не заявлены.", chapters: [
+      { title: "01 / Настройка задачи", body: "Интерфейс генерации персонажей показывает настройки, размер результата и варианты в одном рабочем пространстве.", image: "/cases/aihive/10.webp", caption: "Оригинальная презентация · создание персонажей" },
+      { title: "02 / Выбор инструмента", body: "Главный экран группирует разные способы создания контента до входа в сценарий.", image: "/cases/aihive/7.gif", caption: "Оригинальная презентация · выбор инструмента" },
       { title: "03 / Результат", body: "Пример генерации кода показывает один формат результата; для общей системы нужно больше подтверждений.", image: "/cases/aihive/13.webp", caption: "Оригинальная презентация · результат" },
     ] },
-    hy: { status: "Նախագծված պրոդուկտ", thesis: "Բազմաթիվ AI գործիքներ՝ մեկ հասկանալի միջավայրում։", scope: "Էկրանները ցույց են տալիս ստեղծարար հարթակ՝ չատ, տեքստ, պատկեր, տեսանյութ, կերպար, թարգմանություն և կոդ։ Այստեղ իմ աշխատանքը պրոդուկտի կառուցվածքն ու ընդհանուր UI լեզուն է, ոչ թիմային ավտոմատացման վահանակը։", decision: "Յուրաքանչյուր գործիք ունի իր կարգավորումները, իսկ գործիք գտնելու, առաջադրանք տալու և արդյունքը կարդալու ուղին մնում է հետևողական։", limitation: "Առկա նյութերը ցույց են տալիս նախագծված էկրաններ, ոչ չափված օգտագործում կամ թողարկված թիմային գործընթաց։ Աճի արդյունք չի պնդվում։", chapters: [
-      { title: "01 / Գործիքի ընտրություն", body: "Գլխավոր էջը խմբավորում է ստեղծման տարբեր եղանակները։", image: "/cases/aihive/7.gif", caption: "Բնօրինակ ներկայացում · գործիքներ" },
-      { title: "02 / Առաջադրանքի կարգավորում", body: "Հատուկ կարգավորումները հստակեցնում են խնդիրը։", image: "/cases/aihive/10.webp", caption: "Բնօրինակ ներկայացում · կարգավորումներ" },
+    hy: { status: "Նախագծված պրոդուկտ", thesis: "Մեկ միջավայր՝ բազմաթիվ AI գործիքների համար։", scope: "Էկրանները ցույց են տալիս ստեղծարար հարթակ՝ չատ, տեքստ, պատկեր, տեսանյութ, կերպար, թարգմանություն և կոդ։ Այստեղ իմ աշխատանքը պրոդուկտի կառուցվածքն ու ընդհանուր UI լեզուն է, ոչ թիմային ավտոմատացման վահանակը։", decision: "Յուրաքանչյուր գործիք ունի իր կարգավորումները, իսկ գործիք գտնելու, առաջադրանք տալու և արդյունքը կարդալու ուղին մնում է հետևողական։", limitation: "Առկա նյութերը ցույց են տալիս նախագծված էկրաններ, ոչ չափված օգտագործում կամ թողարկված թիմային գործընթաց։ Աճի արդյունք չի պնդվում։", chapters: [
+      { title: "01 / Առաջադրանքի կարգավորում", body: "Կերպարի ստեղծման էկրանը մեկ վայրում ցույց է տալիս կարգավորումները, չափերն ու արդյունքների տարբերակները։", image: "/cases/aihive/10.webp", caption: "Բնօրինակ ներկայացում · կերպարի ստեղծում" },
+      { title: "02 / Գործիքի ընտրություն", body: "Գլխավոր էջը խմբավորում է ստեղծման տարբեր եղանակները։", image: "/cases/aihive/7.gif", caption: "Բնօրինակ ներկայացում · գործիքներ" },
       { title: "03 / Արդյունք", body: "Կոդի օրինակը ցույց է տալիս արդյունքի մեկ տեսակ. ընդհանուր համակարգի համար ավելի շատ ապացույց է պետք։", image: "/cases/aihive/13.webp", caption: "Բնօրինակ ներկայացում · արդյունք" },
     ] },
   },
@@ -81,15 +81,30 @@ export default function LegacyCaseNarrative({ slug, locale }: { slug: string; lo
   const c = cases[slug]?.[locale];
   if (!c) return null;
   const labels = { en: ["What the work covers", "Design decision", "Evidence boundary"], ru: ["Объём работы", "Дизайн-решение", "Граница доказательств"], hy: ["Աշխատանքի ծավալը", "Դիզայնի որոշումը", "Ապացույցների սահմանը"] }[locale];
-  return <div className={styles.case}>
+  const lead = c.chapters[0];
+  const sourceAction = { en: "Open original board", ru: "Открыть исходный экран", hy: "Բացել բնօրինակ էկրանը" }[locale];
+  return <div className={`${styles.case} ${styles[slug] ?? ""}`}>
     <section className={styles.intro}>
       <div className={styles.inner}>
-        <span className={styles.eyebrow}>— {c.status}</span>
-        <h2>{c.thesis}</h2>
+        <div className={styles.opening}>
+          <div className={styles.openingCopy}>
+            <span className={styles.eyebrow}>— {c.status}</span>
+            <h2>{c.thesis}</h2>
+            <p className={styles.leadDecision}><span>{lead.title}</span>{lead.body}</p>
+          </div>
+          <figure className={styles.leadVisual}>
+            <a href={lead.image} target="_blank" rel="noopener noreferrer" aria-label={`${sourceAction}: ${lead.caption}`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={lead.image} alt={`${lead.title}: ${lead.body}`} loading="eager" />
+              <span className={styles.openIcon} aria-hidden="true">↗</span>
+            </a>
+            <figcaption>{lead.caption} · {sourceAction} ↗</figcaption>
+          </figure>
+        </div>
         <div className={styles.ledger}>{[c.scope, c.decision, c.limitation].map((text, i) => <div key={i}><span>{String(i + 1).padStart(2, "0")} / {labels[i]}</span><p>{text}</p></div>)}</div>
       </div>
     </section>
-    {c.chapters.map((chapter, i) => <section className={styles.chapter} key={chapter.title}>
+    {c.chapters.slice(1).map((chapter, i) => <section className={styles.chapter} key={chapter.title}>
       <div className={styles.inner}>
         <div className={styles.chapterCopy}><span className={styles.eyebrow}>— {chapter.title}</span><p>{chapter.body}</p></div>
         <figure>

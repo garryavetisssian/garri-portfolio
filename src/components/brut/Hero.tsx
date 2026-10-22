@@ -1,48 +1,59 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import type { Locale } from "@/lib/i18n/types";
+import styles from "./Hero.module.css";
 
 const copy = {
   en: {
     eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + COMPLEX PRODUCTS",
     headline: "I design the systems behind the experience.",
-    intro: "I’m Garri Avetisyan. I turn game mechanics, two-sided journeys and complex product rules into interfaces people can understand and use. I own the work from product structure through visual system and delivery.",
+    intro: "I’m Garri Avetisyan. I turn game mechanics, two-sided journeys and complex rules into interfaces people can act on—from product structure and interaction to visual systems and delivery.",
     primary: "Explore iGaming work",
     secondary: "See all 14 cases",
-    featured: "START HERE / SHIPPED GAME",
+    featured: "01 / SHIPPED GAME",
     project: "Duck Master",
-    projectDetail: "A Telegram game spanning progression, cards and market play. It launched, then closed roughly a year later.",
-    status: "NOW CLOSED",
+    projectDetail: "One connected Telegram game: progression, cards, social play and a timed market round.",
+    status: "SHIPPED · LATER CLOSED",
     read: "Read the case",
-    proof: "The portfolio distinguishes shipped work—including products that later closed—from approved pre-production and independent concepts. Outcomes are labelled by source and scope.",
+    capture: "Actual trading-round capture",
+    otherWork: "MORE PRODUCT DEPTH",
+    ineed: "Ineed · two-sided service platform",
+    balvoi: "BalVoi · live editorial AI product",
   },
   ru: {
     eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + СЛОЖНЫЕ ПРОДУКТЫ",
     headline: "Проектирую системы, на которых держится опыт.",
-    intro: "Я Гарри Аветисян. Превращаю игровые механики, двусторонние сценарии и сложные правила продукта в понятные интерфейсы. Отвечаю за путь от структуры продукта до визуальной системы и передачи в разработку.",
+    intro: "Я Гарри Аветисян. Превращаю игровые механики, двусторонние сценарии и сложные правила в интерфейсы, с которыми легко действовать — от структуры продукта и взаимодействий до визуальной системы и передачи в разработку.",
     primary: "Смотреть iGaming",
     secondary: "Все 14 кейсов",
-    featured: "НАЧНИТЕ ЗДЕСЬ / ЗАПУЩЕННАЯ ИГРА",
+    featured: "01 / ЗАПУЩЕННАЯ ИГРА",
     project: "Duck Master",
-    projectDetail: "Telegram-игра с прогрессией, картами и торговым раундом. После запуска проект закрылся примерно через год.",
-    status: "ЗАКРЫТА",
+    projectDetail: "Единая Telegram-игра: прогрессия, карты, социальные сценарии и торговый раунд.",
+    status: "ВЫПУЩЕНА · ПОЗЖЕ ЗАКРЫТА",
     read: "Открыть кейс",
-    proof: "В портфолио различаются запущенные продукты — включая закрывшиеся позже, — утверждённый препродакшен и независимые концепты. Результаты подписаны с указанием источника и границ данных.",
+    capture: "Реальный экран торгового раунда",
+    otherWork: "ДРУГИЕ СЛОЖНЫЕ ПРОДУКТЫ",
+    ineed: "Ineed · двусторонняя платформа услуг",
+    balvoi: "BalVoi · работающий AI-продукт для редакторов",
   },
   hy: {
     eyebrow: "SENIOR PRODUCT DESIGNER / iGAMING + ԲԱՐԴ ՊՐՈԴՈՒԿՏՆԵՐ",
     headline: "Նախագծում եմ փորձառության հիմքում ընկած համակարգերը։",
-    intro: "Ես Գարրի Ավետիսյանն եմ։ Խաղային մեխանիկաները, երկկողմանի հոսքերն ու բարդ կանոնները վերածում եմ հասկանալի միջերեսների։ Աշխատում եմ կառուցվածքից մինչև տեսողական համակարգ և փոխանցում մշակմանը։",
+    intro: "Ես Գարրի Ավետիսյանն եմ։ Խաղային մեխանիկաները, երկկողմանի հոսքերն ու բարդ կանոնները վերածում եմ գործածելի միջերեսների՝ պրոդուկտի կառուցվածքից ու փոխազդեցությունից մինչև տեսողական համակարգ և փոխանցում մշակմանը։",
     primary: "Տեսնել iGaming նախագծերը",
     secondary: "Բոլոր 14 գործերը",
-    featured: "ՍԿՍԵՔ ԱՅՍՏԵՂԻՑ / ԹՈՂԱՐԿՎԱԾ ԽԱՂ",
+    featured: "01 / ԹՈՂԱՐԿՎԱԾ ԽԱՂ",
     project: "Duck Master",
-    projectDetail: "Telegram խաղ՝ առաջընթացով, քարտերով և շուկայական փուլով։ Թողարկումից մոտ մեկ տարի անց այն փակվեց։",
-    status: "ՓԱԿՎԱԾ Է",
+    projectDetail: "Միասնական Telegram խաղ՝ առաջընթացով, քարտերով, սոցիալական խաղով և շուկայական փուլով։",
+    status: "ԹՈՂԱՐԿՎԵԼ Է · ԱՅԺՄ ՓԱԿՎԱԾ Է",
     read: "Բացել գործը",
-    proof: "Պորտֆոլիոն տարանջատում է թողարկված աշխատանքը՝ ներառյալ հետագայում փակված պրոդուկտները, հաստատված նախաարտադրությունն ու անկախ կոնցեպտները։ Արդյունքները նշված են աղբյուրով ու սահմաններով։",
+    capture: "Առևտրային փուլի իրական էկրան",
+    otherWork: "ԱՅԼ ԲԱՐԴ ՊՐՈԴՈՒԿՏՆԵՐ",
+    ineed: "Ineed · երկկողմանի ծառայությունների հարթակ",
+    balvoi: "BalVoi · գործող AI խմբագրական պրոդուկտ",
   },
 } as const;
 
@@ -50,36 +61,46 @@ export default function Hero({ locale }: { locale: Locale }) {
   const { t } = useLanguage();
   const c = copy[locale];
 
-  return <section className="border-b border-line-strong pt-[calc(var(--nav-h)+3rem)] pb-14 md:pt-[calc(var(--nav-h)+5rem)] md:pb-20">
+  return <section className="border-b border-line-strong pt-[calc(var(--nav-h)+2.5rem)] pb-10 md:pt-[calc(var(--nav-h)+4rem)] md:pb-14">
     <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)]">
       <div className="flex flex-wrap justify-between gap-3 mono text-ink-mute text-[11px] tracking-[.14em]">
         <span>— {c.eyebrow}</span>
         <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-acid pulse-dot" />{t.hero.available.toUpperCase()}</span>
       </div>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(290px,.55fr)] lg:items-end">
-        <div>
-          <h1 className="max-w-[12ch] text-ink font-[family-name:var(--font-display)] font-extrabold leading-[.95] tracking-[-.06em] text-[clamp(3.4rem,8.2vw,8.8rem)]">
+      <div className={`${styles.heroLayout} mt-9 grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(410px,.92fr)] lg:items-center`}>
+        <div className={styles.statement}>
+          <h1 className={`max-w-[13ch] text-ink font-[family-name:var(--font-display)] font-extrabold leading-[.96] tracking-[-.055em] text-[clamp(3.1rem,6.5vw,7rem)] ${locale === "ru" ? styles.russianHeadline : locale === "hy" ? styles.armenianHeadline : ""}`}>
             {c.headline}
           </h1>
-          <p className="mt-8 max-w-[62ch] text-ink-mute text-[clamp(1.05rem,1.55vw,1.4rem)] leading-[1.5]">{c.intro}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <p className={`${styles.statementIntro} mt-7 max-w-[58ch] text-ink-mute text-[clamp(1.02rem,1.35vw,1.25rem)] leading-[1.55]`}>{c.intro}</p>
+          <div className={`${styles.statementActions} mt-7 flex flex-wrap items-center gap-4`}>
             <Link href={`/${locale}/work/entertainment`} className="inline-flex min-h-12 items-center gap-8 bg-acid px-5 py-3 text-paper hover:opacity-85 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-acid">{c.primary}<span aria-hidden>↗</span></Link>
             <Link href={`/${locale}/work`} className="inline-flex min-h-12 items-center border-b border-ink-mute text-ink hover:border-acid hover:text-acid transition-colors">{c.secondary} ↗</Link>
           </div>
         </div>
 
-        <Link href={`/${locale}/work/duck-master`} className="group block border border-line-strong bg-paper-soft p-5 md:p-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-acid">
-          <div className="flex justify-between gap-3 mono text-[10px] tracking-[.13em] text-ink-mute"><span>{c.featured}</span><span className="text-acid">{c.status}</span></div>
-          <div className="mt-12 border-t border-line-strong pt-5">
-            <span className="block text-[clamp(2rem,3.4vw,3.6rem)] font-[family-name:var(--font-display)] font-bold leading-none tracking-[-.05em] text-ink">{c.project}<span className="text-acid">.</span></span>
-            <p className="mt-4 max-w-[36ch] text-ink-mute leading-[1.5]">{c.projectDetail}</p>
-            <span className="mt-8 flex justify-between border-t border-line-strong pt-4 mono text-xs text-ink group-hover:text-acid transition-colors"><span>{c.read}</span><span aria-hidden>↗</span></span>
+        <Link href={`/${locale}/work/duck-master`} className={`${styles.feature} group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-acid`} aria-label={`${c.project}. ${c.projectDetail} ${c.read}`}>
+          <div className={styles.featureTop}><span>{c.featured}</span><span>{c.status}</span></div>
+          <div className={styles.featureStage}>
+            <div className={styles.featureCopy}>
+              <span className={styles.featureMark} aria-hidden="true">DM<span>°</span></span>
+              <span className={styles.featureTitle}>{c.project}</span>
+              <span className={styles.featureDetail}>{c.projectDetail}</span>
+            </div>
+            <div className={styles.phone}>
+              <Image src="/cases/duck-master/evidence/trading-session.jpg" alt={c.capture} width={591} height={1280} sizes="(max-width: 700px) 42vw, 260px" priority />
+            </div>
           </div>
+          <div className={styles.featureBottom}><span>{c.capture}</span><span>{c.read} ↗</span></div>
         </Link>
       </div>
 
-      <p className="mt-16 max-w-[90ch] border-t border-line-strong pt-4 mono text-[11px] leading-[1.7] text-ink-mute">{c.proof}</p>
+      <div className={styles.evidencePath}>
+        <span className="mono text-ink-mute">— {c.otherWork}</span>
+        <Link href={`/${locale}/work/ineed`}>{c.ineed}<span aria-hidden="true">↗</span></Link>
+        <Link href={`/${locale}/work/balvoi`}>{c.balvoi}<span aria-hidden="true">↗</span></Link>
+      </div>
     </div>
   </section>;
 }

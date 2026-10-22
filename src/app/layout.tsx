@@ -3,6 +3,7 @@ import { Unbounded, Manrope, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
+import ImageLightbox from "@/components/ui/ImageLightbox";
 
 const unbounded = Unbounded({
   subsets: ["latin", "cyrillic"],
@@ -63,6 +64,7 @@ export default function RootLayout({
       <head><script dangerouslySetInnerHTML={{ __html: `(function(){var t;try{t=localStorage.getItem('portfolio-theme')}catch(e){}var m=matchMedia('(prefers-color-scheme: light)');function apply(){document.documentElement.dataset.theme=t==='light'||t==='dark'?t:m.matches?'light':'dark'}apply();m.addEventListener('change',function(){try{t=localStorage.getItem('portfolio-theme')}catch(e){}apply()});window.addEventListener('storage',function(e){if(e.key==='portfolio-theme'){t=e.newValue;apply()}})})();` }} /></head>
       <body className="min-h-full font-sans antialiased" suppressHydrationWarning>
         {children}
+        <ImageLightbox />
         <Analytics />
       </body>
     </html>

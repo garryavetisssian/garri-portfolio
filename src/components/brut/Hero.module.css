@@ -1,0 +1,28 @@
+.feature{display:block;overflow:hidden;border:1px solid #524117;background:#100f0b;color:#fff4cc;isolation:isolate;box-shadow:0 18px 56px #0003;transition:transform .25s ease,border-color .25s ease}
+.russianHeadline{font-size:clamp(2.1rem,5vw,5.8rem);overflow-wrap:anywhere}
+.armenianHeadline{font-size:clamp(1.95rem,4.7vw,5rem);overflow-wrap:anywhere}
+.feature:hover{transform:translateY(-3px);border-color:#f0c53b}
+.featureTop,.featureBottom{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;font:.62rem/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
+.featureTop{border-bottom:1px solid #7e642b88;color:#e9c86f}
+.featureTop span:last-child{color:#f7e6ba;text-align:right}
+.featureStage{position:relative;min-height:375px;display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,44%);align-items:center;overflow:hidden;background:radial-gradient(circle at 74% 48%,#76591b66 0%,#241c0d 37%,#0e0d0a 72%)}
+.featureStage:before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(132deg,transparent 0 70px,#d5ae4420 71px,#d5ae4420 72px,transparent 73px 140px);opacity:.65}
+.featureCopy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:1.1rem;padding:1.8rem 0 1.8rem 1.6rem;min-width:0}
+.featureMark{font:800 clamp(2.3rem,4vw,4.2rem)/1 var(--font-display);letter-spacing:-.08em;color:#ffcf28;text-shadow:0 4px 18px #000}
+.featureMark span{font-size:.44em;vertical-align:top;margin-left:.1em}
+.featureTitle{font:800 clamp(1.6rem,2.5vw,2.8rem)/.98 var(--font-display);letter-spacing:-.055em;color:#fff;max-width:8ch}
+.featureDetail{font-size:clamp(.85rem,1.1vw,1rem);line-height:1.5;max-width:25ch;color:#e7ddc5}
+.phone{position:relative;z-index:1;width:min(86%,250px);justify-self:center;align-self:end;margin:1.4rem .5rem -3.2rem 0;transform:rotate(7deg);border:5px solid #171717;border-radius:27px;overflow:hidden;background:#050505;box-shadow:0 22px 45px #000c,0 0 0 1px #bea76370;transition:transform .3s ease}
+.phone img{display:block;width:100%;height:auto}
+.feature:hover .phone{transform:rotate(4deg) translateY(-6px)}
+.featureBottom{position:relative;z-index:2;border-top:1px solid #7e642b88;background:#16130d;color:#d6cbaa}
+.featureBottom span:last-child{color:#ffcf28;white-space:nowrap}
+.evidencePath{display:grid;grid-template-columns:minmax(160px,.75fr) repeat(2,minmax(0,1fr));gap:1rem;margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line-strong);align-items:start}
+.evidencePath>span{font-size:.65rem;letter-spacing:.12em}
+.evidencePath a{display:flex;justify-content:space-between;gap:1rem;color:var(--ink);font-size:.9rem;line-height:1.4;border-bottom:1px solid var(--line-strong);padding-bottom:.6rem;transition:color .2s,border-color .2s}
+.evidencePath a:hover,.evidencePath a:focus-visible{color:var(--acid);border-color:var(--acid)}
+.evidencePath a:focus-visible{outline:2px solid var(--acid);outline-offset:4px}
+@media(max-width:1100px){.featureStage{min-height:340px}.featureCopy{padding-left:1.25rem}.phone{width:min(86%,210px)}}
+@media(max-width:900px){.evidencePath{grid-template-columns:1fr 1fr}.evidencePath>span{grid-column:1/-1}.featureStage{min-height:370px}}
+@media(max-width:600px){.heroLayout{gap:1.4rem}.statement{display:contents}.statement h1{order:1}.feature{order:2}.statementIntro{order:3;margin-top:0}.statementActions{order:4;margin-top:0}.featureTop,.featureBottom{padding:.8rem .9rem;font-size:.54rem}.featureTop{align-items:flex-start}.featureStage{min-height:325px;grid-template-columns:minmax(0,1fr) 44%}.featureCopy{gap:.85rem;padding:1.25rem 0 1.25rem 1rem}.featureMark{font-size:2.5rem}.featureTitle{font-size:clamp(1.45rem,7vw,2rem)}.featureDetail{font-size:.77rem}.phone{width:90%;margin:1rem .25rem -2.6rem 0;border-width:4px;border-radius:19px}.featureBottom span:first-child{max-width:18ch}.evidencePath{grid-template-columns:1fr;gap:.75rem}.evidencePath>span{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){.feature,.phone,.evidencePath a{transition:none}.feature:hover{transform:none}.feature:hover .phone{transform:rotate(7deg)}}

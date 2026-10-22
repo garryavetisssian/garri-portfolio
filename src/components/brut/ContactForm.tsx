@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -26,6 +26,9 @@ export default function ContactForm() {
   const [errorKey, setErrorKey] = useState<ErrorKey | undefined>();
   const [errorDetail, setErrorDetail] = useState<string | undefined>();
   const [copied, setCopied] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   // Public-safe key — Web3Forms keys only forward to the email address
   // they're bound to, so exposing them client-side is by design.
@@ -48,6 +51,9 @@ export default function ContactForm() {
       setStatus("error");
       setErrorKey("formError");
       setErrorDetail(undefined);
+      if (!data.name.trim()) nameRef.current?.focus();
+      else if (!isValidEmail(data.email)) emailRef.current?.focus();
+      else messageRef.current?.focus();
       return;
     }
     if (!accessKey) {
@@ -141,6 +147,7 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-px bg-line-strong">
         <Field label={t.contact.formName} required>
           <input
+            ref={nameRef}
             type="text"
             value={data.name}
             onChange={update("name")}
@@ -148,12 +155,14 @@ export default function ContactForm() {
             className="form-input"
             autoComplete="name"
             aria-required="true"
+            aria-describedby="contact-form-status"
             aria-invalid={status === "error" && errorKey === "formError" && !data.name.trim()}
             disabled={isPending}
           />
         </Field>
         <Field label={t.contact.formEmail} required>
           <input
+            ref={emailRef}
             type="email"
             value={data.email}
             onChange={update("email")}
@@ -161,6 +170,7 @@ export default function ContactForm() {
             className="form-input"
             autoComplete="email"
             aria-required="true"
+            aria-describedby="contact-form-status"
             aria-invalid={status === "error" && errorKey === "formError" && !isValidEmail(data.email)}
             disabled={isPending}
           />
@@ -180,11 +190,13 @@ export default function ContactForm() {
 
       <Field label={t.contact.formMessage} required>
         <textarea
+          ref={messageRef}
           value={data.message}
           onChange={update("message")}
           placeholder={t.contact.formMessagePlaceholder}
           rows={7}
           aria-required="true"
+          aria-describedby="contact-form-status"
           aria-invalid={status === "error" && errorKey === "formError" && !data.message.trim()}
           className="form-input resize-y min-h-[150px]"
           disabled={isPending}
@@ -192,7 +204,7 @@ export default function ContactForm() {
       </Field>
 
       <div className="bg-paper p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-        <div className="mono text-[11px] max-w-[52ch] leading-[1.5] min-h-[1.5em] flex flex-col gap-1">
+        <div id="contact-form-status" className="mono text-[11px] max-w-[52ch] leading-[1.5] min-h-[1.5em] flex flex-col gap-1">
           {statusLine ? (
             <span
               role={statusLine.tone === "warn" ? "alert" : "status"}
@@ -220,14 +232,14 @@ export default function ContactForm() {
             type="button"
             onClick={handleCopy}
             disabled={isPending}
-            className="mono px-4 py-3 border border-line-strong text-ink hover:border-acid hover:text-acid transition-colors disabled:opacity-60"
+            className="mono px-4 py-3 border border-line-strong text-ink hover:border-acid hover:text-acid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acid transition-colors disabled:opacity-60"
           >
             {copied ? `✓ ${t.contact.formCopied}` : `${t.contact.formCopy} ⎘`}
           </button>
           <button
             type="submit"
             disabled={isPending}
-            className="mono inline-flex items-center gap-3 px-5 py-3 border border-acid text-acid hover:bg-acid hover:text-paper transition-colors disabled:opacity-60"
+            className="mono inline-flex items-center gap-3 px-5 py-3 border border-acid text-acid hover:bg-acid hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-acid transition-colors disabled:opacity-60"
           >
             <span>{isPending ? t.contact.formSubmitSending : t.contact.formSubmit}</span>
             <span>↗</span>

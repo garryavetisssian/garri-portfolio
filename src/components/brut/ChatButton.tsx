@@ -35,11 +35,11 @@ export default function ChatButton({
         type="button"
         onClick={handleOpen}
         aria-label={t.chat.fabAria}
-        className="chat-fab group/fab fixed z-40 flex min-h-11 items-center gap-2.5 transition-all duration-300"
+        className="chat-fab group/fab fixed z-40 flex min-h-11 min-w-11 items-center justify-center transition-all duration-300 focus-visible:outline-2 focus-visible:outline-acid focus-visible:outline-offset-2"
         style={{
           right: "1.25rem",
           bottom: "1.25rem",
-          padding: "0.6rem 1rem 0.6rem 0.85rem",
+          padding: "0.6rem",
           borderRadius: "999px",
           background: "var(--paper-elev)",
           border: "1px solid var(--line-strong)",
@@ -64,12 +64,6 @@ export default function ChatButton({
               fill="currentColor"
             />
           </svg>
-        </span>
-        <span
-          className="mono hidden uppercase whitespace-nowrap sm:inline"
-          style={{ fontSize: "0.72rem", letterSpacing: "0.06em" }}
-        >
-          {t.chat.fabLabel}
         </span>
       </button>
 

@@ -35,6 +35,11 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
   const router = useRouter();
   const pathname = usePathname();
   const year = new Date().getFullYear();
+  const hiringCopy = {
+    en: { label: "WHAT I DO", line: "Product design for complex systems and iGaming, from the interaction model to the visual language.", note: "Selected work includes shipped products, approved pre-production work and clearly labelled concepts." },
+    ru: { label: "ЧЕМ Я ЗАНИМАЮСЬ", line: "Продуктовый дизайн сложных систем и iGaming — от логики взаимодействия до визуального языка.", note: "Здесь есть запущенные продукты, утверждённый препродакшен и отдельно отмеченные концепты." },
+    hy: { label: "ԻՄ ԱՇԽԱՏԱՆՔԸ", line: "Բարդ համակարգերի և iGaming-ի պրոդուկտ դիզայն՝ փոխազդեցության մոդելից մինչև վիզուալ լեզու։", note: "Ներկայացված են թողարկված պրոդուկտներ, հաստատված նախաարտադրական աշխատանք և հստակ նշված կոնցեպտներ։" },
+  }[locale];
 
   const switchLocale = (next: Locale) => {
     if (next === locale) return;
@@ -42,7 +47,8 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
     router.push(swapLocale(pathname, next));
   };
 
-  const projectLinks = projects.slice(0, 4).map((p) => ({
+  const prioritySlugs = ["duck-master", "ineed", "balvoi", "xy-ecosystem"];
+  const projectLinks = prioritySlugs.map((slug) => projects.find((project) => project.slug === slug)).filter((project): project is NonNullable<typeof project> => Boolean(project)).map((p) => ({
     label: `${p.title} · ${catLabel(p.category)}`,
     href: `/${locale}/work/${p.slug}`,
   }));
@@ -94,44 +100,13 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
 
       {/* Columns */}
       <div className="mx-auto max-w-[var(--max)] px-[var(--gutter)] py-12 grid gap-10 md:grid-cols-12">
-        {/* Brutalist colophon — replaces generic "about this site" blurb */}
+        {/* Hiring context, rather than site implementation statistics. */}
         <div className="md:col-span-4 space-y-6">
-          {/* Built with */}
           <div>
-            <p className="mono text-ink-mute mb-2">— {t.footer.builtLabel}</p>
-            <p className="text-[14px] text-ink leading-[1.55]">
-              Next.js 16 · Tailwind 4 · Vercel
-            </p>
+            <p className="mono text-ink-mute mb-2">— {hiringCopy.label}</p>
+            <p className="text-[18px] text-ink leading-[1.45] max-w-[30ch]">{hiringCopy.line}</p>
           </div>
-
-          {/* Set in */}
-          <div>
-            <p className="mono text-ink-mute mb-2">— {t.footer.setInLabel}</p>
-            <p className="text-[14px] text-ink leading-[1.55]">
-              Unbounded · Manrope · JetBrains Mono
-            </p>
-          </div>
-
-          {/* Figures — tight stats grid */}
-          <div>
-            <p className="mono text-ink-mute mb-3">— {t.footer.figuresLabel}</p>
-            <dl className="grid grid-cols-2 gap-y-1 gap-x-4 text-[13px]">
-              <dt className="mono text-ink-mute">{t.footer.figureLocales}</dt>
-              <dd className="text-ink tabular-nums">
-                <span className="text-acid">03</span>
-              </dd>
-              <dt className="mono text-ink-mute">{t.footer.figureCases}</dt>
-              <dd className="text-ink tabular-nums">
-                <span className="text-acid">{String(projects.length).padStart(2, "0")}</span>
-              </dd>
-              <dt className="mono text-ink-mute">{t.footer.figureTrackers}</dt>
-              <dd className="text-ink tabular-nums">
-                <span className="text-acid">00</span>
-              </dd>
-              <dt className="mono text-ink-mute">{t.footer.figureVersion}</dt>
-              <dd className="text-ink tabular-nums mono">v2026.07</dd>
-            </dl>
-          </div>
+          <p className="text-[13px] text-ink-mute leading-[1.6] max-w-[42ch]">{hiringCopy.note}</p>
 
           <p className="mono text-acid pt-2 flex items-center gap-2">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-acid pulse-dot" />
@@ -182,8 +157,8 @@ export default function Footer({ locale, projects = [] }: FooterProps) {
                   aria-label={`Switch to ${l.label}`}
                   className={
                     isActive
-                      ? "px-2 py-1 border border-acid text-acid cursor-default"
-                      : "px-2 py-1 border border-line-strong text-ink-mute hover:border-acid hover:text-acid transition-colors cursor-pointer"
+                      ? "min-h-11 min-w-11 px-2 py-1 border border-acid text-acid cursor-default"
+                      : "min-h-11 min-w-11 px-2 py-1 border border-line-strong text-ink-mute hover:border-acid hover:text-acid transition-colors cursor-pointer"
                   }
                 >
                   {l.code.toUpperCase()}

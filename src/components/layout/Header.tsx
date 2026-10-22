@@ -83,12 +83,15 @@ export default function Header({ locale }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "mono link-uline inline-flex min-h-11 items-center transition-colors",
+                  "mono inline-flex min-h-11 items-center transition-colors",
                   isActive(item.href) ? "text-acid" : "text-ink-mute hover:text-ink"
                 )}
               >
-                <span className="text-ink-faint mr-1.5">{String(i + 1).padStart(2, "0")}</span>
-                {item.label}
+                <span className="relative inline-flex items-baseline after:absolute after:left-0 after:right-0 after:-bottom-1.5 after:h-px after:bg-current after:content-[''] after:transition-transform after:duration-300 after:origin-left after:scale-x-0 hover:after:scale-x-100">
+                  <span className="text-ink-faint mr-1.5">{String(i + 1).padStart(2, "0")}</span>
+                  <span>{item.label}</span>
+                  {isActive(item.href) && <span aria-hidden="true" className="absolute left-0 right-0 -bottom-1.5 h-px bg-current" />}
+                </span>
               </Link>
             ))}
             <span className="h-4 w-px bg-line-strong" aria-hidden />
